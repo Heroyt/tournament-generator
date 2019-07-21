@@ -1,4 +1,7 @@
 <?php
+
+namespace TournamentGenerator;
+
 define('DUMMY_TEAM', 'dummyRozlosTeam');
 define('groupTypes', [
 	'R_R' => 'Robin-Robin',

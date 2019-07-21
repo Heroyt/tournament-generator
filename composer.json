@@ -1,6 +1,7 @@
 {
 		"name": "heroyt/tournament-generator",
 		"description": "A set of classes used to create multiple kinds of tournament brackets in PHP.",
+		"keywords": ["generator", "tournament", "tournaments", "scheduler", "teams", "bracket"],
 		"type": "library",
 		"license": "MIT",
 		"authors": [
@@ -15,6 +16,7 @@
 			"php": ">=5.6"
 		},
 		"autoload": {
+			"files": ["src/functions.php"],
 			"classmap": ["src/"]
 		}
 }

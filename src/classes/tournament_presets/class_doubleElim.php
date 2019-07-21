@@ -1,11 +1,11 @@
 <?php
 
-namespace TournamentGenerator;
+namespace TournamentGenerator\Preset;
 
 /**
  *
  */
-class Tournament_DoubleElimination extends Tournament
+class Tournament_DoubleElimination extends \TournamentGenerator\Tournament
 {
 
 	public function generate() {
@@ -19,7 +19,7 @@ class Tournament_DoubleElimination extends Tournament
 		// CALCULATE BYES
 		$byes = 0;
 		$nextPow = $countTeams;
-		if ( !isPowerOf2($countTeams) ) {
+		if ( !\TournamentGenerator\isPowerOf2($countTeams) ) {
 			$nextPow = bindec(str_pad(1, strlen(decbin($countTeams))+1, 0, STR_PAD_RIGHT));
 			$byes = $nextPow-$countTeams;
 		}
@@ -62,7 +62,7 @@ class Tournament_DoubleElimination extends Tournament
 			// LOSING SIDE
 			$losingGroupTeamsCount = count($previousLosingGroups)+count($previousGroups);
 			$order = 2;
-			if (isPowerOf2($losingGroupTeamsCount)) { // IF THE NUMBER OF TEAMS IS A POWER OF 2, GENERATE GROUPS WITHOUT BYES
+			if (\TournamentGenerator\isPowerOf2($losingGroupTeamsCount)) { // IF THE NUMBER OF TEAMS IS A POWER OF 2, GENERATE GROUPS WITHOUT BYES
 				for ($g=1; $g <= $losingGroupTeamsCount/2; $g++) {
 					$group = $round->group([
 						'name' => 'Round '.$r.' - loss '.$g,
@@ -157,7 +157,7 @@ class Tournament_DoubleElimination extends Tournament
 			'type' => TWO_TWO,
 			'order' => 1,
 		]);
-		$twoLoss = new TeamFilter('losses', '=', 1, $allGroups);
+		$twoLoss = new \TournamentGenerator\TeamFilter('losses', '=', 1, $allGroups);
 		$groupFinal->progression($group, 0, 2)->addFilter($twoLoss);
 
 		return $this;

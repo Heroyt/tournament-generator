@@ -1,11 +1,11 @@
 <?php
 
-namespace TournamentGenerator;
+namespace TournamentGenerator\Preset;
 
 /**
  *
  */
-class Tournament_2R2G extends Tournament
+class Tournament_2R2G extends \TournamentGenerator\Tournament
 {
 
 	public function generate() {
@@ -44,9 +44,9 @@ class Tournament_2R2G extends Tournament
 			'type' => R_R
 		]);
 
-		$filter_win_1 = new TeamFilter('wins', '=', 1);
-		$filter_loss_1 = new TeamFilter('losses', '=', 1);
-		$filter_notProgressed = new TeamFilter('notprogressed');
+		$filter_win_1 = new \TournamentGenerator\TeamFilter('wins', '=', 1);
+		$filter_loss_1 = new \TournamentGenerator\TeamFilter('losses', '=', 1);
+		$filter_notProgressed = new \TournamentGenerator\TeamFilter('notprogressed');
 
 		$this->splitTeams($round1);
 
@@ -56,10 +56,10 @@ class Tournament_2R2G extends Tournament
 				'type' => TWO_TWO
 			]);
 
-			$filter_win_2 = new TeamFilter('wins', '=', 2, [$group_0_0, $group_top]);
-			$filter_loss_2 = new TeamFilter('losses', '=', 2, [$group_0_0, $group_top]);
-			$filter_win_1_both = new TeamFilter('wins', '=', 1, [$group_0_0, $group_top]);
-			$filter_loss_1_both = new TeamFilter('losses', '=', 1, [$group_0_0, $group_top]);
+			$filter_win_2 = new \TournamentGenerator\TeamFilter('wins', '=', 2, [$group_0_0, $group_top]);
+			$filter_loss_2 = new \TournamentGenerator\TeamFilter('losses', '=', 2, [$group_0_0, $group_top]);
+			$filter_win_1_both = new \TournamentGenerator\TeamFilter('wins', '=', 1, [$group_0_0, $group_top]);
+			$filter_loss_1_both = new \TournamentGenerator\TeamFilter('losses', '=', 1, [$group_0_0, $group_top]);
 			$group_0_0->progression($group_top, 0, 1)->addFilter($filter_win_1); // PROGRESS THE BEST WINNING TEAM
 			$group_0_0->progression($group_top, 0, 1)->addFilter($filter_loss_1); // PROGRESS THE BEST LOSING TEAM
 			$group_top->progression($group_2_0)->addFilter($filter_win_2);

@@ -1,11 +1,11 @@
 <?php
 
-namespace TournamentGenerator;
+namespace TournamentGenerator\Preset;
 
 /**
  *
  */
-class Tournament_SingleElimination extends Tournament
+class Tournament_SingleElimination extends \TournamentGenerator\Tournament
 {
 
 	public function generate() {
@@ -16,7 +16,7 @@ class Tournament_SingleElimination extends Tournament
 
 		// CALCULATE BYES
 		$byes = 0;
-		if ( !isPowerOf2($countTeams) ) {
+		if ( !\TournamentGenerator\isPowerOf2($countTeams) ) {
 			$nextPow = bindec(str_pad(1, strlen(decbin($countTeams))+1, 0, STR_PAD_RIGHT));
 			$byes = $nextPow-$countTeams;
 		}
