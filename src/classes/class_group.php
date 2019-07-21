@@ -2,6 +2,8 @@
 
 namespace TournamentGenerator;
 
+require_once '../functions.php';
+
 /**
  *
  */
@@ -32,22 +34,22 @@ class Group
 			switch ($key) {
 				case 'name':
 					if (gettype($value) === 'string') $this->name = $value;
-					else throw new Exception('Expected string as group name '.gettype($value).' given');
+					else throw new \Exception('Expected string as group name '.gettype($value).' given');
 					break;
 				case 'type':
 					if (in_array($value, groupTypes)) $this->type = $value;
-					else throw new Exception('Unknown group type: '.$value);
+					else throw new \Exception('Unknown group type: '.$value);
 					break;
 				case 'ordering':
 					if (in_array($value, orderingTypes)) $this->ordering = $value;
-					else throw new Exception('Unknown group ordering: '.$value);
+					else throw new \Exception('Unknown group ordering: '.$value);
 					break;
 				case 'inGame':
 					if (gettype($value) === 'integer') {
 						if ($value === 2 || $value === 3 || $value === 4) $this->inGame = $value;
-						else throw new Exception('Expected 2,3 or 4 as inGame '.$value.' given');
+						else throw new \Exception('Expected 2,3 or 4 as inGame '.$value.' given');
 					}
-					else throw new Exception('Expected integer as inGame '.gettype($value).' given');
+					else throw new \Exception('Expected integer as inGame '.gettype($value).' given');
 					break;
 				case 'maxSize':
 					if (gettype($value) === 'integer') {
@@ -112,7 +114,7 @@ class Group
 					];
 				}
 			}
-			else throw new Exception('Trying to add team which is not an instance of Team class');
+			else throw new \Exception('Trying to add team which is not an instance of Team class');
 		}
 		return $this;
 	}
@@ -127,17 +129,17 @@ class Group
 			if (gettype($filter) === 'array') {
 				switch (strtolower($key)) {
 					case 'and':
-						if (!$this->filterAnd($team, $filter)) {
-							unset($teams[$tkey]); // IF FILTER IS NOT VALIDATED REMOVE TEAM FROM RETURN ARRAY
+						foreach ($teams as $tkey => $team) {
+							if (!$this->filterAnd($team, $filter)) unset($teams[$tkey]); // IF FILTER IS NOT VALIDATED REMOVE TEAM FROM RETURN ARRAY
 						}
 						break;
 					case 'or':
-						if (!$this->filterOr($team, $filter)) {
-							unset($teams[$tkey]); // IF FILTER IS NOT VALIDATED REMOVE TEAM FROM RETURN ARRAY
+						foreach ($teams as $tkey => $team) {
+							if (!$this->filterOr($team, $filter)) unset($teams[$tkey]); // IF FILTER IS NOT VALIDATED REMOVE TEAM FROM RETURN ARRAY
 						}
 						break;
 					default:
-						throw new Exception('Unknown opperand type "'.$key.'". Expected "and" or "or".');
+						throw new \Exception('Unknown opperand type "'.$key.'". Expected "and" or "or".');
 						break;
 				}
 			}
@@ -149,8 +151,7 @@ class Group
 				}
 			}
 			else {
-				throw new Exception('Filer ['.$key.'] is not an instance of TeamFilter class');
-				return [];
+				throw new \Exception('Filer ['.$key.'] is not an instance of TeamFilter class');
 			}
 		}
 		return $teams;
@@ -166,15 +167,15 @@ class Group
 						if ($this->filterOr($team, $value)) return false;
 						break;
 					default:
-						throw new Exception('Unknown opperand type "'.$key.'". Expected "and" or "or".');
+						throw new \Exception('Unknown opperand type "'.$key.'". Expected "and" or "or".');
 						break;
 				}
 			}
 			elseif ($value instanceof TeamFilter) {
-				if (!$filter->validate($team, $this->id, 'sum', $this)) return false;
+				if (!$value->validate($team, $this->id, 'sum', $this)) return false;
 			}
 			else {
-				throw new Exception('Filer ['.$key.'] is not an instance of TeamFilter class');
+				throw new \Exception('Filer ['.$key.'] is not an instance of TeamFilter class');
 			}
 		}
 		return true;
@@ -190,15 +191,15 @@ class Group
 						if ($this->filterOr($team, $value)) return true;
 						break;
 					default:
-						throw new Exception('Unknown opperand type "'.$key.'". Expected "and" or "or".');
+						throw new \Exception('Unknown opperand type "'.$key.'". Expected "and" or "or".');
 						break;
 				}
 			}
 			elseif ($value instanceof TeamFilter) {
-				if (!$filter->validate($team, $this->id, 'sum', $this)) return true;
+				if (!$value->validate($team, $this->id, 'sum', $this)) return true;
 			}
 			else {
-				throw new Exception('Filer ['.$key.'] is not an instance of TeamFilter class');
+				throw new \Exception('Filer ['.$key.'] is not an instance of TeamFilter class');
 			}
 		}
 		return false;
@@ -220,7 +221,7 @@ class Group
 	}
 	public function setType(string $type = R_R) {
 		if (in_array($type, groupTypes)) $this->type = $type;
-		else throw new Exception('Unknown group type: '.$type);
+		else throw new \Exception('Unknown group type: '.$type);
 		return $this;
 	}
 	public function getType() {
@@ -228,7 +229,7 @@ class Group
 	}
 	public function setOrdering(string $ordering = POINTS) {
 		if (in_array($ordering, orderingTypes)) $this->ordering = $ordering;
-		else throw new Exception('Unknown group ordering: '.$ordering);
+		else throw new \Exception('Unknown group ordering: '.$ordering);
 		return $this;
 	}
 	public function getOrdering() {
@@ -255,16 +256,16 @@ class Group
 	public function setInGame(int $inGame) {
 		if (gettype($inGame) === 'integer') {
 			if ($inGame === 2 || $inGame === 3 || $inGame === 4) $this->inGame = $inGame;
-			else throw new Exception('Expected 2,3 or 4 as inGame '.$inGame.' given');
+			else throw new \Exception('Expected 2,3 or 4 as inGame '.$inGame.' given');
 		}
-		else throw new Exception('Expected integer as inGame '.gettype($inGame).' given');
+		else throw new \Exception('Expected integer as inGame '.gettype($inGame).' given');
 	}
 	public function getInGame() {
 		return $this->inGame;
 	}
 	public function addProgression(Progression $progression) {
 		if ($progression instanceof Progression) $this->progressions[] = $progression;
-		else throw new Exception('Trying to add progression which is not an instance of Progression class');
+		else throw new \Exception('Trying to add progression which is not an instance of Progression class');
 		return $this;
 	}
 	public function progression(Group $to, int $start = 0, int $len = null) {
@@ -332,7 +333,7 @@ class Group
 				}
 
 				if (count($discard) > 0 && !$this->allowSkip) {
-					throw new Exception('Couldn\'t make games with all teams. Expected k*'.$this->inGame.' teams '.$count.' teams given - discarting '.count($discard).' teams ('.implode(', ', $discard).') in group '.$this.' - allow skip '.var_dump($this->allowSkip));
+					throw new \Exception('Couldn\'t make games with all teams. Expected k*'.$this->inGame.' teams '.$count.' teams given - discarting '.count($discard).' teams ('.implode(', ', $discard).') in group '.$this.' - allow skip '.($this->allowSkip ? 'True' : 'False'));
 				}
 				break;
 			case COND_SPLIT:
@@ -365,9 +366,9 @@ class Group
 		return $g;
 	}
 	public function addGame(Game ...$games){
-		foreach ($game as $game) {
+		foreach ($games as $game) {
 			if ($game instanceof Game) $this->games[] = $game;
-			else throw new Exception('Trying to add game which is not instance of Game object.');
+			else throw new \Exception('Trying to add game which is not instance of Game object.');
 		}
 		return $this;
 	}
@@ -579,7 +580,6 @@ class Group
 		return $games;
 	}
 	public function simulate($filters = [], bool $reset = true) {
-		$return = [];
 		foreach ($this->getGames() as $game) {
 			$teams = $game->getTeams();
 			$results = [];
@@ -609,4 +609,3 @@ class Group
 	}
 
 }
-?>

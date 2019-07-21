@@ -2,6 +2,8 @@
 
 namespace TournamentGenerator;
 
+require_once '../functions.php';
+
 /**
  *
  */
@@ -19,14 +21,14 @@ class Round
 		$this->id = uniqid();
 		$this->name = $name;
 	}
-	function __toString() {
+	public function __toString() {
 		return $this->name;
 	}
 
 	public function addGroup(Group ...$groups){
 		foreach ($groups as $group) {
 			if ($group instanceof Group) $this->groups[] = $group;
-			else throw new Exception('Trying to add group which is not an instance of Group class.');
+			else throw new \Exception('Trying to add group which is not an instance of Group class.');
 		}
 		return $this;
 	}
@@ -63,12 +65,11 @@ class Round
 
 	public function genGames(){
 		$games = [];
-		$ex = [];
 		$g = 0;
 		foreach ($this->groups as $group) {
 			try {
 				$group->genGames();
-			} catch (Exception $e) {
+			} catch (\Exception $e) {
 				throw $e;
 			}
 			$g += count($group->getGames());
@@ -113,7 +114,7 @@ class Round
 					];
 				}
 			}
-			else throw new Exception('Trying to add team which is not an instance of Team class');
+			else throw new \Exception('Trying to add team which is not an instance of Team class');
 		}
 		return $this;
 	}
@@ -185,5 +186,3 @@ class Round
 		return $this;
 	}
 }
-
-?>

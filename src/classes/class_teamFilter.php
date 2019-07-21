@@ -2,6 +2,8 @@
 
 namespace TournamentGenerator;
 
+require_once '../functions.php';
+
 /**
  *
  */
@@ -51,7 +53,7 @@ class TeamFilter
 			if ($group instanceof Group) $this->groups[] =  $group->id;
 		}
 	}
-	function __toString() {
+	public function __toString() {
 		return 'Filter: '.$this->what.' '.($this->what !== 'notprogressed' && $this->what !== 'progressed' ? $this->how.' '.$this->val : '');
 	}
 
@@ -69,12 +71,14 @@ class TeamFilter
 			return false;
 		}
 		elseif ($this->what == 'notprogressed') {
+			if ($from === null) throw new \Exception('Group $from was not defined.');
 			return !$from->progressed($team);
 		}
 		elseif ($this->what == 'progressed') {
+			if ($from === null) throw new \Exception('Group $from was not defined.');
 			return $from->progressed($team);
 		}
-		if (gettype($groupsId) === 'array' && !in_array(strtolower($operation), ['sum', 'avg', 'max', 'min'])) throw new Exception('Unknown operation of '.$sum.'. Only "sum", "avg", "min", "max" possible.');
+		if (gettype($groupsId) === 'array' && !in_array(strtolower($operation), ['sum', 'avg', 'max', 'min'])) throw new \Exception('Unknown operation of '.$operation.'. Only "sum", "avg", "min", "max" possible.');
 		$comp = 0;
 		if (gettype($groupsId) === 'array' && count($groupsId) > 0) {
 			$sum = 0;
@@ -105,32 +109,17 @@ class TeamFilter
 			$comp = $team->groupResults[$groupsId][$this->what];
 		}
 		else {
-			throw new Exception("Couldn't find group of id ".print_r($groupsId, true));
+			throw new \Exception("Couldn't find group of id ".print_r($groupsId, true));
 		}
 
 		switch ($this->how) {
-			case '>':
-				return ($comp > $this->val);
-				break;
-			case '<':
-				return ($comp < $this->val);
-				break;
-			case '<=':
-				return ($comp <= $this->val);
-				break;
-			case '>=':
-				return ($comp >= $this->val);
-				break;
-			case '=':
-				return ($comp == $this->val);
-				break;
-			case '!=':
-				return ($comp != $this->val);
-				break;
+			case '>': return ($comp > $this->val);
+			case '<': return ($comp < $this->val);
+			case '<=': return ($comp <= $this->val);
+			case '>=': return ($comp >= $this->val);
+			case '=': return ($comp == $this->val);
+			case '!=': return ($comp != $this->val);
 		}
 		return false;
 	}
 }
-
-
-?>

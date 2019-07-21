@@ -2,6 +2,8 @@
 
 namespace TournamentGenerator;
 
+require_once '../functions.php';
+
 /**
  *
  */
@@ -14,7 +16,7 @@ class Category
 	private $teams = [];
 	private $allowSkip = false;
 
-	function __construct(string $name = '') {
+	public function __construct(string $name = '') {
 		$this->id = uniqid();
 		$this->name = $name;
 	}
@@ -22,7 +24,7 @@ class Category
 	public function addRound(Round ...$rounds){
 		foreach ($rounds as $round) {
 			if ($round instanceof Round) $this->rounds[] = $round;
-			else throw new Exception('Trying to add round which is not an instance of Round class.');
+			else throw new \Exception('Trying to add round which is not an instance of Round class.');
 		}
 		return $this;
 	}
@@ -61,7 +63,7 @@ class Category
 					if ($team2 instanceof Team) $this->teams[] = $team2;
 				}
 			}
-			else throw new Exception('Trying to add team which is not an instance of Team class');
+			else throw new \Exception('Trying to add team which is not an instance of Team class');
 		}
 		return $this;
 	}
@@ -73,8 +75,8 @@ class Category
 	public function getTeams() {
 		if (count($this->teams) > 0) return $this->teams;
 		$teams = [];
-		foreach ($this->groups as $group) {
-			$teams = array_merge($teams, $group->getTeams());
+		foreach ($this->rounds as $round) {
+			$teams = array_merge($teams, $round->getTeams());
 		}
 		$this->teams = $teams;
 		return $teams;
@@ -110,7 +112,7 @@ class Category
 
 	public function genGamesSimulate() {
 		$games = [];
-		if (count($this->rounds) <= 0) throw new Exception('There are no rounds to simulate games from.');
+		if (count($this->rounds) <= 0) throw new \Exception('There are no rounds to simulate games from.');
 		foreach ($this->rounds as $round) {
 			$games = array_merge($games, $round->genGames());
 			$round->simulate()->progressBlank()->resetGames();
@@ -118,5 +120,3 @@ class Category
 		return $games;
 	}
 }
-
-?>

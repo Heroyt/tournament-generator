@@ -2,6 +2,8 @@
 
 namespace TournamentGenerator\Preset;
 
+require_once '../functions.php';
+
 /**
  *
  */
@@ -59,6 +61,3 @@ class Tournament_SingleElimination extends \TournamentGenerator\Tournament
 	}
 
 }
-
-
-?>

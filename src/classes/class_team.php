@@ -2,6 +2,8 @@
 
 namespace TournamentGenerator;
 
+require_once '../functions.php';
+
 /**
  *
  */
@@ -34,7 +36,7 @@ class Team
 		$this->name = $name;
 		$this->id = uniqid();
 	}
-	function __toString() {
+	public function __toString() {
 		return $this->name;
 	}
 	public function getGamesInfo($groupId) {
@@ -42,65 +44,63 @@ class Team
 	}
 
 	public function addWin(string $groupId = ''){
-		if (!isset($this->groupResults[$groupId])) throw new Exception('Group '.$groupId.' is not set for this team ('.$this->name.')');
+		if (!isset($this->groupResults[$groupId])) throw new \Exception('Group '.$groupId.' is not set for this team ('.$this->name.')');
 		$this->groupResults[$groupId]['points'] += $this->groupResults[$groupId]['group']->winPoints;
 		$this->groupResults[$groupId]['wins']++;
 		return $this;
 	}
 	public function removeWin(string $groupId = ''){
-		if (!isset($this->groupResults[$groupId])) throw new Exception('Group '.$groupId.' is not set for this team ('.$this->name.')');
+		if (!isset($this->groupResults[$groupId])) throw new \Exception('Group '.$groupId.' is not set for this team ('.$this->name.')');
 		$this->groupResults[$groupId]['points'] -= $this->groupResults[$groupId]['group']->winPoints;
 		$this->groupResults[$groupId]['wins']--;
 		return $this;
 	}
 	public function addDraw(string $groupId = ''){
-		if (!isset($this->groupResults[$groupId])) throw new Exception('Group '.$groupId.' is not set for this team ('.$this->name.')');
+		if (!isset($this->groupResults[$groupId])) throw new \Exception('Group '.$groupId.' is not set for this team ('.$this->name.')');
 		$this->groupResults[$groupId]['points'] += $this->groupResults[$groupId]['group']->drawPoints;
 		$this->groupResults[$groupId]['draws']++;
 		return $this;
 	}
 	public function removeDraw(string $groupId = ''){
-		if (!isset($this->groupResults[$groupId])) throw new Exception('Group '.$groupId.' is not set for this team ('.$this->name.')');
+		if (!isset($this->groupResults[$groupId])) throw new \Exception('Group '.$groupId.' is not set for this team ('.$this->name.')');
 		$this->groupResults[$groupId]['points'] -= $this->groupResults[$groupId]['group']->drawPointsPoints;
 		$this->groupResults[$groupId]['draws']--;
 		return $this;
 	}
 	public function addLoss(string $groupId = ''){
-		if (!isset($this->groupResults[$groupId])) throw new Exception('Group '.$groupId.' is not set for this team ('.$this->name.')');
+		if (!isset($this->groupResults[$groupId])) throw new \Exception('Group '.$groupId.' is not set for this team ('.$this->name.')');
 		$this->groupResults[$groupId]['points'] += $this->groupResults[$groupId]['group']->lostPoints;
 		$this->groupResults[$groupId]['losses']++;
 		return $this;
 	}
 	public function removeLoss(string $groupId = ''){
-		if (!isset($this->groupResults[$groupId])) throw new Exception('Group '.$groupId.' is not set for this team ('.$this->name.')');
+		if (!isset($this->groupResults[$groupId])) throw new \Exception('Group '.$groupId.' is not set for this team ('.$this->name.')');
 		$this->groupResults[$groupId]['points'] -= $this->groupResults[$groupId]['group']->lostPoints;
 		$this->groupResults[$groupId]['losses']--;
 		return $this;
 	}
 	public function addSecond(string $groupId = ''){
-		if (!isset($this->groupResults[$groupId])) throw new Exception('Group '.$groupId.' is not set for this team ('.$this->name.')');
+		if (!isset($this->groupResults[$groupId])) throw new \Exception('Group '.$groupId.' is not set for this team ('.$this->name.')');
 		$this->groupResults[$groupId]['points'] += $this->groupResults[$groupId]['group']->secondPoints;
 		$this->groupResults[$groupId]['second']++;
 		return $this;
 	}
 	public function removeSecond(string $groupId = ''){
-		if (!isset($this->groupResults[$groupId])) throw new Exception('Group '.$groupId.' is not set for this team ('.$this->name.')');
+		if (!isset($this->groupResults[$groupId])) throw new \Exception('Group '.$groupId.' is not set for this team ('.$this->name.')');
 		$this->groupResults[$groupId]['points'] -= $this->groupResults[$groupId]['group']->secondPoints;
 		$this->groupResults[$groupId]['second']--;
 		return $this;
 	}
 	public function addThird(string $groupId = ''){
-		if (!isset($this->groupResults[$groupId])) throw new Exception('Group '.$groupId.' is not set for this team ('.$this->name.')');
+		if (!isset($this->groupResults[$groupId])) throw new \Exception('Group '.$groupId.' is not set for this team ('.$this->name.')');
 		$this->groupResults[$groupId]['points'] += $this->groupResults[$groupId]['group']->thirdPoints;
 		$this->groupResults[$groupId]['third']++;
 		return $this;
 	}
 	public function removeThird(string $groupId = ''){
-		if (!isset($this->groupResults[$groupId])) throw new Exception('Group '.$groupId.' is not set for this team ('.$this->name.')');
+		if (!isset($this->groupResults[$groupId])) throw new \Exception('Group '.$groupId.' is not set for this team ('.$this->name.')');
 		$this->groupResults[$groupId]['points'] -= $this->groupResults[$groupId]['group']->thirdPoints;
 		$this->groupResults[$groupId]['third']--;
 		return $this;
 	}
 }
-
-?>

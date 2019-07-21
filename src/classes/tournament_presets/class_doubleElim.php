@@ -2,6 +2,8 @@
 
 namespace TournamentGenerator\Preset;
 
+require_once '../functions.php';
+
 /**
  *
  */
@@ -13,7 +15,7 @@ class Tournament_DoubleElimination extends \TournamentGenerator\Tournament
 
 		$countTeams = count($this->getTeams());
 
-		if ($countTeams < 3) throw new Exception('Double elimination is possible for minimum of 3 teams - '.$countTeams.' teams given.');
+		if ($countTeams < 3) throw new \Exception('Double elimination is possible for minimum of 3 teams - '.$countTeams.' teams given.');
 
 
 		// CALCULATE BYES
@@ -165,6 +167,3 @@ class Tournament_DoubleElimination extends \TournamentGenerator\Tournament
 	}
 
 }
-
-
-?>

@@ -2,6 +2,8 @@
 
 namespace TournamentGenerator;
 
+require_once '../functions.php';
+
 /**
  *
  */
@@ -41,7 +43,7 @@ class Game
 				}
 			}
 		}
-		if (count($error) > 0) throw new Exception('Trying to add teams ('.count($error).') that are not instance of Team class'.PHP_EOL.print_r($error, true));
+		if (count($error) > 0) throw new \Exception('Trying to add teams ('.count($error).') that are not instance of Team class'.PHP_EOL.print_r($error, true));
 	}
 
 	public function addTeam(...$teams) {
@@ -73,7 +75,7 @@ class Game
 				unset($teams[$key]);
 			}
 		}
-		if (count($error) > 0) throw new Exception('Trying to add teams ('.count($error).') that are not instance of Team class'.PHP_EOL.print_r($error, true));
+		if (count($error) > 0) throw new \Exception('Trying to add teams ('.count($error).') that are not instance of Team class'.PHP_EOL.print_r($error, true));
 		return $this;
 	}
 	public function getTeams(){
@@ -104,7 +106,7 @@ class Game
 		$i = 1;
 		foreach ($results as $id => $score) {
 			$team = $this->getTeam($id);
-			if ($team === false) throw new Exception('Couldn\'t find team with id of "'.$id.'"');
+			if ($team === false) throw new \Exception('Couldn\'t find team with id of "'.$id.'"');
 			$this->results[$team->id] = ['score' => $score];
 			$prev = prev($results);
 			next($results);
@@ -222,5 +224,3 @@ class Game
 		return false;
 	}
 }
-
-?>

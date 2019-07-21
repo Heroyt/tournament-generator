@@ -2,6 +2,8 @@
 
 namespace TournamentGenerator\Preset;
 
+require_once '../functions.php';
+
 /**
  *
  */
@@ -10,7 +12,7 @@ class Tournament_2R2G extends \TournamentGenerator\Tournament
 
 	public function generate() {
 
-		if (count($this->getTeams()) === 0) throw new Exception('Couldn\'t generate 2R2G tournament because there are no teams in the tournament.');
+		if (count($this->getTeams()) === 0) throw new \Exception('Couldn\'t generate 2R2G tournament because there are no teams in the tournament.');
 
 
 		$round1 = $this->round('Round 1');
@@ -79,6 +81,3 @@ class Tournament_2R2G extends \TournamentGenerator\Tournament
 	}
 
 }
-
-
-?>

@@ -2,6 +2,8 @@
 
 namespace TournamentGenerator;
 
+require_once '../functions.php';
+
 /**
  *
  */
@@ -23,7 +25,7 @@ class Tournament
 	function __construct(string $name = ''){
 		$this->name = $name;
 	}
-	function __toString() {
+	public function __toString() {
 		return $this->name;
 	}
 
@@ -79,7 +81,7 @@ class Tournament
 	public function addCategory(Category ...$categories){
 		foreach ($categories as $category) {
 			if ($category instanceof Category) $this->categories[] = $category;
-			else throw new Exception('Trying to add category which is not an instance of the Category class.');
+			else throw new \Exception('Trying to add category which is not an instance of the Category class.');
 		}
 		return $this;
 	}
@@ -95,7 +97,7 @@ class Tournament
 	public function addRound(Round ...$rounds) {
 		foreach ($rounds as $round) {
 			if ($round instanceof Round) $this->rounds[] = $round;
-			else throw new Exception('Trying to add round which is not an instance of the Round class.');
+			else throw new \Exception('Trying to add round which is not an instance of the Round class.');
 		}
 		return $this;
 	}
@@ -123,19 +125,9 @@ class Tournament
 			elseif (gettype($team) === 'array') {
 				foreach ($team as $team2) {
 					if ($team2 instanceof Team) $this->teams[] = $team2;
-					$team2->groupResults[$this->id] = [
-						'group' => $this,
-						'points' => 0,
-						'score'  => 0,
-						'wins'   => 0,
-						'draws'  => 0,
-						'losses' => 0,
-						'second' => 0,
-						'third'  => 0
-					];
 				}
 			}
-			else throw new Exception('Trying to add team which is not an instance of Team class');
+			else throw new \Exception('Trying to add team which is not an instance of Team class');
 		}
 		return $this;
 	}
@@ -212,7 +204,7 @@ class Tournament
 			}
 		}
 		else {
-			throw new Exception('There are no rounds or categories to simulate games from.');
+			throw new \Exception('There are no rounds or categories to simulate games from.');
 		}
 		if ($returnTime) return $this->getTournamentTime();
 		return $games;
@@ -232,12 +224,10 @@ class Tournament
 			}
 		}
 		else {
-			throw new Exception('There are no rounds or categories to simulate games from.');
+			throw new \Exception('There are no rounds or categories to simulate games from.');
 		}
 		if ($returnTime) return $this->getTournamentTime();
 		return $games;
 	}
 
 }
-
-?>
