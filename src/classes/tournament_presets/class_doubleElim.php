@@ -28,9 +28,6 @@ class Tournament_DoubleElimination extends \TournamentGenerator\Tournament
 
 		$startRound = $this->round('Start round');
 
-		$teams = $this->getTeams();
-		// shuffle($teams);
-
 		$roundsNum = log($nextPow, 2)*2;
 
 		$startGroups = ($countTeams+$byes)/2;

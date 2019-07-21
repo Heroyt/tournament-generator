@@ -32,7 +32,6 @@ class Progression
 			if (!$filter instanceof TeamFilter) throw new \Exception('Trying to add filter which is not an instance of TeamFilter.');
 			$this->filters[] = $filter;
 		}
-		$this->filters[] = $filter;
 		return $this;
 	}
 

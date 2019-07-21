@@ -37,7 +37,7 @@ function circle_genGames2(array $teams = [], Group $group = null) {
 }
 
 // CREATE GAMES FROM BRACKET
-function circle_saveBracket(array $teams, Group $group) {
+function circle_saveBracket(array $teams, Group $group = null) {
 
 	$bracket = [];
 
@@ -60,9 +60,6 @@ function circle_saveBracket(array $teams, Group $group) {
 // ROTATE TEAMS IN BRACKET
 function circle_rotateBracket(array $teams) {
 
-	$temp1 = null;
-	$temp2 = null;
-
 	$first = array_shift($teams); // THE FIRST TEAM REMAINS FIRST
 	$last = array_shift($teams); // THE SECOND TEAM MOVES TO LAST PLACE
 
@@ -76,5 +73,3 @@ function circle_rotateBracket(array $teams) {
 function isPowerOf2(int $x) {
 	return ($x !== 0) && ($x&($x-1)) === 0;
 }
-
-?>

@@ -264,8 +264,7 @@ class Group
 		return $this->inGame;
 	}
 	public function addProgression(Progression $progression) {
-		if ($progression instanceof Progression) $this->progressions[] = $progression;
-		else throw new \Exception('Trying to add progression which is not an instance of Progression class');
+		$this->progressions[] = $progression;
 		return $this;
 	}
 	public function progression(Group $to, int $start = 0, int $len = null) {
@@ -339,7 +338,7 @@ class Group
 			case COND_SPLIT:
 				$games = [];
 				if (count($this->teams) > $this->maxSize) {
-					$groups = array_chunk($this->teams, ceil(count($this->teams)/ceil(count($this->teams)/$this->maxSize))); // SPLIT TEAMS INTO GROUP OF MAXIMUM SIZE OF $this->maxSize
+					$groups = array_chunk($this->teams, /** @scrutinizer ignore-type */ ceil(count($this->teams)/ceil(count($this->teams)/$this->maxSize))); // SPLIT TEAMS INTO GROUP OF MAXIMUM SIZE OF $this->maxSize
 					foreach ($groups as $group) {
 						$games[] = $this->r_rGames($group);
 					}
