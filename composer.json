@@ -1,14 +1,19 @@
 {
-		"name": "heroyt/tournament-generator",
-		"type": "library",
+		"name": "heroyt/rozlosy",
 		"description": "A set of classes used to create multiple kinds of tournament brackets in PHP.",
-		"keywords": ["tournament","bracket","generator"],
+		"type": "library",
 		"license": "MIT",
 		"authors": [
 				{
 						"name": "Tomáš Vojík",
-						"email": "vojik@wboy.cz",
-						"role": "Developer"
+						"email": "vojik@wboy.cz"
 				}
 		],
+		"minimum-stability": "dev",
+		"require": {
+			"php": ">=5.6"
+		},
+		"autoload": {
+			"classmap": ["src/"]
+		}
 }

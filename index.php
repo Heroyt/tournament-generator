@@ -42,20 +42,25 @@
 	</head>
 	<body>
 		<?php
-			require 'functions.php';
-			require 'classes/class_round.php';
-			require 'classes/class_group.php';
-			require 'classes/class_game.php';
-			require 'classes/class_team.php';
-			require 'classes/class_blankTeam.php';
-			require 'classes/class_progression.php';
-			require 'classes/class_teamFilter.php';
-			require 'classes/class_tournament.php';
-			require 'classes/tournament_presets/class_2R2G.php';
-			require 'classes/tournament_presets/class_singleElim.php';
-			require 'classes/tournament_presets/class_doubleElim.php';
+			require 'vendor/autoload.php';
 
-			$tournament = new Tournament_DoubleElimination('Testovací turnaj');
+			// use TournamentGenerator;
+			// require 'functions.php';
+			// require 'classes/class_round.php';
+			// require 'classes/class_group.php';
+			// require 'classes/class_game.php';
+			// require 'classes/class_team.php';
+			// require 'classes/class_blankTeam.php';
+			// require 'classes/class_progression.php';
+			// require 'classes/class_teamFilter.php';
+			// require 'classes/class_tournament.php';
+			// require 'classes/tournament_presets/class_2R2G.php';
+			// require 'classes/tournament_presets/class_singleElim.php';
+			// require 'classes/tournament_presets/class_doubleElim.php';
+
+			$t = new TournamentGenerator\Tournament('test');
+
+			$tournament = new TournamentGenerator\Tournament_DoubleElimination('Testovací turnaj');
 			$tournament->setPlay(7)->setGameWait(2)->setRoundWait(0);
 			//
 			// $round1 = $tournament->round('Round 1');
