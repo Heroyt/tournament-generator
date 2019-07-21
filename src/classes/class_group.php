@@ -33,33 +33,27 @@ class Group
 		foreach ($settings as $key => $value) {
 			switch ($key) {
 				case 'name':
-					if (gettype($value) === 'string') $this->name = $value;
-					else throw new \Exception('Expected string as group name '.gettype($value).' given');
+					if (gettype($value) !== 'string') throw new \Exception('Expected string as group name '.gettype($value).' given');
+					$this->name = $value;
 					break;
 				case 'type':
-					if (in_array($value, groupTypes)) $this->type = $value;
-					else throw new \Exception('Unknown group type: '.$value);
+					if (!in_array($value, groupTypes)) throw new \Exception('Unknown group type: '.$value);
+					$this->type = $value;
 					break;
 				case 'ordering':
-					if (in_array($value, orderingTypes)) $this->ordering = $value;
-					else throw new \Exception('Unknown group ordering: '.$value);
+					if (!in_array($value, orderingTypes)) throw new \Exception('Unknown group ordering: '.$value);
+					$this->ordering = $value;
 					break;
 				case 'inGame':
-					if (gettype($value) === 'integer') {
-						if ($value === 2 || $value === 3 || $value === 4) $this->inGame = $value;
-						else throw new \Exception('Expected 2,3 or 4 as inGame '.$value.' given');
-					}
-					else throw new \Exception('Expected integer as inGame '.gettype($value).' given');
+					if (gettype($value) !== 'integer') throw new \Exception('Expected integer as inGame '.gettype($value).' given');
+					else if ($value < 2 || $value > 4) throw new \Exception('Expected 2,3 or 4 as inGame '.$value.' given');
+					$this->inGame = $value;
 					break;
 				case 'maxSize':
-					if (gettype($value) === 'integer') {
-						$this->maxSize = $value;
-					}
+					if (gettype($value) === 'integer') $this->maxSize = $value;
 					break;
 				case 'order':
-					if (gettype($value) === 'integer') {
-						$this->order = $value;
-					}
+					if (gettype($value) === 'integer') $this->order = $value;
 					break;
 			}
 		}
@@ -331,9 +325,7 @@ class Group
 					$this->game($tInGame);
 				}
 
-				if (count($discard) > 0 && !$this->allowSkip) {
-					throw new \Exception('Couldn\'t make games with all teams. Expected k*'.$this->inGame.' teams '.$count.' teams given - discarting '.count($discard).' teams ('.implode(', ', $discard).') in group '.$this.' - allow skip '.($this->allowSkip ? 'True' : 'False'));
-				}
+				if (count($discard) > 0 && !$this->allowSkip) throw new \Exception('Couldn\'t make games with all teams. Expected k*'.$this->inGame.' teams '.$count.' teams given - discarting '.count($discard).' teams ('.implode(', ', $discard).') in group '.$this.' - allow skip '.($this->allowSkip ? 'True' : 'False'));
 				break;
 			case COND_SPLIT:
 				$games = [];
