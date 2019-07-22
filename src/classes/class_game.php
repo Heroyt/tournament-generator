@@ -2,8 +2,6 @@
 
 namespace TournamentGenerator;
 
-require_once '../functions.php';
-
 /**
  *
  */
@@ -108,6 +106,7 @@ class Game
 			$team = $this->getTeam($id);
 			if ($team === false) throw new \Exception('Couldn\'t find team with id of "'.$id.'"');
 			$this->results[$team->id] = ['score' => $score];
+			$team->sumScore += $score;
 			$prev = prev($results);
 			next($results);
 			$next = next($results);
@@ -182,6 +181,7 @@ class Game
 		foreach ($this->results as $teamId => $score) {
 			$team = $this->getTeam($teamId);
 			$team->groupResults[$this->group->id]['score'] -= $score['score'];
+			$team->sumScore -= $score['score'];
 			switch ($score['type']) {
 				case 'win':
 					$team->removeWin($this->group->id);

@@ -2,8 +2,6 @@
 
 namespace TournamentGenerator\Preset;
 
-require_once '../functions.php';
-
 /**
  *
  */

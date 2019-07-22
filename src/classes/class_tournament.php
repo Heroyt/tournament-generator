@@ -2,8 +2,6 @@
 
 namespace TournamentGenerator;
 
-require_once '../functions.php';
-
 /**
  *
  */
@@ -136,17 +134,35 @@ class Tournament
 		$this->teams[] = $t;
 		return $t;
 	}
-	public function getTeams() {
-		if (count($this->teams) > 0) return $this->teams;
-		$teams = [];
-		foreach ($this->categories as $category) {
-			$teams = array_merge($teams, $category->getTeams());
+	public function getTeams(bool $ordered = false, $ordering = POINTS) {
+		if (count($this->teams) === 0) {
+			$teams = [];
+			foreach ($this->categories as $category) {
+				$teams = array_merge($teams, $category->getTeams());
+			}
+			foreach ($this->rounds as $round) {
+				$teams = array_merge($teams, $round->getTeams());
+			}
+			$this->teams = $teams;
 		}
-		foreach ($this->rounds as $round) {
-			$teams = array_merge($teams, $round->getTeams());
+		if ($ordered) {
+			switch ($ordering) {
+				case POINTS:{
+					uasort($this->teams, function($a, $b) {
+						if ($a->sumPoints === $b->sumPoints && $a->sumScore === $b->sumScore) return 0;
+						if ($a->sumPoints === $b->sumPoints) return ($a->sumScore > $b->sumScore ? -1 : 1);
+						return ($a->sumPoints > $b->sumPoints ? -1 : 1);
+					});
+					break;}
+				case SCORE:{
+					uasort($this->teams, function($a, $b) {
+						if ($a->sumScore === $b->sumScore) return 0;
+						return ($a->sumScore > $b->sumScore ? -1 : 1);
+					});
+					break;}
+			}
 		}
-		$this->teams = $teams;
-		return $teams;
+		return $this->teams;
 	}
 
 	public function getGames() {
