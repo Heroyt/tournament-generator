@@ -11,7 +11,7 @@ Tournament Generator
 <a href="https://packagist.org/packages/heroyt/tournament-generator"><img src="https://poser.pugx.org/heroyt/tournament-generator/v/stable" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/heroyt/tournament-generator"><img src="https://poser.pugx.org/heroyt/tournament-generator/downloads" alt="Total Downloads"></a>
 <a href="https://scrutinizer-ci.com/g/heroyt/tournament-generator/?branch=master"><img src="https://scrutinizer-ci.com/g/heroyt/tournament-generator/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality" data-canonical-src="https://scrutinizer-ci.com/g/heroyt/tournament-generator/badges/quality-score.png?b=master" style="max-width:100%;"></a>
-[![Build Status](https://scrutinizer-ci.com/g/Heroyt/tournament-generator/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Heroyt/tournament-generator/build-status/master)
+<a href="https://scrutinizer-ci.com/g/Heroyt/tournament-generator/build-status/master"><img src="https://scrutinizer-ci.com/g/heroyt/tournament-generator/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality" data-canonical-src="https://scrutinizer-ci.com/g/Heroyt/tournament-generator/badges/build.png?b=master" style="max-width:100%;"></a>
 
 </p>
 
