@@ -32,9 +32,9 @@ class Team
 	*/
 	public $groupResults = [];
 
-	function __construct(string $name = 'team') {
+	function __construct(string $name = 'team', $id = null) {
 		$this->name = $name;
-		$this->id = uniqid();
+		$this->id = (isset($id) ? $id : uniqid());
 	}
 	public function __toString() {
 		return $this->name;

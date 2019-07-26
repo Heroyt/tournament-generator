@@ -1,0 +1,46 @@
+site_name: Tournament Generator
+repo_url: https://github.com/Heroyt/tournament-generator
+repo_name: GitHub
+site_author: Tomáš Vojík (Heroyt)
+markdown_extensions:
+  - admonition
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+theme:
+  name: material
+nav:
+- Introduction: index.md
+- Examples:
+  - 'Basic tournament': examples/basic.md
+  - 'Single Elimination': 'examples/singleElim.md'
+  - 'Double Elimination': 'examples/doubleElim.md'
+  - '2 rounds to groups': examples/2R2G.md
+- Classes:
+  - Tournament: classes/tournament.md
+  - Category: classes/category.md
+  - Round: classes/round.md
+  - Group: classes/group.md
+  - Team: classes/team.md
+  - Game: classes/game.md
+  - Progression: classes/progression.md
+  - 'Team filter': classes/teamFilter.md
+  - 'Blank team': classes/blankTeam.md
+- Templates:
+  - List: //templates/list.md
+  - 'Single elimination': /templates/singleElim.md
+  - 'Double elimination': /templates/doubleElim.md
+  - '2 rounds to groups': /templates/2R2G.md
