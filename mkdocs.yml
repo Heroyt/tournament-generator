@@ -4,16 +4,6 @@ repo_name: GitHub
 site_author: Tomáš Vojík (Heroyt)
 markdown_extensions:
   - admonition
-  - pymdownx.arithmatex
-  - pymdownx.caret
-  - pymdownx.critic
-  - pymdownx.details
-  - pymdownx.inlinehilite
-  - pymdownx.magiclink
-  - pymdownx.mark
-  - pymdownx.smartsymbols
-  - pymdownx.superfences
-  - pymdownx.tilde
 theme:
   name: readthedocs
 nav:

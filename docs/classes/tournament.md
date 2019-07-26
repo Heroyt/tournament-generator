@@ -49,12 +49,11 @@ new TournamentGenerator\Tournament();
 
 #### Code
 
-??? Expand
-    ```php
-    function __construct(string $name = ''){
-    	$this->name = $name;
-    }
-    ```
+```php
+function __construct(string $name = ''){
+	$this->name = $name;
+}
+```
 
 ---
 
@@ -68,12 +67,11 @@ string $this->name;
 ```
 #### Code
 
-??? Expand
-    ```php
-    public function __toString() {
-  		return $this->name;
-  	}
-    ```
+```php
+public function __toString() {
+	return $this->name;
+}
+```
 
 ---
 
@@ -92,13 +90,12 @@ TournamentGenerator\Tournament $this
 ```
 #### Code
 
-??? Expand
-    ```php
-    public function setPlay(int $play) {
-  		$this->expectedPlay = $play;
-  		return $this;
-  	}
-    ```
+```php
+public function setPlay(int $play) {
+	$this->expectedPlay = $play;
+	return $this;
+}
+```
 
 ---
 
@@ -112,12 +109,11 @@ int $this->expectedPlay;
 ```
 #### Code
 
-??? Expand
-    ```php
-    public function getPlay() {
-  		return $this->expectedPlay;
-  	}
-    ```
+```php
+public function getPlay() {
+	return $this->expectedPlay;
+}
+```
 
 ---
 
@@ -136,13 +132,12 @@ TournamentGenerator\Tournament $this
 ```
 #### Code
 
-??? Expand
-    ```php
-    public function setGameWait(int $wait) {
-  		$this->expectedGameWait = $wait;
-  		return $this;
-  	}
-    ```
+```php
+public function setGameWait(int $wait) {
+	$this->expectedGameWait = $wait;
+	return $this;
+}
+```
 
 ---
 
@@ -156,12 +151,11 @@ int $this->expectedGameWait;
 ```
 #### Code
 
-??? Expand
-    ```php
-    public function getGameWait() {
-  		return $this->expectedGameWait;
-  	}
-    ```
+```php
+public function getGameWait() {
+	return $this->expectedGameWait;
+}
+```
 
 ---
 
@@ -180,13 +174,12 @@ TournamentGenerator\Tournament $this
 ```
 #### Code
 
-??? Expand
-    ```php
-    public function setRoundWait(int $wait) {
-  		$this->expectedRoundWait = $wait;
-  		return $this;
-  	}
-    ```
+```php
+public function setRoundWait(int $wait) {
+	$this->expectedRoundWait = $wait;
+	return $this;
+}
+```
 
 ---
 
@@ -200,12 +193,11 @@ int $this->expectedRoundWait
 ```
 #### Code
 
-??? Expand
-    ```php
-    public function getRoundWait() {
-  		return $this->expectedRoundWait;
-  	}
-    ```
+```php
+public function getRoundWait() {
+	return $this->expectedRoundWait;
+}
+```
 
 ---
 
@@ -224,13 +216,12 @@ TournamentGenerator\Tournament $this
 ```
 #### Code
 
-??? Expand
-    ```php
-    public function setCategoryWait(int $wait) {
-  		$this->expectedCategoryWait = $wait;
-  		return $this;
-  	}
-    ```
+```php
+public function setCategoryWait(int $wait) {
+	$this->expectedCategoryWait = $wait;
+	return $this;
+}
+```
 
 ---
 
@@ -244,12 +235,11 @@ int $this->expectedCategoryWait
 ```
 #### Code
 
-??? Expand
-    ```php
-    public function getCategoryWait() {
-  		return $this->expectedCategoryWait;
-  	}
-    ```
+```php
+public function getCategoryWait() {
+	return $this->expectedCategoryWait;
+}
+```
 
 ---
 
@@ -263,11 +253,10 @@ int
 ```
 #### Code
 
-??? Expand
-    ```php
-    public function getTournamentTime(){
-  		$games = count($this->getGames());
-  		return $games*$this->expectedPlay+$games*$this->expectedGameWait+count($this->getRounds())*$this->expectedRoundWait+count($this->getCategories())*$this->expectedCategoryWait;
+```php
+public function getTournamentTime(){
+	$games = count($this->getGames());
+	return $games*$this->expectedPlay+$games*$this->expectedGameWait+count($this->getRounds())*$this->expectedRoundWait+count($this->getCategories())*$this->expectedCategoryWait;
   	}
     ```
 
