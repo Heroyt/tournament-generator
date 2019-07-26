@@ -18,7 +18,7 @@ Tournament Generator
 
 </p>
 
-## [Documentation](https://readthedocs.org/projects/tournament-generator/)
+## [Documentation](https://tournament-generator.readthedocs.io/en/latest/)
 
 ## Features
 
