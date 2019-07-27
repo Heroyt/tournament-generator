@@ -33,26 +33,26 @@ class Progression
 		return $this;
 	}
 
-	public function progress() {
-		$teams = $this->from->sortTeams($this->filters);
+	public function progress(bool $blank = false) {
+		if ($blank) $teams = $this->from->isPlayed() ? $this->from->sortTeams($this->filters) : $this->from->simulate($this->filters);
+		else $teams = $this->from->sortTeams($this->filters);
+
 		if (count($this->filters) === 0 || $this->len !== null || $this->start !== 0) $next = array_splice($teams, $this->start, ($this->len === null ? count($teams) : $this->len));
 		else $next = $teams;
+
+		$i = 1;
+
+		foreach ($next as $team) {
+			if ($blank) {
+				$this->to->addTeam(new BlankTeam($this.' - '.$i, $team));
+				$i++;
+			}
+			else $team->sumPoints += $this->from->progressPoints;
+		}
+
 		$this->from->addProgressed($next);
-		$this->to->addTeam($next);
+		if (!$blank) $this->to->addTeam($next);
 		return $this;
 	}
 
-	public function progressBlank(){
-		$teams = $this->from->isPlayed() ? $this->from->sortTeams($this->filters) : $this->from->simulate($this->filters);
-		if (count($this->filters) === 0 || $this->len !== null || $this->start !== 0) $next = array_splice($teams, $this->start, ($this->len === null ? count($teams) : $this->len));
-		else $next = $teams;
-		$this->from->addProgressed($next);
-		$i = 1;
-		foreach ($next as $team) {
-			// echo '<pre>Progressing team from '.$this->from.' to '.$this->to.': '.$team.'</pre>';
-			$this->to->addTeam(new BlankTeam($this.' - '.$i, $team));
-			$i++;
-		}
-		return $this;
-	}
 }

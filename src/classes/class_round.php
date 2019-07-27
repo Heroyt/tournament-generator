@@ -39,6 +39,10 @@ class Round
 		$this->orderGroups();
 		return $this->groups;
 	}
+	public function getGroupsIds() {
+		$this->orderGroups();
+		return array_map(function($a) { return $a->id; }, $this->groups);
+	}
 	public function orderGroups() {
 		usort($this->groups, function($a, $b){
 			return $a->order - $b->order;
@@ -62,23 +66,10 @@ class Round
 	}
 
 	public function genGames(){
-		$games = [];
 		$g = 0;
 		foreach ($this->groups as $group) {
-			try {
-				$group->genGames();
-			} catch (\Exception $e) {
-				throw $e;
-			}
-			$g += count($group->getGames());
-			$games[$group->id] = $group->orderGames();
-		}
-		while ($g > 0) {
-			foreach ($games as $key => $group) {
-				$this->games[] = array_shift($games[$key]);
-				if (count($games[$key]) === 0) unset($games[$key]);
-				$g--;
-			}
+			$group->genGames();
+			$this->games = array_merge($this->games, $group->orderGames());
 		}
 		return $this->games;
 	}
@@ -121,14 +112,38 @@ class Round
 		$this->teams[] = $t;
 		return $t;
 	}
-	public function getTeams() {
-		if (count($this->teams) > 0) return $this->teams;
-		$teams = [];
-		foreach ($this->groups as $group) {
-			$teams = array_merge($teams, $group->getTeams());
+	public function getTeams(bool $ordered = false, $ordering = POINTS) {
+		if (count($this->teams) == 0) {
+			$teams = [];
+			foreach ($this->groups as $group) {
+				$teams = array_merge($teams, $group->getTeams());
+			}
+			$this->teams = $teams;
 		}
-		$this->teams = $teams;
-		return $teams;
+		if ($ordered) {
+			$this->sortTeams($ordering);
+		}
+		return $this->teams;
+	}
+	public function sortTeams($ordering = POINTS) {
+		$teams = [];
+		$groupsIds = $this->getGroupsIds();
+		switch ($ordering) {
+			case POINTS:{
+				uasort($this->teams, function($a, $b) use ($groupsIds) {
+					if ($a->sumPoints($groupsIds) === $b->sumPoints($groupsIds) && $a->sumScore($groupsIds) === $b->sumScore($groupsIds)) return 0;
+					if ($a->sumPoints($groupsIds) === $b->sumPoints($groupsIds)) return ($a->sumScore($groupsIds) > $b->sumScore($groupsIds) ? -1 : 1);
+					return ($a->sumPoints($groupsIds) > $b->sumPoints($groupsIds) ? -1 : 1);
+				});
+				break;}
+			case SCORE:{
+				uasort($this->teams, function($a, $b) use ($groupsIds) {
+					if ($a->sumScore($groupsIds) === $b->sumScore($groupsIds)) return 0;
+					return ($a->sumScore($groupsIds) > $b->sumScore($groupsIds) ? -1 : 1);
+				});
+				break;}
+		}
+		return $this->teams;
 	}
 
 	public function splitTeams(...$groups) {
@@ -155,17 +170,9 @@ class Round
 		return $this;
 	}
 
-	public function progress(){
+	public function progress(bool $blank = false){
 		foreach ($this->groups as $group) {
-			$group->progress();
-		}
-		return $this;
-	}
-
-	public function progressBlank(){
-		if (!$this->isPlayed()) $this->simulate();
-		foreach ($this->groups as $group) {
-			$group->progressBlank();
+			$group->progress($blank);
 		}
 		return $this;
 	}

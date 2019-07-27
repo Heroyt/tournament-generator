@@ -70,11 +70,11 @@ class TeamFilter
 		}
 		elseif ($this->what == 'notprogressed') {
 			if ($from === null) throw new \Exception('Group $from was not defined.');
-			return !$from->progressed($team);
+			return !$from->isProgressed($team);
 		}
 		elseif ($this->what == 'progressed') {
 			if ($from === null) throw new \Exception('Group $from was not defined.');
-			return $from->progressed($team);
+			return $from->isProgressed($team);
 		}
 		if (gettype($groupsId) === 'array' && !in_array(strtolower($operation), ['sum', 'avg', 'max', 'min'])) throw new \Exception('Unknown operation of '.$operation.'. Only "sum", "avg", "min", "max" possible.');
 		$comp = 0;

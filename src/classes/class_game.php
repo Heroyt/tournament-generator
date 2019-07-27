@@ -17,7 +17,7 @@ class Game
 	private $thirdId = null;
 	private $drawIds = [];
 
-	function __construct(array $teams = [], Group $group = null) {
+	function __construct(array $teams, Group $group) {
 		$this->group = $group;
 		$error = [];
 		$tids = [];
@@ -25,52 +25,42 @@ class Game
 			if (!$team instanceof Team) {
 				$error[] = $team;
 				unset($teams[$key]);
+				continue;
 			}
-			else {
-				if (!isset($team->games[$group->id])) $team->games[$group->id] = [];
-				$team->games[$group->id][] = $this;
-				$tids[] = $team->id;
-			}
+			$team->addGame($this);
+			$tids[] = $team->id;
 		}
 		$this->teams = $teams;
 		foreach ($this->teams as $team) {
-			foreach ($tids as $id) {
-				if ($team->id !== $id) {
-					if (!isset($team->gamesWith[$group->id][$id])) $team->gamesWith[$group->id][$id] = 0;
-					$team->gamesWith[$group->id][$id]++;
-				}
+			foreach ($this->teams as $team2) {
+				if ($team === $team2) continue;
+				$team->addGameWith($team2, $group);
 			}
 		}
 		if (count($error) > 0) throw new \Exception('Trying to add teams ('.count($error).') that are not instance of Team class'.PHP_EOL.print_r($error, true));
 	}
 
+	public function getGroup() {
+		return $this->group;
+	}
+
 	public function addTeam(...$teams) {
 		$error = [];
-		foreach ($this->teams as $team) {
-			foreach ($teams as $team2) {
-				if ($team2 instanceof Team) {
-					if (!isset($team->gamesWith[$this->group->id][$team2->id])) $team->gamesWith[$this->group->id][$team2->id] = 0;
-					$team->gamesWith[$this->group->id][$team2->id]++;
-					if (!isset($team2->gamesWith[$this->group->id][$team->id])) $team2->gamesWith[$this->group->id][$team->id] = 0;
-					$team2->gamesWith[$this->group->id][$team->id]++;
-				}
-			}
-		}
 		foreach ($teams as $key => $team) {
-			if ($team instanceof Team) {
-				$this->teams[] = $team;
-				if (!isset($team->games[$this->group->id])) $team->games[$this->group->id] = [];
-				$team->games[$this->group->id][] = $this;
-				foreach ($teams as $key2 => $team2) {
-					if ($team2 instanceof Team) {
-						if (!isset($team->gamesWith[$this->group->id][$team2->id])) $team->gamesWith[$this->group->id][$team2->id] = 0;
-						$team->gamesWith[$this->group->id][$team2->id]++;
-					}
-				}
-			}
-			else {
+			if (!$team instanceof Team) {
 				$error[] = $team;
 				unset($teams[$key]);
+				continue;
+			}
+			$this->teams[] = $team;
+			$team->addGame($this);
+
+			foreach ($this->teams as $team2) {
+				if ($team === $team2) continue;
+				if ($team instanceof Team) {
+					$team->addGameWith($team2, $this->group);
+					$team2->addGameWith($team, $this->group);
+				}
 			}
 		}
 		if (count($error) > 0) throw new \Exception('Trying to add teams ('.count($error).') that are not instance of Team class'.PHP_EOL.print_r($error, true));
@@ -80,11 +70,7 @@ class Game
 		return $this->teams;
 	}
 	public function getTeamsIds(){
-		$ids = [];
-		foreach ($this->teams as $team) {
-			$ids[] = $team->id;
-		}
-		return $ids;
+		return array_map(function($a){ return $a->id; }, $this->teams);
 	}
 	public function getTeam(string $id) {
 		foreach ($this->teams as $team) {
@@ -101,6 +87,7 @@ class Game
 	public function setResults(array $results = []) {
 		if (count($this->results) === 0) $this->resetResults();
 		arsort($results);
+		$inGame = /** @scrutinizer ignore-call */ $this->group->getInGame();
 		$i = 1;
 		foreach ($results as $id => $score) {
 			$team = $this->getTeam($id);
@@ -110,73 +97,86 @@ class Game
 			$prev = prev($results);
 			next($results);
 			$next = next($results);
-			switch ($this->group->getInGame()) {
-				case 2:{
-					if ($score === $prev || $score === $next) {
-						$this->drawIds[] = $team->id;
-						$team->addDraw($this->group->id);
-						$this->results[$team->id] += ['points' => $this->group->drawPoints, 'type' => 'draw'];
-					}
-					elseif ($i === 1) {
-						$this->winId = $team->id;
-						$team->addWin($this->group->id);
-						$this->results[$team->id] += ['points' => $this->group->winPoints, 'type' => 'win'];
-					}
-					else {
-						$this->lossId = $team->id;
-						$team->addLoss($this->group->id);
-						$this->results[$team->id] += ['points' => $this->group->lostPoints, 'type' => 'loss'];
-					}
-					break;}
-				case 3:{
-					switch ($i) {
-						case 1:
-							$this->winId = $team->id;
-							$team->addWin($this->group->id);
-							$this->results[$team->id] += ['points' => $this->group->winPoints, 'type' => 'win'];
-							break;
-						case 2:
-							$this->secondId = $team->id;
-							$team->addSecond($this->group->id);
-							$this->results[$team->id] += ['points' => $this->group->secondPoints, 'type' => 'second'];
-							break;
-						case 3:
-							$this->lossId = $team->id;
-							$team->addLoss($this->group->id);
-							$this->results[$team->id] += ['points' => $this->group->lostPoints, 'type' => 'loss'];
-							break;
-					}
-					break;}
-				case 4:{
-					switch ($i) {
-						case 1:
-							$this->winId = $team->id;
-							$team->addWin($this->group->id);
-							$this->results[$team->id] += ['points' => $this->group->winPoints, 'type' => 'win'];
-							break;
-						case 2:
-							$this->secondId = $team->id;
-							$team->addSecond($this->group->id);
-							$this->results[$team->id] += ['points' => $this->group->secondPoints, 'type' => 'second'];
-							break;
-						case 3:
-							$this->thirdId = $team->id;
-							$team->addThird($this->group->id);
-							$this->results[$team->id] += ['points' => $this->group->thirdPoints, 'type' => 'third'];
-							break;
-						case 4:
-							$this->lossId = $team->id;
-							$team->addLoss($this->group->id);
-							$this->results[$team->id] += ['points' => $this->group->lostPoints, 'type' => 'loss'];
-							break;
-					}
-					break;}
+			switch ($inGame) {
+				case 2:
+					$this->setResults2($score, $prev, $next, $team);
+					break;
+				case 3:
+					$this->setResults3($i, $team);
+					break;
+				case 4:
+					$this->setResults4($i, $team);
+					break;
 			}
 			$team->groupResults[$this->group->id]['score'] += $score;
 			$i++;
 		}
 		return $this;
 	}
+	private function setResults2($score, $prev, $next, $team) {
+		if ($score === $prev || $score === $next) {
+			$this->drawIds[] = $team->id;
+			$team->addDraw($this->group->id);
+			$this->results[$team->id] += ['points' => $this->group->drawPoints, 'type' => 'draw'];
+		}
+		elseif ($i === 1) {
+			$this->winId = $team->id;
+			$team->addWin($this->group->id);
+			$this->results[$team->id] += ['points' => $this->group->winPoints, 'type' => 'win'];
+		}
+		else {
+			$this->lossId = $team->id;
+			$team->addLoss($this->group->id);
+			$this->results[$team->id] += ['points' => $this->group->lostPoints, 'type' => 'loss'];
+		}
+		return $this;
+	}
+	private function setResults3($i, $team) {
+		switch ($i) {
+			case 1:
+				$this->winId = $team->id;
+				$team->addWin($this->group->id);
+				$this->results[$team->id] += ['points' => $this->group->winPoints, 'type' => 'win'];
+				break;
+			case 2:
+				$this->secondId = $team->id;
+				$team->addSecond($this->group->id);
+				$this->results[$team->id] += ['points' => $this->group->secondPoints, 'type' => 'second'];
+				break;
+			case 3:
+				$this->lossId = $team->id;
+				$team->addLoss($this->group->id);
+				$this->results[$team->id] += ['points' => $this->group->lostPoints, 'type' => 'loss'];
+				break;
+		}
+		return $this;
+	}
+	private function setResults4($i, $team) {
+		switch ($i) {
+			case 1:
+				$this->winId = $team->id;
+				$team->addWin($this->group->id);
+				$this->results[$team->id] += ['points' => $this->group->winPoints, 'type' => 'win'];
+				break;
+			case 2:
+				$this->secondId = $team->id;
+				$team->addSecond($this->group->id);
+				$this->results[$team->id] += ['points' => $this->group->secondPoints, 'type' => 'second'];
+				break;
+			case 3:
+				$this->thirdId = $team->id;
+				$team->addThird($this->group->id);
+				$this->results[$team->id] += ['points' => $this->group->thirdPoints, 'type' => 'third'];
+				break;
+			case 4:
+				$this->lossId = $team->id;
+				$team->addLoss($this->group->id);
+				$this->results[$team->id] += ['points' => $this->group->lostPoints, 'type' => 'loss'];
+				break;
+		}
+		return $this;
+	}
+
 	public function resetResults() {
 		foreach ($this->results as $teamId => $score) {
 			$team = $this->getTeam($teamId);
@@ -212,7 +212,7 @@ class Game
 	public function getSecond() {
 		return $this->secondId;
 	}
-	public function getThrird() {
+	public function getThird() {
 		return $this->thirdId;
 	}
 	public function getDraw() {

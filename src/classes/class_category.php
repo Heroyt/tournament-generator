@@ -113,7 +113,7 @@ class Category
 		if (count($this->rounds) <= 0) throw new \Exception('There are no rounds to simulate games from.');
 		foreach ($this->rounds as $round) {
 			$games = array_merge($games, $round->genGames());
-			$round->simulate()->progressBlank()->resetGames();
+			$round->simulate()->progress(true)->resetGames();
 		}
 		return $games;
 	}

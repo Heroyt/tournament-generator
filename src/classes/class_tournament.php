@@ -146,22 +146,17 @@ class Tournament
 			$this->teams = $teams;
 		}
 		if ($ordered) {
-			switch ($ordering) {
-				case POINTS:{
-					uasort($this->teams, function($a, $b) {
-						if ($a->sumPoints === $b->sumPoints && $a->sumScore === $b->sumScore) return 0;
-						if ($a->sumPoints === $b->sumPoints) return ($a->sumScore > $b->sumScore ? -1 : 1);
-						return ($a->sumPoints > $b->sumPoints ? -1 : 1);
-					});
-					break;}
-				case SCORE:{
-					uasort($this->teams, function($a, $b) {
-						if ($a->sumScore === $b->sumScore) return 0;
-						return ($a->sumScore > $b->sumScore ? -1 : 1);
-					});
-					break;}
-			}
+			$this->sortTeams($ordering);
 		}
+		return $this->teams;
+	}
+	public function sortTeams($ordering = POINTS) {
+		$teams = [];
+		for ($i = count($this->rounds)-1; $i >= 0; $i--) {
+			$rTeams = array_filter($this->rounds[$i]->getTeams(true, $ordering), function($a) use ($teams) { return !in_array($a, $teams); });
+			$teams = array_merge($teams, $rTeams);
+		}
+		$this->teams = $teams;
 		return $this->teams;
 	}
 
@@ -180,8 +175,13 @@ class Tournament
 		foreach ($wheres as $key => $value) {
 			if (gettype($value) === 'array') {
 				unset($wheres[$key]);
+				foreach ($value as $key2 => $value2) {
+					if (!$value2 instanceof Round && !$value2 instanceof Category) throw new \Exception('Trying to split teams to another object, that is not instance of Category or Round.');
+				}
 				$wheres = array_merge($wheres, $value);
+				continue;
 			}
+			if (!$value instanceof Round && !$value instanceof Category) throw new \Exception('Trying to split teams to another object, that is not instance of Category or Round.');
 		}
 
 		$teams = $this->getTeams();
@@ -189,12 +189,7 @@ class Tournament
 
 		while (count($teams) > 0) {
 			foreach ($wheres as $where) {
-				if ($where instanceof Round) {
-					if (count($teams) > 0) $where->addTeam(array_shift($teams));
-				}
-				elseif ($where instanceof Category) {
-					if (count($teams) > 0) $where->addTeam(array_shift($teams));
-				}
+				if (count($teams) > 0) $where->addTeam(array_shift($teams));
 			}
 		}
 		foreach ($wheres as $where) {
@@ -213,15 +208,13 @@ class Tournament
 		elseif (count($this->rounds) > 0) {
 			foreach ($this->rounds as $round) {
 				$games = array_merge($games, $round->genGames());
-				$round->simulate()->progressBlank();
+				$round->simulate()->progress(true);
 			}
 			foreach ($this->rounds as $round) {
 				$round->resetGames();
 			}
 		}
-		else {
-			throw new \Exception('There are no rounds or categories to simulate games from.');
-		}
+		else throw new \Exception('There are no rounds or categories to simulate games from.');
 		if ($returnTime) return $this->getTournamentTime();
 		return $games;
 	}
@@ -239,9 +232,7 @@ class Tournament
 				$round->progress();
 			}
 		}
-		else {
-			throw new \Exception('There are no rounds or categories to simulate games from.');
-		}
+		else throw new \Exception('There are no rounds or categories to simulate games from.');
 		if ($returnTime) return $this->getTournamentTime();
 		return $games;
 	}

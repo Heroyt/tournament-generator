@@ -43,6 +43,22 @@ class Team
 		return array_filter($this->groupResults[$groupId], function($k) { return $k !== 'group'; }, ARRAY_FILTER_USE_KEY);
 	}
 
+	public function addGameWith(Team $team, Group $group) {
+		if (!isset($this->gamesWith[$group->id][$team->id])) $this->gamesWith[$group->id][$team->id] = 0;
+		$this->gamesWith[$group->id][$team->id]++;
+		return $this;
+	}
+	public function addGroup(Group $group) {
+		if (!isset($this->games[$group->id])) $this->games[$group->id] = [];
+		return $this;
+	}
+	public function addGame(Game $game) {
+		$group = $game->getGroup();
+		if (!isset($this->games[$group->id])) $this->games[$group->id] = [];
+		$this->games[$group->id][] = $game;
+		return $this;
+	}
+
 	public function addWin(string $groupId = ''){
 		if (!isset($this->groupResults[$groupId])) throw new \Exception('Group '.$groupId.' is not set for this team ('.$this->name.')');
 		$this->groupResults[$groupId]['points'] += $this->groupResults[$groupId]['group']->winPoints;
@@ -112,5 +128,21 @@ class Team
 		$this->sumPoints -= $this->groupResults[$groupId]['group']->thirdPoints;
 		$this->groupResults[$groupId]['third']--;
 		return $this;
+	}
+	public function sumPoints(array $groupIds = []) {
+		if (count($groupIds) === 0) return $this->sumPoints;
+		$sum = 0;
+		foreach ($groupIds as $gid) {
+			if (isset($this->groupResults[$gid])) $sum += $this->groupResults[$gid]['points'];
+		}
+		return $sum;
+	}
+	public function sumScore(array $groupIds = []) {
+		if (count($groupIds) === 0) return $this->sumScore;
+		$sum = 0;
+		foreach ($groupIds as $gid) {
+			if (isset($this->groupResults[$gid])) $sum += $this->groupResults[$gid]['score'];
+		}
+		return $sum;
 	}
 }
