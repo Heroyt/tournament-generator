@@ -47,9 +47,7 @@ class TeamFilter
 		if (in_array(strtolower($what), ['points', 'score', 'wins', 'draws', 'losses', 'second', 'third', 'team', 'notprogressed', 'progressed'])) $this->what = strtolower($what);
 		if (in_array($how, ['>', '<', '>=', '<=', '=', '!='])) $this->how = $how;
 		if ((gettype($val) === 'integer' && strtolower($what) !== 'team') || ($val instanceof Team && strtolower($what) === 'team')) $this->val = $val;
-		foreach ($groups as $group) {
-			if ($group instanceof Group) $this->groups[] =  $group->id;
-		}
+		$this->groups = array_map(function($a) { return $a->id; }, array_filter($groups, function($a) {return ($a instanceof Group);}));
 	}
 	public function __toString() {
 		return 'Filter: '.$this->what.' '.($this->what !== 'notprogressed' && $this->what !== 'progressed' ? $this->how.' '.$this->val : '');
@@ -57,28 +55,16 @@ class TeamFilter
 
 	public function validate(Team $team, $groupsId, string $operation = 'sum', Group $from = null) {
 		if (count($this->groups) > 0) $groupsId = array_unique(array_merge($this->groups, (gettype($groupsId) === 'array' ? $groupsId : [$groupsId])), SORT_REGULAR);
-		if ($this->what == 'team') {
-			return $this->validateTeam($team);
-		}
-		elseif ($this->what == 'notprogressed') {
-			return !$this->validateProgressed($team, $from);
-		}
-		elseif ($this->what == 'progressed') {
-			return $this->validateProgressed($team, $from);
-		}
-		return $this->validateCalc($team, $groupsId, $operation, $from);
+
+		if ($this->what == 'team') return ($this->how === '!=' ? !$this->validateTeam($team) : $this->validateTeam($team));
+		elseif ($this->what == 'notprogressed') return !$this->validateProgressed($team, $from);
+		elseif ($this->what == 'progressed') return $this->validateProgressed($team, $from);
+
+		return $this->validateCalc($team, $groupsId, $operation);
 	}
 
 	private function validateTeam(Team $team) {
-		switch ($this->how) {
-			case '=':
-				if ($this->val === $team) return true;
-				break;
-			case '!=':
-				if ($this->val !== $team) return true;
-				break;
-		}
-		return false;
+		return $this->val === $team;
 	}
 	private function validateProgressed(Team $team, Group $from = null) {
 		if ($from === null) throw new \Exception('Group $from was not defined.');
@@ -87,16 +73,13 @@ class TeamFilter
 	private function validateCalc(Team $team, $groupsId, string $operation = 'sum') {
 		if (gettype($groupsId) === 'array' && !in_array(strtolower($operation), ['sum', 'avg', 'max', 'min'])) throw new \Exception('Unknown operation of '.$operation.'. Only "sum", "avg", "min", "max" possible.');
 		$comp = 0;
-		if (gettype($groupsId) === 'array' && count($groupsId) > 0) {
-			switch (strtolower($operation)) {
-				case 'sum': $comp = $this->calcSum($team, $groupsId);
-				case 'avg': $comp = $this->calcSum($team, $groupsId)/count($groupsId);
-				case 'max': $comp = $this->calcMax($team, $groupsId);
-				case 'min': $comp = $this->calcMin($team, $groupsId);
-			}
+		if (gettype($groupsId) === 'string') $groupsId = [$groupsId];
+		switch (strtolower($operation)) {
+			case 'sum': $comp = $this->calcSum($team, $groupsId); break;
+			case 'avg': $comp = $this->calcSum($team, $groupsId)/count($groupsId); break;
+			case 'max': $comp = $this->calcMax($team, $groupsId); break;
+			case 'min': $comp = $this->calcMin($team, $groupsId); break;
 		}
-		elseif (gettype($groupsId) === 'string' && isset($team->groupResults[$groupsId])) $comp = $team->groupResults[$groupsId][$this->what];
-		else throw new \Exception("Couldn't find group of id ".print_r($groupsId, true));
 
 		switch ($this->how) {
 			case '>': return ($comp > $this->val);
@@ -112,8 +95,7 @@ class TeamFilter
 	private function calcSum(Team $team, $groupsId) {
 		$sum = 0;
 		foreach ($groupsId as $id) {
-			if (!isset($team->groupResults[$id])) continue; // IF TEAM DIDN'T PLAY IN THAT GROUP -> SKIP
-			$sum += $team->groupResults[$id][$this->what];
+			if (isset($team->groupResults[$id])) $sum += $team->groupResults[$id][$this->what];
 		}
 		return $sum;
 	}
