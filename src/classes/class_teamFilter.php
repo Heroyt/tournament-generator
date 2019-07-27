@@ -58,24 +58,33 @@ class TeamFilter
 	public function validate(Team $team, $groupsId, string $operation = 'sum', Group $from = null) {
 		if (count($this->groups) > 0) $groupsId = array_unique(array_merge($this->groups, (gettype($groupsId) === 'array' ? $groupsId : [$groupsId])), SORT_REGULAR);
 		if ($this->what == 'team') {
-			switch ($this->how) {
-				case '=':
-					if ($this->val === $team) return true;
-					break;
-				case '!=':
-					if ($this->val !== $team) return true;
-					break;
-			}
-			return false;
+			return $this->validateTeam($team);
 		}
 		elseif ($this->what == 'notprogressed') {
-			if ($from === null) throw new \Exception('Group $from was not defined.');
-			return !$from->isProgressed($team);
+			return !$this->validateProgressed($team, $from);
 		}
 		elseif ($this->what == 'progressed') {
-			if ($from === null) throw new \Exception('Group $from was not defined.');
-			return $from->isProgressed($team);
+			return $this->validateProgressed($team, $from);
 		}
+		return $this->validateCalc($team, $groupsId, $operation, $from);
+	}
+
+	private function validateTeam(Team $team) {
+		switch ($this->how) {
+			case '=':
+				if ($this->val === $team) return true;
+				break;
+			case '!=':
+				if ($this->val !== $team) return true;
+				break;
+		}
+		return false;
+	}
+	private function validateProgressed(Team $team, Group $from) {
+		if ($from === null) throw new \Exception('Group $from was not defined.');
+		return $from->isProgressed($team);
+	}
+	private function validateCalc(Team $team, $groupsId, string $operation = 'sum', Group $from = null) {
 		if (gettype($groupsId) === 'array' && !in_array(strtolower($operation), ['sum', 'avg', 'max', 'min'])) throw new \Exception('Unknown operation of '.$operation.'. Only "sum", "avg", "min", "max" possible.');
 		$comp = 0;
 		if (gettype($groupsId) === 'array' && count($groupsId) > 0) {
@@ -103,12 +112,8 @@ class TeamFilter
 					break;
 			}
 		}
-		elseif (gettype($groupsId) === 'string' && isset($team->groupResults[$groupsId])) {
-			$comp = $team->groupResults[$groupsId][$this->what];
-		}
-		else {
-			throw new \Exception("Couldn't find group of id ".print_r($groupsId, true));
-		}
+		elseif (gettype($groupsId) === 'string' && isset($team->groupResults[$groupsId])) $comp = $team->groupResults[$groupsId][$this->what];
+		else throw new \Exception("Couldn't find group of id ".print_r($groupsId, true));
 
 		switch ($this->how) {
 			case '>': return ($comp > $this->val);
