@@ -53,7 +53,7 @@ class Tournament_DoubleElimination extends \TournamentGenerator\Tournament
 			// GENERATE GROUPS AND PROGRESSIONS
 
 			// GENERATING LOSING AND WINNING SIDE
-			$lastLosingGroup = $this->generateLosingSide($r, $byes, $countTeams, $round, $allGroups, $groups, $previousLosingGroups, $previousGroups, $losingGroups);
+			$lastLosingGroup = $this->generateLosingSide($r, $round, $allGroups, $previousLosingGroups, $previousGroups, $losingGroups);
 			$this->generateWinSide($r, $byes, $countTeams, $round, $allGroups, $groups, $lastWinningGroup, $previousGroups);
 
 			$previousGroups = $groups;
@@ -113,7 +113,7 @@ class Tournament_DoubleElimination extends \TournamentGenerator\Tournament
 		}
 		return $this;
 	}
-	private function generateLosingSide(int &$r, int &$byes, int &$countTeams, \TournamentGenerator\Round &$round, array &$allGroups, array &$groups, array &$previousLosingGroups = [], array &$previousGroups = [], array &$losingGroups = []) {
+	private function generateLosingSide(int &$r, \TournamentGenerator\Round &$round, array &$allGroups, array &$previousLosingGroups = [], array &$previousGroups = [], array &$losingGroups = []) {
 		$losingGroupTeamsCount = count($previousLosingGroups)+count($previousGroups);
 		$order = 2;
 		if (\TournamentGenerator\isPowerOf2($losingGroupTeamsCount)) { // IF THE NUMBER OF TEAMS IS A POWER OF 2, GENERATE GROUPS WITHOUT BYES
