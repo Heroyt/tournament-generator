@@ -66,7 +66,6 @@ class Round
 	}
 
 	public function genGames(){
-		$g = 0;
 		foreach ($this->groups as $group) {
 			$group->genGames();
 			$this->games = array_merge($this->games, $group->orderGames());
@@ -126,7 +125,6 @@ class Round
 		return $this->teams;
 	}
 	public function sortTeams($ordering = POINTS) {
-		$teams = [];
 		$groupsIds = $this->getGroupsIds();
 		switch ($ordering) {
 			case POINTS:{

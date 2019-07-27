@@ -12,7 +12,7 @@ class Group
 	private $teams = []; // ARRAY OF TEAMS
 	private $progressed = []; // ARRAY OF TEAMS ALREADY PROGRESSED FROM THIS GROUP
 	public $name = ''; // DISPLAYABLE NAME
-	private /** @scrutinizer ignore-all */ $ordering = POINTS; // WHAT TO DECIDE ON WHEN ORDERING TEAMS
+	private $ordering = POINTS; // WHAT TO DECIDE ON WHEN ORDERING TEAMS
 	private $progressions = []; // ARRAY OF PROGRESSION CONDITION OBJECTS
 	private $games = []; // ARRAY OF GAME OBJECTS
 	public $id = ''; // UNIQID OF GROUP FOR IDENTIFICATIONT
@@ -26,7 +26,7 @@ class Group
 
 	function __construct(array $settings = []) {
 		$this->id = uniqid();
-		$this->generator = new Generator($this);
+		$this->generator = new Utilis\Generator($this);
 		foreach ($settings as $key => $value) {
 			switch ($key) {
 				case 'name':
@@ -53,7 +53,7 @@ class Group
 			}
 		}
 	}
-	function __toString() {
+	public function __toString() {
 		return 'Group '.$this->name;
 	}
 

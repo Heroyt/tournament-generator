@@ -99,7 +99,7 @@ class Game
 			$next = next($results);
 			switch ($inGame) {
 				case 2:
-					$this->setResults2($score, $prev, $next, $team);
+					$this->setResults2($i, $score, $prev, $next, $team);
 					break;
 				case 3:
 					$this->setResults3($i, $team);
@@ -113,7 +113,7 @@ class Game
 		}
 		return $this;
 	}
-	private function setResults2($score, $prev, $next, $team) {
+	private function setResults2($i, $score, $prev, $next, $team) {
 		if ($score === $prev || $score === $next) {
 			$this->drawIds[] = $team->id;
 			$team->addDraw($this->group->id);

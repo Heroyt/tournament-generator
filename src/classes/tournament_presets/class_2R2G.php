@@ -20,28 +20,28 @@ class Tournament_2R2G extends \TournamentGenerator\Tournament
 		$group_0_0 = $round1->group([
 			'name' => '0/0',
 			'inGame' => 2,
-			'type' => TWO_TWO,
+			'type' => \TournamentGenerator\TWO_TWO,
 		]);
 		$group_0_1 = $round2->group([
 			'name' => '0/1',
-			'type' => TWO_TWO
+			'type' => \TournamentGenerator\TWO_TWO
 		]);
 		$group_1_0 = $round2->group([
 			'name' => '1/0',
-			'type' => TWO_TWO
+			'type' => \TournamentGenerator\TWO_TWO
 		]);
 		$group_1_1 = $round3->group([
 			'name' => '1/1',
-			'type' => COND_SPLIT,
+			'type' => \TournamentGenerator\COND_SPLIT,
 			'maxSize' => 3
 		]);
 		$group_0_2 = $round3->group([
 			'name' => '0/2',
-			'type' => R_R
+			'type' => \TournamentGenerator\R_R
 		]);
 		$group_2_0 = $round3->group([
 			'name' => '2/0',
-			'type' => R_R
+			'type' => \TournamentGenerator\R_R
 		]);
 
 		$filter_win_1 = new \TournamentGenerator\TeamFilter('wins', '=', 1);
@@ -53,7 +53,7 @@ class Tournament_2R2G extends \TournamentGenerator\Tournament
 		if (count($this->getTeams()) % 4 == 2) {
 			$group_top = $round2->group([
 				'name' => 'TOP',
-				'type' => TWO_TWO
+				'type' => \TournamentGenerator\TWO_TWO
 			]);
 
 			$filter_win_2 = new \TournamentGenerator\TeamFilter('wins', '=', 2, [$group_0_0, $group_top]);

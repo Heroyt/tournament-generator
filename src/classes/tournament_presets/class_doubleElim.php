@@ -39,7 +39,7 @@ class Tournament_DoubleElimination extends \TournamentGenerator\Tournament
 			$g = $startRound->group([
 				'name' => 'Start group - '.$i,
 				'inGame' => 2,
-				'type' => TWO_TWO,
+				'type' => \TournamentGenerator\TWO_TWO,
 			]);
 			$allGroups[] = $g;
 			$groupIds[] = $g->id;
@@ -64,7 +64,7 @@ class Tournament_DoubleElimination extends \TournamentGenerator\Tournament
 					$group = $round->group([
 						'name' => 'Round '.$r.' - loss '.$g,
 						'inGame' => 2,
-						'type' => TWO_TWO,
+						'type' => \TournamentGenerator\TWO_TWO,
 						'order' => $order,
 					]);
 					$allGroups[] = $group;
@@ -96,7 +96,7 @@ class Tournament_DoubleElimination extends \TournamentGenerator\Tournament
 					$group = $round->group([
 						'name' => 'Round '.$r.' - loss '.$g,
 						'inGame' => 2,
-						'type' => TWO_TWO,
+						'type' => \TournamentGenerator\TWO_TWO,
 						'order' => $order,
 					]);
 					$allGroups[] = $group;
@@ -120,7 +120,7 @@ class Tournament_DoubleElimination extends \TournamentGenerator\Tournament
 				$group = $round->group([
 					'name' => 'Round '.$r.' - win '.$g,
 					'inGame' => 2,
-					'type' => TWO_TWO,
+					'type' => \TournamentGenerator\TWO_TWO,
 					'order' => $order,
 				]);
 				$allGroups[] = $group;
@@ -140,7 +140,7 @@ class Tournament_DoubleElimination extends \TournamentGenerator\Tournament
 		$groupFinal = $round->group([
 			'name' => 'Round '.$r.' - finale',
 			'inGame' => 2,
-			'type' => TWO_TWO,
+			'type' => \TournamentGenerator\TWO_TWO,
 			'order' => 1,
 		]);
 		$allGroups[] = $groupFinal;
@@ -151,7 +151,7 @@ class Tournament_DoubleElimination extends \TournamentGenerator\Tournament
 		$group = $round->group([
 			'name' => 'Round '.$r.' - finale (2)',
 			'inGame' => 2,
-			'type' => TWO_TWO,
+			'type' => \TournamentGenerator\TWO_TWO,
 			'order' => 1,
 		]);
 		$twoLoss = new \TournamentGenerator\TeamFilter('losses', '=', 1, $allGroups);
