@@ -125,22 +125,7 @@ class Round
 		return $this->teams;
 	}
 	public function sortTeams($ordering = \POINTS) {
-		$groupsIds = $this->getGroupsIds();
-		switch ($ordering) {
-			case \POINTS:{
-				uasort($this->teams, function($a, $b) use ($groupsIds) {
-					if ($a->sumPoints($groupsIds) === $b->sumPoints($groupsIds) && $a->sumScore($groupsIds) === $b->sumScore($groupsIds)) return 0;
-					if ($a->sumPoints($groupsIds) === $b->sumPoints($groupsIds)) return ($a->sumScore($groupsIds) > $b->sumScore($groupsIds) ? -1 : 1);
-					return ($a->sumPoints($groupsIds) > $b->sumPoints($groupsIds) ? -1 : 1);
-				});
-				break;}
-			case \SCORE:{
-				uasort($this->teams, function($a, $b) use ($groupsIds) {
-					if ($a->sumScore($groupsIds) === $b->sumScore($groupsIds)) return 0;
-					return ($a->sumScore($groupsIds) > $b->sumScore($groupsIds) ? -1 : 1);
-				});
-				break;}
-		}
+		Utilis\Sorter\Teams::sortRound($this->teams, $this, $ordering);
 		return $this->teams;
 	}
 

@@ -114,37 +114,12 @@ class Group
 		elseif (gettype($filters) !== 'array') $filters = [];
 
 		// APPLY FILTERS
-		foreach ($filters as $key => $filter) {
-			if (gettype($filter) === 'array') {
-				switch (strtolower($key)) {
-					case 'and':
-						foreach ($teams as $tkey => $team) {
-							if (!$this->filterAnd($team, $filter)) unset($teams[$tkey]); // IF FILTER IS NOT VALIDATED REMOVE TEAM FROM RETURN ARRAY
-						}
-						break;
-					case 'or':
-						foreach ($teams as $tkey => $team) {
-							if (!$this->filterOr($team, $filter)) unset($teams[$tkey]); // IF FILTER IS NOT VALIDATED REMOVE TEAM FROM RETURN ARRAY
-						}
-						break;
-					default:
-						throw new \Exception('Unknown opperand type "'.$key.'". Expected "and" or "or".');
-						break;
-				}
-			}
-			elseif ($filter instanceof TeamFilter) {
-				foreach ($teams as $tkey => $team) {
-					if (!$filter->validate($team, $this->id, 'sum', $this)) {
-						unset($teams[$tkey]); // IF FILTER IS NOT VALIDATED REMOVE TEAM FROM RETURN ARRAY
-					}
-				}
-			}
-			else {
-				throw new \Exception('Filer ['.$key.'] is not an instance of TeamFilter class');
-			}
-		}
+		$filter = new Filter($this, $filters);
+		$filter->filter($teams);
+
 		return $teams;
 	}
+
 	public function team(string $name = '') {
 		$t = new Team($name);
 		$this->teams[] = $t;
@@ -162,71 +137,8 @@ class Group
 	}
 	public function sortTeams($filters = [], $ordering = null) {
 		if (!isset($ordering)) $ordering = $this->ordering;
-		switch ($ordering) {
-			case \POINTS:{
-				usort($this->teams, function($a, $b) {
-					if ($a->groupResults[$this->id]["points"] === $b->groupResults[$this->id]["points"] && $a->groupResults[$this->id]["score"] === $b->groupResults[$this->id]["score"]) return 0;
-					if ($a->groupResults[$this->id]["points"] === $b->groupResults[$this->id]["points"]) return ($a->groupResults[$this->id]["score"] > $b->groupResults[$this->id]["score"] ? -1 : 1);
-					return ($a->groupResults[$this->id]["points"] > $b->groupResults[$this->id]["points"] ? -1 : 1);
-				});
-				break;}
-			case \SCORE:{
-				usort($this->teams, function($a, $b) {
-					if ($a->groupResults[$this->id]["score"] === $b->groupResults[$this->id]["score"]) return 0;
-					return ($a->groupResults[$this->id]["score"] > $b->groupResults[$this->id]["score"] ? -1 : 1);
-				});
-				break;}
-		}
+		Utilis\Sorter\Teams::sortGroup($this->teams, $this, $ordering);
 		return $this->getTeams($filters);
-	}
-
-	public function filterAnd(Team $team, array $filters) {
-		foreach ($filters as $key => $value) {
-			if (gettype($value) === 'array') {
-				switch (strtolower($key)) {
-					case 'and':
-						if ($this->filterAnd($team, $value)) return false;
-						break;
-					case 'or':
-						if ($this->filterOr($team, $value)) return false;
-						break;
-					default:
-						throw new \Exception('Unknown opperand type "'.$key.'". Expected "and" or "or".');
-						break;
-				}
-			}
-			elseif ($value instanceof TeamFilter) {
-				if (!$value->validate($team, $this->id, 'sum', $this)) return false;
-			}
-			else {
-				throw new \Exception('Filer ['.$key.'] is not an instance of TeamFilter class');
-			}
-		}
-		return true;
-	}
-	public function filterOr(Team $team, array $filters) {
-		foreach ($filters as $key => $value) {
-			if (gettype($value) === 'array') {
-				switch (strtolower($key)) {
-					case 'and':
-						if ($this->filterAnd($team, $value)) return true;
-						break;
-					case 'or':
-						if ($this->filterOr($team, $value)) return true;
-						break;
-					default:
-						throw new \Exception('Unknown opperand type "'.$key.'". Expected "and" or "or".');
-						break;
-				}
-			}
-			elseif ($value instanceof TeamFilter) {
-				if (!$value->validate($team, $this->id, 'sum', $this)) return true;
-			}
-			else {
-				throw new \Exception('Filer ['.$key.'] is not an instance of TeamFilter class');
-			}
-		}
-		return false;
 	}
 
 	public function setType(string $type = \R_R) {

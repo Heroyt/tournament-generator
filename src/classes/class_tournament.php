@@ -168,20 +168,16 @@ class Tournament
 		return $games;
 	}
 
-	public function splitTeams(...$wheres) {
+	public function splitTeams(Round ...$wheres) {
 
-		if (count($wheres) === 0) $wheres = array_merge($this->getRounds(), $this->getCategories());
+		if (count($wheres) === 0) $wheres = $this->getRounds();
 
 		foreach ($wheres as $key => $value) {
 			if (gettype($value) === 'array') {
 				unset($wheres[$key]);
-				foreach ($value as $key2 => $value2) {
-					if (!$value2 instanceof Round && !$value2 instanceof Category) throw new \Exception('Trying to split teams to another object, that is not instance of Category or Round.');
-				}
 				$wheres = array_merge($wheres, $value);
 				continue;
 			}
-			if (!$value instanceof Round && !$value instanceof Category) throw new \Exception('Trying to split teams to another object, that is not instance of Category or Round.');
 		}
 
 		$teams = $this->getTeams();
@@ -200,39 +196,37 @@ class Tournament
 
 	public function genGamesSimulate(bool $returnTime = false) {
 		$games = [];
-		if (count($this->categories) > 0) {
-			foreach ($this->categories as $category) {
-				$games = array_merge($games, $category->genGamesSimulate());
-			}
+		if (count($this->categories) === 0 && count($this->rounds) === 0) throw new \Exception('There are no rounds or categories to simulate games from.');
+
+		foreach ($this->categories as $category) {
+			$games = array_merge($games, $category->genGamesSimulate());
 		}
-		elseif (count($this->rounds) > 0) {
-			foreach ($this->rounds as $round) {
-				$games = array_merge($games, $round->genGames());
-				$round->simulate()->progress(true);
-			}
-			foreach ($this->rounds as $round) {
-				$round->resetGames();
-			}
+
+		foreach ($this->rounds as $round) {
+			$games = array_merge($games, $round->genGames());
+			$round->simulate()->progress(true);
 		}
-		else throw new \Exception('There are no rounds or categories to simulate games from.');
+		foreach ($this->rounds as $round) {
+			$round->resetGames();
+		}
+
 		if ($returnTime) return $this->getTournamentTime();
 		return $games;
 	}
 	public function genGamesSimulateReal(bool $returnTime = false) {
 		$games = [];
-		if (count($this->categories) > 0) {
-			foreach ($this->categories as $category) {
-				$games = array_merge($games, $category->genGamesSimulate());
-			}
+		if (count($this->categories) === 0 && count($this->rounds) === 0) throw new \Exception('There are no rounds or categories to simulate games from.');
+
+		foreach ($this->categories as $category) {
+			$games = array_merge($games, $category->genGamesSimulate());
 		}
-		elseif (count($this->rounds) > 0) {
-			foreach ($this->rounds as $round) {
-				$games = array_merge($games, $round->genGames());
-				$round->simulate();
-				$round->progress();
-			}
+
+		foreach ($this->rounds as $round) {
+			$games = array_merge($games, $round->genGames());
+			$round->simulate();
+			$round->progress();
 		}
-		else throw new \Exception('There are no rounds or categories to simulate games from.');
+
 		if ($returnTime) return $this->getTournamentTime();
 		return $games;
 	}
