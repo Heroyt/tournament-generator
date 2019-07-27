@@ -119,13 +119,15 @@ class Tournament
 		foreach ($teams as $team) {
 			if ($team instanceof Team)  {
 				$this->teams[] = $team;
+				continue;
 			}
 			elseif (gettype($team) === 'array') {
-				foreach ($team as $team2) {
-					if ($team2 instanceof Team) $this->teams[] = $team2;
-				}
+				array_merge($teams, array_filter($team, function($a) {
+					return ($a instanceof Team);
+				}));
+				continue;
 			}
-			else throw new \Exception('Trying to add team which is not an instance of Team class');
+			throw new \Exception('Trying to add team which is not an instance of Team class');
 		}
 		return $this;
 	}
@@ -145,9 +147,7 @@ class Tournament
 			}
 			$this->teams = $teams;
 		}
-		if ($ordered) {
-			$this->sortTeams($ordering);
-		}
+		if ($ordered) $this->sortTeams($ordering);
 		return $this->teams;
 	}
 	public function sortTeams($ordering = \POINTS) {
@@ -195,37 +195,13 @@ class Tournament
 	}
 
 	public function genGamesSimulate(bool $returnTime = false) {
-		$games = [];
-		if (count($this->categories) === 0 && count($this->rounds) === 0) throw new \Exception('There are no rounds or categories to simulate games from.');
-
-		foreach ($this->categories as $category) {
-			$games = array_merge($games, $category->genGamesSimulate());
-		}
-
-		foreach ($this->rounds as $round) {
-			$games = array_merge($games, $round->genGames());
-			$round->simulate()->progress(true);
-		}
-		foreach ($this->rounds as $round) {
-			$round->resetGames();
-		}
+		$games = Utilis\Simulator::simulateTournament($this);
 
 		if ($returnTime) return $this->getTournamentTime();
 		return $games;
 	}
 	public function genGamesSimulateReal(bool $returnTime = false) {
-		$games = [];
-		if (count($this->categories) === 0 && count($this->rounds) === 0) throw new \Exception('There are no rounds or categories to simulate games from.');
-
-		foreach ($this->categories as $category) {
-			$games = array_merge($games, $category->genGamesSimulate());
-		}
-
-		foreach ($this->rounds as $round) {
-			$games = array_merge($games, $round->genGames());
-			$round->simulate();
-			$round->progress();
-		}
+		$games = Utilis\Simulator::simulateTournamentReal($this);
 
 		if ($returnTime) return $this->getTournamentTime();
 		return $games;

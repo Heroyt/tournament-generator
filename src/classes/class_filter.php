@@ -41,7 +41,7 @@ class Filter
 			}
 			elseif ($filter instanceof TeamFilter) {
 				foreach ($teams as $tkey => $team) {
-					if (!$filter->validate($team, $this->id, 'sum', $this)) {
+					if (!$filter->validate($team, $this->group->id, 'sum', $this->group)) {
 						unset($teams[$tkey]); // IF FILTER IS NOT VALIDATED REMOVE TEAM FROM RETURN ARRAY
 					}
 				}
@@ -69,7 +69,7 @@ class Filter
 				}
 			}
 			elseif ($value instanceof TeamFilter) {
-				if (!$value->validate($team, $this->id, 'sum', $this)) return false;
+				if (!$value->validate($team, $this->group->id, 'sum', $this->group)) return false;
 			}
 			else {
 				throw new \Exception('Filer ['.$key.'] is not an instance of TeamFilter class');
@@ -93,7 +93,7 @@ class Filter
 				}
 			}
 			elseif ($value instanceof TeamFilter) {
-				if (!$value->validate($team, $this->id, 'sum', $this)) return true;
+				if (!$value->validate($team, $this->group->id, 'sum', $this->group)) return true;
 			}
 			else {
 				throw new \Exception('Filer ['.$key.'] is not an instance of TeamFilter class');

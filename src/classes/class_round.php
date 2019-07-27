@@ -161,10 +161,7 @@ class Round
 	}
 
 	public function simulate() {
-		foreach ($this->groups as $group) {
-			if ($group->isPlayed()) continue;
-			$group->simulate([], false);
-		}
+		Utilis\Simulator::simulateRound($this);
 		return $this;
 	}
 	public function resetGames() {

@@ -240,21 +240,8 @@ class Group
 		return $this->games;
 	}
 
-	public function simulate($filters = [], bool $reset = true) {
-		foreach ($this->getGames() as $game) {
-			$teams = $game->getTeams();
-			$results = [];
-			foreach ($teams as $team) {
-				$results[$team->id] = floor(rand(-1000, 5000));
-			}
-			$game->setResults($results);
-		}
-		$return = $this->sortTeams($filters);
-		if (!$reset) return $return;
-		foreach ($this->getGames() as $game) {
-			$game->resetResults();
-		}
-		return $return;
+	public function simulate(array $filters = [], bool $reset = true) {
+		return Utilis\Simulator::simulateGroup($this, $filters, $reset);
 	}
 	public function resetGames() {
 		foreach ($this->getGames() as $game) {
