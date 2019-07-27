@@ -74,7 +74,7 @@ class Group
 		foreach ($teams as $team) {
 			if (gettype($team) === 'array') {
 				foreach ($team as $team2) {
-					$this->setTeam($team);
+					$this->setTeam($team2);
 				}
 				continue;
 			}
@@ -84,7 +84,7 @@ class Group
 	}
 	private function setTeam(Team $team) {
 		$this->teams[] = $team;
-		$team2->groupResults[$this->id] = [
+		$team->groupResults[$this->id] = [
 			'group' => $this,
 			'points' => 0,
 			'score'  => 0,
