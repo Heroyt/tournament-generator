@@ -122,7 +122,7 @@ class Tournament
 				continue;
 			}
 			elseif (gettype($team) === 'array') {
-				array_merge($teams, array_filter($team, function($a) {
+				$teams = array_merge($teams, array_filter($team, function($a) {
 					return ($a instanceof Team);
 				}));
 				continue;

@@ -30,22 +30,19 @@ class Group
 		foreach ($settings as $key => $value) {
 			switch ($key) {
 				case 'name':
-					if (gettype($value) !== 'string') throw new \Exception('Expected string as group name '.gettype($value).' given');
-					$this->name = $value;
+					$this->name = (string) $value;
 					break;
 				case 'type':
 					$this->generator->setType($value);
 					break;
 				case 'ordering':
-					if (!in_array($value, orderingTypes)) throw new \Exception('Unknown group ordering: '.$value);
-					$this->ordering = $value;
+					$this->setOrdering($value);
 					break;
 				case 'inGame':
-					$this->generator->setInGame($value);
+					$this->generator->setInGame((int) $value);
 					break;
 				case 'maxSize':
-					$value = (int) $value;
-					if ($value > 1) $this->generator->setMaxSize($value);
+					$this->generator->setMaxSize((int) $value);
 					break;
 				case 'order':
 					$this->order = (int) $value;
@@ -75,36 +72,28 @@ class Group
 
 	public function addTeam(...$teams) {
 		foreach ($teams as $team) {
-			if ($team instanceof Team)  {
-				$this->teams[] = $team;
-				$team->groupResults[$this->id] = [
-					'group' => $this,
-					'points' => 0,
-					'score'  => 0,
-					'wins'   => 0,
-					'draws'  => 0,
-					'losses' => 0,
-					'second' => 0,
-					'third'  => 0
-				];
-			}
-			elseif (gettype($team) === 'array') {
+			if (gettype($team) === 'array') {
 				foreach ($team as $team2) {
-					if ($team2 instanceof Team) $this->teams[] = $team2;
-					$team2->groupResults[$this->id] = [
-						'group' => $this,
-						'points' => 0,
-						'score'  => 0,
-						'wins'   => 0,
-						'draws'  => 0,
-						'losses' => 0,
-						'second' => 0,
-						'third'  => 0
-					];
+					$this->setTeam($team);
 				}
+				continue;
 			}
-			else throw new \Exception('Trying to add team which is not an instance of Team class');
+			$this->setTeam($team);
 		}
+		return $this;
+	}
+	private function setTeam(Team $team) {
+		$this->teams[] = $team;
+		$team2->groupResults[$this->id] = [
+			'group' => $this,
+			'points' => 0,
+			'score'  => 0,
+			'wins'   => 0,
+			'draws'  => 0,
+			'losses' => 0,
+			'second' => 0,
+			'third'  => 0
+		];
 		return $this;
 	}
 	public function getTeams($filters = []) {
@@ -150,8 +139,8 @@ class Group
 	}
 
 	public function setOrdering(string $ordering = \POINTS) {
-		if (in_array($ordering, orderingTypes)) $this->ordering = $ordering;
-		else throw new \Exception('Unknown group ordering: '.$ordering);
+		if (!in_array($ordering, orderingTypes)) throw new \Exception('Unknown group ordering: '.$ordering);
+		$this->ordering = $ordering;
 		return $this;
 	}
 	public function getOrdering() {
@@ -182,30 +171,17 @@ class Group
 	}
 	public function addProgressed(...$teams) {
 		foreach ($teams as $team) {
-			if ($team instanceOf Team) {
-				$this->progressed[] = $team->id;
-			}
-			elseif (gettype($team) === 'string' || gettype($team) === 'integer') {
-				$this->progressed[] = $team;
-			}
+			if ($team instanceOf Team) $this->progressed[] = $team->id;
 			elseif (gettype($team) === 'array') {
-				foreach ($team as $teamInner) {
-					if ($teamInner instanceOf Team) {
-						$this->progressed[] = $teamInner->id;
-					}
-					elseif (gettype($teamInner) === 'string' || gettype($teamInner) === 'integer') {
-						$this->progressed[] = $teamInner;
-					}
-				}
+				$this->progressed = array_merge($this->progressed, array_filter($team, function($a) {
+					return ($a instanceof Team);
+				}));
 			}
 		}
 		return $this;
 	}
 	public function isProgressed(Team $team) {
-		if (in_array($team->id, $this->progressed)) {
-			return true;
-		}
-		return false;
+		return in_array($team->id, $this->progressed);
 	}
 
 	public function genGames() {
@@ -222,12 +198,11 @@ class Group
 		foreach ($games as $key => $game) {
 			if (gettype($game) === 'array') {
 				unset($games[$key]);
-				$games = array_merge($games, $game);
+				$games = array_merge($games, array_filter($game, function($a){ return ($a instanceof Game); }));
+				continue;
 			}
-		}
-		foreach ($games as $game) {
-			if ($game instanceof Game) $this->games[] = $game;
-			else throw new \Exception('Trying to add game which is not instance of Game object.');
+			if (!$game instanceof Game) throw new \Exception('Trying to add game which is not instance of Game object.');
+			$this->games[] = $game;
 		}
 		return $this;
 	}
@@ -245,13 +220,13 @@ class Group
 	}
 	public function resetGames() {
 		foreach ($this->getGames() as $game) {
-			if (isset($game)) $game->resetResults();
+			$game->resetResults();
 		}
 		return $this;
 	}
 	public function isPlayed(){
 		foreach ($this->games as $game) {
-			if ((isset($game) || !$this->getSkip()) && !$game->isPlayed()) return false;
+			if (!$game->isPlayed()) return false;
 		}
 		return true;
 	}
