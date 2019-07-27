@@ -111,7 +111,7 @@ class Round
 		$this->teams[] = $t;
 		return $t;
 	}
-	public function getTeams(bool $ordered = false, $ordering = POINTS) {
+	public function getTeams(bool $ordered = false, $ordering = \POINTS) {
 		if (count($this->teams) == 0) {
 			$teams = [];
 			foreach ($this->groups as $group) {
@@ -124,17 +124,17 @@ class Round
 		}
 		return $this->teams;
 	}
-	public function sortTeams($ordering = POINTS) {
+	public function sortTeams($ordering = \POINTS) {
 		$groupsIds = $this->getGroupsIds();
 		switch ($ordering) {
-			case POINTS:{
+			case \POINTS:{
 				uasort($this->teams, function($a, $b) use ($groupsIds) {
 					if ($a->sumPoints($groupsIds) === $b->sumPoints($groupsIds) && $a->sumScore($groupsIds) === $b->sumScore($groupsIds)) return 0;
 					if ($a->sumPoints($groupsIds) === $b->sumPoints($groupsIds)) return ($a->sumScore($groupsIds) > $b->sumScore($groupsIds) ? -1 : 1);
 					return ($a->sumPoints($groupsIds) > $b->sumPoints($groupsIds) ? -1 : 1);
 				});
 				break;}
-			case SCORE:{
+			case \SCORE:{
 				uasort($this->teams, function($a, $b) use ($groupsIds) {
 					if ($a->sumScore($groupsIds) === $b->sumScore($groupsIds)) return 0;
 					return ($a->sumScore($groupsIds) > $b->sumScore($groupsIds) ? -1 : 1);

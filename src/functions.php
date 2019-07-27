@@ -12,12 +12,11 @@ define('orderingTypes', [
 	'POINTS' => 'order based on points aqquired',
 	'SCORE' => 'order based on total score'
 ]);
-foreach (groupTypes as $key => $value) {
-	define($key, $value);
-}
-foreach (orderingTypes as $key => $value) {
-	define($key, $value);
-}
+define('R_R', 'Robin-Robin');
+define('TWO_TWO', 'team plays only once');
+define('COND_SPLIT', 'dependent on condition');
+define('POINTS', 'order based on points aqquired');
+define('SCORE', 'order based on total score');
 
 // IF NUMBER IS POWER OF 2
 function isPowerOf2(int $x) {

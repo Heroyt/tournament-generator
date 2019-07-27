@@ -9,13 +9,12 @@ class Generator
 {
 
 	private $group = null;
-	private $type = \TournamentGenerator\R_R; // TYPE OF ROUND TO CREATE A LAYOUT
+	private $type = \R_R; // TYPE OF ROUND TO CREATE A LAYOUT
 	private $inGame = 2; // NUMBER OF TEAMS IN ONE GAME - 2/3/4
 	private $maxSize = 4; // MAX SIZE OF GROUP BEFORE SPLIT
 	private $allowSkip = false; // IF IS NUMBER OF TEAMS LESS THAN $this->inGame THEN SKIP PLAYING THIS GROUP
-	private $games = []; // ARRAY OF GAME OBJECTS
 
-	function __construct(Group $group) {
+	function __construct(\TournamentGenerator\Group $group) {
 		$this->group = $group;
 	}
 
@@ -36,8 +35,8 @@ class Generator
 	}
 
 
-	public function setType(/** @scrutinizer ignore-all */ string $type = \TournamentGenerator\R_R) {
-		if (in_array($type, \TournamentGenerator\groupTypes)) $this->type = $type;
+	public function setType(/** @scrutinizer ignore-all */ string $type = \R_R) {
+		if (in_array($type, \groupTypes)) $this->type = $type;
 		else throw new \Exception('Unknown group type: '.$type);
 		return $this;
 	}
@@ -65,10 +64,10 @@ class Generator
 
 	public function genGames() {
 		switch ($this->type) {
-			case \TournamentGenerator\R_R:{
+			case \R_R:{
 					$this->group->addGame($this->r_rGames());
 				break;}
-			case \TournamentGenerator\TWO_TWO:
+			case \TWO_TWO:
 				$teams = $this->group->getTeams();
 				$discard = [];
 				shuffle($teams);
@@ -83,7 +82,7 @@ class Generator
 
 				if (count($discard) > 0 && !$this->allowSkip) throw new \Exception('Couldn\'t make games with all teams. Expected k*'.$this->inGame.' teams '.$count.' teams given - discarting '.count($discard).' teams ('.implode(', ', $discard).') in group '.$this->group.' - allow skip '.($this->allowSkip ? 'True' : 'False'));
 				break;
-			case \TournamentGenerator\COND_SPLIT:
+			case \COND_SPLIT:
 				$games = [];
 				$teams = $this->group->getTeams();
 				if (count($teams) > $this->maxSize) {
@@ -146,16 +145,16 @@ class Generator
 	}
 
 	public function orderGames() {
-		$sorter = new \Sorter\Games($this, $this->group);
+		$sorter = new Sorter\Games($this->group);
 
 		return $sorter->orderGames();
 	}
 
 	// GENERATES A ROBIN-ROBIN BRACKET
-	public static function circle_genGames2(array $teams = [], Group $group) {
+	public static function circle_genGames2(array $teams = [], \tournamentGenerator\Group $group) {
 		$bracket = []; // ARRAY OF GAMES
 
-		if (count($teams) % 2 != 0) $teams[] = \TournamentGenerator\DUMMY_TEAM; // IF NOT EVEN NUMBER OF TEAMS, ADD DUMMY
+		if (count($teams) % 2 != 0) $teams[] = \DUMMY_TEAM; // IF NOT EVEN NUMBER OF TEAMS, ADD DUMMY
 
 		shuffle($teams); // SHUFFLE TEAMS FOR MORE RANDOMNESS
 
@@ -169,7 +168,7 @@ class Generator
 
 	}
 	// CREATE GAMES FROM BRACKET
-	public static function circle_saveBracket(array $teams, Group $group) {
+	public static function circle_saveBracket(array $teams, \tournamentGenerator\Group $group) {
 
 		$bracket = [];
 
@@ -179,7 +178,7 @@ class Generator
 			$reverse = array_reverse($teams);
 			$away = $reverse[$i];
 
-			if (($home == \TournamentGenerator\DUMMY_TEAM || $away == \TournamentGenerator\DUMMY_TEAM)) continue; // SKIP WHEN DUMMY_TEAM IS PRESENT
+			if (($home == \DUMMY_TEAM || $away == \DUMMY_TEAM)) continue; // SKIP WHEN DUMMY_TEAM IS PRESENT
 
 			$bracket[] = new \TournamentGenerator\Game([$home, $away], $group);
 

@@ -12,7 +12,7 @@ class Group
 	private $teams = []; // ARRAY OF TEAMS
 	private $progressed = []; // ARRAY OF TEAMS ALREADY PROGRESSED FROM THIS GROUP
 	public $name = ''; // DISPLAYABLE NAME
-	private $ordering = POINTS; // WHAT TO DECIDE ON WHEN ORDERING TEAMS
+	private $ordering = \POINTS; // WHAT TO DECIDE ON WHEN ORDERING TEAMS
 	private $progressions = []; // ARRAY OF PROGRESSION CONDITION OBJECTS
 	private $games = []; // ARRAY OF GAME OBJECTS
 	public $id = ''; // UNIQID OF GROUP FOR IDENTIFICATIONT
@@ -163,14 +163,14 @@ class Group
 	public function sortTeams($filters = [], $ordering = null) {
 		if (!isset($ordering)) $ordering = $this->ordering;
 		switch ($ordering) {
-			case POINTS:{
+			case \POINTS:{
 				usort($this->teams, function($a, $b) {
 					if ($a->groupResults[$this->id]["points"] === $b->groupResults[$this->id]["points"] && $a->groupResults[$this->id]["score"] === $b->groupResults[$this->id]["score"]) return 0;
 					if ($a->groupResults[$this->id]["points"] === $b->groupResults[$this->id]["points"]) return ($a->groupResults[$this->id]["score"] > $b->groupResults[$this->id]["score"] ? -1 : 1);
 					return ($a->groupResults[$this->id]["points"] > $b->groupResults[$this->id]["points"] ? -1 : 1);
 				});
 				break;}
-			case SCORE:{
+			case \SCORE:{
 				usort($this->teams, function($a, $b) {
 					if ($a->groupResults[$this->id]["score"] === $b->groupResults[$this->id]["score"]) return 0;
 					return ($a->groupResults[$this->id]["score"] > $b->groupResults[$this->id]["score"] ? -1 : 1);
@@ -229,7 +229,7 @@ class Group
 		return false;
 	}
 
-	public function setType(string $type = R_R) {
+	public function setType(string $type = \R_R) {
 		$this->generator->setType($type);
 		return $this;
 	}
@@ -237,7 +237,7 @@ class Group
 		return $this->generator->getType();
 	}
 
-	public function setOrdering(string $ordering = POINTS) {
+	public function setOrdering(string $ordering = \POINTS) {
 		if (in_array($ordering, orderingTypes)) $this->ordering = $ordering;
 		else throw new \Exception('Unknown group ordering: '.$ordering);
 		return $this;

@@ -22,7 +22,7 @@ class Games
 	private $games = [];
 	/**
 	 * Orderes games from group
-	 * @param TournamentGenerator\Group $group
+	 * @param \TournamentGenerator\Group $group
 	 */
 	function __construct(\TournamentGenerator\Group $group) {
 		$this->group = $group;
@@ -142,7 +142,7 @@ class Games
 		return $found;
 	}
 
-	private function moveCalculatedGames(Game $game, array &$teams) {
+	private function moveCalculatedGames(\tournamentGenerator\Game $game, array &$teams) {
 
 		$this->games[] = $game;
 
@@ -169,7 +169,7 @@ class Games
 		return $teams;
 
 	}
-	private function orderCheckTeamsVal(Game $game, array &$teams, array $checkVals, array $required = []) {
+	private function orderCheckTeamsVal(\tournamentGenerator\Game $game, array &$teams, array $checkVals, array $required = []) {
 
 		$requiredTeams = array_filter($teams, function($a) use ($required) { return in_array($a, $required); });
 
