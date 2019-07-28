@@ -23,34 +23,32 @@ class Filter
 	public function filter(array &$teams) {
 		foreach ($this->filters as $key => $filter) {
 			if (gettype($filter) === 'array') {
-				switch (strtolower($key)) {
-					case 'and':
-						foreach ($teams as $tkey => $team) {
-							if (!$this->filterAnd($team, $filter)) unset($teams[$tkey]); // IF FILTER IS NOT VALIDATED REMOVE TEAM FROM RETURN ARRAY
-						}
-						break;
-					case 'or':
-						foreach ($teams as $tkey => $team) {
-							if (!$this->filterOr($team, $filter)) unset($teams[$tkey]); // IF FILTER IS NOT VALIDATED REMOVE TEAM FROM RETURN ARRAY
-						}
-						break;
-					default:
-						throw new \Exception('Unknown opperand type "'.$key.'". Expected "and" or "or".');
-						break;
-				}
+				$this->filterMulti($teams, $filter, $key);
+				continue;
 			}
 			elseif ($filter instanceof TeamFilter) {
-				foreach ($teams as $tkey => $team) {
-					if (!$filter->validate($team, $this->group->id, 'sum', $this->group)) {
-						unset($teams[$tkey]); // IF FILTER IS NOT VALIDATED REMOVE TEAM FROM RETURN ARRAY
-					}
-				}
+				$teams = array_filter($teams, function($team) use ($filter) {return $filter->validate($team, $this->group->id, 'sum', $this->group); });
+				continue;
 			}
-			else {
-				throw new \Exception('Filer ['.$key.'] is not an instance of TeamFilter class');
-			}
+			throw new \Exception('Filer ['.$key.'] is not an instance of TeamFilter class');
 		}
 		return $teams;
+	}
+
+	private function filterMulti(array &$teams, array $filters, string $how = 'and') {
+		switch (strtolower($how)) {
+			case 'and':
+				foreach ($teams as $tkey => $team) {
+					if (!$this->filterAnd($team, $filter)) unset($teams[$tkey]); // IF FILTER IS NOT VALIDATED REMOVE TEAM FROM RETURN ARRAY
+				}
+				return true;
+			case 'or':
+				foreach ($teams as $tkey => $team) {
+					if (!$this->filterOr($team, $filter)) unset($teams[$tkey]); // IF FILTER IS NOT VALIDATED REMOVE TEAM FROM RETURN ARRAY
+				}
+				return true;
+		}
+		throw new \Exception('Unknown opperand type "'.$key.'". Expected "and" or "or".');
 	}
 
 	private function filterAnd(Team $team, array $filters) {
@@ -67,13 +65,13 @@ class Filter
 						throw new \Exception('Unknown opperand type "'.$key.'". Expected "and" or "or".');
 						break;
 				}
+				continue;
 			}
 			elseif ($value instanceof TeamFilter) {
 				if (!$value->validate($team, $this->group->id, 'sum', $this->group)) return false;
+				continue;
 			}
-			else {
-				throw new \Exception('Filer ['.$key.'] is not an instance of TeamFilter class');
-			}
+			throw new \Exception('Filer ['.$key.'] is not an instance of TeamFilter class');
 		}
 		return true;
 	}
@@ -91,13 +89,13 @@ class Filter
 						throw new \Exception('Unknown opperand type "'.$key.'". Expected "and" or "or".');
 						break;
 				}
+				continue;
 			}
 			elseif ($value instanceof TeamFilter) {
 				if (!$value->validate($team, $this->group->id, 'sum', $this->group)) return true;
+				continue;
 			}
-			else {
-				throw new \Exception('Filer ['.$key.'] is not an instance of TeamFilter class');
-			}
+			throw new \Exception('Filer ['.$key.'] is not an instance of TeamFilter class');
 		}
 		return false;
 	}

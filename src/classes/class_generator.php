@@ -64,48 +64,19 @@ class Generator
 
 	public function genGames() {
 		switch ($this->type) {
-			case \R_R:{
+			case \R_R:
 					$this->group->addGame($this->r_rGames());
-				break;}
+				break;
 			case \TWO_TWO:
-				$teams = $this->group->getTeams();
-				$discard = [];
-				shuffle($teams);
-				$count = count($teams);
-				while (count($teams) % $this->inGame !== 0) { $discard[] = array_shift($teams); }
-
-				while (count($teams) > 0) {
-					$tInGame = [];
-					for ($i=0; $i < $this->inGame; $i++) { $tInGame[] = array_shift($teams); }
-					$this->group->game($tInGame);
-				}
-
-				if (count($discard) > 0 && !$this->allowSkip) throw new \Exception('Couldn\'t make games with all teams. Expected k*'.$this->inGame.' teams '.$count.' teams given - discarting '.count($discard).' teams ('.implode(', ', $discard).') in group '.$this->group.' - allow skip '.($this->allowSkip ? 'True' : 'False'));
+					$this->two_twoGames();
 				break;
 			case \COND_SPLIT:
-				$games = [];
-				$teams = $this->group->getTeams();
-				if (count($teams) > $this->maxSize) {
-					$groups = array_chunk($teams, /** @scrutinizer ignore-type */ ceil(count($teams)/ceil(count($teams)/$this->maxSize))); // SPLIT TEAMS INTO GROUP OF MAXIMUM SIZE OF $this->maxSize
-					foreach ($groups as $group) { $games[] = $this->r_rGames($group); }
-					$g = 0;
-					foreach ($games as $group) {
-						$g += count($group);
-					}
-					while ($g > 0) {
-						foreach ($games as $key => $group) {
-							$this->group->addGame(array_shift($games[$key]));
-							if (count($games[$key]) === 0) unset($games[$key]);
-							$g--;
-						}
-					}
-				}
-				else $this->group->addGame($this->r_rGames());
+				$this->cond_splitGames();
 				break;
 		}
 		return $this->group->getGames();
 	}
-	public function r_rGames(array $teams = []) {
+	private function r_rGames(array $teams = []) {
 		$games = [];
 		if (count($teams) === 0) $teams = $this->group->getTeams();
 		switch ($this->inGame) {
@@ -142,6 +113,46 @@ class Generator
 				break;}
 		}
 		return $games;
+	}
+	private function two_twoGames(array $teams = []) {
+		if (count($teams) === 0) $teams = $this->group->getTeams();
+		$discard = [];
+		shuffle($teams);
+		$count = count($teams);
+		while (count($teams) % $this->inGame !== 0) { $discard[] = array_shift($teams); }
+
+		while (count($teams) > 0) {
+			$tInGame = [];
+			for ($i=0; $i < $this->inGame; $i++) { $tInGame[] = array_shift($teams); }
+			$this->group->game($tInGame);
+		}
+
+		if (count($discard) > 0 && !$this->allowSkip) throw new \Exception('Couldn\'t make games with all teams. Expected k*'.$this->inGame.' teams '.$count.' teams given - discarting '.count($discard).' teams ('.implode(', ', $discard).') in group '.$this->group.' - allow skip '.($this->allowSkip ? 'True' : 'False'));
+
+		return $this;
+	}
+	private function cond_splitGames(array $teams = []) {
+		$games = [];
+		if (count($teams) === 0) $teams = $this->group->getTeams();
+		if (count($teams) > $this->maxSize) {
+			$groups = array_chunk($teams, /** @scrutinizer ignore-type */ ceil(count($teams)/ceil(count($teams)/$this->maxSize))); // SPLIT TEAMS INTO GROUP OF MAXIMUM SIZE OF $this->maxSize
+			foreach ($groups as $group) { $games[] = $this->r_rGames($group); }
+			$g = 0;
+			foreach ($games as $group) {
+				$g += count($group);
+			}
+			while ($g > 0) {
+				foreach ($games as $key => $group) {
+					$this->group->addGame(array_shift($games[$key]));
+					if (count($games[$key]) === 0) unset($games[$key]);
+					$g--;
+				}
+			}
+			return $this;
+		}
+		$this->group->addGame($this->r_rGames());
+
+		return $this;
 	}
 
 	public function orderGames() {
