@@ -23,7 +23,7 @@ class Filter
 	public function filter(array &$teams) {
 		foreach ($this->filters as $key => $filter) {
 			if (gettype($filter) === 'array') {
-				$this->filterMulti($teams, $filter, $key);
+				$this->filterMulti($teams, $filters, $key);
 				continue;
 			}
 			elseif ($filter instanceof TeamFilter) {
@@ -39,16 +39,16 @@ class Filter
 		switch (strtolower($how)) {
 			case 'and':
 				foreach ($teams as $tkey => $team) {
-					if (!$this->filterAnd($team, $filter)) unset($teams[$tkey]); // IF FILTER IS NOT VALIDATED REMOVE TEAM FROM RETURN ARRAY
+					if (!$this->filterAnd($team, $filters)) unset($teams[$tkey]); // IF FILTER IS NOT VALIDATED REMOVE TEAM FROM RETURN ARRAY
 				}
 				return true;
 			case 'or':
 				foreach ($teams as $tkey => $team) {
-					if (!$this->filterOr($team, $filter)) unset($teams[$tkey]); // IF FILTER IS NOT VALIDATED REMOVE TEAM FROM RETURN ARRAY
+					if (!$this->filterOr($team, $filters)) unset($teams[$tkey]); // IF FILTER IS NOT VALIDATED REMOVE TEAM FROM RETURN ARRAY
 				}
 				return true;
 		}
-		throw new \Exception('Unknown opperand type "'.$key.'". Expected "and" or "or".');
+		throw new \Exception('Unknown opperand type "'.$how.'". Expected "and" or "or".');
 	}
 
 	private function filterAnd(Team $team, array $filters) {

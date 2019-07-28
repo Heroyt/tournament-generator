@@ -83,35 +83,36 @@ class Generator
 			case 2:
 				$games = Generator::circle_genGames2($teams, $this->group);
 				break;
-			case 3:{
-				$teamsB = $teams;
-				while (count($teamsB) >= 3) {
-					$lockedTeam = array_shift($teamsB);
-					$gamesTemp = Generator::circle_genGames2($teamsB, $this->group);
-					foreach ($gamesTemp as $game) {
-						$game->addTeam($lockedTeam);
-					}
-					$games = array_merge($games, $gamesTemp);
-				}
-				break;}
-			case 4:{
-				$teamsB = $teams;
-				$lockedTeam1 = array_shift($teamsB);
-				while (count($teamsB) >= 4) {
-					$teamsB2 = $teamsB;
-					while (count($teamsB2) >= 3) {
-						$lockedTeam2 = array_shift($teamsB2);
-						$gamesTemp = Generator::circle_genGames2($teamsB2, $this->group);
-						foreach ($gamesTemp as $game) {
-							$game->addTeam($lockedTeam1, $lockedTeam2);
-						}
-						$games = array_merge($games, $gamesTemp);
-					}
-					$lockedTeam1 = array_shift($teamsB);
-				}
-				$games[] = new \TournamentGenerator\Game(array_merge([$lockedTeam1], $teamsB), $this->group);
-				break;}
+			case 3:
+				$games = $this->r_r3Games($teams, $games);
+				break;
+			case 4:
+				$games = $this->r_r4Games($teams, $games);
+				break;
 		}
+		return $games;
+	}
+	private function r_r3Games(array $teams, array &$games, \TournamentGenerator\Team $lockedTeam1 = null) {
+		$teamsB = $teams;
+		while (count($teamsB) >= 3) {
+			$lockedTeam = array_shift($teamsB);
+			$gamesTemp = Generator::circle_genGames2($teamsB, $this->group);
+			foreach ($gamesTemp as $game) {
+				if (isset($lockedTeam1)) $game->addTeam($lockedTeam1);
+				$game->addTeam($lockedTeam);
+			}
+			$games = array_merge($games, $gamesTemp);
+		}
+		return $games;
+	}
+	private function r_r4Games(array $teams, array &$games) {
+		$teamsB = $teams;
+		$lockedTeam1 = array_shift($teamsB);
+		while (count($teamsB) >= 4) {
+			$this->r_r3Games($teamsB, $games, $lockedTeam1);
+			$lockedTeam1 = array_shift($teamsB);
+		}
+		$games[] = new \TournamentGenerator\Game(array_merge([$lockedTeam1], $teamsB), $this->group);
 		return $games;
 	}
 	private function two_twoGames(array $teams = []) {
@@ -134,13 +135,12 @@ class Generator
 	private function cond_splitGames(array $teams = []) {
 		$games = [];
 		if (count($teams) === 0) $teams = $this->group->getTeams();
+
 		if (count($teams) > $this->maxSize) {
 			$groups = array_chunk($teams, /** @scrutinizer ignore-type */ ceil(count($teams)/ceil(count($teams)/$this->maxSize))); // SPLIT TEAMS INTO GROUP OF MAXIMUM SIZE OF $this->maxSize
 			foreach ($groups as $group) { $games[] = $this->r_rGames($group); }
 			$g = 0;
-			foreach ($games as $group) {
-				$g += count($group);
-			}
+			foreach ($games as $group) {	$g += count($group); }
 			while ($g > 0) {
 				foreach ($games as $key => $group) {
 					$this->group->addGame(array_shift($games[$key]));

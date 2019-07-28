@@ -198,7 +198,7 @@ class Group
 		foreach ($games as $key => $game) {
 			if (gettype($game) === 'array') {
 				unset($games[$key]);
-				$games = array_merge($games, array_filter($game, function($a){ return ($a instanceof Game); }));
+				$this->games = array_merge($this->games, array_filter($game, function($a){ return ($a instanceof Game); }));
 				continue;
 			}
 			if (!$game instanceof Game) throw new \Exception('Trying to add game which is not instance of Game object.');
