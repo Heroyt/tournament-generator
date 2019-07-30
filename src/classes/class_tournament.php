@@ -115,7 +115,7 @@ class Tournament
 		return $this->rounds;
 	}
 
-	public function addTeam(...$teams) {
+	public function addTeam(Team ...$teams) {
 		foreach ($teams as $team) {
 			if ($team instanceof Team)  {
 				$this->teams[] = $team;

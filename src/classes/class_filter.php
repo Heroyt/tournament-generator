@@ -23,7 +23,7 @@ class Filter
 	public function filter(array &$teams) {
 		foreach ($this->filters as $key => $filter) {
 			if (gettype($filter) === 'array') {
-				$this->filterMulti($teams, $filters, $key);
+				$this->filterMulti($teams, $filter, $key);
 				continue;
 			}
 			elseif ($filter instanceof TeamFilter) {
