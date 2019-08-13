@@ -32,11 +32,7 @@ class Tournament_DoubleElimination extends \TournamentGenerator\Tournament
 		$allGroups = [];
 
 		for ($i=1; $i <= $startGroups; $i++) {
-			$g = $startRound->group([
-				'name' => 'Start group - '.$i,
-				'inGame' => 2,
-				'type' => \TournamentGenerator\Constants::ROUND_TWO,
-			]);
+			$g = $startRound->group('Start group - '.$i)->setInGame(2)->setType(\TournamentGenerator\Constants::ROUND_TWO);
 			$allGroups[] = $g;
 			$groupIds[] = $g->id;
 			$previousGroups[] = $g;
@@ -62,23 +58,13 @@ class Tournament_DoubleElimination extends \TournamentGenerator\Tournament
 
 		// LAST ROUND
 		$round = $this->round('Round '.$roundsNum.' - Finale');
-		$groupFinal = $round->group([
-			'name' => 'Round '.$r.' - finale',
-			'inGame' => 2,
-			'type' => \TournamentGenerator\Constants::ROUND_TWO,
-			'order' => 1,
-		]);
+		$groupFinal = $round->group('Round '.$r.' - finale')->setInGame(2)->setType(\TournamentGenerator\Constants::ROUND_TWO)->setOrder(1);
 		$allGroups[] = $groupFinal;
 		$lastLosingGroup->progression($groupFinal, 0, 1);
 		$lastWinningGroup->progression($groupFinal, 0, 1);
 
 		// REPEAT GROUP IF LOSING TEAM WON
-		$group = $round->group([
-			'name' => 'Round '.$r.' - finale (2)',
-			'inGame' => 2,
-			'type' => \TournamentGenerator\Constants::ROUND_TWO,
-			'order' => 1,
-		]);
+		$group = $round->group('Round '.$r.' - finale (2)')->setInGame(2)->setType(\TournamentGenerator\Constants::ROUND_TWO)->setOrder(1);
 		$twoLoss = new \TournamentGenerator\TeamFilter('losses', '=', 1, $allGroups);
 		$groupFinal->progression($group, 0, 2)->addFilter($twoLoss);
 
@@ -98,12 +84,7 @@ class Tournament_DoubleElimination extends \TournamentGenerator\Tournament
 	private function generateWinSide(int &$r, int &$byes, int &$countTeams, \TournamentGenerator\Round &$round, array &$allGroups, array &$groups, \TournamentGenerator\Group &$lastWinningGroup = null, array &$previousGroups = []) {
 		$order = 1;
 		for ($g=1; $g <= (($countTeams+$byes)/pow(2, $r)); $g++) {
-			$group = $round->group([
-				'name' => 'Round '.$r.' - win '.$g,
-				'inGame' => 2,
-				'type' => \TournamentGenerator\Constants::ROUND_TWO,
-				'order' => $order,
-			]);
+			$group = $round->group('Round '.$r.' - win '.$g)->setInGame(2)->setType(\TournamentGenerator\Constants::ROUND_TWO)->setOrder($order);
 			$allGroups[] = $group;
 			$order += 2;
 			$groups[] = $group;
@@ -118,12 +99,7 @@ class Tournament_DoubleElimination extends \TournamentGenerator\Tournament
 		$order = 2;
 		if (\TournamentGenerator\isPowerOf2($losingGroupTeamsCount)) { // IF THE NUMBER OF TEAMS IS A POWER OF 2, GENERATE GROUPS WITHOUT BYES
 			for ($g=1; $g <= $losingGroupTeamsCount/2; $g++) {
-				$group = $round->group([
-					'name' => 'Round '.$r.' - loss '.$g,
-					'inGame' => 2,
-					'type' => \TournamentGenerator\Constants::ROUND_TWO,
-					'order' => $order,
-				]);
+				$group = $round->group('Round '.$r.' - loss '.$g)->setInGame(2)->setType(\TournamentGenerator\Constants::ROUND_TWO)->setOrder($order);
 				$allGroups[] = $group;
 				$order += 2;
 				$losingGroups[] = $group;
@@ -150,12 +126,7 @@ class Tournament_DoubleElimination extends \TournamentGenerator\Tournament
 			}
 			$lastGroup = 0;
 			for ($g=1; $g <= ((count($previousLosingGroups)/2)+$losingByes); $g++) {
-				$group = $round->group([
-					'name' => 'Round '.$r.' - loss '.$g,
-					'inGame' => 2,
-					'type' => \TournamentGenerator\Constants::ROUND_TWO,
-					'order' => $order,
-				]);
+				$group = $round->group('Round '.$r.' - loss '.$g)->setInGame(2)->setType(\TournamentGenerator\Constants::ROUND_TWO)->setOrder($order);
 				$allGroups[] = $group;
 				$order += 2;
 				$losingGroups[] = $group;

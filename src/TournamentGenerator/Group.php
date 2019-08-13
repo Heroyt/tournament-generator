@@ -22,33 +22,12 @@ class Group
 	public $secondPoints = 2; // POINTS AQUIRED FROM BEING SECOND (APPLIES ONLY FOR 3 OR 4 INGAME VALUE)
 	public $thirdPoints = 1; // POINTS AQUIRED FROM BEING THIRD (APPLIES ONLY FOR 4 INGAME VALUE)
 	public $progressPoints = 50; // POINTS AQUIRED FROM PROGRESSING TO THE NEXT ROUND
-	public $order = 0; // ORDER OF GROUPS IN ROUND
+	private $order = 0; // ORDER OF GROUPS IN ROUND
 
-	function __construct(array $settings = []) {
+	function __construct(string $name) {
 		$this->id = uniqid();
 		$this->generator = new Utilis\Generator($this);
-		foreach ($settings as $key => $value) {
-			switch ($key) {
-				case 'name':
-					$this->name = (string) $value;
-					break;
-				case 'type':
-					$this->generator->setType($value);
-					break;
-				case 'ordering':
-					$this->setOrdering($value);
-					break;
-				case 'inGame':
-					$this->generator->setInGame((int) $value);
-					break;
-				case 'maxSize':
-					$this->generator->setMaxSize((int) $value);
-					break;
-				case 'order':
-					$this->order = (int) $value;
-					break;
-			}
-		}
+		$this->name = (string) $name;
 	}
 	public function __toString() {
 		return 'Group '.$this->name;
@@ -130,12 +109,28 @@ class Group
 		return $this->getTeams($filters);
 	}
 
+	public function setMaxSize(int $size) {
+		$this->generator->setMaxSize($size);
+		return $this;
+	}
+	public function getMaxSize() {
+		return $this->generator->getMaxSize();
+	}
+
 	public function setType(string $type = \TournamentGenerator\Constants::ROUND_ROBIN) {
 		$this->generator->setType($type);
 		return $this;
 	}
 	public function getType() {
 		return $this->generator->getType();
+	}
+
+	public function setOrder(int $order) {
+		$this->order = $order;
+		return $this;
+	}
+	public function getOrder() {
+		return $this->order;
 	}
 
 	public function setOrdering(string $ordering = \TournamentGenerator\Constants::POINTS) {

@@ -28,11 +28,7 @@ class Tournament_SingleElimination extends \TournamentGenerator\Tournament
 		$previousGroups = [];
 
 		for ($i=1; $i <= (($countTeams+$byes)/2); $i++) {
-			$g = $startRound->group([
-				'name' => 'Round 1 - '.$i,
-				'inGame' => 2,
-				'type' => \TournamentGenerator\Constants::ROUND_TWO,
-			]);
+			$g = $startRound->group('Round 1 '.$i)->setInGame(2)->setType(\TournamentGenerator\Constants::ROUND_TWO);
 			$previousGroups[] = $g;
 		}
 
@@ -42,11 +38,7 @@ class Tournament_SingleElimination extends \TournamentGenerator\Tournament
 			$groups = [];
 			$round = $this->round('Round '.$r);
 			for ($g=1; $g <= (($countTeams+$byes)/pow(2, $r)); $g++) {
-				$group = $round->group([
-					'name' => 'Round '.$r.' - '.$g,
-					'inGame' => 2,
-					'type' => \TournamentGenerator\Constants::ROUND_TWO,
-				]);
+				$group = $round->group('Round '.$r.' - '.$g)->setInGame(2)->setType(\TournamentGenerator\Constants::ROUND_TWO);
 				$groups[] = $group;
 				array_shift($previousGroups)->progression($group, 0, 1); // PROGRESS FROM GROUP BEFORE
 				array_shift($previousGroups)->progression($group, 0, 1); // PROGREESS FROM GROUP BEFORE

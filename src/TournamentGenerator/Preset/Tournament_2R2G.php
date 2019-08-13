@@ -17,32 +17,12 @@ class Tournament_2R2G extends \TournamentGenerator\Tournament
 		$round2 = $this->round('Round 2');
 		$round3 = $this->round('Round 3');
 
-		$group_0_0 = $round1->group([
-			'name' => '0/0',
-			'inGame' => 2,
-			'type' => \TournamentGenerator\Constants::ROUND_TWO,
-		]);
-		$group_0_1 = $round2->group([
-			'name' => '0/1',
-			'type' => \TournamentGenerator\Constants::ROUND_TWO
-		]);
-		$group_1_0 = $round2->group([
-			'name' => '1/0',
-			'type' => \TournamentGenerator\Constants::ROUND_TWO
-		]);
-		$group_1_1 = $round3->group([
-			'name' => '1/1',
-			'type' => \TournamentGenerator\Constants::ROUND_SPLIT,
-			'maxSize' => 3
-		]);
-		$group_0_2 = $round3->group([
-			'name' => '0/2',
-			'type' => \TournamentGenerator\Constants::ROUND_ROBIN
-		]);
-		$group_2_0 = $round3->group([
-			'name' => '2/0',
-			'type' => \TournamentGenerator\Constants::ROUND_ROBIN
-		]);
+		$group_0_0 = $round1->group('0/0')->setInGame(2)->setType(\TournamentGenerator\Constants::ROUND_TWO);
+		$group_0_1 = $round2->group('0/1')->setInGame(2)->setType(\TournamentGenerator\Constants::ROUND_TWO);
+		$group_1_0 = $round2->group('1/0')->setInGame(2)->setType(\TournamentGenerator\Constants::ROUND_TWO);
+		$group_1_1 = $round3->group('1/1')->setInGame(2)->setType(\TournamentGenerator\Constants::ROUND_SPLIT)->setMaxSize(3);
+		$group_0_2 = $round3->group('0/2')->setInGame(2)->setType(\TournamentGenerator\Constants::ROUND_ROBIN);
+		$group_2_0 = $round3->group('2/0')->setInGame(2)->setType(\TournamentGenerator\Constants::ROUND_ROBIN);
 
 		$filter_win_1 = new \TournamentGenerator\TeamFilter('wins', '=', 1);
 		$filter_loss_1 = new \TournamentGenerator\TeamFilter('losses', '=', 1);
@@ -51,10 +31,7 @@ class Tournament_2R2G extends \TournamentGenerator\Tournament
 		$this->splitTeams($round1);
 
 		if (count($this->getTeams()) % 4 == 2) {
-			$group_top = $round2->group([
-				'name' => 'TOP',
-				'type' => \TournamentGenerator\Constants::ROUND_TWO
-			]);
+			$group_top = $round2->group('TOP')->setType(\TournamentGenerator\Constants::ROUND_TWO);
 
 			$filter_win_2 = new \TournamentGenerator\TeamFilter('wins', '=', 2, [$group_0_0, $group_top]);
 			$filter_loss_2 = new \TournamentGenerator\TeamFilter('losses', '=', 2, [$group_0_0, $group_top]);

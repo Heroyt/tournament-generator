@@ -30,8 +30,8 @@ class Round
 		}
 		return $this;
 	}
-	public function group(array $settings = []) {
-		$g = new Group($settings);
+	public function group(string $name) {
+		$g = new Group($name);
 		$this->groups[] = $g->setSkip($this->allowSkip);
 		return $g;
 	}
@@ -45,7 +45,7 @@ class Round
 	}
 	public function orderGroups() {
 		usort($this->groups, function($a, $b){
-			return $a->order - $b->order;
+			return $a->getOrder() - $b->getOrder();
 		});
 	}
 
