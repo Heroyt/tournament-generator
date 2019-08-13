@@ -136,7 +136,7 @@ class Tournament
 		$this->teams[] = $t;
 		return $t;
 	}
-	public function getTeams(bool $ordered = false, $ordering = \POINTS) {
+	public function getTeams(bool $ordered = false, $ordering = \TournamentGenerator\Constants::POINTS) {
 		if (count($this->teams) === 0) {
 			$teams = [];
 			foreach ($this->categories as $category) {
@@ -150,7 +150,7 @@ class Tournament
 		if ($ordered) $this->sortTeams($ordering);
 		return $this->teams;
 	}
-	public function sortTeams($ordering = \POINTS) {
+	public function sortTeams($ordering = \TournamentGenerator\Constants::POINTS) {
 		$teams = [];
 		for ($i = count($this->rounds)-1; $i >= 0; $i--) {
 			$rTeams = array_filter($this->rounds[$i]->getTeams(true, $ordering), function($a) use ($teams) { return !in_array($a, $teams); });

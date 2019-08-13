@@ -12,7 +12,7 @@ class Group
 	private $teams = []; // ARRAY OF TEAMS
 	private $progressed = []; // ARRAY OF TEAMS ALREADY PROGRESSED FROM THIS GROUP
 	public $name = ''; // DISPLAYABLE NAME
-	private $ordering = \POINTS; // WHAT TO DECIDE ON WHEN ORDERING TEAMS
+	private $ordering = \TournamentGenerator\Constants::POINTS; // WHAT TO DECIDE ON WHEN ORDERING TEAMS
 	private $progressions = []; // ARRAY OF PROGRESSION CONDITION OBJECTS
 	private $games = []; // ARRAY OF GAME OBJECTS
 	public $id = ''; // UNIQID OF GROUP FOR IDENTIFICATIONT
@@ -130,7 +130,7 @@ class Group
 		return $this->getTeams($filters);
 	}
 
-	public function setType(string $type = \R_R) {
+	public function setType(string $type = \TournamentGenerator\Constants::ROUND_ROBIN) {
 		$this->generator->setType($type);
 		return $this;
 	}
@@ -138,8 +138,8 @@ class Group
 		return $this->generator->getType();
 	}
 
-	public function setOrdering(string $ordering = \POINTS) {
-		if (!in_array($ordering, orderingTypes)) throw new \Exception('Unknown group ordering: '.$ordering);
+	public function setOrdering(string $ordering = \TournamentGenerator\Constants::POINTS) {
+		if (!in_array($ordering, \TournamentGenerator\Constants::OrderingTypes)) throw new \Exception('Unknown group ordering: '.$ordering);
 		$this->ordering = $ordering;
 		return $this;
 	}

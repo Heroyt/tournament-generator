@@ -9,7 +9,7 @@ class Generator
 {
 
 	private $group = null;
-	private $type = \R_R; // TYPE OF ROUND TO CREATE A LAYOUT
+	private $type = \TournamentGenerator\Constants::ROUND_ROBIN; // TYPE OF ROUND TO CREATE A LAYOUT
 	private $inGame = 2; // NUMBER OF TEAMS IN ONE GAME - 2/3/4
 	private $maxSize = 4; // MAX SIZE OF GROUP BEFORE SPLIT
 	private $allowSkip = false; // IF IS NUMBER OF TEAMS LESS THAN $this->inGame THEN SKIP PLAYING THIS GROUP
@@ -35,8 +35,8 @@ class Generator
 	}
 
 
-	public function setType(/** @scrutinizer ignore-all */ string $type = \R_R) {
-		if (in_array($type, \groupTypes)) $this->type = $type;
+	public function setType(/** @scrutinizer ignore-all */ string $type = \TournamentGenerator\Constants::ROUND_ROBIN) {
+		if (in_array($type, \TournamentGenerator\Constants::GroupTypes)) $this->type = $type;
 		else throw new \Exception('Unknown group type: '.$type);
 		return $this;
 	}
@@ -64,13 +64,13 @@ class Generator
 
 	public function genGames() {
 		switch ($this->type) {
-			case \R_R:
+			case \TournamentGenerator\Constants::ROUND_ROBIN:
 					$this->group->addGame($this->r_rGames());
 				break;
-			case \TWO_TWO:
+			case \TournamentGenerator\Constants::ROUND_TWO:
 					$this->two_twoGames();
 				break;
-			case \COND_SPLIT:
+			case \TournamentGenerator\Constants::ROUND_SPLIT:
 				$this->cond_splitGames();
 				break;
 		}
@@ -165,7 +165,7 @@ class Generator
 	public static function circle_genGames2(array $teams = [], \tournamentGenerator\Group $group) {
 		$bracket = []; // ARRAY OF GAMES
 
-		if (count($teams) % 2 != 0) $teams[] = \DUMMY_TEAM; // IF NOT EVEN NUMBER OF TEAMS, ADD DUMMY
+		if (count($teams) % 2 != 0) $teams[] = \TournamentGenerator\Constants::DUMMY_TEAM; // IF NOT EVEN NUMBER OF TEAMS, ADD DUMMY
 
 		shuffle($teams); // SHUFFLE TEAMS FOR MORE RANDOMNESS
 
@@ -189,7 +189,7 @@ class Generator
 			$reverse = array_reverse($teams);
 			$away = $reverse[$i];
 
-			if (($home == \DUMMY_TEAM || $away == \DUMMY_TEAM)) continue; // SKIP WHEN DUMMY_TEAM IS PRESENT
+			if (($home == \TournamentGenerator\Constants::DUMMY_TEAM || $away == \TournamentGenerator\Constants::DUMMY_TEAM)) continue; // SKIP WHEN DUMMY_TEAM IS PRESENT
 
 			$bracket[] = new \TournamentGenerator\Game([$home, $away], $group);
 

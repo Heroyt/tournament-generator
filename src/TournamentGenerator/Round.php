@@ -111,7 +111,7 @@ class Round
 		$this->teams[] = $t;
 		return $t;
 	}
-	public function getTeams(bool $ordered = false, $ordering = \POINTS) {
+	public function getTeams(bool $ordered = false, $ordering = \TournamentGenerator\Constants::POINTS) {
 		if (count($this->teams) == 0) {
 			$teams = [];
 			foreach ($this->groups as $group) {
@@ -124,7 +124,7 @@ class Round
 		}
 		return $this->teams;
 	}
-	public function sortTeams($ordering = \POINTS) {
+	public function sortTeams($ordering = \TournamentGenerator\Constants::POINTS) {
 		Utilis\Sorter\Teams::sortRound($this->teams, $this, $ordering);
 		return $this->teams;
 	}
