@@ -51,17 +51,9 @@ class Category
 		return $this->allowSkip;
 	}
 
-	public function addTeam(...$teams) {
+	public function addTeam(Team ...$teams) {
 		foreach ($teams as $team) {
-			if ($team instanceof Team)  {
-				$this->teams[] = $team;
-			}
-			elseif (gettype($team) === 'array') {
-				foreach ($team as $team2) {
-					if ($team2 instanceof Team) $this->teams[] = $team2;
-				}
-			}
-			else throw new \Exception('Trying to add team which is not an instance of Team class');
+			$this->teams[] = $team;
 		}
 		return $this;
 	}

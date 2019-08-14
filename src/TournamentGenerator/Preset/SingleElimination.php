@@ -5,7 +5,7 @@ namespace TournamentGenerator\Preset;
 /**
  *
  */
-class Tournament_SingleElimination extends \TournamentGenerator\Tournament
+class SingleElimination extends \TournamentGenerator\Tournament
 {
 
 	public function generate() {

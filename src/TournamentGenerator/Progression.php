@@ -25,9 +25,8 @@ class Progression
 		return 'Team from '.$this->from;
 	}
 
-	public function addFilter(...$filters) {
+	public function addFilter(TeamFilter ...$filters) {
 		foreach ($filters as $filter) {
-			if (!$filter instanceof TeamFilter) throw new \Exception('Trying to add filter which is not an instance of TeamFilter.');
 			$this->filters[] = $filter;
 		}
 		return $this;

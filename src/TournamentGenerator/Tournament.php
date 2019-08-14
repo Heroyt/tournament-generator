@@ -8,7 +8,7 @@ namespace TournamentGenerator;
 class Tournament
 {
 
-	public $name = '';
+	private $name = '';
 	private $categories = [];
 	private $rounds = [];
 	private $teams = [];
@@ -24,6 +24,14 @@ class Tournament
 		$this->name = $name;
 	}
 	public function __toString() {
+		return $this->name;
+	}
+
+	public function setName(string $name) {
+		$this->name = $name;
+		return $this;
+	}
+	public function getName() {
 		return $this->name;
 	}
 
@@ -110,24 +118,14 @@ class Tournament
 			foreach ($this->categories as $category) {
 				$rounds = array_merge($rounds, $category->getRounds());
 			}
-			return $rounds;
+			return array_merge($rounds, $this->rounds);
 		}
 		return $this->rounds;
 	}
 
 	public function addTeam(Team ...$teams) {
 		foreach ($teams as $team) {
-			if ($team instanceof Team)  {
-				$this->teams[] = $team;
-				continue;
-			}
-			elseif (gettype($team) === 'array') {
-				$teams = array_merge($teams, array_filter($team, function($a) {
-					return ($a instanceof Team);
-				}));
-				continue;
-			}
-			throw new \Exception('Trying to add team which is not an instance of Team class');
+			$this->teams[] = $team;
 		}
 		return $this;
 	}
@@ -137,16 +135,14 @@ class Tournament
 		return $t;
 	}
 	public function getTeams(bool $ordered = false, $ordering = \TournamentGenerator\Constants::POINTS) {
-		if (count($this->teams) === 0) {
-			$teams = [];
-			foreach ($this->categories as $category) {
-				$teams = array_merge($teams, $category->getTeams());
-			}
-			foreach ($this->rounds as $round) {
-				$teams = array_merge($teams, $round->getTeams());
-			}
-			$this->teams = $teams;
+		$teams = $this->teams;
+		foreach ($this->categories as $category) {
+			$teams = array_merge($teams, $category->getTeams());
 		}
+		foreach ($this->rounds as $round) {
+			$teams = array_merge($teams, $round->getTeams());
+		}
+		$this->teams = \array_unique($teams);
 		if ($ordered) $this->sortTeams($ordering);
 		return $this->teams;
 	}

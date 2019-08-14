@@ -5,7 +5,7 @@ namespace TournamentGenerator\Preset;
 /**
  *
  */
-class Tournament_2R2G extends \TournamentGenerator\Tournament
+class R2G extends \TournamentGenerator\Tournament
 {
 
 	public function generate() {

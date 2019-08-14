@@ -5,7 +5,7 @@ namespace TournamentGenerator\Preset;
 /**
  *
  */
-class Tournament_DoubleElimination extends \TournamentGenerator\Tournament
+class DoubleElimination extends \TournamentGenerator\Tournament
 {
 
 	public function generate() {

@@ -59,6 +59,13 @@ class Team
 		return $this;
 	}
 
+	public function getSumPoints() {
+		return $this->sumPoints;
+	}
+	public function getSumScore() {
+		return $this->sumScore;
+	}
+
 	public function addWin(string $groupId = ''){
 		if (!isset($this->groupResults[$groupId])) throw new \Exception('Group '.$groupId.' is not set for this team ('.$this->name.')');
 		$this->groupResults[$groupId]['points'] += $this->groupResults[$groupId]['group']->winPoints;

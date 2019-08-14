@@ -8,7 +8,7 @@ namespace TournamentGenerator;
 class Round
 {
 
-	public $name = '';
+	private $name = '';
 	public $id = '';
 	private $groups = [];
 	private $games = [];
@@ -23,10 +23,16 @@ class Round
 		return $this->name;
 	}
 
+	public function setName(string $name) {
+		$this->name = $name;
+	}
+	public function getName() {
+		return $this->name;
+	}
+
 	public function addGroup(Group ...$groups){
 		foreach ($groups as $group) {
-			if ($group instanceof Group) $this->groups[] = $group;
-			else throw new \Exception('Trying to add group which is not an instance of Group class.');
+			$this->groups[] = $group;
 		}
 		return $this;
 	}

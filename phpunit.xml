@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpunit
+	bootstrap="vendor/autoload.php"
+	colors="true"
+	verbose="true"
+	stopOnFailure="false">
+	<testsuites>
+		<testsuite name="Tournament Generator">
+			<directory>tests</directory>
+		</testsuite>
+	</testsuites>
+	<logging>
+		<log type="coverage-clover" target="/tmp/coverage.xml"/>
+		<log type="coverage-php" target="/tmp/coverage.serialized"/>
+	</logging>
+</phpunit>

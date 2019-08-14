@@ -23,5 +23,8 @@
  				 "TournamentGenerator\\Utilis\\": "src/TournamentGenerator/Utilis/",
  				 "TournamentGenerator\\Utilis\\Sorter\\": "src/TournamentGenerator/Utilis/Sorter/"
 			}
+		},
+		"require-dev": {
+				"phpunit/phpunit": "^8.3"
 		}
 }
