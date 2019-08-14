@@ -33,23 +33,17 @@ In rounds, you create new **[Groups](/classes/group.php)**.
 
 ```php
 // Create 2 groups for the first round
-$group_1 = $round->group([
-	'name' => 'Round 1',
-	'inGame' => 2, // 2 TEAMS PLAYING AGAINST EACH OTHER
-	'type' => R_R // ROBIN-ROBIN GROUP
-]);
-$group_2 = $round->group([
-	'name' => 'Round 2',
-	'inGame' => 2, // 2 TEAMS PLAYING AGAINST EACH OTHER
-	'type' => R_R // ROBIN-ROBIN GROUP
-]);
+$group_1 = $round->group('Round 1')
+	->setInGame(2) // 2 TEAMS PLAYING AGAINST EACH OTHER
+	->setType(TournamentGenerator\Constants::ROUND_ROBIN); // ROBIN-ROBIN GROUP
+$group_2 = $round->group('Round 2')
+	->setInGame(2) // 2 TEAMS PLAYING AGAINST EACH OTHER
+	->setType(TournamentGenerator\Constants::ROUND_ROBIN); // ROBIN-ROBIN GROUP
 
 // Create a final group
-$final_group = $final->group([
-	'name' => 'Finale',
-	'inGame' => 2, // 2 TEAMS PLAYING AGAINST EACH OTHER
-	'type' => R_R // ROBIN-ROBIN GROUP
-]);
+$final_group = $final->group('Finale')
+	->setInGame(2) // 2 TEAMS PLAYING AGAINST EACH OTHER
+	->setType(TournamentGenerator\Constants::ROUND_ROBIN); // ROBIN-ROBIN GROUP
 ```
 We set a **[Progression](/classes/progression.php)** conditions from first groups to our final group.  
 This determines how many and which team
