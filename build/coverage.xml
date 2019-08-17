@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1566082235">
-  <project timestamp="1566082235">
+<coverage generated="1566082427">
+  <project timestamp="1566082427">
     <package name="TournamentGenerator">
       <file name="/Volumes/Heroyt-Disk/work/Moje/rozlosy/src/TournamentGenerator/BlankTeam.php">
         <class name="TournamentGenerator\BlankTeam" namespace="TournamentGenerator">
@@ -320,7 +320,7 @@
       </file>
       <file name="/Volumes/Heroyt-Disk/work/Moje/rozlosy/src/TournamentGenerator/Group.php">
         <class name="TournamentGenerator\Group" namespace="TournamentGenerator">
-          <metrics complexity="56" methods="38" coveredmethods="38" conditionals="0" coveredconditionals="0" statements="91" coveredstatements="91" elements="129" coveredelements="129"/>
+          <metrics complexity="54" methods="38" coveredmethods="38" conditionals="0" coveredconditionals="0" statements="88" coveredstatements="88" elements="126" coveredelements="126"/>
         </class>
         <line num="27" type="method" name="__construct" complexity="2" crap="2" count="48"/>
         <line num="28" type="stmt" count="48"/>
@@ -416,42 +416,39 @@
         <line num="159" type="stmt" count="11"/>
         <line num="160" type="stmt" count="11"/>
         <line num="162" type="stmt" count="11"/>
-        <line num="163" type="method" name="addProgressed" visibility="public" complexity="4" crap="4" count="12"/>
-        <line num="164" type="stmt" count="12"/>
-        <line num="165" type="stmt" count="12"/>
-        <line num="166" type="stmt" count="11"/>
+        <line num="163" type="method" name="addProgressed" visibility="public" complexity="2" crap="2" count="12"/>
+        <line num="167" type="stmt" count="11"/>
         <line num="168" type="stmt" count="11"/>
-        <line num="169" type="stmt" count="11"/>
-        <line num="172" type="stmt" count="12"/>
-        <line num="174" type="method" name="isProgressed" visibility="public" complexity="1" crap="1" count="3"/>
-        <line num="175" type="stmt" count="3"/>
-        <line num="178" type="method" name="genGames" visibility="public" complexity="1" crap="1" count="15"/>
-        <line num="179" type="stmt" count="15"/>
-        <line num="180" type="stmt" count="15"/>
-        <line num="183" type="method" name="game" visibility="public" complexity="1" crap="1" count="13"/>
+        <line num="170" type="stmt" count="12"/>
+        <line num="172" type="method" name="isProgressed" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="173" type="stmt" count="3"/>
+        <line num="176" type="method" name="genGames" visibility="public" complexity="1" crap="1" count="15"/>
+        <line num="177" type="stmt" count="15"/>
+        <line num="178" type="stmt" count="15"/>
+        <line num="181" type="method" name="game" visibility="public" complexity="1" crap="1" count="13"/>
+        <line num="182" type="stmt" count="13"/>
+        <line num="183" type="stmt" count="13"/>
         <line num="184" type="stmt" count="13"/>
-        <line num="185" type="stmt" count="13"/>
-        <line num="186" type="stmt" count="13"/>
-        <line num="188" type="method" name="addGame" visibility="public" complexity="2" crap="2" count="15"/>
-        <line num="194" type="stmt" count="15"/>
-        <line num="196" type="method" name="getGames" visibility="public" complexity="1" crap="1" count="17"/>
-        <line num="197" type="stmt" count="17"/>
-        <line num="199" type="method" name="orderGames" visibility="public" complexity="2" crap="2" count="11"/>
+        <line num="186" type="method" name="addGame" visibility="public" complexity="2" crap="2" count="15"/>
+        <line num="192" type="stmt" count="15"/>
+        <line num="194" type="method" name="getGames" visibility="public" complexity="1" crap="1" count="17"/>
+        <line num="195" type="stmt" count="17"/>
+        <line num="197" type="method" name="orderGames" visibility="public" complexity="2" crap="2" count="11"/>
+        <line num="198" type="stmt" count="11"/>
+        <line num="199" type="stmt" count="11"/>
         <line num="200" type="stmt" count="11"/>
-        <line num="201" type="stmt" count="11"/>
-        <line num="202" type="stmt" count="11"/>
-        <line num="205" type="method" name="simulate" visibility="public" complexity="1" crap="1" count="11"/>
-        <line num="206" type="stmt" count="11"/>
-        <line num="208" type="method" name="resetGames" visibility="public" complexity="2" crap="2" count="6"/>
-        <line num="209" type="stmt" count="6"/>
+        <line num="203" type="method" name="simulate" visibility="public" complexity="1" crap="1" count="11"/>
+        <line num="204" type="stmt" count="11"/>
+        <line num="206" type="method" name="resetGames" visibility="public" complexity="2" crap="2" count="6"/>
+        <line num="207" type="stmt" count="6"/>
+        <line num="208" type="stmt" count="6"/>
         <line num="210" type="stmt" count="6"/>
-        <line num="212" type="stmt" count="6"/>
-        <line num="214" type="method" name="isPlayed" visibility="public" complexity="4" crap="4" count="11"/>
+        <line num="212" type="method" name="isPlayed" visibility="public" complexity="4" crap="4" count="11"/>
+        <line num="213" type="stmt" count="11"/>
+        <line num="214" type="stmt" count="11"/>
         <line num="215" type="stmt" count="11"/>
-        <line num="216" type="stmt" count="11"/>
-        <line num="217" type="stmt" count="11"/>
-        <line num="219" type="stmt" count="8"/>
-        <metrics loc="222" ncloc="189" classes="1" methods="38" coveredmethods="38" conditionals="0" coveredconditionals="0" statements="91" coveredstatements="91" elements="129" coveredelements="129"/>
+        <line num="217" type="stmt" count="8"/>
+        <metrics loc="220" ncloc="187" classes="1" methods="38" coveredmethods="38" conditionals="0" coveredconditionals="0" statements="88" coveredstatements="88" elements="126" coveredelements="126"/>
       </file>
       <file name="/Volumes/Heroyt-Disk/work/Moje/rozlosy/src/TournamentGenerator/Progression.php">
         <class name="TournamentGenerator\Progression" namespace="TournamentGenerator">
@@ -710,12 +707,12 @@
         <line num="181" type="stmt" count="18"/>
         <line num="182" type="stmt" count="18"/>
         <line num="184" type="stmt" count="18"/>
-        <line num="186" type="method" name="sumScore" visibility="public" complexity="3" crap="3" count="11"/>
-        <line num="187" type="stmt" count="11"/>
-        <line num="188" type="stmt" count="11"/>
-        <line num="189" type="stmt" count="11"/>
-        <line num="190" type="stmt" count="11"/>
-        <line num="192" type="stmt" count="11"/>
+        <line num="186" type="method" name="sumScore" visibility="public" complexity="3" crap="3" count="13"/>
+        <line num="187" type="stmt" count="13"/>
+        <line num="188" type="stmt" count="13"/>
+        <line num="189" type="stmt" count="13"/>
+        <line num="190" type="stmt" count="13"/>
+        <line num="192" type="stmt" count="13"/>
         <metrics loc="194" ncloc="176" classes="1" methods="25" coveredmethods="14" conditionals="0" coveredconditionals="0" statements="98" coveredstatements="60" elements="123" coveredelements="74"/>
       </file>
       <file name="/Volumes/Heroyt-Disk/work/Moje/rozlosy/src/TournamentGenerator/TeamFilter.php">
@@ -1396,6 +1393,6 @@
       <line num="7" type="stmt" count="1"/>
       <metrics loc="8" ncloc="6" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="1" coveredelements="1"/>
     </file>
-    <metrics files="19" loc="2282" ncloc="1934" classes="17" methods="214" coveredmethods="152" conditionals="0" coveredconditionals="0" statements="1062" coveredstatements="617" elements="1276" coveredelements="769"/>
+    <metrics files="19" loc="2280" ncloc="1932" classes="17" methods="214" coveredmethods="152" conditionals="0" coveredconditionals="0" statements="1059" coveredstatements="614" elements="1273" coveredelements="766"/>
   </project>
 </coverage>
