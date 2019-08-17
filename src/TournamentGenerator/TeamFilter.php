@@ -47,7 +47,7 @@ class TeamFilter
 		if (in_array(strtolower($what), ['points', 'score', 'wins', 'draws', 'losses', 'second', 'third', 'team', 'notprogressed', 'progressed'])) $this->what = strtolower($what);
 		if (in_array($how, ['>', '<', '>=', '<=', '=', '!='])) $this->how = $how;
 		if ((gettype($val) === 'integer' && strtolower($what) !== 'team') || ($val instanceof Team && strtolower($what) === 'team')) $this->val = $val;
-		$this->groups = array_map(function($a) { return $a->id; }, array_filter($groups, function($a) {return ($a instanceof Group);}));
+		$this->groups = array_map(function($a) { return $a->getId(); }, array_filter($groups, function($a) {return ($a instanceof Group);}));
 	}
 	public function __toString() {
 		return 'Filter: '.$this->what.' '.($this->what !== 'notprogressed' && $this->what !== 'progressed' ? $this->how.' '.$this->val : '');

@@ -27,7 +27,7 @@ class Filter
 				continue;
 			}
 			elseif ($filter instanceof TeamFilter) {
-				$teams = array_filter($teams, function($team) use ($filter) {return $filter->validate($team, $this->group->id, 'sum', $this->group); });
+				$teams = array_filter($teams, function($team) use ($filter) {return $filter->validate($team, $this->group->getId(), 'sum', $this->group); });
 				continue;
 			}
 			throw new \Exception('Filer ['.$key.'] is not an instance of TeamFilter class');
@@ -68,7 +68,7 @@ class Filter
 				continue;
 			}
 			elseif ($value instanceof TeamFilter) {
-				if (!$value->validate($team, $this->group->id, 'sum', $this->group)) return false;
+				if (!$value->validate($team, $this->group->getId(), 'sum', $this->group)) return false;
 				continue;
 			}
 			throw new \Exception('Filer ['.$key.'] is not an instance of TeamFilter class');
@@ -92,7 +92,7 @@ class Filter
 				continue;
 			}
 			elseif ($value instanceof TeamFilter) {
-				if (!$value->validate($team, $this->group->id, 'sum', $this->group)) return true;
+				if (!$value->validate($team, $this->group->getId(), 'sum', $this->group)) return true;
 				continue;
 			}
 			throw new \Exception('Filer ['.$key.'] is not an instance of TeamFilter class');

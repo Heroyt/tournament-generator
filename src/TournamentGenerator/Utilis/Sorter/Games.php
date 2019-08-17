@@ -41,7 +41,7 @@ class Games
 		$this->games = [];
 
 		$teams = [];
-		foreach ($this->group->getTeams() as $team) { $teams[$team->id] = 0; }
+		foreach ($this->group->getTeams() as $team) { $teams[$team->getId()] = 0; }
 
 		$this->moveCalculatedGames(array_shift($games), $teams);
 

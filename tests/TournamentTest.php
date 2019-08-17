@@ -9,7 +9,7 @@ class TournamentTest extends TestCase
 {
 
 	/** @test */
-	public function check_if_name_is_setup_and_can_get() {
+	public function check_if_name_is_setup_and_can_get_tournament() {
 
 		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
 
@@ -26,7 +26,7 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_play_time() {
+	public function check_play_time_tournament() {
 
 		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
 
@@ -37,7 +37,7 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_game_wait_time() {
+	public function check_game_wait_time_tournament() {
 
 		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
 
@@ -48,7 +48,7 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_round_wait_time() {
+	public function check_round_wait_time_tournament() {
 
 		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
 
@@ -59,7 +59,7 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_category_wait_time() {
+	public function check_category_wait_time_tournament() {
 
 		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
 
@@ -70,7 +70,7 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_skip() {
+	public function check_skip_tournament() {
 
 		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
 
@@ -89,7 +89,7 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_category_add() {
+	public function check_category_add_tournament() {
 
 		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
 
@@ -115,7 +115,7 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_category_creation() {
+	public function check_category_creation_tournament() {
 
 		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
 
@@ -129,7 +129,7 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_category_inherits_skip() {
+	public function check_category_inherits_skip_tournament() {
 
 		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
 
@@ -141,7 +141,7 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_round_add() {
+	public function check_round_add_tournament() {
 
 		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
 
@@ -167,7 +167,7 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_round_creation() {
+	public function check_round_creation_tournament() {
 
 		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
 
@@ -181,7 +181,7 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_round_inherits_skip() {
+	public function check_round_inherits_skip_tournament() {
 
 		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
 
@@ -193,7 +193,7 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_team_add() {
+	public function check_team_add_tournament() {
 
 		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
 
@@ -219,7 +219,7 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_team_creation() {
+	public function check_team_creation_tournament() {
 
 		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
 
@@ -233,7 +233,7 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_rounds_from_categories() {
+	public function check_rounds_from_categories_tournament() {
 
 		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
 
@@ -253,7 +253,7 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_teams_from_categories_and_rounds() {
+	public function check_teams_from_categories_and_rounds_tournament() {
 
 		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
 
@@ -278,7 +278,7 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_split_teams() {
+	public function check_split_teams_tournament() {
 
 		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
 
@@ -299,7 +299,7 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_split_teams_with_defined_groups() {
+	public function check_split_teams_with_defined_groups_tournament() {
 
 		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
 
@@ -353,7 +353,7 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_gen_games_simulate() {
+	public function check_gen_games_simulate_tournament() {
 
 		$tournament = $this->gen_tournament();
 
@@ -364,7 +364,7 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_gen_games_simulate_with_time() {
+	public function check_gen_games_simulate_with_time_tournament() {
 
 		$tournament = $this->gen_tournament();
 
@@ -375,7 +375,7 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_gen_games_simulate_real() {
+	public function check_gen_games_simulate_real_tournament() {
 
 		$tournament = $this->gen_tournament();
 
@@ -386,7 +386,7 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_gen_games_simulate_real_with_time() {
+	public function check_gen_games_simulate_real_with_time_tournament() {
 
 		$tournament = $this->gen_tournament();
 
@@ -397,7 +397,7 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_tournament_time() {
+	public function check_tournament_time_tournament() {
 
 		$tournament = $this->gen_tournament();
 
@@ -408,7 +408,7 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_getting_games() {
+	public function check_getting_games_tournament() {
 
 		$tournament = $this->gen_tournament();
 
@@ -419,7 +419,7 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_sorting_teams() {
+	public function check_sorting_teams_tournament() {
 
 		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
 
@@ -436,15 +436,15 @@ class TournamentTest extends TestCase
 		$group->addTeam($teams);
 
 
-		$group->game([$teams[0], $teams[1]])->setResults([$teams[0]->id => 2000, $teams[1]->id => 2001]);
-		$group->game([$teams[2], $teams[3]])->setResults([$teams[2]->id => 100, $teams[3]->id => 99]);
-		$group->game([$teams[0], $teams[2]])->setResults([$teams[0]->id => 199, $teams[2]->id => 200]);
-		$group->game([$teams[1], $teams[3]])->setResults([$teams[3]->id => 1000, $teams[1]->id => 5000]);
-		$group->game([$teams[0], $teams[3]])->setResults([$teams[3]->id => 1000, $teams[0]->id => 1001]);
-		$group->game([$teams[1], $teams[2]])->setResults([$teams[1]->id => 99, $teams[2]->id => 100]);
+		$group->game([$teams[0], $teams[1]])->setResults([$teams[0]->getId() => 2000, $teams[1]->getId() => 2001]);
+		$group->game([$teams[2], $teams[3]])->setResults([$teams[2]->getId() => 100, $teams[3]->getId() => 99]);
+		$group->game([$teams[0], $teams[2]])->setResults([$teams[0]->getId() => 199, $teams[2]->getId() => 200]);
+		$group->game([$teams[1], $teams[3]])->setResults([$teams[3]->getId() => 1000, $teams[1]->getId() => 5000]);
+		$group->game([$teams[0], $teams[3]])->setResults([$teams[3]->getId() => 1000, $teams[0]->getId() => 1001]);
+		$group->game([$teams[1], $teams[2]])->setResults([$teams[1]->getId() => 99, $teams[2]->getId() => 100]);
 
 		$teamsSorted = array_map(function($team) {
-			return $team->name;
+			return $team->getName();
 		}, $tournament->sortTeams());
 
 		$this->assertSame(['Team 3', 'Team 2', 'Team 1', 'Team 4'], $teamsSorted);
@@ -452,7 +452,7 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_sorting_teams_from_getTeams() {
+	public function check_sorting_teams_from_getTeams_tournament() {
 
 		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
 
@@ -468,23 +468,23 @@ class TournamentTest extends TestCase
 
 		$group->addTeam($teams);
 
-		$group->game([$teams[0], $teams[1]])->setResults([$teams[0]->id => 2000, $teams[1]->id => 2001]);
-		$group->game([$teams[2], $teams[3]])->setResults([$teams[2]->id => 100, $teams[3]->id => 99]);
-		$group->game([$teams[0], $teams[2]])->setResults([$teams[0]->id => 199, $teams[2]->id => 200]);
-		$group->game([$teams[1], $teams[3]])->setResults([$teams[3]->id => 1000, $teams[1]->id => 5000]);
-		$group->game([$teams[0], $teams[3]])->setResults([$teams[3]->id => 1000, $teams[0]->id => 1001]);
-		$group->game([$teams[1], $teams[2]])->setResults([$teams[1]->id => 99, $teams[2]->id => 100]);
+		$group->game([$teams[0], $teams[1]])->setResults([$teams[0]->getId() => 2000, $teams[1]->getId() => 2001]);
+		$group->game([$teams[2], $teams[3]])->setResults([$teams[2]->getId() => 100, $teams[3]->getId() => 99]);
+		$group->game([$teams[0], $teams[2]])->setResults([$teams[0]->getId() => 199, $teams[2]->getId() => 200]);
+		$group->game([$teams[1], $teams[3]])->setResults([$teams[3]->getId() => 1000, $teams[1]->getId() => 5000]);
+		$group->game([$teams[0], $teams[3]])->setResults([$teams[3]->getId() => 1000, $teams[0]->getId() => 1001]);
+		$group->game([$teams[1], $teams[2]])->setResults([$teams[1]->getId() => 99, $teams[2]->getId() => 100]);
 
 		$teamsSorted = array_map(function($team) {
-			return $team->name;
-		}, $tournament->sortTeams());
+			return $team->getName();
+		}, $tournament->getTeams(true));
 
 		$this->assertSame(['Team 3', 'Team 2', 'Team 1', 'Team 4'], $teamsSorted);
 
 	}
 
 	/** @test */
-	public function check_sorting_teams_by_score() {
+	public function check_sorting_teams_by_score_tournament() {
 
 		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
 
@@ -500,15 +500,15 @@ class TournamentTest extends TestCase
 
 		$group->addTeam($teams);
 
-		$group->game([$teams[0], $teams[1]])->setResults([$teams[0]->id => 2000, $teams[1]->id => 2001]);
-		$group->game([$teams[2], $teams[3]])->setResults([$teams[2]->id => 100, $teams[3]->id => 99]);
-		$group->game([$teams[0], $teams[2]])->setResults([$teams[0]->id => 199, $teams[2]->id => 200]);
-		$group->game([$teams[1], $teams[3]])->setResults([$teams[3]->id => 1000, $teams[1]->id => 5000]);
-		$group->game([$teams[0], $teams[3]])->setResults([$teams[3]->id => 1000, $teams[0]->id => 1001]);
-		$group->game([$teams[1], $teams[2]])->setResults([$teams[1]->id => 99, $teams[2]->id => 100]);
+		$group->game([$teams[0], $teams[1]])->setResults([$teams[0]->getId() => 2000, $teams[1]->getId() => 2001]);
+		$group->game([$teams[2], $teams[3]])->setResults([$teams[2]->getId() => 100, $teams[3]->getId() => 99]);
+		$group->game([$teams[0], $teams[2]])->setResults([$teams[0]->getId() => 199, $teams[2]->getId() => 200]);
+		$group->game([$teams[1], $teams[3]])->setResults([$teams[3]->getId() => 1000, $teams[1]->getId() => 5000]);
+		$group->game([$teams[0], $teams[3]])->setResults([$teams[3]->getId() => 1000, $teams[0]->getId() => 1001]);
+		$group->game([$teams[1], $teams[2]])->setResults([$teams[1]->getId() => 99, $teams[2]->getId() => 100]);
 
 		$teamsSorted = array_map(function($team) {
-			return $team->name;
+			return $team->getName();
 		}, $tournament->sortTeams(\TournamentGenerator\Constants::SCORE));
 
 		$this->assertSame(['Team 2', 'Team 1', 'Team 4', 'Team 3'], $teamsSorted);

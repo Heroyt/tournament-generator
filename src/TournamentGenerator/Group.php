@@ -11,11 +11,11 @@ class Group
 	private $generator = null;
 	private $teams = []; // ARRAY OF TEAMS
 	private $progressed = []; // ARRAY OF TEAMS ALREADY PROGRESSED FROM THIS GROUP
-	public $name = ''; // DISPLAYABLE NAME
+	private $name = ''; // DISPLAYABLE NAME
 	private $ordering = \TournamentGenerator\Constants::POINTS; // WHAT TO DECIDE ON WHEN ORDERING TEAMS
 	private $progressions = []; // ARRAY OF PROGRESSION CONDITION OBJECTS
 	private $games = []; // ARRAY OF GAME OBJECTS
-	public $id = ''; // UNIQID OF GROUP FOR IDENTIFICATIONT
+	private $id = ''; // UNIQID OF GROUP FOR IDENTIFICATIONT
 	public $winPoints = 3; // POINTS AQUIRED FROM WINNING
 	public $drawPoints = 1; // POINTS AQUIRED FROM DRAW
 	public $lostPoints = 0; // POINTS AQUIRED FROM LOOSING
@@ -24,13 +24,30 @@ class Group
 	public $progressPoints = 50; // POINTS AQUIRED FROM PROGRESSING TO THE NEXT ROUND
 	private $order = 0; // ORDER OF GROUPS IN ROUND
 
-	function __construct(string $name) {
-		$this->id = uniqid();
+	function __construct(string $name, $id = null) {
+		$this->setName($name);
 		$this->generator = new Utilis\Generator($this);
-		$this->name = (string) $name;
+		$this->setId(isset($id) ? $id : uniqid());
 	}
 	public function __toString() {
-		return 'Group '.$this->name;
+		return $this->name;
+	}
+
+	public function setName(string $name) {
+		$this->name = $name;
+	}
+	public function getName() {
+		return $this->name;
+	}
+	public function setId($id) {
+		if (!is_string($id) && !is_int($id)) {
+			$this->id = uniqid();
+			throw new \Exception('Unsupported id type ('.gettype($id).') - expected type of string or int');
+		}
+		$this->id = $id;
+	}
+	public function getId() {
+		return $this->id;
 	}
 
 	public function allowSkip(){
@@ -51,7 +68,7 @@ class Group
 
 	public function addTeam(...$teams) {
 		foreach ($teams as $team) {
-			if (gettype($team) === 'array') {
+			if (is_array($team)) {
 				foreach ($team as $team2) {
 					$this->setTeam($team2);
 				}
@@ -63,19 +80,10 @@ class Group
 	}
 	private function setTeam(Team $team) {
 		$this->teams[] = $team;
-		$team->groupResults[$this->id] = [
-			'group' => $this,
-			'points' => 0,
-			'score'  => 0,
-			'wins'   => 0,
-			'draws'  => 0,
-			'losses' => 0,
-			'second' => 0,
-			'third'  => 0
-		];
+		$team->addGroupResults($this);
 		return $this;
 	}
-	public function getTeams($filters = []) {
+	public function getTeams(array $filters = []) {
 		$teams = $this->teams;
 
 		if (gettype($filters) !== 'array' && $filters instanceof TeamFilter) $filters = [$filters];
@@ -91,19 +99,10 @@ class Group
 	public function team(string $name = '') {
 		$t = new Team($name);
 		$this->teams[] = $t;
-		$t->groupResults[$this->id] = [
-			'group' => $this,
-			'points' => 0,
-			'score'  => 0,
-			'wins'   => 0,
-			'draws'  => 0,
-			'losses' => 0,
-			'second' => 0,
-			'third'  => 0
-		];
+		$t->addGroupResults($this);
 		return $t;
 	}
-	public function sortTeams($filters = [], $ordering = null) {
+	public function sortTeams(array $filters = [], $ordering = null) {
 		if (!isset($ordering)) $ordering = $this->ordering;
 		Utilis\Sorter\Teams::sortGroup($this->teams, $this, $ordering);
 		return $this->getTeams($filters);
@@ -166,7 +165,7 @@ class Group
 	}
 	public function addProgressed(...$teams) {
 		foreach ($teams as $team) {
-			if ($team instanceOf Team) $this->progressed[] = $team->id;
+			if ($team instanceOf Team) $this->progressed[] = $team;
 			elseif (gettype($team) === 'array') {
 				$this->progressed = array_merge($this->progressed, array_filter($team, function($a) {
 					return ($a instanceof Team);
@@ -176,7 +175,7 @@ class Group
 		return $this;
 	}
 	public function isProgressed(Team $team) {
-		return in_array($team->id, $this->progressed);
+		return in_array($team, $this->progressed);
 	}
 
 	public function genGames() {
@@ -220,6 +219,7 @@ class Group
 		return $this;
 	}
 	public function isPlayed(){
+		if (count($this->games) === 0) return false;
 		foreach ($this->games as $game) {
 			if (!$game->isPlayed()) return false;
 		}

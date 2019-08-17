@@ -107,8 +107,8 @@ class Tournament
 		}
 		return $this;
 	}
-	public function round(string $name = '') {
-		$r = new Round($name);
+	public function round(string $name = '', $id = null) {
+		$r = new Round($name, $id);
 		$this->rounds[] = $r->setSkip($this->allowSkip);
 		return $r;
 	}
@@ -129,8 +129,8 @@ class Tournament
 		}
 		return $this;
 	}
-	public function team(string $name = '') {
-		$t = new Team($name);
+	public function team(string $name = '', $id = null) {
+		$t = new Team($name, $id);
 		$this->teams[] = $t;
 		return $t;
 	}

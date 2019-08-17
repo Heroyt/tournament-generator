@@ -9,15 +9,15 @@ class Round
 {
 
 	private $name = '';
-	public $id = '';
+	private $id = '';
 	private $groups = [];
 	private $games = [];
 	private $teams = [];
 	private $allowSkip = false;
 
-	function __construct(string $name = '') {
-		$this->id = uniqid();
-		$this->name = $name;
+	function __construct(string $name = '', $id = null) {
+		$this->setName($name);
+		$this->setId(isset($id) ? $id : uniqid());
 	}
 	public function __toString() {
 		return $this->name;
@@ -29,6 +29,16 @@ class Round
 	public function getName() {
 		return $this->name;
 	}
+	public function setId($id) {
+		if (!is_string($id) && !is_int($id)) {
+			$this->id = uniqid();
+			throw new \Exception('Unsupported id type ('.gettype($id).') - expected type of string or int');
+		}
+		$this->id = $id;
+	}
+	public function getId() {
+		return $this->id;
+	}
 
 	public function addGroup(Group ...$groups){
 		foreach ($groups as $group) {
@@ -36,8 +46,8 @@ class Round
 		}
 		return $this;
 	}
-	public function group(string $name) {
-		$g = new Group($name);
+	public function group(string $name, $id = null) {
+		$g = new Group($name, $id);
 		$this->groups[] = $g->setSkip($this->allowSkip);
 		return $g;
 	}
@@ -47,12 +57,13 @@ class Round
 	}
 	public function getGroupsIds() {
 		$this->orderGroups();
-		return array_map(function($a) { return $a->id; }, $this->groups);
+		return array_map(function($a) { return $a->getId(); }, $this->groups);
 	}
 	public function orderGroups() {
 		usort($this->groups, function($a, $b){
 			return $a->getOrder() - $b->getOrder();
 		});
+		return $this->groups;
 	}
 
 	public function allowSkip(){
@@ -82,38 +93,21 @@ class Round
 		return $this->games;
 	}
 	public function isPlayed(){
+		if (count($this->games) === 0) return false;
 		foreach ($this->groups as $group) {
 			if (!$group->isPlayed()) return false;
 		}
 		return true;
 	}
 
-	public function addTeam(...$teams) {
+	public function addTeam(Team ...$teams) {
 		foreach ($teams as $team) {
-			if ($team instanceof Team)  {
-				$this->teams[] = $team;
-			}
-			elseif (gettype($team) === 'array') {
-				foreach ($team as $team2) {
-					if ($team2 instanceof Team) $this->teams[] = $team2;
-					$team2->groupResults[$this->id] = [
-						'group' => $this,
-						'points' => 0,
-						'score'  => 0,
-						'wins'   => 0,
-						'draws'  => 0,
-						'losses' => 0,
-						'second' => 0,
-						'third'  => 0
-					];
-				}
-			}
-			else throw new \Exception('Trying to add team which is not an instance of Team class');
+			$this->teams[] = $team;
 		}
 		return $this;
 	}
-	public function team(string $name = '') {
-		$t = new Team($name);
+	public function team(string $name = '', $id = null) {
+		$t = new Team($name, $id);
 		$this->teams[] = $t;
 		return $t;
 	}
@@ -131,11 +125,14 @@ class Round
 		return $this->teams;
 	}
 	public function sortTeams($ordering = \TournamentGenerator\Constants::POINTS) {
-		Utilis\Sorter\Teams::sortRound($this->teams, $this, $ordering);
+		$teams = Utilis\Sorter\Teams::sortRound($this->teams, $this, $ordering);
+		$teams = array_map(function($team) {
+			return $team->getName();
+		}, $teams);
 		return $this->teams;
 	}
 
-	public function splitTeams(...$groups) {
+	public function splitTeams(Group ...$groups) {
 
 		if (count($groups) === 0) $groups = $this->getGroups();
 
@@ -151,9 +148,7 @@ class Round
 
 		while (count($teams) > 0) {
 			foreach ($groups as $group) {
-				if ($group instanceof Group) {
-					if (count($teams) > 0) $group->addTeam(array_shift($teams));
-				}
+				if (count($teams) > 0) $group->addTeam(array_shift($teams));
 			}
 		}
 		return $this;

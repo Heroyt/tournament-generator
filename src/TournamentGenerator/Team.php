@@ -8,8 +8,8 @@ namespace TournamentGenerator;
 class Team
 {
 
-	public $name = 'team';
-	public $id = '';
+	private $name = 'team';
+	private $id = '';
 	public $games = [];
 	public $gamesWith = [];
 	public $sumPoints = 0;
@@ -33,8 +33,8 @@ class Team
 	public $groupResults = [];
 
 	function __construct(string $name = 'team', $id = null) {
-		$this->name = $name;
-		$this->id = (isset($id) ? $id : uniqid());
+		$this->setName($name);
+		$this->setId(isset($id) ? $id : uniqid());
 	}
 	public function __toString() {
 		return $this->name;
@@ -43,19 +43,57 @@ class Team
 		return array_filter($this->groupResults[$groupId], function($k) { return $k !== 'group'; }, ARRAY_FILTER_USE_KEY);
 	}
 
+	public function setName(string $name) {
+		$this->name = $name;
+	}
+	public function getName() {
+		return $this->name;
+	}
+	public function setId($id) {
+		if (!is_string($id) && !is_int($id)) {
+			$this->id = uniqid();
+			throw new Exception('Unsupported id type ('.gettype($id).') - expected type of string or int');
+		}
+		$this->id = $id;
+	}
+	public function getId() {
+		return $this->id;
+	}
+
+	public function addGroupResults(Group $group) {
+		$this->groupResults[$group->getId()] = [
+			'group' => $group,
+			'points' => 0,
+			'score'  => 0,
+			'wins'   => 0,
+			'draws'  => 0,
+			'losses' => 0,
+			'second' => 0,
+			'third'  => 0
+		];
+		return $this;
+	}
+	public function getGroupResults($groupId = null) {
+		if (isset($groupId)) {
+			if (!isset($this->groupResults[$groupId])) throw new \Exception('Trying to get unexisting group results ('.$groupId.')');
+			return $this->groupResults[$groupId];
+		}
+		return $this->groupResults;
+	}
+
 	public function addGameWith(Team $team, Group $group) {
-		if (!isset($this->gamesWith[$group->id][$team->id])) $this->gamesWith[$group->id][$team->id] = 0;
-		$this->gamesWith[$group->id][$team->id]++;
+		if (!isset($this->gamesWith[$group->getId()][$team->getId()])) $this->gamesWith[$group->getId()][$team->getId()] = 0;
+		$this->gamesWith[$group->getId()][$team->getId()]++;
 		return $this;
 	}
 	public function addGroup(Group $group) {
-		if (!isset($this->games[$group->id])) $this->games[$group->id] = [];
+		if (!isset($this->games[$group->getId()])) $this->games[$group->getId()] = [];
 		return $this;
 	}
 	public function addGame(Game $game) {
 		$group = $game->getGroup();
-		if (!isset($this->games[$group->id])) $this->games[$group->id] = [];
-		$this->games[$group->id][] = $game;
+		if (!isset($this->games[$group->getId()])) $this->games[$group->getId()] = [];
+		$this->games[$group->getId()][] = $game;
 		return $this;
 	}
 

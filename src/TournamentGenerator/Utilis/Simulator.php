@@ -13,7 +13,7 @@ class Simulator
 			$teams = $game->getTeams();
 			$results = [];
 			foreach ($teams as $team) {
-				$results[$team->id] = floor(rand(0, 500));
+				$results[$team->getId()] = floor(rand(0, 500));
 			}
 			$game->setResults($results);
 		}
