@@ -133,13 +133,6 @@ class Round
 
 		if (count($groups) === 0) $groups = $this->getGroups();
 
-		foreach ($groups as $key => $value) {
-			if (gettype($value) === 'array') {
-				unset($groups[$key]);
-				$groups = array_merge($groups, $value);
-			}
-		}
-
 		$teams = $this->getTeams();
 		shuffle($teams);
 

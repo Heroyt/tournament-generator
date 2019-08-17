@@ -10,7 +10,14 @@
 		</testsuite>
 	</testsuites>
 	<logging>
-		<log type="coverage-clover" target="/tmp/coverage.xml"/>
-		<log type="coverage-php" target="/tmp/coverage.serialized"/>
+		<log type="coverage-html" target="build/coverage"/>
+		<log type="coverage-clover" target="build/coverage.xml"/>
+		<log type="coverage-php" target="build/coverage.serialized"/>
 	</logging>
+	<filter>
+    <whitelist>
+        <directory>./src</directory>
+				<directory>./build</directory>
+    </whitelist>
+</filter>
 </phpunit>

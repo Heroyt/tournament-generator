@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /Volumes/Heroyt-Disk/work/Moje/rozlosy/src/TournamentGenerator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="_css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="_css/nv.d3.min.css" rel="stylesheet" type="text/css">
+  <link href="_css/style.css" rel="stylesheet" type="text/css">
+  <link href="_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="index.html">/Volumes/Heroyt-Disk/work/Moje/rozlosy/src/TournamentGenerator</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Preset/DoubleElimination.php.html#8">TournamentGenerator\Preset\DoubleElimination</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Preset/R2G.php.html#8">TournamentGenerator\Preset\R2G</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Preset/SingleElimination.php.html#8">TournamentGenerator\Preset\SingleElimination</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filter.php.html#8">TournamentGenerator\Filter</a></td><td class="text-right">14%</td></tr>
+       <tr><td><a href="Category.php.html#8">TournamentGenerator\Category</a></td><td class="text-right">28%</td></tr>
+       <tr><td><a href="Game.php.html#8">TournamentGenerator\Game</a></td><td class="text-right">43%</td></tr>
+       <tr><td><a href="TeamFilter.php.html#8">TournamentGenerator\TeamFilter</a></td><td class="text-right">60%</td></tr>
+       <tr><td><a href="Team.php.html#8">TournamentGenerator\Team</a></td><td class="text-right">61%</td></tr>
+       <tr><td><a href="Utilis/Sorter/Games.php.html#18">TournamentGenerator\Utilis\Sorter\Games</a></td><td class="text-right">62%</td></tr>
+       <tr><td><a href="Utilis/Generator.php.html#8">TournamentGenerator\Utilis\Generator</a></td><td class="text-right">77%</td></tr>
+       <tr><td><a href="Progression.php.html#8">TournamentGenerator\Progression</a></td><td class="text-right">81%</td></tr>
+       <tr><td><a href="Utilis/Simulator.php.html#8">TournamentGenerator\Utilis\Simulator</a></td><td class="text-right">85%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Game.php.html#8">TournamentGenerator\Game</a></td><td class="text-right">598</td></tr>
+       <tr><td><a href="Filter.php.html#8">TournamentGenerator\Filter</a></td><td class="text-right">591</td></tr>
+       <tr><td><a href="Preset/DoubleElimination.php.html#8">TournamentGenerator\Preset\DoubleElimination</a></td><td class="text-right">380</td></tr>
+       <tr><td><a href="Category.php.html#8">TournamentGenerator\Category</a></td><td class="text-right">299</td></tr>
+       <tr><td><a href="Team.php.html#8">TournamentGenerator\Team</a></td><td class="text-right">182</td></tr>
+       <tr><td><a href="TeamFilter.php.html#8">TournamentGenerator\TeamFilter</a></td><td class="text-right">178</td></tr>
+       <tr><td><a href="Utilis/Sorter/Games.php.html#18">TournamentGenerator\Utilis\Sorter\Games</a></td><td class="text-right">116</td></tr>
+       <tr><td><a href="Utilis/Generator.php.html#8">TournamentGenerator\Utilis\Generator</a></td><td class="text-right">91</td></tr>
+       <tr><td><a href="Preset/SingleElimination.php.html#8">TournamentGenerator\Preset\SingleElimination</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Utilis/Simulator.php.html#8">TournamentGenerator\Utilis\Simulator</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Progression.php.html#8">TournamentGenerator\Progression</a></td><td class="text-right">15</td></tr>
+       <tr><td><a href="Preset/R2G.php.html#8">TournamentGenerator\Preset\R2G</a></td><td class="text-right">12</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Category.php.html#22"><abbr title="TournamentGenerator\Category::addRound">addRound</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Team.php.html#156"><abbr title="TournamentGenerator\Team::removeSecond">removeSecond</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Preset/DoubleElimination.php.html#97"><abbr title="TournamentGenerator\Preset\DoubleElimination::generateLosingSide">generateLosingSide</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Category.php.html#38"><abbr title="TournamentGenerator\Category::allowSkip">allowSkip</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Preset/SingleElimination.php.html#11"><abbr title="TournamentGenerator\Preset\SingleElimination::generate">generate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Progression.php.html#28"><abbr title="TournamentGenerator\Progression::addFilter">addFilter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Team.php.html#89"><abbr title="TournamentGenerator\Team::addGroup">addGroup</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Team.php.html#100"><abbr title="TournamentGenerator\Team::getSumPoints">getSumPoints</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Team.php.html#103"><abbr title="TournamentGenerator\Team::getSumScore">getSumScore</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Team.php.html#121"><abbr title="TournamentGenerator\Team::addDraw">addDraw</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Team.php.html#128"><abbr title="TournamentGenerator\Team::removeDraw">removeDraw</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Team.php.html#149"><abbr title="TournamentGenerator\Team::addSecond">addSecond</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Team.php.html#163"><abbr title="TournamentGenerator\Team::addThird">addThird</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Preset/DoubleElimination.php.html#75"><abbr title="TournamentGenerator\Preset\DoubleElimination::calcByes">calcByes</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Team.php.html#170"><abbr title="TournamentGenerator\Team::removeThird">removeThird</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TeamFilter.php.html#52"><abbr title="TournamentGenerator\TeamFilter::__toString">__toString</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TeamFilter.php.html#66"><abbr title="TournamentGenerator\TeamFilter::validateTeam">validateTeam</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TeamFilter.php.html#69"><abbr title="TournamentGenerator\TeamFilter::validateProgressed">validateProgressed</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TeamFilter.php.html#102"><abbr title="TournamentGenerator\TeamFilter::calcMax">calcMax</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TeamFilter.php.html#109"><abbr title="TournamentGenerator\TeamFilter::calcMin">calcMin</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Utilis/Generator.php.html#95"><abbr title="TournamentGenerator\Utilis\Generator::r_r3Games">r_r3Games</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Utilis/Generator.php.html#108"><abbr title="TournamentGenerator\Utilis\Generator::r_r4Games">r_r4Games</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Utilis/Sorter/Games.php.html#106"><abbr title="TournamentGenerator\Utilis\Sorter\Games::cycle3">cycle3</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Utilis/Sorter/Games.php.html#119"><abbr title="TournamentGenerator\Utilis\Sorter\Games::cycle4">cycle4</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Preset/DoubleElimination.php.html#84"><abbr title="TournamentGenerator\Preset\DoubleElimination::generateWinSide">generateWinSide</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Preset/R2G.php.html#11"><abbr title="TournamentGenerator\Preset\R2G::generate">generate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Preset/DoubleElimination.php.html#11"><abbr title="TournamentGenerator\Preset\DoubleElimination::generate">generate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Game.php.html#47"><abbr title="TournamentGenerator\Game::addTeam">addTeam</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Category.php.html#42"><abbr title="TournamentGenerator\Category::disallowSkip">disallowSkip</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Category.php.html#60"><abbr title="TournamentGenerator\Category::team">team</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Category.php.html#75"><abbr title="TournamentGenerator\Category::getGames">getGames</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Category.php.html#83"><abbr title="TournamentGenerator\Category::splitTeams">splitTeams</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Category.php.html#103"><abbr title="TournamentGenerator\Category::genGamesSimulate">genGamesSimulate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filter.php.html#38"><abbr title="TournamentGenerator\Filter::filterMulti">filterMulti</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filter.php.html#54"><abbr title="TournamentGenerator\Filter::filterAnd">filterAnd</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Game.php.html#221"><abbr title="TournamentGenerator\Game::getDraw">getDraw</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filter.php.html#78"><abbr title="TournamentGenerator\Filter::filterOr">filterOr</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Game.php.html#134"><abbr title="TournamentGenerator\Game::setResults3">setResults3</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Game.php.html#209"><abbr title="TournamentGenerator\Game::getWin">getWin</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Game.php.html#218"><abbr title="TournamentGenerator\Game::getThird">getThird</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Game.php.html#215"><abbr title="TournamentGenerator\Game::getSecond">getSecond</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Game.php.html#212"><abbr title="TournamentGenerator\Game::getLoss">getLoss</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Utilis/Sorter/Games.php.html#132"><abbr title="TournamentGenerator\Utilis\Sorter\Games::cycle5">cycle5</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Game.php.html#179"><abbr title="TournamentGenerator\Game::getResults">getResults</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Game.php.html#154"><abbr title="TournamentGenerator\Game::setResults4">setResults4</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Category.php.html#65"><abbr title="TournamentGenerator\Category::getTeams">getTeams</abbr></a></td><td class="text-right">16%</td></tr>
+       <tr><td><a href="Team.php.html#76"><abbr title="TournamentGenerator\Team::getGroupResults">getGroupResults</abbr></a></td><td class="text-right">50%</td></tr>
+       <tr><td><a href="Utilis/Generator.php.html#79"><abbr title="TournamentGenerator\Utilis\Generator::r_rGames">r_rGames</abbr></a></td><td class="text-right">53%</td></tr>
+       <tr><td><a href="Team.php.html#52"><abbr title="TournamentGenerator\Team::setId">setId</abbr></a></td><td class="text-right">60%</td></tr>
+       <tr><td><a href="Filter.php.html#23"><abbr title="TournamentGenerator\Filter::filter">filter</abbr></a></td><td class="text-right">62%</td></tr>
+       <tr><td><a href="Game.php.html#183"><abbr title="TournamentGenerator\Game::resetResults">resetResults</abbr></a></td><td class="text-right">63%</td></tr>
+       <tr><td><a href="Game.php.html#75"><abbr title="TournamentGenerator\Game::getTeam">getTeam</abbr></a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="Utilis/Sorter/Games.php.html#35"><abbr title="TournamentGenerator\Utilis\Sorter\Games::orderGames">orderGames</abbr></a></td><td class="text-right">71%</td></tr>
+       <tr><td><a href="Utilis/Simulator.php.html#11"><abbr title="TournamentGenerator\Utilis\Simulator::simulateGroup">simulateGroup</abbr></a></td><td class="text-right">72%</td></tr>
+       <tr><td><a href="TeamFilter.php.html#73"><abbr title="TournamentGenerator\TeamFilter::validateCalc">validateCalc</abbr></a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="Game.php.html#116"><abbr title="TournamentGenerator\Game::setResults2">setResults2</abbr></a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="Game.php.html#87"><abbr title="TournamentGenerator\Game::setResults">setResults</abbr></a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="Game.php.html#20"><abbr title="TournamentGenerator\Game::__construct">__construct</abbr></a></td><td class="text-right">82%</td></tr>
+       <tr><td><a href="Utilis/Generator.php.html#135"><abbr title="TournamentGenerator\Utilis\Generator::cond_splitGames">cond_splitGames</abbr></a></td><td class="text-right">86%</td></tr>
+       <tr><td><a href="Utilis/Simulator.php.html#56"><abbr title="TournamentGenerator\Utilis\Simulator::simulateTournamentReal">simulateTournamentReal</abbr></a></td><td class="text-right">88%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Preset/DoubleElimination.php.html#97"><abbr title="TournamentGenerator\Preset\DoubleElimination::generateLosingSide">generateLosingSide</abbr></a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="Filter.php.html#78"><abbr title="TournamentGenerator\Filter::filterOr">filterOr</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="Filter.php.html#54"><abbr title="TournamentGenerator\Filter::filterAnd">filterAnd</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="Filter.php.html#38"><abbr title="TournamentGenerator\Filter::filterMulti">filterMulti</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Game.php.html#47"><abbr title="TournamentGenerator\Game::addTeam">addTeam</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Category.php.html#83"><abbr title="TournamentGenerator\Category::splitTeams">splitTeams</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="TeamFilter.php.html#109"><abbr title="TournamentGenerator\TeamFilter::calcMin">calcMin</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Preset/SingleElimination.php.html#11"><abbr title="TournamentGenerator\Preset\SingleElimination::generate">generate</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="TeamFilter.php.html#102"><abbr title="TournamentGenerator\TeamFilter::calcMax">calcMax</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Game.php.html#154"><abbr title="TournamentGenerator\Game::setResults4">setResults4</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Game.php.html#134"><abbr title="TournamentGenerator\Game::setResults3">setResults3</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Preset/DoubleElimination.php.html#11"><abbr title="TournamentGenerator\Preset\DoubleElimination::generate">generate</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Utilis/Generator.php.html#95"><abbr title="TournamentGenerator\Utilis\Generator::r_r3Games">r_r3Games</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="TeamFilter.php.html#73"><abbr title="TournamentGenerator\TeamFilter::validateCalc">validateCalc</abbr></a></td><td class="text-right">17</td></tr>
+       <tr><td><a href="Category.php.html#22"><abbr title="TournamentGenerator\Category::addRound">addRound</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="TeamFilter.php.html#52"><abbr title="TournamentGenerator\TeamFilter::__toString">__toString</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Utilis/Sorter/Games.php.html#106"><abbr title="TournamentGenerator\Utilis\Sorter\Games::cycle3">cycle3</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Utilis/Sorter/Games.php.html#119"><abbr title="TournamentGenerator\Utilis\Sorter\Games::cycle4">cycle4</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Preset/R2G.php.html#11"><abbr title="TournamentGenerator\Preset\R2G::generate">generate</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Utilis/Sorter/Games.php.html#132"><abbr title="TournamentGenerator\Utilis\Sorter\Games::cycle5">cycle5</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Category.php.html#103"><abbr title="TournamentGenerator\Category::genGamesSimulate">genGamesSimulate</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Utilis/Sorter/Games.php.html#35"><abbr title="TournamentGenerator\Utilis\Sorter\Games::orderGames">orderGames</abbr></a></td><td class="text-right">10</td></tr>
+       <tr><td><a href="Game.php.html#183"><abbr title="TournamentGenerator\Game::resetResults">resetResults</abbr></a></td><td class="text-right">9</td></tr>
+       <tr><td><a href="Category.php.html#65"><abbr title="TournamentGenerator\Category::getTeams">getTeams</abbr></a></td><td class="text-right">8</td></tr>
+       <tr><td><a href="Utilis/Generator.php.html#135"><abbr title="TournamentGenerator\Utilis\Generator::cond_splitGames">cond_splitGames</abbr></a></td><td class="text-right">8</td></tr>
+       <tr><td><a href="Game.php.html#87"><abbr title="TournamentGenerator\Game::setResults">setResults</abbr></a></td><td class="text-right">7</td></tr>
+       <tr><td><a href="Utilis/Generator.php.html#79"><abbr title="TournamentGenerator\Utilis\Generator::r_rGames">r_rGames</abbr></a></td><td class="text-right">7</td></tr>
+       <tr><td><a href="Game.php.html#20"><abbr title="TournamentGenerator\Game::__construct">__construct</abbr></a></td><td class="text-right">7</td></tr>
+       <tr><td><a href="Preset/DoubleElimination.php.html#84"><abbr title="TournamentGenerator\Preset\DoubleElimination::generateWinSide">generateWinSide</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Preset/DoubleElimination.php.html#75"><abbr title="TournamentGenerator\Preset\DoubleElimination::calcByes">calcByes</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Category.php.html#75"><abbr title="TournamentGenerator\Category::getGames">getGames</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Utilis/Generator.php.html#108"><abbr title="TournamentGenerator\Utilis\Generator::r_r4Games">r_r4Games</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="TeamFilter.php.html#69"><abbr title="TournamentGenerator\TeamFilter::validateProgressed">validateProgressed</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Team.php.html#170"><abbr title="TournamentGenerator\Team::removeThird">removeThird</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Team.php.html#163"><abbr title="TournamentGenerator\Team::addThird">addThird</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Team.php.html#156"><abbr title="TournamentGenerator\Team::removeSecond">removeSecond</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Team.php.html#149"><abbr title="TournamentGenerator\Team::addSecond">addSecond</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Team.php.html#128"><abbr title="TournamentGenerator\Team::removeDraw">removeDraw</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Team.php.html#121"><abbr title="TournamentGenerator\Team::addDraw">addDraw</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Team.php.html#89"><abbr title="TournamentGenerator\Team::addGroup">addGroup</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Progression.php.html#28"><abbr title="TournamentGenerator\Progression::addFilter">addFilter</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Utilis/Simulator.php.html#11"><abbr title="TournamentGenerator\Utilis\Simulator::simulateGroup">simulateGroup</abbr></a></td><td class="text-right">5</td></tr>
+       <tr><td><a href="Utilis/Simulator.php.html#56"><abbr title="TournamentGenerator\Utilis\Simulator::simulateTournamentReal">simulateTournamentReal</abbr></a></td><td class="text-right">5</td></tr>
+       <tr><td><a href="Filter.php.html#23"><abbr title="TournamentGenerator\Filter::filter">filter</abbr></a></td><td class="text-right">4</td></tr>
+       <tr><td><a href="Game.php.html#116"><abbr title="TournamentGenerator\Game::setResults2">setResults2</abbr></a></td><td class="text-right">4</td></tr>
+       <tr><td><a href="Team.php.html#76"><abbr title="TournamentGenerator\Team::getGroupResults">getGroupResults</abbr></a></td><td class="text-right">4</td></tr>
+       <tr><td><a href="Team.php.html#52"><abbr title="TournamentGenerator\Team::setId">setId</abbr></a></td><td class="text-right">3</td></tr>
+       <tr><td><a href="Game.php.html#75"><abbr title="TournamentGenerator\Game::getTeam">getTeam</abbr></a></td><td class="text-right">3</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 7.0.7</a> using <a href="https://secure.php.net/" target="_top">PHP 7.3.7</a> with <a href="https://xdebug.org/">Xdebug 2.7.2</a> and <a href="https://phpunit.de/">PHPUnit 8.3.4</a> at Sat Aug 17 22:50:35 UTC 2019.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="_js/jquery.min.js" type="text/javascript"></script>
+  <script src="_js/d3.min.js" type="text/javascript"></script>
+  <script src="_js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([3,0,1,1,0,1,0,3,1,2,0,6], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([45,0,1,0,0,0,2,4,5,3,2,154], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[100,1,"<a href=\"BlankTeam.php.html#8\">TournamentGenerator\\BlankTeam<\/a>"],[28.000000000000004,27,"<a href=\"Category.php.html#8\">TournamentGenerator\\Category<\/a>"],[100,0,"<a href=\"Constants.php.html#8\">TournamentGenerator\\Constants<\/a>"],[14.545454545454545,30,"<a href=\"Filter.php.html#8\">TournamentGenerator\\Filter<\/a>"],[43.57142857142857,55,"<a href=\"Game.php.html#8\">TournamentGenerator\\Game<\/a>"],[100,56,"<a href=\"Group.php.html#8\">TournamentGenerator\\Group<\/a>"],[0,19,"<a href=\"Preset\/DoubleElimination.php.html#8\">TournamentGenerator\\Preset\\DoubleElimination<\/a>"],[0,3,"<a href=\"Preset\/R2G.php.html#8\">TournamentGenerator\\Preset\\R2G<\/a>"],[0,5,"<a href=\"Preset\/SingleElimination.php.html#8\">TournamentGenerator\\Preset\\SingleElimination<\/a>"],[81.81818181818183,14,"<a href=\"Progression.php.html#8\">TournamentGenerator\\Progression<\/a>"],[100,44,"<a href=\"Round.php.html#8\">TournamentGenerator\\Round<\/a>"],[61.224489795918366,48,"<a href=\"Team.php.html#8\">TournamentGenerator\\Team<\/a>"],[60.97560975609756,47,"<a href=\"TeamFilter.php.html#8\">TournamentGenerator\\TeamFilter<\/a>"],[100,48,"<a href=\"Tournament.php.html#8\">TournamentGenerator\\Tournament<\/a>"],[77.14285714285715,55,"<a href=\"Utilis\/Generator.php.html#8\">TournamentGenerator\\Utilis\\Generator<\/a>"],[85.29411764705883,19,"<a href=\"Utilis\/Simulator.php.html#8\">TournamentGenerator\\Utilis\\Simulator<\/a>"],[62.16216216216216,38,"<a href=\"Utilis\/Sorter\/Games.php.html#18\">TournamentGenerator\\Utilis\\Sorter\\Games<\/a>"],[100,17,"<a href=\"Utilis\/Sorter\/Teams.php.html#17\">TournamentGenerator\\Utilis\\Sorter\\Teams<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[100,1,"<a href=\"BlankTeam.php.html#11\">TournamentGenerator\\BlankTeam::__construct<\/a>"],[100,1,"<a href=\"Category.php.html#17\">TournamentGenerator\\Category::__construct<\/a>"],[0,3,"<a href=\"Category.php.html#22\">TournamentGenerator\\Category::addRound<\/a>"],[100,1,"<a href=\"Category.php.html#29\">TournamentGenerator\\Category::round<\/a>"],[100,1,"<a href=\"Category.php.html#34\">TournamentGenerator\\Category::getRounds<\/a>"],[0,1,"<a href=\"Category.php.html#38\">TournamentGenerator\\Category::allowSkip<\/a>"],[0,1,"<a href=\"Category.php.html#42\">TournamentGenerator\\Category::disallowSkip<\/a>"],[100,1,"<a href=\"Category.php.html#46\">TournamentGenerator\\Category::setSkip<\/a>"],[100,1,"<a href=\"Category.php.html#50\">TournamentGenerator\\Category::getSkip<\/a>"],[100,2,"<a href=\"Category.php.html#54\">TournamentGenerator\\Category::addTeam<\/a>"],[0,1,"<a href=\"Category.php.html#60\">TournamentGenerator\\Category::team<\/a>"],[16.666666666666664,3,"<a href=\"Category.php.html#65\">TournamentGenerator\\Category::getTeams<\/a>"],[0,2,"<a href=\"Category.php.html#75\">TournamentGenerator\\Category::getGames<\/a>"],[0,6,"<a href=\"Category.php.html#83\">TournamentGenerator\\Category::splitTeams<\/a>"],[0,3,"<a href=\"Category.php.html#103\">TournamentGenerator\\Category::genGamesSimulate<\/a>"],[100,1,"<a href=\"Filter.php.html#14\">TournamentGenerator\\Filter::__construct<\/a>"],[62.5,4,"<a href=\"Filter.php.html#23\">TournamentGenerator\\Filter::filter<\/a>"],[0,7,"<a href=\"Filter.php.html#38\">TournamentGenerator\\Filter::filterMulti<\/a>"],[0,9,"<a href=\"Filter.php.html#54\">TournamentGenerator\\Filter::filterAnd<\/a>"],[0,9,"<a href=\"Filter.php.html#78\">TournamentGenerator\\Filter::filterOr<\/a>"],[82.35294117647058,7,"<a href=\"Game.php.html#20\">TournamentGenerator\\Game::__construct<\/a>"],[100,1,"<a href=\"Game.php.html#43\">TournamentGenerator\\Game::getGroup<\/a>"],[0,7,"<a href=\"Game.php.html#47\">TournamentGenerator\\Game::addTeam<\/a>"],[100,1,"<a href=\"Game.php.html#69\">TournamentGenerator\\Game::getTeams<\/a>"],[100,1,"<a href=\"Game.php.html#72\">TournamentGenerator\\Game::getTeamsIds<\/a>"],[66.66666666666666,3,"<a href=\"Game.php.html#75\">TournamentGenerator\\Game::getTeam<\/a>"],[75,7,"<a href=\"Game.php.html#87\">TournamentGenerator\\Game::setResults<\/a>"],[75,4,"<a href=\"Game.php.html#116\">TournamentGenerator\\Game::setResults2<\/a>"],[0,4,"<a href=\"Game.php.html#134\">TournamentGenerator\\Game::setResults3<\/a>"],[0,5,"<a href=\"Game.php.html#154\">TournamentGenerator\\Game::setResults4<\/a>"],[0,1,"<a href=\"Game.php.html#179\">TournamentGenerator\\Game::getResults<\/a>"],[63.63636363636363,7,"<a href=\"Game.php.html#183\">TournamentGenerator\\Game::resetResults<\/a>"],[0,1,"<a href=\"Game.php.html#209\">TournamentGenerator\\Game::getWin<\/a>"],[0,1,"<a href=\"Game.php.html#212\">TournamentGenerator\\Game::getLoss<\/a>"],[0,1,"<a href=\"Game.php.html#215\">TournamentGenerator\\Game::getSecond<\/a>"],[0,1,"<a href=\"Game.php.html#218\">TournamentGenerator\\Game::getThird<\/a>"],[0,1,"<a href=\"Game.php.html#221\">TournamentGenerator\\Game::getDraw<\/a>"],[100,2,"<a href=\"Game.php.html#225\">TournamentGenerator\\Game::isPlayed<\/a>"],[100,2,"<a href=\"Group.php.html#27\">TournamentGenerator\\Group::__construct<\/a>"],[100,1,"<a href=\"Group.php.html#32\">TournamentGenerator\\Group::__toString<\/a>"],[100,1,"<a href=\"Group.php.html#36\">TournamentGenerator\\Group::setName<\/a>"],[100,1,"<a href=\"Group.php.html#39\">TournamentGenerator\\Group::getName<\/a>"],[100,3,"<a href=\"Group.php.html#42\">TournamentGenerator\\Group::setId<\/a>"],[100,1,"<a href=\"Group.php.html#49\">TournamentGenerator\\Group::getId<\/a>"],[100,1,"<a href=\"Group.php.html#53\">TournamentGenerator\\Group::allowSkip<\/a>"],[100,1,"<a href=\"Group.php.html#57\">TournamentGenerator\\Group::disallowSkip<\/a>"],[100,1,"<a href=\"Group.php.html#61\">TournamentGenerator\\Group::setSkip<\/a>"],[100,1,"<a href=\"Group.php.html#65\">TournamentGenerator\\Group::getSkip<\/a>"],[100,4,"<a href=\"Group.php.html#69\">TournamentGenerator\\Group::addTeam<\/a>"],[100,1,"<a href=\"Group.php.html#81\">TournamentGenerator\\Group::setTeam<\/a>"],[100,1,"<a href=\"Group.php.html#86\">TournamentGenerator\\Group::getTeams<\/a>"],[100,1,"<a href=\"Group.php.html#96\">TournamentGenerator\\Group::team<\/a>"],[100,2,"<a href=\"Group.php.html#102\">TournamentGenerator\\Group::sortTeams<\/a>"],[100,1,"<a href=\"Group.php.html#108\">TournamentGenerator\\Group::setMaxSize<\/a>"],[100,1,"<a href=\"Group.php.html#112\">TournamentGenerator\\Group::getMaxSize<\/a>"],[100,1,"<a href=\"Group.php.html#116\">TournamentGenerator\\Group::setType<\/a>"],[100,1,"<a href=\"Group.php.html#120\">TournamentGenerator\\Group::getType<\/a>"],[100,1,"<a href=\"Group.php.html#124\">TournamentGenerator\\Group::setOrder<\/a>"],[100,1,"<a href=\"Group.php.html#128\">TournamentGenerator\\Group::getOrder<\/a>"],[100,2,"<a href=\"Group.php.html#132\">TournamentGenerator\\Group::setOrdering<\/a>"],[100,1,"<a href=\"Group.php.html#137\">TournamentGenerator\\Group::getOrdering<\/a>"],[100,1,"<a href=\"Group.php.html#141\">TournamentGenerator\\Group::setInGame<\/a>"],[100,1,"<a href=\"Group.php.html#145\">TournamentGenerator\\Group::getInGame<\/a>"],[100,1,"<a href=\"Group.php.html#149\">TournamentGenerator\\Group::addProgression<\/a>"],[100,1,"<a href=\"Group.php.html#153\">TournamentGenerator\\Group::progression<\/a>"],[100,2,"<a href=\"Group.php.html#158\">TournamentGenerator\\Group::progress<\/a>"],[100,4,"<a href=\"Group.php.html#163\">TournamentGenerator\\Group::addProgressed<\/a>"],[100,1,"<a href=\"Group.php.html#174\">TournamentGenerator\\Group::isProgressed<\/a>"],[100,1,"<a href=\"Group.php.html#178\">TournamentGenerator\\Group::genGames<\/a>"],[100,1,"<a href=\"Group.php.html#183\">TournamentGenerator\\Group::game<\/a>"],[100,2,"<a href=\"Group.php.html#188\">TournamentGenerator\\Group::addGame<\/a>"],[100,1,"<a href=\"Group.php.html#196\">TournamentGenerator\\Group::getGames<\/a>"],[100,2,"<a href=\"Group.php.html#199\">TournamentGenerator\\Group::orderGames<\/a>"],[100,1,"<a href=\"Group.php.html#205\">TournamentGenerator\\Group::simulate<\/a>"],[100,2,"<a href=\"Group.php.html#208\">TournamentGenerator\\Group::resetGames<\/a>"],[100,4,"<a href=\"Group.php.html#214\">TournamentGenerator\\Group::isPlayed<\/a>"],[0,4,"<a href=\"Preset\/DoubleElimination.php.html#11\">TournamentGenerator\\Preset\\DoubleElimination::generate<\/a>"],[0,2,"<a href=\"Preset\/DoubleElimination.php.html#75\">TournamentGenerator\\Preset\\DoubleElimination::calcByes<\/a>"],[0,2,"<a href=\"Preset\/DoubleElimination.php.html#84\">TournamentGenerator\\Preset\\DoubleElimination::generateWinSide<\/a>"],[0,11,"<a href=\"Preset\/DoubleElimination.php.html#97\">TournamentGenerator\\Preset\\DoubleElimination::generateLosingSide<\/a>"],[0,3,"<a href=\"Preset\/R2G.php.html#11\">TournamentGenerator\\Preset\\R2G::generate<\/a>"],[0,5,"<a href=\"Preset\/SingleElimination.php.html#11\">TournamentGenerator\\Preset\\SingleElimination::generate<\/a>"],[100,1,"<a href=\"Progression.php.html#17\">TournamentGenerator\\Progression::__construct<\/a>"],[100,1,"<a href=\"Progression.php.html#24\">TournamentGenerator\\Progression::__toString<\/a>"],[0,2,"<a href=\"Progression.php.html#28\">TournamentGenerator\\Progression::addFilter<\/a>"],[92.3076923076923,10,"<a href=\"Progression.php.html#35\">TournamentGenerator\\Progression::progress<\/a>"],[100,2,"<a href=\"Round.php.html#18\">TournamentGenerator\\Round::__construct<\/a>"],[100,1,"<a href=\"Round.php.html#22\">TournamentGenerator\\Round::__toString<\/a>"],[100,1,"<a href=\"Round.php.html#26\">TournamentGenerator\\Round::setName<\/a>"],[100,1,"<a href=\"Round.php.html#29\">TournamentGenerator\\Round::getName<\/a>"],[100,3,"<a href=\"Round.php.html#32\">TournamentGenerator\\Round::setId<\/a>"],[100,1,"<a href=\"Round.php.html#39\">TournamentGenerator\\Round::getId<\/a>"],[100,2,"<a href=\"Round.php.html#43\">TournamentGenerator\\Round::addGroup<\/a>"],[100,1,"<a href=\"Round.php.html#49\">TournamentGenerator\\Round::group<\/a>"],[100,1,"<a href=\"Round.php.html#54\">TournamentGenerator\\Round::getGroups<\/a>"],[100,1,"<a href=\"Round.php.html#58\">TournamentGenerator\\Round::getGroupsIds<\/a>"],[100,1,"<a href=\"Round.php.html#62\">TournamentGenerator\\Round::orderGroups<\/a>"],[100,1,"<a href=\"Round.php.html#69\">TournamentGenerator\\Round::allowSkip<\/a>"],[100,1,"<a href=\"Round.php.html#73\">TournamentGenerator\\Round::disallowSkip<\/a>"],[100,1,"<a href=\"Round.php.html#77\">TournamentGenerator\\Round::setSkip<\/a>"],[100,1,"<a href=\"Round.php.html#81\">TournamentGenerator\\Round::getSkip<\/a>"],[100,2,"<a href=\"Round.php.html#85\">TournamentGenerator\\Round::genGames<\/a>"],[100,1,"<a href=\"Round.php.html#92\">TournamentGenerator\\Round::getGames<\/a>"],[100,4,"<a href=\"Round.php.html#95\">TournamentGenerator\\Round::isPlayed<\/a>"],[100,2,"<a href=\"Round.php.html#103\">TournamentGenerator\\Round::addTeam<\/a>"],[100,1,"<a href=\"Round.php.html#109\">TournamentGenerator\\Round::team<\/a>"],[100,4,"<a href=\"Round.php.html#114\">TournamentGenerator\\Round::getTeams<\/a>"],[100,1,"<a href=\"Round.php.html#127\">TournamentGenerator\\Round::sortTeams<\/a>"],[100,5,"<a href=\"Round.php.html#132\">TournamentGenerator\\Round::splitTeams<\/a>"],[100,2,"<a href=\"Round.php.html#147\">TournamentGenerator\\Round::progress<\/a>"],[100,1,"<a href=\"Round.php.html#154\">TournamentGenerator\\Round::simulate<\/a>"],[100,2,"<a href=\"Round.php.html#158\">TournamentGenerator\\Round::resetGames<\/a>"],[100,2,"<a href=\"Team.php.html#35\">TournamentGenerator\\Team::__construct<\/a>"],[100,1,"<a href=\"Team.php.html#39\">TournamentGenerator\\Team::__toString<\/a>"],[100,1,"<a href=\"Team.php.html#42\">TournamentGenerator\\Team::getGamesInfo<\/a>"],[100,1,"<a href=\"Team.php.html#46\">TournamentGenerator\\Team::setName<\/a>"],[100,1,"<a href=\"Team.php.html#49\">TournamentGenerator\\Team::getName<\/a>"],[60,3,"<a href=\"Team.php.html#52\">TournamentGenerator\\Team::setId<\/a>"],[100,1,"<a href=\"Team.php.html#59\">TournamentGenerator\\Team::getId<\/a>"],[100,1,"<a href=\"Team.php.html#63\">TournamentGenerator\\Team::addGroupResults<\/a>"],[50,3,"<a href=\"Team.php.html#76\">TournamentGenerator\\Team::getGroupResults<\/a>"],[100,2,"<a href=\"Team.php.html#84\">TournamentGenerator\\Team::addGameWith<\/a>"],[0,2,"<a href=\"Team.php.html#89\">TournamentGenerator\\Team::addGroup<\/a>"],[100,2,"<a href=\"Team.php.html#93\">TournamentGenerator\\Team::addGame<\/a>"],[0,1,"<a href=\"Team.php.html#100\">TournamentGenerator\\Team::getSumPoints<\/a>"],[0,1,"<a href=\"Team.php.html#103\">TournamentGenerator\\Team::getSumScore<\/a>"],[100,2,"<a href=\"Team.php.html#107\">TournamentGenerator\\Team::addWin<\/a>"],[100,2,"<a href=\"Team.php.html#114\">TournamentGenerator\\Team::removeWin<\/a>"],[0,2,"<a href=\"Team.php.html#121\">TournamentGenerator\\Team::addDraw<\/a>"],[0,2,"<a href=\"Team.php.html#128\">TournamentGenerator\\Team::removeDraw<\/a>"],[100,2,"<a href=\"Team.php.html#135\">TournamentGenerator\\Team::addLoss<\/a>"],[100,2,"<a href=\"Team.php.html#142\">TournamentGenerator\\Team::removeLoss<\/a>"],[0,2,"<a href=\"Team.php.html#149\">TournamentGenerator\\Team::addSecond<\/a>"],[0,2,"<a href=\"Team.php.html#156\">TournamentGenerator\\Team::removeSecond<\/a>"],[0,2,"<a href=\"Team.php.html#163\">TournamentGenerator\\Team::addThird<\/a>"],[0,2,"<a href=\"Team.php.html#170\">TournamentGenerator\\Team::removeThird<\/a>"],[100,3,"<a href=\"Team.php.html#178\">TournamentGenerator\\Team::sumPoints<\/a>"],[100,3,"<a href=\"Team.php.html#186\">TournamentGenerator\\Team::sumScore<\/a>"],[100,7,"<a href=\"TeamFilter.php.html#46\">TournamentGenerator\\TeamFilter::__construct<\/a>"],[0,3,"<a href=\"TeamFilter.php.html#52\">TournamentGenerator\\TeamFilter::__toString<\/a>"],[100,7,"<a href=\"TeamFilter.php.html#56\">TournamentGenerator\\TeamFilter::validate<\/a>"],[0,1,"<a href=\"TeamFilter.php.html#66\">TournamentGenerator\\TeamFilter::validateTeam<\/a>"],[0,2,"<a href=\"TeamFilter.php.html#69\">TournamentGenerator\\TeamFilter::validateProgressed<\/a>"],[75,14,"<a href=\"TeamFilter.php.html#73\">TournamentGenerator\\TeamFilter::validateCalc<\/a>"],[100,3,"<a href=\"TeamFilter.php.html#95\">TournamentGenerator\\TeamFilter::calcSum<\/a>"],[0,5,"<a href=\"TeamFilter.php.html#102\">TournamentGenerator\\TeamFilter::calcMax<\/a>"],[0,5,"<a href=\"TeamFilter.php.html#109\">TournamentGenerator\\TeamFilter::calcMin<\/a>"],[100,1,"<a href=\"Tournament.php.html#23\">TournamentGenerator\\Tournament::__construct<\/a>"],[100,1,"<a href=\"Tournament.php.html#26\">TournamentGenerator\\Tournament::__toString<\/a>"],[100,1,"<a href=\"Tournament.php.html#30\">TournamentGenerator\\Tournament::setName<\/a>"],[100,1,"<a href=\"Tournament.php.html#34\">TournamentGenerator\\Tournament::getName<\/a>"],[100,1,"<a href=\"Tournament.php.html#38\">TournamentGenerator\\Tournament::setPlay<\/a>"],[100,1,"<a href=\"Tournament.php.html#42\">TournamentGenerator\\Tournament::getPlay<\/a>"],[100,1,"<a href=\"Tournament.php.html#45\">TournamentGenerator\\Tournament::setGameWait<\/a>"],[100,1,"<a href=\"Tournament.php.html#49\">TournamentGenerator\\Tournament::getGameWait<\/a>"],[100,1,"<a href=\"Tournament.php.html#52\">TournamentGenerator\\Tournament::setRoundWait<\/a>"],[100,1,"<a href=\"Tournament.php.html#56\">TournamentGenerator\\Tournament::getRoundWait<\/a>"],[100,1,"<a href=\"Tournament.php.html#59\">TournamentGenerator\\Tournament::setCategoryWait<\/a>"],[100,1,"<a href=\"Tournament.php.html#63\">TournamentGenerator\\Tournament::getCategoryWait<\/a>"],[100,1,"<a href=\"Tournament.php.html#66\">TournamentGenerator\\Tournament::getTournamentTime<\/a>"],[100,1,"<a href=\"Tournament.php.html#71\">TournamentGenerator\\Tournament::allowSkip<\/a>"],[100,1,"<a href=\"Tournament.php.html#75\">TournamentGenerator\\Tournament::disallowSkip<\/a>"],[100,1,"<a href=\"Tournament.php.html#79\">TournamentGenerator\\Tournament::setSkip<\/a>"],[100,1,"<a href=\"Tournament.php.html#83\">TournamentGenerator\\Tournament::getSkip<\/a>"],[100,2,"<a href=\"Tournament.php.html#87\">TournamentGenerator\\Tournament::addCategory<\/a>"],[100,1,"<a href=\"Tournament.php.html#93\">TournamentGenerator\\Tournament::category<\/a>"],[100,1,"<a href=\"Tournament.php.html#98\">TournamentGenerator\\Tournament::getCategories<\/a>"],[100,2,"<a href=\"Tournament.php.html#102\">TournamentGenerator\\Tournament::addRound<\/a>"],[100,1,"<a href=\"Tournament.php.html#108\">TournamentGenerator\\Tournament::round<\/a>"],[100,3,"<a href=\"Tournament.php.html#113\">TournamentGenerator\\Tournament::getRounds<\/a>"],[100,2,"<a href=\"Tournament.php.html#124\">TournamentGenerator\\Tournament::addTeam<\/a>"],[100,1,"<a href=\"Tournament.php.html#130\">TournamentGenerator\\Tournament::team<\/a>"],[100,4,"<a href=\"Tournament.php.html#135\">TournamentGenerator\\Tournament::getTeams<\/a>"],[100,2,"<a href=\"Tournament.php.html#147\">TournamentGenerator\\Tournament::sortTeams<\/a>"],[100,2,"<a href=\"Tournament.php.html#157\">TournamentGenerator\\Tournament::getGames<\/a>"],[100,6,"<a href=\"Tournament.php.html#165\">TournamentGenerator\\Tournament::splitTeams<\/a>"],[100,2,"<a href=\"Tournament.php.html#183\">TournamentGenerator\\Tournament::genGamesSimulate<\/a>"],[100,2,"<a href=\"Tournament.php.html#189\">TournamentGenerator\\Tournament::genGamesSimulateReal<\/a>"],[100,1,"<a href=\"Utilis\/Generator.php.html#17\">TournamentGenerator\\Utilis\\Generator::__construct<\/a>"],[100,1,"<a href=\"Utilis\/Generator.php.html#21\">TournamentGenerator\\Utilis\\Generator::allowSkip<\/a>"],[100,1,"<a href=\"Utilis\/Generator.php.html#25\">TournamentGenerator\\Utilis\\Generator::disallowSkip<\/a>"],[100,1,"<a href=\"Utilis\/Generator.php.html#29\">TournamentGenerator\\Utilis\\Generator::setSkip<\/a>"],[100,1,"<a href=\"Utilis\/Generator.php.html#33\">TournamentGenerator\\Utilis\\Generator::getSkip<\/a>"],[100,2,"<a href=\"Utilis\/Generator.php.html#38\">TournamentGenerator\\Utilis\\Generator::setType<\/a>"],[100,1,"<a href=\"Utilis\/Generator.php.html#43\">TournamentGenerator\\Utilis\\Generator::getType<\/a>"],[100,3,"<a href=\"Utilis\/Generator.php.html#47\">TournamentGenerator\\Utilis\\Generator::setInGame<\/a>"],[100,1,"<a href=\"Utilis\/Generator.php.html#52\">TournamentGenerator\\Utilis\\Generator::getInGame<\/a>"],[100,2,"<a href=\"Utilis\/Generator.php.html#56\">TournamentGenerator\\Utilis\\Generator::setMaxSize<\/a>"],[100,1,"<a href=\"Utilis\/Generator.php.html#61\">TournamentGenerator\\Utilis\\Generator::getMaxSize<\/a>"],[100,4,"<a href=\"Utilis\/Generator.php.html#65\">TournamentGenerator\\Utilis\\Generator::genGames<\/a>"],[53.84615384615385,5,"<a href=\"Utilis\/Generator.php.html#79\">TournamentGenerator\\Utilis\\Generator::r_rGames<\/a>"],[0,4,"<a href=\"Utilis\/Generator.php.html#95\">TournamentGenerator\\Utilis\\Generator::r_r3Games<\/a>"],[0,2,"<a href=\"Utilis\/Generator.php.html#108\">TournamentGenerator\\Utilis\\Generator::r_r4Games<\/a>"],[100,8,"<a href=\"Utilis\/Generator.php.html#118\">TournamentGenerator\\Utilis\\Generator::two_twoGames<\/a>"],[86.66666666666667,8,"<a href=\"Utilis\/Generator.php.html#135\">TournamentGenerator\\Utilis\\Generator::cond_splitGames<\/a>"],[100,1,"<a href=\"Utilis\/Generator.php.html#158\">TournamentGenerator\\Utilis\\Generator::orderGames<\/a>"],[100,3,"<a href=\"Utilis\/Generator.php.html#165\">TournamentGenerator\\Utilis\\Generator::circle_genGames2<\/a>"],[100,4,"<a href=\"Utilis\/Generator.php.html#182\">TournamentGenerator\\Utilis\\Generator::circle_saveBracket<\/a>"],[100,1,"<a href=\"Utilis\/Generator.php.html#202\">TournamentGenerator\\Utilis\\Generator::circle_rotateBracket<\/a>"],[72.72727272727273,5,"<a href=\"Utilis\/Simulator.php.html#11\">TournamentGenerator\\Utilis\\Simulator::simulateGroup<\/a>"],[100,3,"<a href=\"Utilis\/Simulator.php.html#28\">TournamentGenerator\\Utilis\\Simulator::simulateRound<\/a>"],[90,6,"<a href=\"Utilis\/Simulator.php.html#36\">TournamentGenerator\\Utilis\\Simulator::simulateTournament<\/a>"],[88.88888888888889,5,"<a href=\"Utilis\/Simulator.php.html#56\">TournamentGenerator\\Utilis\\Simulator::simulateTournamentReal<\/a>"],[100,1,"<a href=\"Utilis\/Sorter\/Games.php.html#27\">TournamentGenerator\\Utilis\\Sorter\\Games::__construct<\/a>"],[71.42857142857143,9,"<a href=\"Utilis\/Sorter\/Games.php.html#35\">TournamentGenerator\\Utilis\\Sorter\\Games::orderGames<\/a>"],[100,3,"<a href=\"Utilis\/Sorter\/Games.php.html#79\">TournamentGenerator\\Utilis\\Sorter\\Games::cycle1<\/a>"],[100,3,"<a href=\"Utilis\/Sorter\/Games.php.html#92\">TournamentGenerator\\Utilis\\Sorter\\Games::cycle2<\/a>"],[0,3,"<a href=\"Utilis\/Sorter\/Games.php.html#106\">TournamentGenerator\\Utilis\\Sorter\\Games::cycle3<\/a>"],[0,3,"<a href=\"Utilis\/Sorter\/Games.php.html#119\">TournamentGenerator\\Utilis\\Sorter\\Games::cycle4<\/a>"],[0,3,"<a href=\"Utilis\/Sorter\/Games.php.html#132\">TournamentGenerator\\Utilis\\Sorter\\Games::cycle5<\/a>"],[100,8,"<a href=\"Utilis\/Sorter\/Games.php.html#145\">TournamentGenerator\\Utilis\\Sorter\\Games::moveCalculatedGames<\/a>"],[100,5,"<a href=\"Utilis\/Sorter\/Games.php.html#172\">TournamentGenerator\\Utilis\\Sorter\\Games::orderCheckTeamsVal<\/a>"],[100,4,"<a href=\"Utilis\/Sorter\/Teams.php.html#34\">TournamentGenerator\\Utilis\\Sorter\\Teams::sortGroup<\/a>"],[100,4,"<a href=\"Utilis\/Sorter\/Teams.php.html#60\">TournamentGenerator\\Utilis\\Sorter\\Teams::sortRound<\/a>"],[100,6,"<a href=\"Utilis\/Sorter\/Teams.php.html#80\">TournamentGenerator\\Utilis\\Sorter\\Teams::sortTeamsByPoints<\/a>"],[100,3,"<a href=\"Utilis\/Sorter\/Teams.php.html#89\">TournamentGenerator\\Utilis\\Sorter\\Teams::sortTeamsByScore<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

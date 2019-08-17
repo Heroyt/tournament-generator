@@ -161,13 +161,11 @@ class Group
 		}
 	}
 	public function addProgressed(...$teams) {
-		foreach ($teams as $team) {
-			if ($team instanceOf Team) $this->progressed[] = $team;
-			elseif (gettype($team) === 'array') {
-				$this->progressed = array_merge($this->progressed, array_filter($team, function($a) {
-					return ($a instanceof Team);
-				}));
-			}
+		$this->progressed = array_merge($this->progressed, array_filter($teams, function($a){return $a instanceof Team;}));
+		foreach (array_filter($teams, function($a){return is_array($a);}) as $team) {
+			$this->progressed = array_merge($this->progressed, array_filter($team, function($a) {
+				return ($a instanceof Team);
+			}));
 		}
 		return $this;
 	}
@@ -186,14 +184,10 @@ class Group
 		return $g;
 	}
 	public function addGame(...$games){
-		foreach ($games as $key => $game) {
-			if (gettype($game) === 'array') {
-				unset($games[$key]);
-				$this->games = array_merge($this->games, array_filter($game, function($a){ return ($a instanceof Game); }));
-				continue;
-			}
-			if (!$game instanceof Game) throw new \Exception('Trying to add game which is not instance of Game object.');
-			$this->games[] = $game;
+		$this->games = array_merge($this->games, array_filter($games, function($a){ return ($a instanceof Game); }));
+
+		foreach (array_filter($games, function($a){return is_array($a);}) as $key => $game) {
+			$this->games = array_merge($this->games, array_filter($game, function($a){ return ($a instanceof Game); }));
 		}
 		return $this;
 	}

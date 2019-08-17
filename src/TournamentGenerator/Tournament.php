@@ -86,8 +86,7 @@ class Tournament
 
 	public function addCategory(Category ...$categories){
 		foreach ($categories as $category) {
-			if ($category instanceof Category) $this->categories[] = $category;
-			else throw new \Exception('Trying to add category which is not an instance of the Category class.');
+			$this->categories[] = $category;
 		}
 		return $this;
 	}
@@ -102,8 +101,7 @@ class Tournament
 
 	public function addRound(Round ...$rounds) {
 		foreach ($rounds as $round) {
-			if ($round instanceof Round) $this->rounds[] = $round;
-			else throw new \Exception('Trying to add round which is not an instance of the Round class.');
+			$this->rounds[] = $round;
 		}
 		return $this;
 	}
@@ -167,14 +165,6 @@ class Tournament
 	public function splitTeams(Round ...$wheres) {
 
 		if (count($wheres) === 0) $wheres = $this->getRounds();
-
-		foreach ($wheres as $key => $value) {
-			if (gettype($value) === 'array') {
-				unset($wheres[$key]);
-				$wheres = array_merge($wheres, $value);
-				continue;
-			}
-		}
 
 		$teams = $this->getTeams();
 		shuffle($teams);
