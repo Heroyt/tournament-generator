@@ -52,7 +52,7 @@ class Team
 	public function setId($id) {
 		if (!is_string($id) && !is_int($id)) {
 			$this->id = uniqid();
-			throw new Exception('Unsupported id type ('.gettype($id).') - expected type of string or int');
+			throw new \Exception('Unsupported id type ('.gettype($id).') - expected type of string or int');
 		}
 		$this->id = $id;
 	}
@@ -174,11 +174,12 @@ class Team
 		$this->groupResults[$groupId]['third']--;
 		return $this;
 	}
+
 	public function sumPoints(array $groupIds = []) {
 		if (count($groupIds) === 0) return $this->sumPoints;
 		$sum = 0;
 		foreach ($groupIds as $gid) {
-			if (isset($this->groupResults[$gid])) $sum += $this->groupResults[$gid]['points'];
+			$sum += $this->groupResults[$gid]['points'] ?? 0;
 		}
 		return $sum;
 	}
@@ -186,7 +187,7 @@ class Team
 		if (count($groupIds) === 0) return $this->sumScore;
 		$sum = 0;
 		foreach ($groupIds as $gid) {
-			if (isset($this->groupResults[$gid])) $sum += $this->groupResults[$gid]['score'];
+			$sum += $this->groupResults[$gid]['score'] ?? 0;
 		}
 		return $sum;
 	}

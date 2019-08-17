@@ -122,7 +122,6 @@ class GroupTest extends TestCase
 
 	}
 
-
 	/** @test */
 	public function check_team_creation_group() {
 

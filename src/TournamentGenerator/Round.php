@@ -125,10 +125,7 @@ class Round
 		return $this->teams;
 	}
 	public function sortTeams($ordering = \TournamentGenerator\Constants::POINTS) {
-		$teams = Utilis\Sorter\Teams::sortRound($this->teams, $this, $ordering);
-		$teams = array_map(function($team) {
-			return $team->getName();
-		}, $teams);
+		Utilis\Sorter\Teams::sortRound($this->teams, $this, $ordering);
 		return $this->teams;
 	}
 

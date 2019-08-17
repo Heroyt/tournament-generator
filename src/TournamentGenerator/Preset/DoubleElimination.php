@@ -34,7 +34,7 @@ class DoubleElimination extends \TournamentGenerator\Tournament
 		for ($i=1; $i <= $startGroups; $i++) {
 			$g = $startRound->group('Start group - '.$i)->setInGame(2)->setType(\TournamentGenerator\Constants::ROUND_TWO);
 			$allGroups[] = $g;
-			$groupIds[] = $g->id;
+			$groupIds[] = $g->getId();
 			$previousGroups[] = $g;
 		}
 

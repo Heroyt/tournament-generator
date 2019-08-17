@@ -86,9 +86,6 @@ class Group
 	public function getTeams(array $filters = []) {
 		$teams = $this->teams;
 
-		if (gettype($filters) !== 'array' && $filters instanceof TeamFilter) $filters = [$filters];
-		elseif (gettype($filters) !== 'array') $filters = [];
-
 		// APPLY FILTERS
 		$filter = new Filter($this, $filters);
 		$filter->filter($teams);
