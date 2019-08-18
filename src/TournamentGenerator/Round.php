@@ -5,11 +5,9 @@ namespace TournamentGenerator;
 /**
  *
  */
-class Round
+class Round extends Base
 {
 
-	private $name = '';
-	private $id = '';
 	private $groups = [];
 	private $games = [];
 	private $teams = [];
@@ -18,26 +16,6 @@ class Round
 	function __construct(string $name = '', $id = null) {
 		$this->setName($name);
 		$this->setId(isset($id) ? $id : uniqid());
-	}
-	public function __toString() {
-		return $this->name;
-	}
-
-	public function setName(string $name) {
-		$this->name = $name;
-	}
-	public function getName() {
-		return $this->name;
-	}
-	public function setId($id) {
-		if (!is_string($id) && !is_int($id)) {
-			$this->id = uniqid();
-			throw new \Exception('Unsupported id type ('.gettype($id).') - expected type of string or int');
-		}
-		$this->id = $id;
-	}
-	public function getId() {
-		return $this->id;
 	}
 
 	public function addGroup(Group ...$groups){

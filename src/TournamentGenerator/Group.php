@@ -5,17 +5,15 @@ namespace TournamentGenerator;
 /**
  *
  */
-class Group
+class Group extends Base
 {
 
 	private $generator = null;
 	private $teams = []; // ARRAY OF TEAMS
 	private $progressed = []; // ARRAY OF TEAMS ALREADY PROGRESSED FROM THIS GROUP
-	private $name = ''; // DISPLAYABLE NAME
 	private $ordering = \TournamentGenerator\Constants::POINTS; // WHAT TO DECIDE ON WHEN ORDERING TEAMS
 	private $progressions = []; // ARRAY OF PROGRESSION CONDITION OBJECTS
 	private $games = []; // ARRAY OF GAME OBJECTS
-	private $id = ''; // UNIQID OF GROUP FOR IDENTIFICATIONT
 	public $winPoints = 3; // POINTS AQUIRED FROM WINNING
 	public $drawPoints = 1; // POINTS AQUIRED FROM DRAW
 	public $lostPoints = 0; // POINTS AQUIRED FROM LOOSING
@@ -28,26 +26,6 @@ class Group
 		$this->setName($name);
 		$this->generator = new Utilis\Generator($this);
 		$this->setId(isset($id) ? $id : uniqid());
-	}
-	public function __toString() {
-		return $this->name;
-	}
-
-	public function setName(string $name) {
-		$this->name = $name;
-	}
-	public function getName() {
-		return $this->name;
-	}
-	public function setId($id) {
-		if (!is_string($id) && !is_int($id)) {
-			$this->id = uniqid();
-			throw new \Exception('Unsupported id type ('.gettype($id).') - expected type of string or int');
-		}
-		$this->id = $id;
-	}
-	public function getId() {
-		return $this->id;
 	}
 
 	public function allowSkip(){
@@ -161,16 +139,16 @@ class Group
 		}
 	}
 	public function addProgressed(...$teams) {
-		$this->progressed = array_merge($this->progressed, array_filter($teams, function($a){return $a instanceof Team;}));
+		$this->progressed = array_merge($this->progressed, array_map(function ($a) {return $a->getId();}, array_filter($teams, function($a){return $a instanceof Team;})));
 		foreach (array_filter($teams, function($a){return is_array($a);}) as $team) {
-			$this->progressed = array_merge($this->progressed, array_filter($team, function($a) {
+			$this->progressed = array_merge($this->progressed, array_map(function ($a) {return $a->getId();}, array_filter($team, function($a) {
 				return ($a instanceof Team);
-			}));
+			})));
 		}
 		return $this;
 	}
 	public function isProgressed(Team $team) {
-		return in_array($team, $this->progressed);
+		return in_array($team->getId(), $this->progressed);
 	}
 
 	public function genGames() {

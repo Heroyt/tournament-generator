@@ -48,7 +48,7 @@ class TeamFilter
 		$this->what = strtolower($what);
 		if (!in_array($how, ['>', '<', '>=', '<=', '=', '!='])) throw new \Exception('Trying to filter with unexisting operator ('.$how.')');
 		$this->how = $how;
-		if (!(gettype($val) === 'integer' && strtolower($what) !== 'team') && !($val instanceof Team && strtolower($what) === 'team')) throw new \Exception('Unsupported filter value type ('.typeof($val).')');
+		if (!(gettype($val) === 'integer' && strtolower($what) !== 'team') && !($val instanceof Team && strtolower($what) === 'team')) throw new \Exception('Unsupported filter value type ('.gettype($val).')');
 		$this->val = $val;
 		$this->groups = array_map(function($a) { return $a->getId(); }, array_filter($groups, function($a) {return ($a instanceof Group);}));
 	}
@@ -75,69 +75,9 @@ class TeamFilter
 	}
 	private function validateCalc(Team $team, array $groupsId, string $operation = 'sum') {
 		if (gettype($groupsId) === 'array' && !in_array(strtolower($operation), ['sum', 'avg', 'max', 'min'])) throw new \Exception('Unknown operation of '.$operation.'. Only "sum", "avg", "min", "max" possible.');
-		$comp = 0;
-		$return = false;
-		switch (strtolower($operation)) {
-			case 'sum': $comp = $this->calcSum($team, $groupsId); break;
-			case 'avg': $comp = $this->calcAvg($team, $groupsId); break;
-			case 'max': $comp = $this->calcMax($team, $groupsId); break;
-			case 'min': $comp = $this->calcMin($team, $groupsId); break;
-		}
 
-		switch ($this->how) {
-			case '>': $return = ($comp > $this->val); break;
-			case '<': $return = ($comp < $this->val); break;
-			case '<=': $return = ($comp <= $this->val); break;
-			case '>=': $return = ($comp >= $this->val); break;
-			case '=': $return = ($comp == $this->val); break;
-			case '!=': $return = ($comp != $this->val); break;
-		}
+		return Utilis\FilterComparator::compare($operation, $this->val, $this->how, $this->what, $team, $groupsId);
 
-		return $return;
 	}
 
-	private function calcAvg(Team $team, array $groupsId) {
-		$games = 0;
-		foreach ($groupsId as $id) {
-			$games += count($team->getGames(null, $id));
-		}
-		return $this->calcSum($team, $groupsId)/$games;
-	}
-	private function calcSum(Team $team, array $groupsId) {
-		$sum = 0;
-		foreach ($groupsId as $id) {
-			if (isset($team->groupResults[$id])) $sum += $team->groupResults[$id][$this->what];
-		}
-		return $sum;
-	}
-	private function calcMax(Team $team, array $groupsId) {
-		$max = null;
-		if (count($groupsId) === 1 && in_array($this->what, ['score', 'points'])) {
-			$games = $team->getGames(null, reset($groupsId));
-			foreach ($games as $game) {
-				$results = $game->getResults()[$team->getId()];
-				if (($results[$this->what] > $max || $max === null)) $max = $results[$this->what];
-			}
-			return $max;
-		}
-		foreach ($groupsId as $id) {
-			if (isset($team->groupResults[$id]) && ($team->groupResults[$id][$this->what] > $max || $max === null)) $max = $team->groupResults[$id][$this->what];
-		}
-		return $max;
-	}
-	private function calcMin(Team $team, array $groupsId) {
-		$min = null;
-		if (count($groupsId) === 1 && in_array($this->what, ['score', 'points'])) {
-			$games = $team->getGames(null, reset($groupsId));
-			foreach ($games as $game) {
-				$results = $game->getResults()[$team->getId()];
-				if (($results[$this->what] < $min || $min === null)) $min = $results[$this->what];
-			}
-			return $min;
-		}
-		foreach ($groupsId as $id) {
-			if (isset($team->groupResults[$id]) && ($team->groupResults[$id][$this->what] < $min || $min === null)) $min = $team->groupResults[$id][$this->what];
-		}
-		return $min;
-	}
 }
