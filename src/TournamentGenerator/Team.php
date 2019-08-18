@@ -113,6 +113,11 @@ class Team
 		$this->games[$group->getId()][] = $game;
 		return $this;
 	}
+	public function getGames(Group $group = null, $groupId = null) {
+		if (isset($group) && isset($this->games[$group->getId()])) return $this->games[$group->getId()];
+		if (isset($groupId) && isset($this->games[$groupId])) return $this->games[$groupId];
+		return $this->games;
+	}
 
 	public function getSumPoints() {
 		return $this->sumPoints;

@@ -27,10 +27,10 @@ class Filter
 				continue;
 			}
 			elseif ($filter instanceof TeamFilter) {
-				$teams = array_filter($teams, function($team) use ($filter) {return $filter->validate($team, $this->group->getId(), 'sum', $this->group); });
+				$teams = array_filter($teams, function($team) use ($filter) {return $filter->validate($team, [$this->group->getId()], 'sum', $this->group); });
 				continue;
 			}
-			throw new \Exception('Filer ['.$key.'] is not an instance of TeamFilter class');
+			throw new \Exception('Filter ['.$key.'] is not an instance of TeamFilter class');
 		}
 		return $teams;
 	}
@@ -53,17 +53,16 @@ class Filter
 
 	private function filterAnd(Team $team, array $filters) {
 		foreach ($filters as $key => $value) {
-			if (gettype($value) === 'array') {
+			if (is_array($value)) {
 				switch (strtolower($key)) {
 					case 'and':
-						if ($this->filterAnd($team, $value)) return false;
+						if (!$this->filterAnd($team, $value)) return false;
 						break;
 					case 'or':
-						if ($this->filterOr($team, $value)) return false;
+						if (!$this->filterOr($team, $value)) return false;
 						break;
 					default:
 						throw new \Exception('Unknown opperand type "'.$key.'". Expected "and" or "or".');
-						break;
 				}
 				continue;
 			}
@@ -71,13 +70,13 @@ class Filter
 				if (!$value->validate($team, $this->group->getId(), 'sum', $this->group)) return false;
 				continue;
 			}
-			throw new \Exception('Filer ['.$key.'] is not an instance of TeamFilter class');
+			throw new \Exception('Filter ['.$key.'] is not an instance of TeamFilter class');
 		}
 		return true;
 	}
 	private function filterOr(Team $team, array $filters) {
 		foreach ($filters as $key => $value) {
-			if (gettype($value) === 'array') {
+			if (is_array($value)) {
 				switch (strtolower($key)) {
 					case 'and':
 						if ($this->filterAnd($team, $value)) return true;
@@ -87,15 +86,14 @@ class Filter
 						break;
 					default:
 						throw new \Exception('Unknown opperand type "'.$key.'". Expected "and" or "or".');
-						break;
 				}
 				continue;
 			}
 			elseif ($value instanceof TeamFilter) {
-				if (!$value->validate($team, $this->group->getId(), 'sum', $this->group)) return true;
+				if ($value->validate($team, $this->group->getId(), 'sum', $this->group)) return true;
 				continue;
 			}
-			throw new \Exception('Filer ['.$key.'] is not an instance of TeamFilter class');
+			throw new \Exception('Filter ['.$key.'] is not an instance of TeamFilter class');
 		}
 		return false;
 	}

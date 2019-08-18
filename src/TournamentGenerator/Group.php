@@ -93,8 +93,8 @@ class Group
 		return $teams;
 	}
 
-	public function team(string $name = '') {
-		$t = new Team($name);
+	public function team(string $name = '', $id = null) {
+		$t = new Team($name, $id);
 		$this->teams[] = $t;
 		$t->addGroupResults($this);
 		return $t;
