@@ -72,11 +72,9 @@ class Game
 	public function getTeamsIds(){
 		return array_map(function($a){ return $a->getId(); }, $this->teams);
 	}
-	public function getTeam(string $id) {
-		foreach ($this->teams as $team) {
-			if ($team->getId() === $id) return $team;
-		}
-		return false;
+	public function getTeam($id) {
+		$key = array_search($id, array_map(function($a){ return $a->getId();}, $this->teams));
+		return ($key !== false ? $this->teams[$key] : false);
 	}
 
 	/**
@@ -90,16 +88,14 @@ class Game
 		$inGame = /** @scrutinizer ignore-call */ $this->group->getInGame();
 		$i = 1;
 		foreach ($results as $id => $score) {
+			if (!is_numeric($score)) throw new \TypeError('Score passed to TournamentGenerator\Game::setResults() must be of the type numeric, '.gettype($score).' given');
 			$team = $this->getTeam($id);
-			if ($team === false) throw new \Exception('Couldn\'t find team with id of "'.$id.'"');
+			if (!$team instanceof Team) throw new \Exception('Couldn\'t find team with id of "'.$id.'"');
 			$this->results[$team->getId()] = ['score' => $score];
-			$team->sumScore += $score;
-			$prev = prev($results);
-			next($results);
-			$next = next($results);
+			$team->addScore($score);
 			switch ($inGame) {
 				case 2:
-					$this->setResults2($i, $score, $prev, $next, $team);
+					$this->setResults2($i, $score, $results, $team);
 					break;
 				case 3:
 					$this->setResults3($i, $team);
@@ -113,8 +109,8 @@ class Game
 		}
 		return $this;
 	}
-	private function setResults2($i, $score, $prev, $next, $team) {
-		if ($score === $prev || $score === $next) {
+	private function setResults2($i, $score, $results, $team) {
+		if (count(array_filter($results, function($a) use ($score){return $a === $score;})) > 1) {
 			$this->drawIds[] = $team->getId();
 			$team->addDraw($this->group->getId());
 			$this->results[$team->getId()] += ['points' => $this->group->drawPoints, 'type' => 'draw'];
@@ -177,6 +173,7 @@ class Game
 		return $this;
 	}
 	public function getResults() {
+		ksort($this->results);
 		return $this->results;
 	}
 

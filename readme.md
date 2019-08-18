@@ -12,6 +12,7 @@ Tournament Generator
 <a href="https://packagist.org/packages/heroyt/tournament-generator"><img src="https://poser.pugx.org/heroyt/tournament-generator/downloads" alt="Total Downloads"></a>
 <a href="https://scrutinizer-ci.com/g/heroyt/tournament-generator/?branch=master"><img src="https://scrutinizer-ci.com/g/heroyt/tournament-generator/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality" data-canonical-src="https://scrutinizer-ci.com/g/heroyt/tournament-generator/badges/quality-score.png?b=master" style="max-width:100%;"></a>
 <a href="https://scrutinizer-ci.com/g/Heroyt/tournament-generator/build-status/master"><img src="https://scrutinizer-ci.com/g/Heroyt/tournament-generator/badges/build.png?b=master" alt="Scrutinizer Build" data-canonical-src="https://scrutinizer-ci.com/g/Heroyt/tournament-generator/badges/build.png?b=master" style="max-width:100%;"></a>
+<a href="(https://scrutinizer-ci.com/g/Heroyt/tournament-generator/?branch=master"><img src="https://scrutinizer-ci.com/g/Heroyt/tournament-generator/badges/coverage.png?b=master" alt="Code Coverage" data-canonical-src="https://scrutinizer-ci.com/g/heroyt/tournament-generator/badges/quality-score.png?b=master" style="max-width:100%;"></a>
 <a href='https://tournament-generator.readthedocs.io/en/latest/?badge=latest'>
     <img src='https://readthedocs.org/projects/tournament-generator/badge/?version=latest' alt='Documentation Status' />
 </a>
