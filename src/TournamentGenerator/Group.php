@@ -5,7 +5,7 @@ namespace TournamentGenerator;
 /**
  *
  */
-class Group extends Base
+class Group extends Base implements WithGeneratorSetters, WithSkipSetters, WithTeams
 {
 
 	private $generator = null;
@@ -61,26 +61,27 @@ class Group extends Base
 		$team->addGroupResults($this);
 		return $this;
 	}
-	public function getTeams(array $filters = []) {
+	public function getTeams(bool $ordered = false, $ordering = \TournamentGenerator\Constants::POINTS, array $filters = []) {
 		$teams = $this->teams;
 
+		if ($ordered) return $this->sortTeams($ordering, $filters);
+
 		// APPLY FILTERS
-		$filter = new Filter($this, $filters);
+		$filter = new Filter([$this], $filters);
 		$filter->filter($teams);
 
 		return $teams;
 	}
-
 	public function team(string $name = '', $id = null) {
 		$t = new Team($name, $id);
 		$this->teams[] = $t;
 		$t->addGroupResults($this);
 		return $t;
 	}
-	public function sortTeams(array $filters = [], $ordering = null) {
+	public function sortTeams($ordering = null, array $filters = []) {
 		if (!isset($ordering)) $ordering = $this->ordering;
 		Utilis\Sorter\Teams::sortGroup($this->teams, $this, $ordering);
-		return $this->getTeams($filters);
+		return $this->getTeams(false, $filters);
 	}
 
 	public function setMaxSize(int $size) {

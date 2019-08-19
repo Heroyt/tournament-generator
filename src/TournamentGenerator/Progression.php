@@ -33,8 +33,8 @@ class Progression
 	}
 
 	public function progress(bool $blank = false) {
-		if ($blank) $teams = $this->from->isPlayed() ? $this->from->sortTeams($this->filters) : $this->from->simulate($this->filters);
-		else $teams = $this->from->sortTeams($this->filters);
+		if ($blank) $teams = $this->from->isPlayed() ? $this->from->sortTeams(null, $this->filters) : $this->from->simulate($this->filters);
+		else $teams = $this->from->sortTeams(null, $this->filters);
 
 		if (count($this->filters) === 0 || $this->len !== null || $this->start !== 0) $next = array_splice($teams, $this->start, ($this->len === null ? count($teams) : $this->len));
 		else $next = $teams;

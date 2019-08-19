@@ -5,7 +5,7 @@ namespace TournamentGenerator\Utilis;
 /**
  *
  */
-class Generator
+class Generator implements \TournamentGenerator\WithGeneratorSetters, \TournamentGenerator\WithSkipSetters
 {
 
 	private $group = null;

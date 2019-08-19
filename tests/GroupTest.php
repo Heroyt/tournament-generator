@@ -108,15 +108,15 @@ class GroupTest extends TestCase
 		$filter = new \TournamentGenerator\TeamFilter('score', '>', 3000);
 		$filter2 = new \TournamentGenerator\TeamFilter('points', '!=', 3);
 
-		$filtered = array_map(function($a){return $a->getName();},$group->getTeams([$filter]));
+		$filtered = array_map(function($a){return $a->getName();},$group->getTeams(false, null, [$filter]));
 		$this->assertCount(2, $filtered);
 		$this->assertSame(['Team 1', 'Team 2'], $filtered);
 
-		$filtered = array_map(function($a){return $a->getName();},$group->getTeams([$filter2]));
+		$filtered = array_map(function($a){return $a->getName();},$group->getTeams(false, null, [$filter2]));
 		$this->assertCount(3, $filtered);
 		$this->assertSame([1 => 'Team 2', 2 => 'Team 3', 3 => 'Team 4'], $filtered);
 
-		$filtered = array_map(function($a){return $a->getName();},$group->getTeams([$filter, $filter2]));
+		$filtered = array_map(function($a){return $a->getName();},$group->getTeams(false, null, [$filter, $filter2]));
 		$this->assertCount(1, $filtered);
 		$this->assertSame([1 => 'Team 2'], $filtered);
 
@@ -196,7 +196,7 @@ class GroupTest extends TestCase
 
 		$teamsSorted = array_map(function($team) {
 			return $team->getName();
-		}, $group->sortTeams([], \TournamentGenerator\Constants::SCORE));
+		}, $group->sortTeams(\TournamentGenerator\Constants::SCORE, []));
 
 		$this->assertSame(['Team 2', 'Team 1', 'Team 4', 'Team 3'], $teamsSorted);
 

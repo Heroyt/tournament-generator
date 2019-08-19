@@ -5,7 +5,7 @@ namespace TournamentGenerator;
 /**
  *
  */
-class Round extends Base
+class Round extends Base implements WithSkipSetters, WithTeams
 {
 
 	private $groups = [];
@@ -89,22 +89,29 @@ class Round extends Base
 		$this->teams[] = $t;
 		return $t;
 	}
-	public function getTeams(bool $ordered = false, $ordering = \TournamentGenerator\Constants::POINTS) {
+	public function getTeams(bool $ordered = false, $ordering = \TournamentGenerator\Constants::POINTS, array $filters = []) {
+		$teams = $this->teams;
 		if (count($this->teams) == 0) {
-			$teams = [];
 			foreach ($this->groups as $group) {
 				$teams = array_merge($teams, $group->getTeams());
 			}
 			$this->teams = $teams;
 		}
-		if ($ordered) {
-			$this->sortTeams($ordering);
-		}
-		return $this->teams;
+		if ($ordered) $teams = $this->sortTeams($ordering);
+
+		// APPLY FILTERS
+		$filter = new Filter($this->getGroups(), $filters);
+		$filter->filter($teams);
+		return $teams;
 	}
-	public function sortTeams($ordering = \TournamentGenerator\Constants::POINTS) {
-		Utilis\Sorter\Teams::sortRound($this->teams, $this, $ordering);
-		return $this->teams;
+	public function sortTeams($ordering = \TournamentGenerator\Constants::POINTS, array $filters = []) {
+		$teams = Utilis\Sorter\Teams::sortRound($this->teams, $this, $ordering);
+
+		// APPLY FILTERS
+		$filter = new Filter($this->getGroups(), $filters);
+		$filter->filter($teams);
+
+		return $teams;
 	}
 
 	public function splitTeams(Group ...$groups) {

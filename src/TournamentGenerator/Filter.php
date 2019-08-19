@@ -8,12 +8,16 @@ namespace TournamentGenerator;
 class Filter
 {
 
-	private $group;
+	private $groups;
 	private $filters = [];
 
-	function __construct(Group $group, array $filters) {
-		$this->group = $group;
+	function __construct(array $groups, array $filters) {
+		$this->groups = array_filter($groups, function($a) {return $a instanceof Group;});
 		$this->filters = $filters;
+	}
+
+	private function getGroupsIds() {
+		return array_map(function($a){return $a->getId();}, $this->groups);
 	}
 
 	/**
@@ -27,7 +31,7 @@ class Filter
 				continue;
 			}
 			elseif ($filter instanceof TeamFilter) {
-				$teams = array_filter($teams, function($team) use ($filter) {return $filter->validate($team, [$this->group->getId()], 'sum', $this->group); });
+				$teams = array_filter($teams, function($team) use ($filter) {return $filter->validate($team, $this->getGroupsIds(), 'sum', $this->groups[0]); });
 				continue;
 			}
 			throw new \Exception('Filter ['.$key.'] is not an instance of TeamFilter class');
@@ -67,7 +71,7 @@ class Filter
 				continue;
 			}
 			elseif ($value instanceof TeamFilter) {
-				if (!$value->validate($team, $this->group->getId(), 'sum', $this->group)) return false;
+				if (!$value->validate($team, $this->getGroupsIds(), 'sum', $this->groups[0])) return false;
 				continue;
 			}
 			throw new \Exception('Filter ['.$key.'] is not an instance of TeamFilter class');
@@ -90,7 +94,7 @@ class Filter
 				continue;
 			}
 			elseif ($value instanceof TeamFilter) {
-				if ($value->validate($team, $this->group->getId(), 'sum', $this->group)) return true;
+				if ($value->validate($team, $this->getGroupsIds(), 'sum', $this->groups[0])) return true;
 				continue;
 			}
 			throw new \Exception('Filter ['.$key.'] is not an instance of TeamFilter class');

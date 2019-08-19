@@ -5,7 +5,7 @@ namespace TournamentGenerator;
 /**
  *
  */
-class Tournament
+class Tournament implements WithSkipSetters, WithTeams
 {
 
 	private $name = '';
@@ -121,6 +121,14 @@ class Tournament
 		return $this->rounds;
 	}
 
+	public function getGroups() {
+		$groups = [];
+		foreach ($this->getRounds() as $round) {
+			$groups = array_merge($groups, $round->getGroups());
+		}
+		return $groups;
+	}
+
 	public function addTeam(Team ...$teams) {
 		foreach ($teams as $team) {
 			$this->teams[] = $team;
@@ -132,7 +140,7 @@ class Tournament
 		$this->teams[] = $t;
 		return $t;
 	}
-	public function getTeams(bool $ordered = false, $ordering = \TournamentGenerator\Constants::POINTS) {
+	public function getTeams(bool $ordered = false, $ordering = \TournamentGenerator\Constants::POINTS, array $filters = []) {
 		$teams = $this->teams;
 		foreach ($this->categories as $category) {
 			$teams = array_merge($teams, $category->getTeams());
@@ -140,18 +148,29 @@ class Tournament
 		foreach ($this->rounds as $round) {
 			$teams = array_merge($teams, $round->getTeams());
 		}
-		$this->teams = \array_unique($teams);
-		if ($ordered) $this->sortTeams($ordering);
-		return $this->teams;
+		$teams = \array_unique($teams);
+		$this->teams = $teams;
+		if ($ordered) $teams = $this->sortTeams($ordering);
+
+		// APPLY FILTERS
+		$filter = new Filter($this->getGroups(), $filters);
+		$filter->filter($teams);
+
+		return $teams;
 	}
-	public function sortTeams($ordering = \TournamentGenerator\Constants::POINTS) {
+	public function sortTeams($ordering = \TournamentGenerator\Constants::POINTS, array $filters = []) {
 		$teams = [];
 		for ($i = count($this->rounds)-1; $i >= 0; $i--) {
 			$rTeams = array_filter($this->rounds[$i]->getTeams(true, $ordering), function($a) use ($teams) { return !in_array($a, $teams); });
 			$teams = array_merge($teams, $rTeams);
 		}
 		$this->teams = $teams;
-		return $this->teams;
+
+		// APPLY FILTERS
+		$filter = new Filter($this->getGroups(), $filters);
+		$filter->filter($teams);
+
+		return $teams;
 	}
 
 	public function getGames() {

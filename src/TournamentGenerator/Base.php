@@ -5,11 +5,11 @@ namespace TournamentGenerator;
 /**
  *
  */
-class Base
+abstract class Base
 {
 
-	private $name = '';
-	private $id = 'null';
+	protected $name = '';
+	protected $id = 'null';
 
 	public function __toString() {
 		return $this->name;

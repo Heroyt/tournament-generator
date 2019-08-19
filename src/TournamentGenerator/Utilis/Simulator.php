@@ -17,7 +17,7 @@ class Simulator
 			}
 			$game->setResults($results);
 		}
-		$return = $group->sortTeams($filters);
+		$return = $group->sortTeams(null, $filters);
 		if (!$reset) return $return;
 		foreach ($group->getGames() as $game) {
 			$game->resetResults();

@@ -53,12 +53,12 @@ class TeamFilterTest extends TestCase
 		$filter_is = new \TournamentGenerator\TeamFilter('points', '=', 4, [$group]);
 		$filter_isnt = new \TournamentGenerator\TeamFilter('points', '!=', 6, [$group]);
 
-		$this->assertCount(2, $group->getTeams([$filter_greater]));
-		$this->assertCount(1, $group->getTeams([$filter_less]));
-		$this->assertCount(1, $group->getTeams([$filter_greater_equal]));
-		$this->assertCount(2, $group->getTeams([$filter_less_equal]));
-		$this->assertCount(1, $group->getTeams([$filter_is]));
-		$this->assertCount(2, $group->getTeams([$filter_isnt]));
+		$this->assertCount(2, $group->getTeams(false, null, [$filter_greater]));
+		$this->assertCount(1, $group->getTeams(false, null, [$filter_less]));
+		$this->assertCount(1, $group->getTeams(false, null, [$filter_greater_equal]));
+		$this->assertCount(2, $group->getTeams(false, null, [$filter_less_equal]));
+		$this->assertCount(1, $group->getTeams(false, null, [$filter_is]));
+		$this->assertCount(2, $group->getTeams(false, null, [$filter_isnt]));
 
 	}
 
@@ -85,12 +85,12 @@ class TeamFilterTest extends TestCase
 		$filter_is = new \TournamentGenerator\TeamFilter('score', '=', 420, [$group]);
 		$filter_isnt = new \TournamentGenerator\TeamFilter('score', '!=', 420, [$group]);
 
-		$this->assertCount(2, $group->getTeams([$filter_greater]));
-		$this->assertCount(2, $group->getTeams([$filter_less]));
-		$this->assertCount(3, $group->getTeams([$filter_greater_equal]));
-		$this->assertCount(2, $group->getTeams([$filter_less_equal]));
-		$this->assertCount(1, $group->getTeams([$filter_is]));
-		$this->assertCount(3, $group->getTeams([$filter_isnt]));
+		$this->assertCount(2, $group->getTeams(false, null, [$filter_greater]));
+		$this->assertCount(2, $group->getTeams(false, null, [$filter_less]));
+		$this->assertCount(3, $group->getTeams(false, null, [$filter_greater_equal]));
+		$this->assertCount(2, $group->getTeams(false, null, [$filter_less_equal]));
+		$this->assertCount(1, $group->getTeams(false, null, [$filter_is]));
+		$this->assertCount(3, $group->getTeams(false, null, [$filter_isnt]));
 
 	}
 
@@ -117,12 +117,12 @@ class TeamFilterTest extends TestCase
 		$filter_is = new \TournamentGenerator\TeamFilter('wins', '=', 2, [$group]);
 		$filter_isnt = new \TournamentGenerator\TeamFilter('wins', '!=', 2, [$group]);
 
-		$this->assertCount(2, $group->getTeams([$filter_greater]));
-		$this->assertCount(2, $group->getTeams([$filter_less]));
-		$this->assertCount(4, $group->getTeams([$filter_greater_equal]));
-		$this->assertCount(2, $group->getTeams([$filter_less_equal]));
-		$this->assertCount(2, $group->getTeams([$filter_is]));
-		$this->assertCount(2, $group->getTeams([$filter_isnt]));
+		$this->assertCount(2, $group->getTeams(false, null, [$filter_greater]));
+		$this->assertCount(2, $group->getTeams(false, null, [$filter_less]));
+		$this->assertCount(4, $group->getTeams(false, null, [$filter_greater_equal]));
+		$this->assertCount(2, $group->getTeams(false, null, [$filter_less_equal]));
+		$this->assertCount(2, $group->getTeams(false, null, [$filter_is]));
+		$this->assertCount(2, $group->getTeams(false, null, [$filter_isnt]));
 
 	}
 
@@ -149,12 +149,12 @@ class TeamFilterTest extends TestCase
 		$filter_is = new \TournamentGenerator\TeamFilter('losses', '=', 2, [$group]);
 		$filter_isnt = new \TournamentGenerator\TeamFilter('losses', '!=', 2, [$group]);
 
-		$this->assertCount(2, $group->getTeams([$filter_greater]));
-		$this->assertCount(2, $group->getTeams([$filter_less]));
-		$this->assertCount(4, $group->getTeams([$filter_greater_equal]));
-		$this->assertCount(2, $group->getTeams([$filter_less_equal]));
-		$this->assertCount(2, $group->getTeams([$filter_is]));
-		$this->assertCount(2, $group->getTeams([$filter_isnt]));
+		$this->assertCount(2, $group->getTeams(false, null, [$filter_greater]));
+		$this->assertCount(2, $group->getTeams(false, null, [$filter_less]));
+		$this->assertCount(4, $group->getTeams(false, null, [$filter_greater_equal]));
+		$this->assertCount(2, $group->getTeams(false, null, [$filter_less_equal]));
+		$this->assertCount(2, $group->getTeams(false, null, [$filter_is]));
+		$this->assertCount(2, $group->getTeams(false, null, [$filter_isnt]));
 
 	}
 
@@ -181,12 +181,12 @@ class TeamFilterTest extends TestCase
 		$filter_is = new \TournamentGenerator\TeamFilter('draws', '=', 2, [$group]);
 		$filter_isnt = new \TournamentGenerator\TeamFilter('draws', '!=', 2, [$group]);
 
-		$this->assertCount(1, $group->getTeams([$filter_greater]));
-		$this->assertCount(3, $group->getTeams([$filter_less]));
-		$this->assertCount(3, $group->getTeams([$filter_greater_equal]));
-		$this->assertCount(3, $group->getTeams([$filter_less_equal]));
-		$this->assertCount(1, $group->getTeams([$filter_is]));
-		$this->assertCount(3, $group->getTeams([$filter_isnt]));
+		$this->assertCount(1, $group->getTeams(false, null, [$filter_greater]));
+		$this->assertCount(3, $group->getTeams(false, null, [$filter_less]));
+		$this->assertCount(3, $group->getTeams(false, null, [$filter_greater_equal]));
+		$this->assertCount(3, $group->getTeams(false, null, [$filter_less_equal]));
+		$this->assertCount(1, $group->getTeams(false, null, [$filter_is]));
+		$this->assertCount(3, $group->getTeams(false, null, [$filter_isnt]));
 
 	}
 
@@ -214,12 +214,12 @@ class TeamFilterTest extends TestCase
 		$filter_is = new \TournamentGenerator\TeamFilter('second', '=', 0, [$group]);
 		$filter_isnt = new \TournamentGenerator\TeamFilter('second', '!=', 2, [$group]);
 
-		$this->assertCount(1, $group->getTeams([$filter_greater]));
-		$this->assertCount(4, $group->getTeams([$filter_less]));
-		$this->assertCount(3, $group->getTeams([$filter_greater_equal]));
-		$this->assertCount(4, $group->getTeams([$filter_less_equal]));
-		$this->assertCount(2, $group->getTeams([$filter_is]));
-		$this->assertCount(5, $group->getTeams([$filter_isnt]));
+		$this->assertCount(1, $group->getTeams(false, null, [$filter_greater]));
+		$this->assertCount(4, $group->getTeams(false, null, [$filter_less]));
+		$this->assertCount(3, $group->getTeams(false, null, [$filter_greater_equal]));
+		$this->assertCount(4, $group->getTeams(false, null, [$filter_less_equal]));
+		$this->assertCount(2, $group->getTeams(false, null, [$filter_is]));
+		$this->assertCount(5, $group->getTeams(false, null, [$filter_isnt]));
 
 	}
 
@@ -247,12 +247,12 @@ class TeamFilterTest extends TestCase
 		$filter_is = new \TournamentGenerator\TeamFilter('third', '=', 0, [$group]);
 		$filter_isnt = new \TournamentGenerator\TeamFilter('third', '!=', 2, [$group]);
 
-		$this->assertCount(1, $group->getTeams([$filter_greater]));
-		$this->assertCount(4, $group->getTeams([$filter_less]));
-		$this->assertCount(3, $group->getTeams([$filter_greater_equal]));
-		$this->assertCount(4, $group->getTeams([$filter_less_equal]));
-		$this->assertCount(2, $group->getTeams([$filter_is]));
-		$this->assertCount(5, $group->getTeams([$filter_isnt]));
+		$this->assertCount(1, $group->getTeams(false, null, [$filter_greater]));
+		$this->assertCount(4, $group->getTeams(false, null, [$filter_less]));
+		$this->assertCount(3, $group->getTeams(false, null, [$filter_greater_equal]));
+		$this->assertCount(4, $group->getTeams(false, null, [$filter_less_equal]));
+		$this->assertCount(2, $group->getTeams(false, null, [$filter_is]));
+		$this->assertCount(5, $group->getTeams(false, null, [$filter_isnt]));
 
 	}
 
@@ -274,12 +274,12 @@ class TeamFilterTest extends TestCase
 		$filter_is = new \TournamentGenerator\TeamFilter('team', '=', $team1, [$group]);
 		$filter_isnt = new \TournamentGenerator\TeamFilter('team', '!=', $team1, [$group]);
 
-		$this->assertCount(1, $group->getTeams([$filter_greater]));
-		$this->assertCount(1, $group->getTeams([$filter_less]));
-		$this->assertCount(1, $group->getTeams([$filter_greater_equal]));
-		$this->assertCount(1, $group->getTeams([$filter_less_equal]));
-		$this->assertCount(1, $group->getTeams([$filter_is]));
-		$this->assertCount(4, $group->getTeams([$filter_isnt]));
+		$this->assertCount(1, $group->getTeams(false, null, [$filter_greater]));
+		$this->assertCount(1, $group->getTeams(false, null, [$filter_less]));
+		$this->assertCount(1, $group->getTeams(false, null, [$filter_greater_equal]));
+		$this->assertCount(1, $group->getTeams(false, null, [$filter_less_equal]));
+		$this->assertCount(1, $group->getTeams(false, null, [$filter_is]));
+		$this->assertCount(4, $group->getTeams(false, null, [$filter_isnt]));
 
 	}
 
@@ -313,12 +313,12 @@ class TeamFilterTest extends TestCase
 		$filter_is = new \TournamentGenerator\TeamFilter('progressed', '=', 0, [$group]);
 		$filter_isnt = new \TournamentGenerator\TeamFilter('progressed', '!=', 2, [$group]);
 
-		$this->assertCount(3, $group->getTeams([$filter_greater]));
-		$this->assertCount(3, $group->getTeams([$filter_less]));
-		$this->assertCount(3, $group->getTeams([$filter_greater_equal]));
-		$this->assertCount(3, $group->getTeams([$filter_less_equal]));
-		$this->assertCount(3, $group->getTeams([$filter_is]));
-		$this->assertCount(3, $group->getTeams([$filter_isnt]));
+		$this->assertCount(3, $group->getTeams(false, null, [$filter_greater]));
+		$this->assertCount(3, $group->getTeams(false, null, [$filter_less]));
+		$this->assertCount(3, $group->getTeams(false, null, [$filter_greater_equal]));
+		$this->assertCount(3, $group->getTeams(false, null, [$filter_less_equal]));
+		$this->assertCount(3, $group->getTeams(false, null, [$filter_is]));
+		$this->assertCount(3, $group->getTeams(false, null, [$filter_isnt]));
 
 	}
 
@@ -352,12 +352,12 @@ class TeamFilterTest extends TestCase
 		$filter_is = new \TournamentGenerator\TeamFilter('notprogressed', '=', 0, [$group]);
 		$filter_isnt = new \TournamentGenerator\TeamFilter('notprogressed', '!=', 2, [$group]);
 
-		$this->assertCount(2, $group->getTeams([$filter_greater]));
-		$this->assertCount(2, $group->getTeams([$filter_less]));
-		$this->assertCount(2, $group->getTeams([$filter_greater_equal]));
-		$this->assertCount(2, $group->getTeams([$filter_less_equal]));
-		$this->assertCount(2, $group->getTeams([$filter_is]));
-		$this->assertCount(2, $group->getTeams([$filter_isnt]));
+		$this->assertCount(2, $group->getTeams(false, null, [$filter_greater]));
+		$this->assertCount(2, $group->getTeams(false, null, [$filter_less]));
+		$this->assertCount(2, $group->getTeams(false, null, [$filter_greater_equal]));
+		$this->assertCount(2, $group->getTeams(false, null, [$filter_less_equal]));
+		$this->assertCount(2, $group->getTeams(false, null, [$filter_is]));
+		$this->assertCount(2, $group->getTeams(false, null, [$filter_isnt]));
 
 	}
 
