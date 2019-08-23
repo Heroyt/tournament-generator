@@ -5,7 +5,7 @@ namespace TournamentGenerator;
 /**
  *
  */
-class Tournament implements WithSkipSetters, WithTeams
+class Tournament implements WithSkipSetters, WithTeams, WithRounds
 {
 
 	private $name = '';
@@ -65,7 +65,7 @@ class Tournament implements WithSkipSetters, WithTeams
 	}
 	public function getTournamentTime(){
 		$games = count($this->getGames());
-		return $games*$this->expectedPlay+$games*$this->expectedGameWait+count($this->getRounds())*$this->expectedRoundWait+count($this->getCategories())*$this->expectedCategoryWait;
+		return $games*$this->expectedPlay+($games-1)*$this->expectedGameWait+(count($this->getRounds())-1)*$this->expectedRoundWait+(count($this->getCategories())-1)*$this->expectedCategoryWait;
 	}
 
 	public function allowSkip(){
@@ -120,7 +120,6 @@ class Tournament implements WithSkipSetters, WithTeams
 		}
 		return $this->rounds;
 	}
-
 	public function getGroups() {
 		$groups = [];
 		foreach ($this->getRounds() as $round) {

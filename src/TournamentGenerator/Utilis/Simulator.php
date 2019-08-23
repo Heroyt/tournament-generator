@@ -38,10 +38,6 @@ class Simulator
 
 		$games = [];
 
-		foreach ($tournament->getCategories() as $category) {
-			$games = array_merge($games, $category->genGamesSimulate());
-		}
-
 		foreach ($tournament->getRounds() as $round) {
 			$games = array_merge($games, $round->genGames());
 			$round->simulate()->progress(true);
@@ -57,11 +53,35 @@ class Simulator
 		$games = [];
 		if (count($tournament->getCategories()) === 0 && count($tournament->getRounds()) === 0) throw new \Exception('There are no rounds or categories to simulate games from.');
 
-		foreach ($tournament->getCategories() as $category) {
-			$games = array_merge($games, $category->genGamesSimulate());
+		foreach ($tournament->getRounds() as $round) {
+			$games = array_merge($games, $round->genGames());
+			$round->simulate();
+			$round->progress();
+		}
+		return $games;
+	}
+
+	public static function simulateCategory(\TournamentGenerator\Category $category) {
+		if (count($category->getRounds()) === 0) throw new \Exception('There are no rounds to simulate games from.');
+
+		$games = [];
+
+		foreach ($category->getRounds() as $round) {
+			$games = array_merge($games, $round->genGames());
+			$round->simulate()->progress(true);
+		}
+		foreach ($category->getRounds() as $round) {
+			$round->resetGames();
 		}
 
-		foreach ($tournament->getRounds() as $round) {
+		return $games;
+	}
+
+	public static function simulateCategoryReal(\TournamentGenerator\Category $category) {
+		$games = [];
+		if (count($category->getRounds()) === 0) throw new \Exception('There are no rounds to simulate games from.');
+
+		foreach ($category->getRounds() as $round) {
 			$games = array_merge($games, $round->genGames());
 			$round->simulate();
 			$round->progress();

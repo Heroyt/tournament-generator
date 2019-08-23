@@ -352,6 +352,60 @@ class TournamentTest extends TestCase
 		return $tournament;
 	}
 
+	protected function gen_tournament_with_categories() {
+		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
+
+		$tournament
+			->setPlay(7) // SET GAME TIME TO 7 MINUTES
+			->setGameWait(2) // SET TIME BETWEEN GAMES TO 2 MINUTES
+			->setRoundWait(0) // SET TIME BETWEEN ROUNDS TO 0 MINUTES
+			->setCategoryWait(10); // SET TIME BETWEEN CATEGORIES TO 10 MINUTES
+
+		for ($i=1; $i <= 16; $i++) {
+			$tournament->team('Team '.$i);
+		}
+
+		// Create categories
+		$category1 = $tournament->category('Category 1');
+		$category2 = $tournament->category('Category 2');
+
+		// Create a round and a final round for Category 1
+		$round = $category1->round("First's round's name");
+		$final = $category1->round("Final's round's name");
+
+		// Create a round and a final round for Category 2
+		$round2 = $category2->round("First's round's name");
+		$final2 = $category2->round("Final's round's name");
+
+		// Create 2 groups for the first round for Category 1
+		$group_1 = $round->group('Group 1')->setInGame(2)->setType(TournamentGenerator\Constants::ROUND_ROBIN);
+		$group_2 = $round->group('Group 2')->setInGame(2)->setType(TournamentGenerator\Constants::ROUND_ROBIN);
+
+		// Create 2 groups for the first round fir Category 2
+		$group2_1 = $round2->group('Group 1')->setInGame(2)->setType(TournamentGenerator\Constants::ROUND_ROBIN);
+		$group2_2 = $round2->group('Group 2')->setInGame(2)->setType(TournamentGenerator\Constants::ROUND_ROBIN);
+
+		// Create a final groups
+		$final_group = $final->group('Finale')->setInGame(2)->setType(TournamentGenerator\Constants::ROUND_ROBIN);
+		$final_group2 = $final2->group('Finale')->setInGame(2)->setType(TournamentGenerator\Constants::ROUND_ROBIN);
+
+		$tournament->splitTeams($round, $round2);
+
+		$this->assertCount(8, $round->getTeams());
+		$this->assertCount(4, $group_1->getTeams());
+		$this->assertCount(4, $group_2->getTeams());
+		$this->assertCount(8, $round2->getTeams());
+		$this->assertCount(4, $group2_1->getTeams());
+		$this->assertCount(4, $group2_2->getTeams());
+
+		$group_1->progression($final_group, 0, 2); // PROGRESS 2 BEST WINNING TEAMS
+		$group_2->progression($final_group, 0, 2); // PROGRESS 2 BEST WINNING TEAMS
+		$group2_1->progression($final_group2, 0, 2); // PROGRESS 2 BEST WINNING TEAMS
+		$group2_2->progression($final_group2, 0, 2); // PROGRESS 2 BEST WINNING TEAMS
+
+		return $tournament;
+	}
+
 	/** @test */
 	public function check_gen_games_simulate_tournament() {
 
@@ -370,7 +424,7 @@ class TournamentTest extends TestCase
 
 		$time = $tournament->genGamesSimulate(true);
 
-		$this->assertEquals(162, $time);
+		$this->assertEquals(160, $time);
 
 	}
 
@@ -392,7 +446,51 @@ class TournamentTest extends TestCase
 
 		$time = $tournament->genGamesSimulateReal(true);
 
-		$this->assertEquals(162, $time);
+		$this->assertEquals(160, $time);
+
+	}
+
+	/** @test */
+	public function check_gen_games_simulate_with_categories_tournament() {
+
+		$tournament = $this->gen_tournament_with_categories();
+
+		$games = $tournament->genGamesSimulate();
+
+		$this->assertCount(36, $games);
+
+	}
+
+	/** @test */
+	public function check_gen_games_simulate_with_categories_with_time_tournament() {
+
+		$tournament = $this->gen_tournament_with_categories();
+
+		$time = $tournament->genGamesSimulate(true);
+
+		$this->assertEquals(161*2+10, $time);
+
+	}
+
+	/** @test */
+	public function check_gen_games_simulate_with_categories_real_tournament() {
+
+		$tournament = $this->gen_tournament_with_categories();
+
+		$games = $tournament->genGamesSimulateReal();
+
+		$this->assertCount(36, $games);
+
+	}
+
+	/** @test */
+	public function check_gen_games_simulate_with_categories_real_with_time_tournament() {
+
+		$tournament = $this->gen_tournament_with_categories();
+
+		$time = $tournament->genGamesSimulateReal(true);
+
+		$this->assertEquals(161*2+10, $time);
 
 	}
 
@@ -403,7 +501,7 @@ class TournamentTest extends TestCase
 
 		$tournament->genGamesSimulate();
 
-		$this->assertEquals(162, $tournament->getTournamentTime());
+		$this->assertEquals(160, $tournament->getTournamentTime());
 
 	}
 

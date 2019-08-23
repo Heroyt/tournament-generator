@@ -80,8 +80,8 @@ class Group extends Base implements WithGeneratorSetters, WithSkipSetters, WithT
 	}
 	public function sortTeams($ordering = null, array $filters = []) {
 		if (!isset($ordering)) $ordering = $this->ordering;
-		Utilis\Sorter\Teams::sortGroup($this->teams, $this, $ordering);
-		return $this->getTeams(false, $filters);
+		$this->teams = Utilis\Sorter\Teams::sortGroup($this->teams, $this, $ordering);
+		return $this->getTeams(false, null, $filters);
 	}
 
 	public function setMaxSize(int $size) {

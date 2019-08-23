@@ -529,4 +529,42 @@ class GroupTest extends TestCase
 		$group->setMaxSize(1);
 
 	}
+
+	/** @test */
+	public function check_gen_games_simulate_group() {
+
+		$group = new \TournamentGenerator\Group('Group name');
+
+		for ($i=1; $i <= 4; $i++) {
+			$group->team('Team '.$i);
+		}
+
+		$games = $group->genGames();
+		$this->assertCount(6, $games);
+
+		$teams = $group->simulate([], false);
+		$this->assertCount(4, $teams);
+
+		$this->assertTrue($group->isPlayed());
+
+	}
+
+	/** @test */
+	public function check_gen_games_simulate_with_reset_group() {
+
+		$group = new \TournamentGenerator\Group('Group name');
+
+		for ($i=1; $i <= 4; $i++) {
+			$group->team('Team '.$i);
+		}
+
+		$games = $group->genGames();
+		$this->assertCount(6, $games);
+
+		$teams = $group->simulate([], true);
+		$this->assertCount(4, $teams);
+
+		$this->assertFalse($group->isPlayed());
+
+	}
 }
