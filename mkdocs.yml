@@ -15,6 +15,7 @@ nav:
   - 'Using progressions': 'examples/progressions.md'
   - 'Using filters': 'examples/filters.md'
 - Classes:
+  - Constants: classes/constants.md
   - Tournament: classes/tournament.md
   - Category: classes/category.md
   - Round: classes/round.md
@@ -25,7 +26,7 @@ nav:
   - 'Team filter': classes/teamFilter.md
   - 'Blank team': classes/blankTeam.md
 - Templates:
-  - List: templates/list.md
-  - 'Single elimination': templates/singleElim.md
-  - 'Double elimination': templates/doubleElim.md
-  - '2 rounds to groups': templates/2R2G.md
+  - List: template/list.md
+  - 'Single elimination': template/singleElim.md
+  - 'Double elimination': template/doubleElim.md
+  - '2 rounds to groups': template/2R2G.md

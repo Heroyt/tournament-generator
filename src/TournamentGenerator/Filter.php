@@ -40,7 +40,6 @@ class Filter
 	}
 
 	private function filterMulti(array &$teams, array $filters, string $how = 'and') {
-		if (is_int($how)) $how = 'and';
 		switch (strtolower($how)) {
 			case 'and':
 				foreach ($teams as $tkey => $team) {

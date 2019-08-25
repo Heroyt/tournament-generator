@@ -23,8 +23,8 @@ class Category extends Base implements WithSkipSetters, WithTeams, WithRounds
 		}
 		return $this;
 	}
-	public function round(string $name = '') {
-		$r = new Round($name);
+	public function round(string $name = '', $id = null) {
+		$r = new Round($name, $id);
 		$this->rounds[] = $r->setSkip($this->allowSkip);
 		return $r;
 	}

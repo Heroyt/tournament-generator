@@ -90,8 +90,8 @@ class Tournament implements WithSkipSetters, WithTeams, WithRounds
 		}
 		return $this;
 	}
-	public function category(string $name = '') {
-		$c = new Category($name);
+	public function category(string $name = '', $id = null) {
+		$c = new Category($name, $id);
 		$this->categories[] = $c->setSkip($this->allowSkip);
 		return $c;
 	}

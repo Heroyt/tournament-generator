@@ -4295,12 +4295,7 @@ $coverage->setData(array (
       0 => 'FilterTest::check_filter_creation_multi',
       1 => 'FilterTest::check_filter_creation_multi_round',
       2 => 'FilterTest::check_filter_creation_multi_tournament',
-      3 => 'FilterTest::check_filter_creation_multi_false_operrand_multi',
-      4 => 'FilterTest::check_filter_creation_multi_false_filter_and',
-      5 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
-      6 => 'FilterTest::check_filter_creation_multi_false_filter_or',
-      7 => 'FilterTest::check_filter_creation_multi_false_operrand_or',
-      8 => 'FilterTest::check_filter_creation_multi_with_double_comp',
+      3 => 'FilterTest::check_filter_creation_multi_with_double_comp',
     ),
     46 => 
     array (
@@ -4309,7 +4304,7 @@ $coverage->setData(array (
       2 => 'FilterTest::check_filter_creation_multi_tournament',
       3 => 'FilterTest::check_filter_creation_multi_with_double_comp',
     ),
-    47 => 
+    48 => 
     array (
       0 => 'FilterTest::check_filter_creation_multi',
       1 => 'FilterTest::check_filter_creation_multi_round',
@@ -4321,18 +4316,21 @@ $coverage->setData(array (
       0 => 'FilterTest::check_filter_creation_multi',
       1 => 'FilterTest::check_filter_creation_multi_round',
       2 => 'FilterTest::check_filter_creation_multi_tournament',
-      3 => 'FilterTest::check_filter_creation_multi_with_double_comp',
+      3 => 'FilterTest::check_filter_creation_multi_false_operrand_multi',
+      4 => 'FilterTest::check_filter_creation_multi_false_filter_and',
+      5 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
+      6 => 'FilterTest::check_filter_creation_multi_false_filter_or',
+      7 => 'FilterTest::check_filter_creation_multi_false_operrand_or',
     ),
     50 => 
     array (
       0 => 'FilterTest::check_filter_creation_multi',
       1 => 'FilterTest::check_filter_creation_multi_round',
       2 => 'FilterTest::check_filter_creation_multi_tournament',
-      3 => 'FilterTest::check_filter_creation_multi_false_operrand_multi',
-      4 => 'FilterTest::check_filter_creation_multi_false_filter_and',
-      5 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
-      6 => 'FilterTest::check_filter_creation_multi_false_filter_or',
-      7 => 'FilterTest::check_filter_creation_multi_false_operrand_or',
+      3 => 'FilterTest::check_filter_creation_multi_false_filter_and',
+      4 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
+      5 => 'FilterTest::check_filter_creation_multi_false_filter_or',
+      6 => 'FilterTest::check_filter_creation_multi_false_operrand_or',
     ),
     51 => 
     array (
@@ -4344,27 +4342,26 @@ $coverage->setData(array (
       5 => 'FilterTest::check_filter_creation_multi_false_filter_or',
       6 => 'FilterTest::check_filter_creation_multi_false_operrand_or',
     ),
-    52 => 
+    53 => 
+    array (
+      0 => 'FilterTest::check_filter_creation_multi',
+      1 => 'FilterTest::check_filter_creation_multi_round',
+      2 => 'FilterTest::check_filter_creation_multi_tournament',
+    ),
+    55 => 
+    array (
+      0 => 'FilterTest::check_filter_creation_multi_false_operrand_multi',
+    ),
+    56 => NULL,
+    59 => 
     array (
       0 => 'FilterTest::check_filter_creation_multi',
       1 => 'FilterTest::check_filter_creation_multi_round',
       2 => 'FilterTest::check_filter_creation_multi_tournament',
       3 => 'FilterTest::check_filter_creation_multi_false_filter_and',
       4 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
-      5 => 'FilterTest::check_filter_creation_multi_false_filter_or',
-      6 => 'FilterTest::check_filter_creation_multi_false_operrand_or',
+      5 => 'FilterTest::check_filter_creation_multi_with_double_comp',
     ),
-    54 => 
-    array (
-      0 => 'FilterTest::check_filter_creation_multi',
-      1 => 'FilterTest::check_filter_creation_multi_round',
-      2 => 'FilterTest::check_filter_creation_multi_tournament',
-    ),
-    56 => 
-    array (
-      0 => 'FilterTest::check_filter_creation_multi_false_operrand_multi',
-    ),
-    57 => NULL,
     60 => 
     array (
       0 => 'FilterTest::check_filter_creation_multi',
@@ -4407,23 +4404,23 @@ $coverage->setData(array (
       1 => 'FilterTest::check_filter_creation_multi_round',
       2 => 'FilterTest::check_filter_creation_multi_tournament',
       3 => 'FilterTest::check_filter_creation_multi_false_filter_and',
-      4 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
-      5 => 'FilterTest::check_filter_creation_multi_with_double_comp',
+      4 => 'FilterTest::check_filter_creation_multi_with_double_comp',
     ),
     65 => 
     array (
       0 => 'FilterTest::check_filter_creation_multi',
       1 => 'FilterTest::check_filter_creation_multi_round',
       2 => 'FilterTest::check_filter_creation_multi_tournament',
-      3 => 'FilterTest::check_filter_creation_multi_false_filter_and',
-      4 => 'FilterTest::check_filter_creation_multi_with_double_comp',
+      3 => 'FilterTest::check_filter_creation_multi_with_double_comp',
     ),
     66 => 
     array (
       0 => 'FilterTest::check_filter_creation_multi',
       1 => 'FilterTest::check_filter_creation_multi_round',
       2 => 'FilterTest::check_filter_creation_multi_tournament',
-      3 => 'FilterTest::check_filter_creation_multi_with_double_comp',
+      3 => 'FilterTest::check_filter_creation_multi_false_filter_and',
+      4 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
+      5 => 'FilterTest::check_filter_creation_multi_with_double_comp',
     ),
     67 => 
     array (
@@ -4431,8 +4428,7 @@ $coverage->setData(array (
       1 => 'FilterTest::check_filter_creation_multi_round',
       2 => 'FilterTest::check_filter_creation_multi_tournament',
       3 => 'FilterTest::check_filter_creation_multi_false_filter_and',
-      4 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
-      5 => 'FilterTest::check_filter_creation_multi_with_double_comp',
+      4 => 'FilterTest::check_filter_creation_multi_with_double_comp',
     ),
     68 => 
     array (
@@ -4442,32 +4438,30 @@ $coverage->setData(array (
       3 => 'FilterTest::check_filter_creation_multi_false_filter_and',
       4 => 'FilterTest::check_filter_creation_multi_with_double_comp',
     ),
-    69 => 
-    array (
-      0 => 'FilterTest::check_filter_creation_multi',
-      1 => 'FilterTest::check_filter_creation_multi_round',
-      2 => 'FilterTest::check_filter_creation_multi_tournament',
-      3 => 'FilterTest::check_filter_creation_multi_false_filter_and',
-      4 => 'FilterTest::check_filter_creation_multi_with_double_comp',
-    ),
-    71 => 
+    70 => 
     array (
       0 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
     ),
-    73 => 
+    72 => 
     array (
       0 => 'FilterTest::check_filter_creation_multi',
       1 => 'FilterTest::check_filter_creation_multi_round',
       2 => 'FilterTest::check_filter_creation_multi_tournament',
       3 => 'FilterTest::check_filter_creation_multi_false_filter_and',
       4 => 'FilterTest::check_filter_creation_multi_with_double_comp',
+    ),
+    74 => 
+    array (
+      0 => 'FilterTest::check_filter_creation_multi',
+      1 => 'FilterTest::check_filter_creation_multi_round',
+      2 => 'FilterTest::check_filter_creation_multi_tournament',
+      3 => 'FilterTest::check_filter_creation_multi_false_filter_and',
     ),
     75 => 
     array (
       0 => 'FilterTest::check_filter_creation_multi',
       1 => 'FilterTest::check_filter_creation_multi_round',
       2 => 'FilterTest::check_filter_creation_multi_tournament',
-      3 => 'FilterTest::check_filter_creation_multi_false_filter_and',
     ),
     76 => 
     array (
@@ -4475,24 +4469,29 @@ $coverage->setData(array (
       1 => 'FilterTest::check_filter_creation_multi_round',
       2 => 'FilterTest::check_filter_creation_multi_tournament',
     ),
-    77 => 
-    array (
-      0 => 'FilterTest::check_filter_creation_multi',
-      1 => 'FilterTest::check_filter_creation_multi_round',
-      2 => 'FilterTest::check_filter_creation_multi_tournament',
-    ),
-    79 => 
+    78 => 
     array (
       0 => 'FilterTest::check_filter_creation_multi_false_filter_and',
     ),
-    81 => 
+    80 => 
     array (
       0 => 'FilterTest::check_filter_creation_multi',
       1 => 'FilterTest::check_filter_creation_multi_round',
       2 => 'FilterTest::check_filter_creation_multi_tournament',
       3 => 'FilterTest::check_filter_creation_multi_with_double_comp',
     ),
-    82 => NULL,
+    81 => NULL,
+    83 => 
+    array (
+      0 => 'FilterTest::check_filter_creation_multi',
+      1 => 'FilterTest::check_filter_creation_multi_round',
+      2 => 'FilterTest::check_filter_creation_multi_tournament',
+      3 => 'FilterTest::check_filter_creation_multi_false_filter_and',
+      4 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
+      5 => 'FilterTest::check_filter_creation_multi_false_filter_or',
+      6 => 'FilterTest::check_filter_creation_multi_false_operrand_or',
+      7 => 'FilterTest::check_filter_creation_multi_with_double_comp',
+    ),
     84 => 
     array (
       0 => 'FilterTest::check_filter_creation_multi',
@@ -4524,7 +4523,6 @@ $coverage->setData(array (
       4 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
       5 => 'FilterTest::check_filter_creation_multi_false_filter_or',
       6 => 'FilterTest::check_filter_creation_multi_false_operrand_or',
-      7 => 'FilterTest::check_filter_creation_multi_with_double_comp',
     ),
     87 => 
     array (
@@ -4543,22 +4541,22 @@ $coverage->setData(array (
       2 => 'FilterTest::check_filter_creation_multi_tournament',
       3 => 'FilterTest::check_filter_creation_multi_false_filter_and',
       4 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
-      5 => 'FilterTest::check_filter_creation_multi_false_filter_or',
-      6 => 'FilterTest::check_filter_creation_multi_false_operrand_or',
     ),
     89 => 
     array (
       0 => 'FilterTest::check_filter_creation_multi',
       1 => 'FilterTest::check_filter_creation_multi_round',
       2 => 'FilterTest::check_filter_creation_multi_tournament',
-      3 => 'FilterTest::check_filter_creation_multi_false_filter_and',
-      4 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
     ),
     90 => 
     array (
       0 => 'FilterTest::check_filter_creation_multi',
       1 => 'FilterTest::check_filter_creation_multi_round',
       2 => 'FilterTest::check_filter_creation_multi_tournament',
+      3 => 'FilterTest::check_filter_creation_multi_false_filter_and',
+      4 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
+      5 => 'FilterTest::check_filter_creation_multi_false_filter_or',
+      6 => 'FilterTest::check_filter_creation_multi_false_operrand_or',
     ),
     91 => 
     array (
@@ -4568,7 +4566,6 @@ $coverage->setData(array (
       3 => 'FilterTest::check_filter_creation_multi_false_filter_and',
       4 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
       5 => 'FilterTest::check_filter_creation_multi_false_filter_or',
-      6 => 'FilterTest::check_filter_creation_multi_false_operrand_or',
     ),
     92 => 
     array (
@@ -4577,21 +4574,12 @@ $coverage->setData(array (
       2 => 'FilterTest::check_filter_creation_multi_tournament',
       3 => 'FilterTest::check_filter_creation_multi_false_filter_and',
       4 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
-      5 => 'FilterTest::check_filter_creation_multi_false_filter_or',
     ),
-    93 => 
-    array (
-      0 => 'FilterTest::check_filter_creation_multi',
-      1 => 'FilterTest::check_filter_creation_multi_round',
-      2 => 'FilterTest::check_filter_creation_multi_tournament',
-      3 => 'FilterTest::check_filter_creation_multi_false_filter_and',
-      4 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
-    ),
-    95 => 
+    94 => 
     array (
       0 => 'FilterTest::check_filter_creation_multi_false_operrand_or',
     ),
-    97 => 
+    96 => 
     array (
       0 => 'FilterTest::check_filter_creation_multi',
       1 => 'FilterTest::check_filter_creation_multi_round',
@@ -4599,7 +4587,7 @@ $coverage->setData(array (
       3 => 'FilterTest::check_filter_creation_multi_false_filter_and',
       4 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
     ),
-    99 => 
+    98 => 
     array (
       0 => 'FilterTest::check_filter_creation_multi',
       1 => 'FilterTest::check_filter_creation_multi_round',
@@ -4608,6 +4596,15 @@ $coverage->setData(array (
       4 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
       5 => 'FilterTest::check_filter_creation_multi_false_filter_or',
       6 => 'FilterTest::check_filter_creation_multi_with_double_comp',
+    ),
+    99 => 
+    array (
+      0 => 'FilterTest::check_filter_creation_multi',
+      1 => 'FilterTest::check_filter_creation_multi_round',
+      2 => 'FilterTest::check_filter_creation_multi_tournament',
+      3 => 'FilterTest::check_filter_creation_multi_false_filter_and',
+      4 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
+      5 => 'FilterTest::check_filter_creation_multi_with_double_comp',
     ),
     100 => 
     array (
@@ -4618,20 +4615,11 @@ $coverage->setData(array (
       4 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
       5 => 'FilterTest::check_filter_creation_multi_with_double_comp',
     ),
-    101 => 
-    array (
-      0 => 'FilterTest::check_filter_creation_multi',
-      1 => 'FilterTest::check_filter_creation_multi_round',
-      2 => 'FilterTest::check_filter_creation_multi_tournament',
-      3 => 'FilterTest::check_filter_creation_multi_false_filter_and',
-      4 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
-      5 => 'FilterTest::check_filter_creation_multi_with_double_comp',
-    ),
-    103 => 
+    102 => 
     array (
       0 => 'FilterTest::check_filter_creation_multi_false_filter_or',
     ),
-    105 => 
+    104 => 
     array (
       0 => 'FilterTest::check_filter_creation_multi',
       1 => 'FilterTest::check_filter_creation_multi_round',
@@ -4640,7 +4628,7 @@ $coverage->setData(array (
       4 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
       5 => 'FilterTest::check_filter_creation_multi_with_double_comp',
     ),
-    106 => NULL,
+    105 => NULL,
   ),
   '/Volumes/Heroyt-Disk/work/Moje/rozlosy/src/TournamentGenerator/Team.php' => 
   array (
@@ -7451,109 +7439,124 @@ $coverage->setData(array (
     120 => NULL,
     123 => 
     array (
-      0 => 'FilterTest::check_filter_creation_multi',
-      1 => 'FilterTest::check_filter_creation_multi_round',
-      2 => 'FilterTest::check_filter_creation_multi_tournament',
-      3 => 'FilterTest::check_filter_creation_multi_false_filter_multi',
-      4 => 'FilterTest::check_filter_creation_multi_false_operrand_multi',
-      5 => 'FilterTest::check_filter_creation_multi_false_filter_and',
-      6 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
-      7 => 'FilterTest::check_filter_creation_multi_false_filter_or',
-      8 => 'FilterTest::check_filter_creation_multi_false_operrand_or',
-      9 => 'FilterTest::check_filter_creation_multi_with_double_comp',
-      10 => 'GameTest::check_setting_results_2_draw_game',
-      11 => 'GameTest::check_getting_draw_teams_2_game',
-      12 => 'TeamFilterTest::check_filter_validate_points_teamFilter',
-      13 => 'TeamFilterTest::check_filter_validate_draws_teamFilter',
+      0 => 'CategoryTest::check_gen_games_simulate_real_category',
+      1 => 'FilterTest::check_filter_creation_multi',
+      2 => 'FilterTest::check_filter_creation_multi_round',
+      3 => 'FilterTest::check_filter_creation_multi_tournament',
+      4 => 'FilterTest::check_filter_creation_multi_false_filter_multi',
+      5 => 'FilterTest::check_filter_creation_multi_false_operrand_multi',
+      6 => 'FilterTest::check_filter_creation_multi_false_filter_and',
+      7 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
+      8 => 'FilterTest::check_filter_creation_multi_false_filter_or',
+      9 => 'FilterTest::check_filter_creation_multi_false_operrand_or',
+      10 => 'FilterTest::check_filter_creation_multi_with_double_comp',
+      11 => 'GameTest::check_setting_results_2_draw_game',
+      12 => 'GameTest::check_getting_draw_teams_2_game',
+      13 => 'TeamFilterTest::check_filter_validate_points_teamFilter',
+      14 => 'TeamFilterTest::check_filter_validate_draws_teamFilter',
+      15 => 'TournamentTest::check_gen_games_simulate_with_categories_tournament',
     ),
     124 => 
     array (
-      0 => 'FilterTest::check_filter_creation_multi',
-      1 => 'FilterTest::check_filter_creation_multi_round',
-      2 => 'FilterTest::check_filter_creation_multi_tournament',
-      3 => 'FilterTest::check_filter_creation_multi_false_filter_multi',
-      4 => 'FilterTest::check_filter_creation_multi_false_operrand_multi',
-      5 => 'FilterTest::check_filter_creation_multi_false_filter_and',
-      6 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
-      7 => 'FilterTest::check_filter_creation_multi_false_filter_or',
-      8 => 'FilterTest::check_filter_creation_multi_false_operrand_or',
-      9 => 'FilterTest::check_filter_creation_multi_with_double_comp',
-      10 => 'GameTest::check_setting_results_2_draw_game',
-      11 => 'GameTest::check_getting_draw_teams_2_game',
-      12 => 'TeamFilterTest::check_filter_validate_points_teamFilter',
-      13 => 'TeamFilterTest::check_filter_validate_draws_teamFilter',
+      0 => 'CategoryTest::check_gen_games_simulate_real_category',
+      1 => 'FilterTest::check_filter_creation_multi',
+      2 => 'FilterTest::check_filter_creation_multi_round',
+      3 => 'FilterTest::check_filter_creation_multi_tournament',
+      4 => 'FilterTest::check_filter_creation_multi_false_filter_multi',
+      5 => 'FilterTest::check_filter_creation_multi_false_operrand_multi',
+      6 => 'FilterTest::check_filter_creation_multi_false_filter_and',
+      7 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
+      8 => 'FilterTest::check_filter_creation_multi_false_filter_or',
+      9 => 'FilterTest::check_filter_creation_multi_false_operrand_or',
+      10 => 'FilterTest::check_filter_creation_multi_with_double_comp',
+      11 => 'GameTest::check_setting_results_2_draw_game',
+      12 => 'GameTest::check_getting_draw_teams_2_game',
+      13 => 'TeamFilterTest::check_filter_validate_points_teamFilter',
+      14 => 'TeamFilterTest::check_filter_validate_draws_teamFilter',
+      15 => 'TournamentTest::check_gen_games_simulate_with_categories_tournament',
     ),
     125 => 
     array (
-      0 => 'FilterTest::check_filter_creation_multi',
-      1 => 'FilterTest::check_filter_creation_multi_round',
-      2 => 'FilterTest::check_filter_creation_multi_tournament',
-      3 => 'FilterTest::check_filter_creation_multi_false_filter_multi',
-      4 => 'FilterTest::check_filter_creation_multi_false_operrand_multi',
-      5 => 'FilterTest::check_filter_creation_multi_false_filter_and',
-      6 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
-      7 => 'FilterTest::check_filter_creation_multi_false_filter_or',
-      8 => 'FilterTest::check_filter_creation_multi_false_operrand_or',
-      9 => 'FilterTest::check_filter_creation_multi_with_double_comp',
-      10 => 'GameTest::check_setting_results_2_draw_game',
-      11 => 'GameTest::check_getting_draw_teams_2_game',
-      12 => 'TeamFilterTest::check_filter_validate_points_teamFilter',
-      13 => 'TeamFilterTest::check_filter_validate_draws_teamFilter',
+      0 => 'CategoryTest::check_gen_games_simulate_real_category',
+      1 => 'FilterTest::check_filter_creation_multi',
+      2 => 'FilterTest::check_filter_creation_multi_round',
+      3 => 'FilterTest::check_filter_creation_multi_tournament',
+      4 => 'FilterTest::check_filter_creation_multi_false_filter_multi',
+      5 => 'FilterTest::check_filter_creation_multi_false_operrand_multi',
+      6 => 'FilterTest::check_filter_creation_multi_false_filter_and',
+      7 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
+      8 => 'FilterTest::check_filter_creation_multi_false_filter_or',
+      9 => 'FilterTest::check_filter_creation_multi_false_operrand_or',
+      10 => 'FilterTest::check_filter_creation_multi_with_double_comp',
+      11 => 'GameTest::check_setting_results_2_draw_game',
+      12 => 'GameTest::check_getting_draw_teams_2_game',
+      13 => 'TeamFilterTest::check_filter_validate_points_teamFilter',
+      14 => 'TeamFilterTest::check_filter_validate_draws_teamFilter',
+      15 => 'TournamentTest::check_gen_games_simulate_with_categories_tournament',
     ),
     126 => 
     array (
-      0 => 'FilterTest::check_filter_creation_multi',
-      1 => 'FilterTest::check_filter_creation_multi_round',
-      2 => 'FilterTest::check_filter_creation_multi_tournament',
-      3 => 'FilterTest::check_filter_creation_multi_false_filter_multi',
-      4 => 'FilterTest::check_filter_creation_multi_false_operrand_multi',
-      5 => 'FilterTest::check_filter_creation_multi_false_filter_and',
-      6 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
-      7 => 'FilterTest::check_filter_creation_multi_false_filter_or',
-      8 => 'FilterTest::check_filter_creation_multi_false_operrand_or',
-      9 => 'FilterTest::check_filter_creation_multi_with_double_comp',
-      10 => 'GameTest::check_setting_results_2_draw_game',
-      11 => 'GameTest::check_getting_draw_teams_2_game',
-      12 => 'TeamFilterTest::check_filter_validate_points_teamFilter',
-      13 => 'TeamFilterTest::check_filter_validate_draws_teamFilter',
+      0 => 'CategoryTest::check_gen_games_simulate_real_category',
+      1 => 'FilterTest::check_filter_creation_multi',
+      2 => 'FilterTest::check_filter_creation_multi_round',
+      3 => 'FilterTest::check_filter_creation_multi_tournament',
+      4 => 'FilterTest::check_filter_creation_multi_false_filter_multi',
+      5 => 'FilterTest::check_filter_creation_multi_false_operrand_multi',
+      6 => 'FilterTest::check_filter_creation_multi_false_filter_and',
+      7 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
+      8 => 'FilterTest::check_filter_creation_multi_false_filter_or',
+      9 => 'FilterTest::check_filter_creation_multi_false_operrand_or',
+      10 => 'FilterTest::check_filter_creation_multi_with_double_comp',
+      11 => 'GameTest::check_setting_results_2_draw_game',
+      12 => 'GameTest::check_getting_draw_teams_2_game',
+      13 => 'TeamFilterTest::check_filter_validate_points_teamFilter',
+      14 => 'TeamFilterTest::check_filter_validate_draws_teamFilter',
+      15 => 'TournamentTest::check_gen_games_simulate_with_categories_tournament',
     ),
     127 => 
     array (
-      0 => 'FilterTest::check_filter_creation_multi',
-      1 => 'FilterTest::check_filter_creation_multi_round',
-      2 => 'FilterTest::check_filter_creation_multi_tournament',
-      3 => 'FilterTest::check_filter_creation_multi_false_filter_multi',
-      4 => 'FilterTest::check_filter_creation_multi_false_operrand_multi',
-      5 => 'FilterTest::check_filter_creation_multi_false_filter_and',
-      6 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
-      7 => 'FilterTest::check_filter_creation_multi_false_filter_or',
-      8 => 'FilterTest::check_filter_creation_multi_false_operrand_or',
-      9 => 'FilterTest::check_filter_creation_multi_with_double_comp',
-      10 => 'GameTest::check_setting_results_2_draw_game',
-      11 => 'GameTest::check_getting_draw_teams_2_game',
-      12 => 'TeamFilterTest::check_filter_validate_points_teamFilter',
-      13 => 'TeamFilterTest::check_filter_validate_draws_teamFilter',
+      0 => 'CategoryTest::check_gen_games_simulate_real_category',
+      1 => 'FilterTest::check_filter_creation_multi',
+      2 => 'FilterTest::check_filter_creation_multi_round',
+      3 => 'FilterTest::check_filter_creation_multi_tournament',
+      4 => 'FilterTest::check_filter_creation_multi_false_filter_multi',
+      5 => 'FilterTest::check_filter_creation_multi_false_operrand_multi',
+      6 => 'FilterTest::check_filter_creation_multi_false_filter_and',
+      7 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
+      8 => 'FilterTest::check_filter_creation_multi_false_filter_or',
+      9 => 'FilterTest::check_filter_creation_multi_false_operrand_or',
+      10 => 'FilterTest::check_filter_creation_multi_with_double_comp',
+      11 => 'GameTest::check_setting_results_2_draw_game',
+      12 => 'GameTest::check_getting_draw_teams_2_game',
+      13 => 'TeamFilterTest::check_filter_validate_points_teamFilter',
+      14 => 'TeamFilterTest::check_filter_validate_draws_teamFilter',
+      15 => 'TournamentTest::check_gen_games_simulate_with_categories_tournament',
     ),
     128 => NULL,
     130 => 
     array (
       0 => 'GameTest::check_setting_results_2_draw_game',
+      1 => 'TournamentTest::check_gen_games_simulate_with_categories_tournament',
     ),
     131 => 
     array (
       0 => 'GameTest::check_setting_results_2_draw_game',
+      1 => 'TournamentTest::check_gen_games_simulate_with_categories_tournament',
     ),
     132 => 
     array (
       0 => 'GameTest::check_setting_results_2_draw_game',
+      1 => 'TournamentTest::check_gen_games_simulate_with_categories_tournament',
     ),
     133 => 
     array (
       0 => 'GameTest::check_setting_results_2_draw_game',
+      1 => 'TournamentTest::check_gen_games_simulate_with_categories_tournament',
     ),
     134 => 
     array (
       0 => 'GameTest::check_setting_results_2_draw_game',
+      1 => 'TournamentTest::check_gen_games_simulate_with_categories_tournament',
     ),
     135 => NULL,
     138 => 
@@ -8470,20 +8473,21 @@ $coverage->setData(array (
       12 => 'ProgressionTest::check_progressing_blank_wint_filters',
       13 => 'RoundTest::check_sorting_teams_by_score_round',
       14 => 'RoundTest::check_played_round',
-      15 => 'RoundTest::check_progress_blank_round',
-      16 => 'TournamentTest::check_gen_games_simulate_tournament',
-      17 => 'TournamentTest::check_gen_games_simulate_with_time_tournament',
-      18 => 'TournamentTest::check_gen_games_simulate_real_tournament',
-      19 => 'TournamentTest::check_gen_games_simulate_real_with_time_tournament',
-      20 => 'TournamentTest::check_gen_games_simulate_with_categories_tournament',
-      21 => 'TournamentTest::check_gen_games_simulate_with_categories_with_time_tournament',
-      22 => 'TournamentTest::check_gen_games_simulate_with_categories_real_tournament',
-      23 => 'TournamentTest::check_gen_games_simulate_with_categories_real_with_time_tournament',
-      24 => 'TournamentTest::check_tournament_time_tournament',
-      25 => 'TournamentTest::check_getting_games_tournament',
-      26 => 'TournamentTest::check_sorting_teams_by_score_tournament',
-      27 => 'TwoRoundsEliminationTest::test_2R2G_elimination_even_teams',
-      28 => 'TwoRoundsEliminationTest::test_2R2G_elimination_nondivisible_by_4',
+      15 => 'RoundTest::check_progress_round',
+      16 => 'RoundTest::check_progress_blank_round',
+      17 => 'TournamentTest::check_gen_games_simulate_tournament',
+      18 => 'TournamentTest::check_gen_games_simulate_with_time_tournament',
+      19 => 'TournamentTest::check_gen_games_simulate_real_tournament',
+      20 => 'TournamentTest::check_gen_games_simulate_real_with_time_tournament',
+      21 => 'TournamentTest::check_gen_games_simulate_with_categories_tournament',
+      22 => 'TournamentTest::check_gen_games_simulate_with_categories_with_time_tournament',
+      23 => 'TournamentTest::check_gen_games_simulate_with_categories_real_tournament',
+      24 => 'TournamentTest::check_gen_games_simulate_with_categories_real_with_time_tournament',
+      25 => 'TournamentTest::check_tournament_time_tournament',
+      26 => 'TournamentTest::check_getting_games_tournament',
+      27 => 'TournamentTest::check_sorting_teams_by_score_tournament',
+      28 => 'TwoRoundsEliminationTest::test_2R2G_elimination_even_teams',
+      29 => 'TwoRoundsEliminationTest::test_2R2G_elimination_nondivisible_by_4',
     ),
     192 => 
     array (
@@ -8502,20 +8506,21 @@ $coverage->setData(array (
       12 => 'ProgressionTest::check_progressing_blank_wint_filters',
       13 => 'RoundTest::check_sorting_teams_by_score_round',
       14 => 'RoundTest::check_played_round',
-      15 => 'RoundTest::check_progress_blank_round',
-      16 => 'TournamentTest::check_gen_games_simulate_tournament',
-      17 => 'TournamentTest::check_gen_games_simulate_with_time_tournament',
-      18 => 'TournamentTest::check_gen_games_simulate_real_tournament',
-      19 => 'TournamentTest::check_gen_games_simulate_real_with_time_tournament',
-      20 => 'TournamentTest::check_gen_games_simulate_with_categories_tournament',
-      21 => 'TournamentTest::check_gen_games_simulate_with_categories_with_time_tournament',
-      22 => 'TournamentTest::check_gen_games_simulate_with_categories_real_tournament',
-      23 => 'TournamentTest::check_gen_games_simulate_with_categories_real_with_time_tournament',
-      24 => 'TournamentTest::check_tournament_time_tournament',
-      25 => 'TournamentTest::check_getting_games_tournament',
-      26 => 'TournamentTest::check_sorting_teams_by_score_tournament',
-      27 => 'TwoRoundsEliminationTest::test_2R2G_elimination_even_teams',
-      28 => 'TwoRoundsEliminationTest::test_2R2G_elimination_nondivisible_by_4',
+      15 => 'RoundTest::check_progress_round',
+      16 => 'RoundTest::check_progress_blank_round',
+      17 => 'TournamentTest::check_gen_games_simulate_tournament',
+      18 => 'TournamentTest::check_gen_games_simulate_with_time_tournament',
+      19 => 'TournamentTest::check_gen_games_simulate_real_tournament',
+      20 => 'TournamentTest::check_gen_games_simulate_real_with_time_tournament',
+      21 => 'TournamentTest::check_gen_games_simulate_with_categories_tournament',
+      22 => 'TournamentTest::check_gen_games_simulate_with_categories_with_time_tournament',
+      23 => 'TournamentTest::check_gen_games_simulate_with_categories_real_tournament',
+      24 => 'TournamentTest::check_gen_games_simulate_with_categories_real_with_time_tournament',
+      25 => 'TournamentTest::check_tournament_time_tournament',
+      26 => 'TournamentTest::check_getting_games_tournament',
+      27 => 'TournamentTest::check_sorting_teams_by_score_tournament',
+      28 => 'TwoRoundsEliminationTest::test_2R2G_elimination_even_teams',
+      29 => 'TwoRoundsEliminationTest::test_2R2G_elimination_nondivisible_by_4',
     ),
     193 => 
     array (
@@ -8534,20 +8539,21 @@ $coverage->setData(array (
       12 => 'ProgressionTest::check_progressing_blank_wint_filters',
       13 => 'RoundTest::check_sorting_teams_by_score_round',
       14 => 'RoundTest::check_played_round',
-      15 => 'RoundTest::check_progress_blank_round',
-      16 => 'TournamentTest::check_gen_games_simulate_tournament',
-      17 => 'TournamentTest::check_gen_games_simulate_with_time_tournament',
-      18 => 'TournamentTest::check_gen_games_simulate_real_tournament',
-      19 => 'TournamentTest::check_gen_games_simulate_real_with_time_tournament',
-      20 => 'TournamentTest::check_gen_games_simulate_with_categories_tournament',
-      21 => 'TournamentTest::check_gen_games_simulate_with_categories_with_time_tournament',
-      22 => 'TournamentTest::check_gen_games_simulate_with_categories_real_tournament',
-      23 => 'TournamentTest::check_gen_games_simulate_with_categories_real_with_time_tournament',
-      24 => 'TournamentTest::check_tournament_time_tournament',
-      25 => 'TournamentTest::check_getting_games_tournament',
-      26 => 'TournamentTest::check_sorting_teams_by_score_tournament',
-      27 => 'TwoRoundsEliminationTest::test_2R2G_elimination_even_teams',
-      28 => 'TwoRoundsEliminationTest::test_2R2G_elimination_nondivisible_by_4',
+      15 => 'RoundTest::check_progress_round',
+      16 => 'RoundTest::check_progress_blank_round',
+      17 => 'TournamentTest::check_gen_games_simulate_tournament',
+      18 => 'TournamentTest::check_gen_games_simulate_with_time_tournament',
+      19 => 'TournamentTest::check_gen_games_simulate_real_tournament',
+      20 => 'TournamentTest::check_gen_games_simulate_real_with_time_tournament',
+      21 => 'TournamentTest::check_gen_games_simulate_with_categories_tournament',
+      22 => 'TournamentTest::check_gen_games_simulate_with_categories_with_time_tournament',
+      23 => 'TournamentTest::check_gen_games_simulate_with_categories_real_tournament',
+      24 => 'TournamentTest::check_gen_games_simulate_with_categories_real_with_time_tournament',
+      25 => 'TournamentTest::check_tournament_time_tournament',
+      26 => 'TournamentTest::check_getting_games_tournament',
+      27 => 'TournamentTest::check_sorting_teams_by_score_tournament',
+      28 => 'TwoRoundsEliminationTest::test_2R2G_elimination_even_teams',
+      29 => 'TwoRoundsEliminationTest::test_2R2G_elimination_nondivisible_by_4',
     ),
     194 => 
     array (
@@ -8566,20 +8572,21 @@ $coverage->setData(array (
       12 => 'ProgressionTest::check_progressing_blank_wint_filters',
       13 => 'RoundTest::check_sorting_teams_by_score_round',
       14 => 'RoundTest::check_played_round',
-      15 => 'RoundTest::check_progress_blank_round',
-      16 => 'TournamentTest::check_gen_games_simulate_tournament',
-      17 => 'TournamentTest::check_gen_games_simulate_with_time_tournament',
-      18 => 'TournamentTest::check_gen_games_simulate_real_tournament',
-      19 => 'TournamentTest::check_gen_games_simulate_real_with_time_tournament',
-      20 => 'TournamentTest::check_gen_games_simulate_with_categories_tournament',
-      21 => 'TournamentTest::check_gen_games_simulate_with_categories_with_time_tournament',
-      22 => 'TournamentTest::check_gen_games_simulate_with_categories_real_tournament',
-      23 => 'TournamentTest::check_gen_games_simulate_with_categories_real_with_time_tournament',
-      24 => 'TournamentTest::check_tournament_time_tournament',
-      25 => 'TournamentTest::check_getting_games_tournament',
-      26 => 'TournamentTest::check_sorting_teams_by_score_tournament',
-      27 => 'TwoRoundsEliminationTest::test_2R2G_elimination_even_teams',
-      28 => 'TwoRoundsEliminationTest::test_2R2G_elimination_nondivisible_by_4',
+      15 => 'RoundTest::check_progress_round',
+      16 => 'RoundTest::check_progress_blank_round',
+      17 => 'TournamentTest::check_gen_games_simulate_tournament',
+      18 => 'TournamentTest::check_gen_games_simulate_with_time_tournament',
+      19 => 'TournamentTest::check_gen_games_simulate_real_tournament',
+      20 => 'TournamentTest::check_gen_games_simulate_real_with_time_tournament',
+      21 => 'TournamentTest::check_gen_games_simulate_with_categories_tournament',
+      22 => 'TournamentTest::check_gen_games_simulate_with_categories_with_time_tournament',
+      23 => 'TournamentTest::check_gen_games_simulate_with_categories_real_tournament',
+      24 => 'TournamentTest::check_gen_games_simulate_with_categories_real_with_time_tournament',
+      25 => 'TournamentTest::check_tournament_time_tournament',
+      26 => 'TournamentTest::check_getting_games_tournament',
+      27 => 'TournamentTest::check_sorting_teams_by_score_tournament',
+      28 => 'TwoRoundsEliminationTest::test_2R2G_elimination_even_teams',
+      29 => 'TwoRoundsEliminationTest::test_2R2G_elimination_nondivisible_by_4',
     ),
     196 => 
     array (
@@ -8598,20 +8605,21 @@ $coverage->setData(array (
       12 => 'ProgressionTest::check_progressing_blank_wint_filters',
       13 => 'RoundTest::check_sorting_teams_by_score_round',
       14 => 'RoundTest::check_played_round',
-      15 => 'RoundTest::check_progress_blank_round',
-      16 => 'TournamentTest::check_gen_games_simulate_tournament',
-      17 => 'TournamentTest::check_gen_games_simulate_with_time_tournament',
-      18 => 'TournamentTest::check_gen_games_simulate_real_tournament',
-      19 => 'TournamentTest::check_gen_games_simulate_real_with_time_tournament',
-      20 => 'TournamentTest::check_gen_games_simulate_with_categories_tournament',
-      21 => 'TournamentTest::check_gen_games_simulate_with_categories_with_time_tournament',
-      22 => 'TournamentTest::check_gen_games_simulate_with_categories_real_tournament',
-      23 => 'TournamentTest::check_gen_games_simulate_with_categories_real_with_time_tournament',
-      24 => 'TournamentTest::check_tournament_time_tournament',
-      25 => 'TournamentTest::check_getting_games_tournament',
-      26 => 'TournamentTest::check_sorting_teams_by_score_tournament',
-      27 => 'TwoRoundsEliminationTest::test_2R2G_elimination_even_teams',
-      28 => 'TwoRoundsEliminationTest::test_2R2G_elimination_nondivisible_by_4',
+      15 => 'RoundTest::check_progress_round',
+      16 => 'RoundTest::check_progress_blank_round',
+      17 => 'TournamentTest::check_gen_games_simulate_tournament',
+      18 => 'TournamentTest::check_gen_games_simulate_with_time_tournament',
+      19 => 'TournamentTest::check_gen_games_simulate_real_tournament',
+      20 => 'TournamentTest::check_gen_games_simulate_real_with_time_tournament',
+      21 => 'TournamentTest::check_gen_games_simulate_with_categories_tournament',
+      22 => 'TournamentTest::check_gen_games_simulate_with_categories_with_time_tournament',
+      23 => 'TournamentTest::check_gen_games_simulate_with_categories_real_tournament',
+      24 => 'TournamentTest::check_gen_games_simulate_with_categories_real_with_time_tournament',
+      25 => 'TournamentTest::check_tournament_time_tournament',
+      26 => 'TournamentTest::check_getting_games_tournament',
+      27 => 'TournamentTest::check_sorting_teams_by_score_tournament',
+      28 => 'TwoRoundsEliminationTest::test_2R2G_elimination_even_teams',
+      29 => 'TwoRoundsEliminationTest::test_2R2G_elimination_nondivisible_by_4',
     ),
     197 => NULL,
     200 => 
@@ -10333,78 +10341,70 @@ $coverage->setData(array (
       0 => 'GeneratorTest::check_group_generator_cond_split',
       1 => 'GroupTest::check_games_generation_split_group',
       2 => 'TwoRoundsEliminationTest::test_2R2G_elimination_even_teams',
-      3 => 'TwoRoundsEliminationTest::test_2R2G_elimination_nondivisible_by_4',
     ),
     141 => 
     array (
       0 => 'GeneratorTest::check_group_generator_cond_split',
       1 => 'GroupTest::check_games_generation_split_group',
       2 => 'TwoRoundsEliminationTest::test_2R2G_elimination_even_teams',
-      3 => 'TwoRoundsEliminationTest::test_2R2G_elimination_nondivisible_by_4',
     ),
     142 => 
     array (
       0 => 'GeneratorTest::check_group_generator_cond_split',
       1 => 'GroupTest::check_games_generation_split_group',
       2 => 'TwoRoundsEliminationTest::test_2R2G_elimination_even_teams',
-      3 => 'TwoRoundsEliminationTest::test_2R2G_elimination_nondivisible_by_4',
     ),
     143 => 
     array (
       0 => 'GeneratorTest::check_group_generator_cond_split',
       1 => 'GroupTest::check_games_generation_split_group',
       2 => 'TwoRoundsEliminationTest::test_2R2G_elimination_even_teams',
-      3 => 'TwoRoundsEliminationTest::test_2R2G_elimination_nondivisible_by_4',
     ),
     144 => 
     array (
       0 => 'GeneratorTest::check_group_generator_cond_split',
       1 => 'GroupTest::check_games_generation_split_group',
       2 => 'TwoRoundsEliminationTest::test_2R2G_elimination_even_teams',
-      3 => 'TwoRoundsEliminationTest::test_2R2G_elimination_nondivisible_by_4',
     ),
     145 => 
     array (
       0 => 'GeneratorTest::check_group_generator_cond_split',
       1 => 'GroupTest::check_games_generation_split_group',
       2 => 'TwoRoundsEliminationTest::test_2R2G_elimination_even_teams',
-      3 => 'TwoRoundsEliminationTest::test_2R2G_elimination_nondivisible_by_4',
     ),
     146 => 
     array (
       0 => 'GeneratorTest::check_group_generator_cond_split',
       1 => 'GroupTest::check_games_generation_split_group',
       2 => 'TwoRoundsEliminationTest::test_2R2G_elimination_even_teams',
-      3 => 'TwoRoundsEliminationTest::test_2R2G_elimination_nondivisible_by_4',
     ),
     147 => 
     array (
       0 => 'GeneratorTest::check_group_generator_cond_split',
       1 => 'GroupTest::check_games_generation_split_group',
       2 => 'TwoRoundsEliminationTest::test_2R2G_elimination_even_teams',
-      3 => 'TwoRoundsEliminationTest::test_2R2G_elimination_nondivisible_by_4',
     ),
     148 => 
     array (
       0 => 'GeneratorTest::check_group_generator_cond_split',
       1 => 'GroupTest::check_games_generation_split_group',
       2 => 'TwoRoundsEliminationTest::test_2R2G_elimination_even_teams',
-      3 => 'TwoRoundsEliminationTest::test_2R2G_elimination_nondivisible_by_4',
     ),
     151 => 
     array (
       0 => 'GeneratorTest::check_group_generator_cond_split',
       1 => 'GroupTest::check_games_generation_split_group',
       2 => 'TwoRoundsEliminationTest::test_2R2G_elimination_even_teams',
-      3 => 'TwoRoundsEliminationTest::test_2R2G_elimination_nondivisible_by_4',
     ),
     153 => 
     array (
       0 => 'GeneratorTest::check_group_generator_cond_split_without_splitting',
+      1 => 'TwoRoundsEliminationTest::test_2R2G_elimination_nondivisible_by_4',
     ),
     155 => 
     array (
       0 => 'GeneratorTest::check_group_generator_cond_split_without_splitting',
+      1 => 'TwoRoundsEliminationTest::test_2R2G_elimination_nondivisible_by_4',
     ),
     156 => NULL,
     159 => 
@@ -17616,51 +17616,57 @@ $coverage->setData(array (
     111 => NULL,
     114 => 
     array (
-      0 => 'FilterTest::check_filter_creation_multi',
-      1 => 'FilterTest::check_filter_creation_multi_round',
-      2 => 'FilterTest::check_filter_creation_multi_tournament',
-      3 => 'FilterTest::check_filter_creation_multi_false_filter_multi',
-      4 => 'FilterTest::check_filter_creation_multi_false_operrand_multi',
-      5 => 'FilterTest::check_filter_creation_multi_false_filter_and',
-      6 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
-      7 => 'FilterTest::check_filter_creation_multi_false_filter_or',
-      8 => 'FilterTest::check_filter_creation_multi_false_operrand_or',
-      9 => 'FilterTest::check_filter_creation_multi_with_double_comp',
-      10 => 'GameTest::check_setting_results_2_draw_game',
-      11 => 'GameTest::check_getting_draw_teams_2_game',
-      12 => 'TeamFilterTest::check_filter_validate_draws_teamFilter',
+      0 => 'CategoryTest::check_gen_games_simulate_real_category',
+      1 => 'FilterTest::check_filter_creation_multi',
+      2 => 'FilterTest::check_filter_creation_multi_round',
+      3 => 'FilterTest::check_filter_creation_multi_tournament',
+      4 => 'FilterTest::check_filter_creation_multi_false_filter_multi',
+      5 => 'FilterTest::check_filter_creation_multi_false_operrand_multi',
+      6 => 'FilterTest::check_filter_creation_multi_false_filter_and',
+      7 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
+      8 => 'FilterTest::check_filter_creation_multi_false_filter_or',
+      9 => 'FilterTest::check_filter_creation_multi_false_operrand_or',
+      10 => 'FilterTest::check_filter_creation_multi_with_double_comp',
+      11 => 'GameTest::check_setting_results_2_draw_game',
+      12 => 'GameTest::check_getting_draw_teams_2_game',
+      13 => 'TeamFilterTest::check_filter_validate_draws_teamFilter',
+      14 => 'TournamentTest::check_gen_games_simulate_with_categories_tournament',
     ),
     115 => 
     array (
-      0 => 'FilterTest::check_filter_creation_multi',
-      1 => 'FilterTest::check_filter_creation_multi_round',
-      2 => 'FilterTest::check_filter_creation_multi_tournament',
-      3 => 'FilterTest::check_filter_creation_multi_false_filter_multi',
-      4 => 'FilterTest::check_filter_creation_multi_false_operrand_multi',
-      5 => 'FilterTest::check_filter_creation_multi_false_filter_and',
-      6 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
-      7 => 'FilterTest::check_filter_creation_multi_false_filter_or',
-      8 => 'FilterTest::check_filter_creation_multi_false_operrand_or',
-      9 => 'FilterTest::check_filter_creation_multi_with_double_comp',
-      10 => 'GameTest::check_setting_results_2_draw_game',
-      11 => 'GameTest::check_getting_draw_teams_2_game',
-      12 => 'TeamFilterTest::check_filter_validate_draws_teamFilter',
+      0 => 'CategoryTest::check_gen_games_simulate_real_category',
+      1 => 'FilterTest::check_filter_creation_multi',
+      2 => 'FilterTest::check_filter_creation_multi_round',
+      3 => 'FilterTest::check_filter_creation_multi_tournament',
+      4 => 'FilterTest::check_filter_creation_multi_false_filter_multi',
+      5 => 'FilterTest::check_filter_creation_multi_false_operrand_multi',
+      6 => 'FilterTest::check_filter_creation_multi_false_filter_and',
+      7 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
+      8 => 'FilterTest::check_filter_creation_multi_false_filter_or',
+      9 => 'FilterTest::check_filter_creation_multi_false_operrand_or',
+      10 => 'FilterTest::check_filter_creation_multi_with_double_comp',
+      11 => 'GameTest::check_setting_results_2_draw_game',
+      12 => 'GameTest::check_getting_draw_teams_2_game',
+      13 => 'TeamFilterTest::check_filter_validate_draws_teamFilter',
+      14 => 'TournamentTest::check_gen_games_simulate_with_categories_tournament',
     ),
     116 => 
     array (
-      0 => 'FilterTest::check_filter_creation_multi',
-      1 => 'FilterTest::check_filter_creation_multi_round',
-      2 => 'FilterTest::check_filter_creation_multi_tournament',
-      3 => 'FilterTest::check_filter_creation_multi_false_filter_multi',
-      4 => 'FilterTest::check_filter_creation_multi_false_operrand_multi',
-      5 => 'FilterTest::check_filter_creation_multi_false_filter_and',
-      6 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
-      7 => 'FilterTest::check_filter_creation_multi_false_filter_or',
-      8 => 'FilterTest::check_filter_creation_multi_false_operrand_or',
-      9 => 'FilterTest::check_filter_creation_multi_with_double_comp',
-      10 => 'GameTest::check_setting_results_2_draw_game',
-      11 => 'GameTest::check_getting_draw_teams_2_game',
-      12 => 'TeamFilterTest::check_filter_validate_draws_teamFilter',
+      0 => 'CategoryTest::check_gen_games_simulate_real_category',
+      1 => 'FilterTest::check_filter_creation_multi',
+      2 => 'FilterTest::check_filter_creation_multi_round',
+      3 => 'FilterTest::check_filter_creation_multi_tournament',
+      4 => 'FilterTest::check_filter_creation_multi_false_filter_multi',
+      5 => 'FilterTest::check_filter_creation_multi_false_operrand_multi',
+      6 => 'FilterTest::check_filter_creation_multi_false_filter_and',
+      7 => 'FilterTest::check_filter_creation_multi_false_operrand_and',
+      8 => 'FilterTest::check_filter_creation_multi_false_filter_or',
+      9 => 'FilterTest::check_filter_creation_multi_false_operrand_or',
+      10 => 'FilterTest::check_filter_creation_multi_with_double_comp',
+      11 => 'GameTest::check_setting_results_2_draw_game',
+      12 => 'GameTest::check_getting_draw_teams_2_game',
+      13 => 'TeamFilterTest::check_filter_validate_draws_teamFilter',
+      14 => 'TournamentTest::check_gen_games_simulate_with_categories_tournament',
     ),
     118 => 
     array (
@@ -18777,10 +18783,12 @@ $coverage->setData(array (
     190 => 
     array (
       0 => 'GameTest::check_setting_results_2_draw_game',
+      1 => 'TournamentTest::check_gen_games_simulate_with_categories_tournament',
     ),
     191 => 
     array (
       0 => 'GameTest::check_setting_results_2_draw_game',
+      1 => 'TournamentTest::check_gen_games_simulate_with_categories_tournament',
     ),
     192 => 
     array (
@@ -19429,6 +19437,7 @@ $coverage->setData(array (
     72 => 
     array (
       0 => 'GeneratorTest::check_group_generator_r_r_4_with_games_ordering',
+      1 => 'GeneratorTest::check_group_generator_r_r_4_with_games_ordering2',
     ),
     75 => 
     array (
@@ -19982,19 +19991,23 @@ $coverage->setData(array (
     ),
     136 => 
     array (
-      0 => 'GeneratorTest::check_group_generator_r_r_4_with_games_ordering2',
+      0 => 'GeneratorTest::check_group_generator_r_r_4_with_games_ordering',
+      1 => 'GeneratorTest::check_group_generator_r_r_4_with_games_ordering2',
     ),
     137 => 
     array (
-      0 => 'GeneratorTest::check_group_generator_r_r_4_with_games_ordering2',
+      0 => 'GeneratorTest::check_group_generator_r_r_4_with_games_ordering',
+      1 => 'GeneratorTest::check_group_generator_r_r_4_with_games_ordering2',
     ),
     138 => 
     array (
-      0 => 'GeneratorTest::check_group_generator_r_r_4_with_games_ordering2',
+      0 => 'GeneratorTest::check_group_generator_r_r_4_with_games_ordering',
+      1 => 'GeneratorTest::check_group_generator_r_r_4_with_games_ordering2',
     ),
     139 => 
     array (
-      0 => 'GeneratorTest::check_group_generator_r_r_4_with_games_ordering2',
+      0 => 'GeneratorTest::check_group_generator_r_r_4_with_games_ordering',
+      1 => 'GeneratorTest::check_group_generator_r_r_4_with_games_ordering2',
     ),
     142 => 
     array (

@@ -22,7 +22,7 @@ See [Examples](/examples/basic/)
 
 | Scope | Name | Type | Default | Description |
 | :---: | :--: | :--: | :-----: | :---------: |
-| private | `$name` | `string` | `''` | Name of the tournament |
+| protected | `$name` | `string` | `''` | Name of the tournament |
 | private | `$categories` | `array` | `[]` | List of tournament categories |
 | private | `$rounds` | `array` | `[]` | List of tournament rounds |
 | private | `$teams` | `array` | `[]` | List of teams |
@@ -40,7 +40,7 @@ See [Examples](/examples/basic/)
 | public | [`__construct`](#construct) | `$this` | Construct method |
 | public | [`__toString`](#toString) | `string` | Returns the name of the tournament |
 | public | [`setName`](#setName) | `$this` | Sets name of the tournament. |
-| public | [`getName`](#getName) | `$this` | Gets name of the tournament. |
+| public | [`getName`](#getName) | `string` | Gets name of the tournament. |
 | public | [`setPlay`](#setPlay) | `$this` | Sets time to play one game in minutes. |
 | public | [`getPlay`](#getPlay) | `int` | Gets time to play one game in minutes. |
 | public | [`setGameWait`](#setGameWait) | `$this` | Sets time to wait between games in minutes. |
@@ -73,7 +73,7 @@ See [Examples](/examples/basic/)
 ---
 
 <a name="construct" id="construct"></a>
-### TournamentGenerator\Tournament \_\_construct(string $name)
+### Tournament \_\_construct(string $name)
 
 Creates a new **[Tournament](/classes/tournament/)** class
 
@@ -117,7 +117,7 @@ public function __toString() {
 ---
 
 <a name="setName" id="setName"></a>
-###  public TournamentGenerator\Tournament setName(string $name)
+### public Tournament setName(string $name)
 
 Sets the name of the tournament.
 
@@ -142,7 +142,7 @@ public function setName(string $name) {
 ---
 
 <a name="getName" id="getName"></a>
-###  public int getName()
+### public string getName()
 
 Gets the name of the tournament.
 
@@ -161,7 +161,7 @@ public function getName() {
 ---
 
 <a name="setPlay" id="setPlay"></a>
-###  public TournamentGenerator\Tournament setPlay(int $play)
+### public Tournament setPlay(int $play)
 
 Sets time to play one game in minutes.
 
@@ -186,7 +186,7 @@ public function setPlay(int $play) {
 ---
 
 <a name="getPlay" id="getPlay"></a>
-###  public int getPlay()
+### public int getPlay()
 
 Gets time to play one game in minutes.
 
@@ -205,7 +205,7 @@ public function getPlay() {
 ---
 
 <a name="setGameWait" id="setGameWait"></a>
-###  public TournamentGenerator\Tournament setGameWait(int $wait)
+### public Tournament setGameWait(int $wait)
 
 Sets time to wait between games in minutes.
 
@@ -230,7 +230,7 @@ public function setGameWait(int $wait) {
 ---
 
 <a name="getGameWait" id="getGameWait"></a>
-###  public int getGameWait()
+### public int getGameWait()
 
 Sets time to play one game in minutes.
 
@@ -249,7 +249,7 @@ public function getGameWait() {
 ---
 
 <a name="setRoundWait" id="setRoundWait"></a>
-###  public TournamentGenerator\Tournament setRoundWait(int $wait)
+### public Tournament setRoundWait(int $wait)
 
 Sets time to wait between rounds in minutes.
 
@@ -274,7 +274,7 @@ public function setRoundWait(int $wait) {
 ---
 
 <a name="getRoundWait" id="getRoundWait"></a>
-###  public int getRoundWait()
+### public int getRoundWait()
 
 Gets time between rounds in minutes.
 
@@ -293,7 +293,7 @@ public function getRoundWait() {
 ---
 
 <a name="setCategoryWait" id="setCategoryWait"></a>
-###  public TournamentGenerator\Tournament setCategoryWait(int $wait)
+### public Tournament setCategoryWait(int $wait)
 
 Sets time to wait between categories in minutes.
 
@@ -318,7 +318,7 @@ public function setCategoryWait(int $wait) {
 ---
 
 <a name="getCategoryWait" id="getCategoryWait"></a>
-###  public int getCategoryWait()
+### public int getCategoryWait()
 
 Gets time between categories in minutes.
 
@@ -337,7 +337,7 @@ public function getCategoryWait() {
 ---
 
 <a name="getTournamentTime" id="getTournamentTime"></a>
-###  public int getTournamentTime()
+### public int getTournamentTime()
 
 Gets expected time to play the whole tournament.
 
@@ -357,7 +357,7 @@ public function getTournamentTime(){
 ---
 
 <a name="allowSkip" id="allowSkip"></a>
-###  public TournamentGenerator\Tournament allowSkip()
+### public Tournament allowSkip()
 
 Allow skipping of unplayed games while progressing.
 
@@ -377,7 +377,7 @@ public function allowSkip(){
 ---
 
 <a name="disallowSkip" id="disallowSkip"></a>
-###  public TournamentGenerator\Tournament disallowSkip()
+### public Tournament disallowSkip()
 
 Disallow skipping of unplayed games while progressing.
 
@@ -397,7 +397,7 @@ public function disallowSkip(){
 ---
 
 <a name="setSkip" id="setSkip"></a>
-###  public TournamentGenerator\Tournament setSkip(bool $skip)
+### public Tournament setSkip(bool $skip)
 
 Sets whether an unplayed games should be skipped while progressing or not.
 
@@ -422,7 +422,7 @@ public function setSkip(bool $skip) {
 ---
 
 <a name="getSkip" id="getSkip"></a>
-###  public bool getSkip()
+### public bool getSkip()
 
 Gets whether an unplayed games should be skipped while progressing or not.
 
@@ -441,7 +441,7 @@ public function getSkip(bool $skip) {
 ---
 
 <a name="addCategory" id="addCategory"></a>
-###  public bool addCategory(TournamentGenerator\\Category ...$categories)
+### public Tournament addCategory(TournamentGenerator\\Category ...$categories)
 
 Adds created **[Categories](/classes/category/)** to **[Tournament](/classes/tournament/)**.
 
@@ -469,7 +469,7 @@ public function addCategory(Category ...$categories){
 ---
 
 <a name="category" id="category"></a>
-###  public bool category(string $name)
+### public Category category(string $name)
 
 Creates and adds new **[Category](/classes/category/)** to **[Tournament](/classes/tournament/)**.
 
@@ -477,6 +477,7 @@ Creates and adds new **[Category](/classes/category/)** to **[Tournament](/class
 | Name | Type | Default | Description |
 | :--: | :--: | :-----: | :---------: |
 | `$name` | `string` | `''` | Name of the new **[Category](/classes/category/)**. |
+| `$id` | `string|int` | `null` | Id of the new **[Category](/classes/category/)**. |
 
 ##### Return value
 ```php
@@ -485,8 +486,8 @@ new TournamentGenerator\Category
 #### Code
 
 ```php
-public function category(string $name = '') {
-	$c = new Category($name);
+public function category(string $name = '', $id = null) {
+	$c = new Category($name, $id);
 	$this->categories[] = $c->setSkip($this->allowSkip);
 	return $c;
 }
@@ -495,7 +496,7 @@ public function category(string $name = '') {
 ---
 
 <a name="getCategories" id="getCategories"></a>
-###  public bool getCategories()
+### public array getCategories()
 
 Gets an array of all **[Categories](/classes/category/)** from **[Tournament](/classes/tournament/)**.
 
@@ -514,7 +515,7 @@ public function getCategories() {
 ---
 
 <a name="addRound" id="addRound"></a>
-###  public bool addRound(TournamentGenerator\\Round ...$rounds)
+### public Tournament addRound(TournamentGenerator\\Round ...$rounds)
 
 Adds created **[Round](/classes/round/)** to **[Tournament](/classes/tournament/)**.
 
@@ -542,7 +543,7 @@ public function addRound(Round ...$rounds) {
 ---
 
 <a name="round" id="round"></a>
-###  public bool round(string $name)
+### public Round round(string $name)
 
 Creates and adds new **[Round](/classes/round/)** to **[Tournament](/classes/tournament/)**.
 
@@ -550,6 +551,7 @@ Creates and adds new **[Round](/classes/round/)** to **[Tournament](/classes/tou
 | Name | Type | Default | Description |
 | :--: | :--: | :-----: | :---------: |
 | `$name` | `string` | `''` | Name of the new **[Round](/classes/round/)**. |
+| `$id` | `string|int` | `null` | Id of the new **[Round](/classes/round/)**. |
 
 ##### Return value
 ```php
@@ -558,8 +560,8 @@ new TournamentGenerator\Round
 #### Code
 
 ```php
-public function round(string $name = '') {
-	$r = new Round($name);
+public function round(string $name = '', $id = null) {
+	$r = new Round($name, $id);
 	$this->rounds[] = $r->setSkip($this->allowSkip);
 	return $r;
 }
@@ -568,7 +570,7 @@ public function round(string $name = '') {
 ---
 
 <a name="getRounds" id="getRounds"></a>
-###  public bool getRounds()
+### public array getRounds()
 
 Gets an array of all **[Rounds](/classes/round/)** from **[Tournament](/classes/tournament/)**.
 
@@ -594,7 +596,7 @@ public function getRounds() {
 ---
 
 <a name="getGroups" id="getGroups"></a>
-###  public bool getGroups()
+### public array getGroups()
 
 Gets an array of all **[Groups](/classes/round/)** from **[Tournament](/classes/tournament/)**.
 
@@ -617,7 +619,7 @@ public function getGroups() {
 ---
 
 <a name="addTeam" id="addTeam"></a>
-###  public bool addTeam(TournamentGenerator\\Team ...$teams)
+### public Tournament addTeam(TournamentGenerator\\Team ...$teams)
 
 Adds created **[Team](/classes/team/)** to **[Tournament](/classes/tournament/)**.
 
@@ -635,17 +637,7 @@ $this
 ```php
 public function addTeam(Team ...$teams) {
 	foreach ($teams as $team) {
-		if ($team instanceof Team)  {
-			$this->teams[] = $team;
-			continue;
-		}
-		elseif (gettype($team) === 'array') {
-			$teams = array_merge($teams, array_filter($team, function($a) {
-				return ($a instanceof Team);
-			}));
-			continue;
-		}
-		throw new \Exception('Trying to add team which is not an instance of Team class');
+		$this->teams[] = $team;
 	}
 	return $this;
 }
@@ -654,7 +646,7 @@ public function addTeam(Team ...$teams) {
 ---
 
 <a name="team" id="team"></a>
-###  public bool team(string $name)
+### public Team team(string $name)
 
 Creates and adds new **[Team](/classes/team/)** to **[Tournament](/classes/tournament/)**.
 
@@ -662,6 +654,7 @@ Creates and adds new **[Team](/classes/team/)** to **[Tournament](/classes/tourn
 | Name | Type | Default | Description |
 | :--: | :--: | :-----: | :---------: |
 | `$name` | `string` | `''` | Name of the new **[Team](/classes/team/)**. |
+| `$id` | `string|int` | `null` | Id of the new **[Team](/classes/team/)**. |
 
 ##### Return value
 ```php
@@ -670,8 +663,8 @@ new TournamentGenerator\Team
 #### Code
 
 ```php
-public function team(string $name = '') {
-	$t = new Team($name);
+public function team(string $name = '', $id = null) {
+	$t = new Team($name, $id);
 	$this->teams[] = $t;
 	return $t;
 }
@@ -680,7 +673,7 @@ public function team(string $name = '') {
 ---
 
 <a name="getTeams" id="getTeams"></a>
-###  public bool getTeams(bool $ordered = false, $ordering = POINTS)
+### public array getTeams(bool $ordered = false, $ordering = POINTS)
 
 Gets an array of all **[Teams](/classes/team/)** from **[Tournament](/classes/tournament/)**.
 If passed `true` as the first argument, teams will be ordered.
@@ -689,7 +682,8 @@ If passed `true` as the first argument, teams will be ordered.
 | Name | Type | Default | Description |
 | :--: | :--: | :-----: | :---------: |
 | `$ordered` | `bool` | `false` | If teams should be ordered. |
-| `$ordering` | `POINTS / SCORE` | `POITS` | What to order the teams by. |
+| `$ordering` | `\TournamentGenerator\Constants::POINTS | \TournamentGenerator\Constants::SCORE` | `\TournamentGenerator\Constants::POINTS` | What to order the teams by. |
+| `$filters` | `array` | `[]` | **[Filters](/classes/teamFilter/)** to filter the teams. |
 
 ##### Return value
 ```php
@@ -698,33 +692,38 @@ array of TournamentGenerator\Team
 #### Code
 
 ```php
-public function getTeams(bool $ordered = false, $ordering = \POINTS) {
-	if (count($this->teams) === 0) {
-		$teams = [];
-		foreach ($this->categories as $category) {
-			$teams = array_merge($teams, $category->getTeams());
-		}
-		foreach ($this->rounds as $round) {
-			$teams = array_merge($teams, $round->getTeams());
-		}
-		$this->teams = $teams;
+public function getTeams(bool $ordered = false, $ordering = \TournamentGenerator\Constants::POINTS, array $filters = []) {
+	$teams = $this->teams;
+	foreach ($this->categories as $category) {
+		$teams = array_merge($teams, $category->getTeams());
 	}
-	if ($ordered) $this->sortTeams($ordering);
-	return $this->teams;
+	foreach ($this->rounds as $round) {
+		$teams = array_merge($teams, $round->getTeams());
+	}
+	$teams = \array_unique($teams);
+	$this->teams = $teams;
+	if ($ordered) $teams = $this->sortTeams($ordering);
+
+	// APPLY FILTERS
+	$filter = new Filter($this->getGroups(), $filters);
+	$filter->filter($teams);
+
+	return $teams;
 }
 ```
 
 ---
 
 <a name="sortTeams" id="sortTeams"></a>
-###  public bool sortTeams($ordering = POINTS)
+### public array sortTeams($ordering = POINTS)
 
 Sorts all **[Teams](/classes/team/)** from **[Tournament](/classes/tournament/)** and returns them.
 
 ##### Parameters
 | Name | Type | Default | Description |
 | :--: | :--: | :-----: | :---------: |
-| `$ordering` | `POINTS / SCORE` | `POITS` | What to order the teams by. |
+| `$ordering` | `\TournamentGenerator\Constants::POINTS | \TournamentGenerator\Constants::SCORE` | `\TournamentGenerator\Constants::POINTS` | What to order the teams by. |
+| `$filters` | `array` | `[]` | **[Filters](/classes/teamFilter/)** to filter the teams. |
 
 ##### Return value
 ```php
@@ -733,21 +732,26 @@ array of TournamentGenerator\Team
 #### Code
 
 ```php
-public function sortTeams($ordering = \POINTS) {
+public function sortTeams($ordering = \TournamentGenerator\Constants::POINTS, array $filters = []) {
 	$teams = [];
 	for ($i = count($this->rounds)-1; $i >= 0; $i--) {
 		$rTeams = array_filter($this->rounds[$i]->getTeams(true, $ordering), function($a) use ($teams) { return !in_array($a, $teams); });
 		$teams = array_merge($teams, $rTeams);
 	}
 	$this->teams = $teams;
-	return $this->teams;
+
+	// APPLY FILTERS
+	$filter = new Filter($this->getGroups(), $filters);
+	$filter->filter($teams);
+
+	return $teams;
 }
 ```
 
 ---
 
 <a name="getGames" id="getGames"></a>
-###  public bool getGames()
+### public array getGames()
 
 Gets an array of all **[Games](/classes/game/)** from **[Tournament](/classes/tournament/)**.
 
@@ -770,7 +774,7 @@ public function getGames() {
 ---
 
 <a name="splitTeams" id="splitTeams"></a>
-###  public bool splitTeams(TournamentGenerator\\Round ...$wheres)
+### public Tournament splitTeams(TournamentGenerator\\Round ...$wheres)
 
 Split all **[Teams](/classes/team/)** from **[Tournament](/classes/tournament/)** into given **[Rounds](/classes/round/)**. If no argument is given, method will split into all available **[Rounds](/classes/round/)** in **[Tournament](/classes/tournament/)**.
 
@@ -790,14 +794,6 @@ public function splitTeams(Round ...$wheres) {
 
 	if (count($wheres) === 0) $wheres = $this->getRounds();
 
-	foreach ($wheres as $key => $value) {
-		if (gettype($value) === 'array') {
-			unset($wheres[$key]);
-			$wheres = array_merge($wheres, $value);
-			continue;
-		}
-	}
-
 	$teams = $this->getTeams();
 	shuffle($teams);
 
@@ -816,7 +812,7 @@ public function splitTeams(Round ...$wheres) {
 ---
 
 <a name="genGamesSimulate" id="genGamesSimulate"></a>
-###  public bool genGamesSimulate(bool $returnTime)
+### public array|int genGamesSimulate(bool $returnTime)
 
 Generate and simulate all **[Games](/classes/game/)** from **[Tournament](/classes/tournament/)** without real teams (just to export) and returns array of all **[Games](/classes/game/)** or caculated tournament time. It uses **[BlankTeam](/classes/blankTeam/)** class for progressing.
 
@@ -850,7 +846,7 @@ public function genGamesSimulate(bool $returnTime = false) {
 ---
 
 <a name="genGamesSimulateReal" id="genGamesSimulateReal"></a>
-###  public bool genGamesSimulateReal(bool $returnTime)
+### public array|int genGamesSimulateReal(bool $returnTime)
 
 Generate and simulate all **[Games](/classes/game/)** from **[Tournament](/classes/tournament/)** with real teams (just as it was played for real) and returns array of all **[Games](/classes/game/)** or caculated tournament time.  
 Could be used for testing and demonstration purposes.
