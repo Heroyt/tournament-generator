@@ -42,6 +42,55 @@ class ProgressionTest extends TestCase
 	}
 
 	/** @test */
+	public function check_progressing_duplicates() {
+		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
+
+		for ($i=1; $i <= 8; $i++) {
+			$tournament->team('Team '.$i);
+		}
+		// Create a round and a final round
+		$round = $tournament->round("First's round's name");
+		$final = $tournament->round("Final's round's name");
+
+		// Create 2 groups for the first round
+		$group_1 = $round->group('Round 1')->setInGame(2)->setType(TournamentGenerator\Constants::ROUND_ROBIN);
+		$group_2 = $round->group('Round 2')->setInGame(2)->setType(TournamentGenerator\Constants::ROUND_ROBIN);
+
+		// Create a final group
+		$final_group = $final->group('Teams 1-4')->setInGame(2)->setType(TournamentGenerator\Constants::ROUND_ROBIN);
+		$second_group = $final->group('Teams 5-8')->setInGame(2)->setType(TournamentGenerator\Constants::ROUND_ROBIN);
+
+		$tournament->splitTeams($round);
+
+		$progression1 = $group_1->progression($final_group, 0, 2); // PROGRESS 2 BEST WINNING TEAMS
+		$progression2 = $group_2->progression($final_group, 0, 2); // PROGRESS 2 BEST WINNING TEAMS
+		$progression3 = $group_1->progression($second_group, 2, 2); // PROGRESS 2 BEST WINNING TEAMS
+		$progression4 = $group_2->progression($second_group, 2, 2); // PROGRESS 2 BEST WINNING TEAMS
+
+		$round->simulate();
+
+		$round->progress();
+
+		$this->assertCount(4, $final_group->getTeams());
+		$this->assertCount(4, $second_group->getTeams());
+
+		$round->progress();
+
+		$this->assertCount(4, $final_group->getTeams());
+		$this->assertCount(4, $second_group->getTeams());
+
+		$progression1->reset();
+		$progression2->reset();
+		$progression3->reset();
+		$progression4->reset();
+
+		$round->progress();
+
+		$this->assertCount(8, $final_group->getTeams());
+		$this->assertCount(8, $second_group->getTeams());
+	}
+
+	/** @test */
 	public function check_progressing_blank() {
 		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
 
@@ -106,6 +155,48 @@ class ProgressionTest extends TestCase
 		$group_2->progression($final_group)->addFilter($filter1);
 		$group_1->progression($second_group)->addFilter($filter2);
 		$group_2->progression($second_group)->addFilter($filter2);
+
+		$round->genGames();
+
+		$round->simulate();
+
+		$round->progress();
+
+		$filtered1 = $round->getTeams(false, null, [$filter1]);
+		$filtered2 = $round->getTeams(false, null, [$filter2]);
+
+		$this->assertCount(count($filtered1), $final_group->getTeams());
+		$this->assertCount(count($filtered2), $second_group->getTeams());
+	}
+
+	/** @test */
+	public function check_progressing_with_filters_setting() {
+		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
+
+		for ($i=1; $i <= 8; $i++) {
+			$tournament->team('Team '.$i);
+		}
+		// Create a round and a final round
+		$round = $tournament->round("First's round's name");
+		$final = $tournament->round("Final's round's name");
+
+		// Create 2 groups for the first round
+		$group_1 = $round->group('Round 1')->setInGame(2)->setType(TournamentGenerator\Constants::ROUND_ROBIN);
+		$group_2 = $round->group('Round 2')->setInGame(2)->setType(TournamentGenerator\Constants::ROUND_ROBIN);
+
+		// Create a final group
+		$final_group = $final->group('Teams 1-4')->setInGame(2)->setType(TournamentGenerator\Constants::ROUND_ROBIN);
+		$second_group = $final->group('Teams 5-8')->setInGame(2)->setType(TournamentGenerator\Constants::ROUND_ROBIN);
+
+		$tournament->splitTeams($round);
+
+		$filter1 = new \TournamentGenerator\TeamFilter('points', '>', 3, [$group_1, $group_2]);
+		$filter2 = new \TournamentGenerator\TeamFilter('losses', '<=', 3, [$group_1, $group_2]);
+
+		$group_1->progression($final_group)->setFilters([$filter1]);
+		$group_2->progression($final_group)->setFilters([$filter1]);
+		$group_1->progression($second_group)->setFilters([$filter2]);
+		$group_2->progression($second_group)->setFilters([$filter2]);
 
 		$round->genGames();
 

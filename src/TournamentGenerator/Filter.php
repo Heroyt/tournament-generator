@@ -40,6 +40,7 @@ class Filter
 	}
 
 	private function filterMulti(array &$teams, array $filters, string $how = 'and') {
+		if (is_int($how)) $how = 'and';
 		switch (strtolower($how)) {
 			case 'and':
 				foreach ($teams as $tkey => $team) {
@@ -58,6 +59,7 @@ class Filter
 	private function filterAnd(Team $team, array $filters) {
 		foreach ($filters as $key => $value) {
 			if (is_array($value)) {
+				if (is_int($key)) $key = 'and';
 				switch (strtolower($key)) {
 					case 'and':
 						if (!$this->filterAnd($team, $value)) return false;
@@ -80,6 +82,7 @@ class Filter
 	}
 	private function filterOr(Team $team, array $filters) {
 		foreach ($filters as $key => $value) {
+			if (is_int($key)) $key = 'and';
 			if (is_array($value)) {
 				switch (strtolower($key)) {
 					case 'and':

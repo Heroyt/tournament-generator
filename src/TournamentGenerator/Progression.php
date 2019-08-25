@@ -13,6 +13,7 @@ class Progression
 	private $start = 0;
 	private $len = null;
 	private $filters = [];
+	private $progressed = false;
 
 	public function __construct(Group $from, Group $to, int $start = 0, int $len = null) {
 		$this->from = $from;
@@ -25,6 +26,10 @@ class Progression
 		return 'Team from '.$this->from;
 	}
 
+	public function setFilters(array $filters) {
+		$this->filters = $filters;
+		return $this;
+	}
 	public function addFilter(TeamFilter ...$filters) {
 		foreach ($filters as $filter) {
 			$this->filters[] = $filter;
@@ -33,6 +38,7 @@ class Progression
 	}
 
 	public function progress(bool $blank = false) {
+		if ($this->progressed) return $this;
 		if ($blank) $teams = $this->from->isPlayed() ? $this->from->sortTeams(null, $this->filters) : $this->from->simulate($this->filters);
 		else $teams = $this->from->sortTeams(null, $this->filters);
 
@@ -43,7 +49,7 @@ class Progression
 
 		foreach ($next as $team) {
 			if ($blank) {
-				$this->to->addTeam(new BlankTeam($this.' - '.$i, $team));
+				$this->to->addTeam(new BlankTeam($this.' - '.$i, $team, $this->from, $this));
 				$i++;
 			}
 			else $team->sumPoints += $this->from->progressPoints;
@@ -51,6 +57,11 @@ class Progression
 
 		$this->from->addProgressed($next);
 		if (!$blank) $this->to->addTeam($next);
+		$this->progressed = true;
+		return $this;
+	}
+	public function reset() {
+		$this->progressed = false;
 		return $this;
 	}
 
