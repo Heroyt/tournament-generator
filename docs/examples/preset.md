@@ -3,19 +3,21 @@
 
 You also have an ability to use predefined tournament [tempates](/templates/list.md).
 
-[Tempates](/templates/list.md) are predefined classes, that make it easier to create commonly used tournament brackets with any number of [Teams](/templates/team.md).
+[Templates](/templates/list.md) are predefined classes, that make it easier to create commonly used tournament brackets with any number of [Teams](/templates/team.md). All [templates](/templates/list.md) are used in a similar way - see the [list of templates](/templates/list.md).
 
 ---
 
 ## Creating a tournament
 
-Start with creating a new [Tournament_SingleElimination](/templates/singleElim.md) class.
+In this example, we will be looking at creating a single elimination bracket.
+
+Start with creating a new [SingleElimination](/templates/singleElim.md) class.
 
 ```php
-require 'vendor/autoload.php';
+require 'vendor/autoload.md';
 
 // Create a tournament
-$tournament = new TournamentGenerator\Preset\Tournament_SingleElimination('Tournament name');
+$tournament = new TournamentGenerator\Preset\SingleElimination('Tournament name');
 ```
 
 You can also set play time, time between games and time between rounds to later calculate a timetable of the whole tournament
@@ -32,16 +34,18 @@ $tournament
 
 ## Adding teams
 
-Now, you can add **[Teams](/classes/team.php)** to your tournament.
+Now, you can add **[Teams](/classes/team.md)** to your tournament.
+
+We will add just a few, but you can populate your tournament with your own teams.
 
 ```php
 // CREATE 6 TEAMS
 for ($i=1; $i <= 6; $i++) {
-	$tournament->team('Team '.$i);
+	$tournament->team('Team '.$i, $i); // Creates a team with name 'Team $i' and id of $i
 }
 ```
 
-Now, we generate all the games.
+Now, we generate all the games using a [generate()](/templates/singleElim.md#generate) method.
 
 ```php
 // GENERATE ALL GAMES
@@ -52,7 +56,7 @@ $tournament->generate();
 
 ## Generating results
 
-At last you set results to all your **[Games](/classes/game.php)** one by one.
+At last you set results to all your **[Games](/classes/game.md)** one by one with your own scores.
 
 ```php
 // Get all rounds
@@ -71,7 +75,7 @@ $games[0]->setResults(
 // Continue for all other games and rounds
 ```
 
-Or you simulate all the **[Rounds](/classes/round.php)**.
+Or you simulate all the **[Rounds](/classes/round.md)**.
 
 ```php
 // Get all rounds
@@ -83,7 +87,7 @@ foreach ($rounds as $round) {
 }
 ```
 
-Or you can simulate a whole **[Tournament](/classes/tournament.php)** at once.
+Or you can simulate a whole **[Tournament](/classes/tournament.md)** at once.
 
 ```php
 // Simulate games
@@ -95,7 +99,7 @@ $tournament->genGamesSimulateReal(); // Simulate games with results like a real 
 
 ## Getting final results
 
-Finally, you can get all the **[Teams](/classes/team.php)** ordered by their results.
+Finally, you can get all the **[Teams](/classes/team.md)** ordered by their results.
 
 ```php
 // GET ALL TEAMS

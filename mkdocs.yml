@@ -10,9 +10,10 @@ nav:
 - Introduction: index.md
 - Examples:
   - 'Basic tournament': examples/basic.md
-  - 'Single Elimination': 'examples/singleElim.md'
-  - 'Double Elimination': 'examples/doubleElim.md'
-  - '2 rounds to groups': examples/2R2G.md
+  - 'Tournament from a template': 'examples/preset.md'
+  - 'Simulating a tournament': 'examples/simulating.md'
+  - 'Using progressions': 'examples/progressions.md'
+  - 'Using filters': 'examples/filters.md'
 - Classes:
   - Tournament: classes/tournament.md
   - Category: classes/category.md
@@ -24,7 +25,7 @@ nav:
   - 'Team filter': classes/teamFilter.md
   - 'Blank team': classes/blankTeam.md
 - Templates:
-  - List: //templates/list.md
-  - 'Single elimination': /templates/singleElim.md
-  - 'Double elimination': /templates/doubleElim.md
-  - '2 rounds to groups': /templates/2R2G.md
+  - List: templates/list.md
+  - 'Single elimination': templates/singleElim.md
+  - 'Double elimination': templates/doubleElim.md
+  - '2 rounds to groups': templates/2R2G.md

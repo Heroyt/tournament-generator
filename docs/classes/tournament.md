@@ -1,6 +1,6 @@
 ## Introduction
 
-**[Tournament](/classes/tournament.md)** class is a main class, you will be working with most of the time. It's used to generate brackets, create new games and store all information about the tournament.
+**[Tournament](/classes/tournament/)** class is a main class, you will be working with most of the time. It's used to generate brackets, create new games and store all information about the tournament.
 
 ---
 
@@ -14,7 +14,7 @@ $tournament = new TournamentGenerator\Tournament('Tournament name');
 
 ### Setting up a basic tournament
 
-See [Examples](/examples/basic.md)
+See [Examples](/examples/basic/)
 
 ---
 
@@ -22,7 +22,7 @@ See [Examples](/examples/basic.md)
 
 | Scope | Name | Type | Default | Description |
 | :---: | :--: | :--: | :-----: | :---------: |
-| public | `$name` | `string` | `''` | Name of the tournament |
+| private | `$name` | `string` | `''` | Name of the tournament |
 | private | `$categories` | `array` | `[]` | List of tournament categories |
 | private | `$rounds` | `array` | `[]` | List of tournament rounds |
 | private | `$teams` | `array` | `[]` | List of teams |
@@ -39,6 +39,8 @@ See [Examples](/examples/basic.md)
 | :---: | :--: | :----: | :---------: |
 | public | [`__construct`](#construct) | `$this` | Construct method |
 | public | [`__toString`](#toString) | `string` | Returns the name of the tournament |
+| public | [`setName`](#setName) | `$this` | Sets name of the tournament. |
+| public | [`getName`](#getName) | `$this` | Gets name of the tournament. |
 | public | [`setPlay`](#setPlay) | `$this` | Sets time to play one game in minutes. |
 | public | [`getPlay`](#getPlay) | `int` | Gets time to play one game in minutes. |
 | public | [`setGameWait`](#setGameWait) | `$this` | Sets time to wait between games in minutes. |
@@ -52,27 +54,28 @@ See [Examples](/examples/basic.md)
 | public | [`disallowSkip`](#disallowSkip) | `$this` | Disllow skipping of unplayed games while progressing. |
 | public | [`setSkip`](#setSkip) | `$this` | Sets whether to skip unplayed games while progressing or not. |
 | public | [`getSkip`](#getSkip) | `bool` | Gets whether to skip unplayed games while progressing or not. |
-| public | [`addCategory`](#addCategory) | `$this` | Adds created **[Category](/classes/category.md)** to **[Tournament](/classes/tournament.md)**. |
-| public | [`category`](#category) | `TournamentGenerator\Category` | Creates and adds new **[Category](/classes/category.md)** to **[Tournament](/classes/tournament.md)**. |
-| public | [`getCategories`](#getCategories) | `array` | Gets an array of all **[Categories](/classes/category.md)** from **[Tournament](/classes/tournament.md)**. |
-| public | [`addRound`](#addRound) | `$this` | Adds created **[Round](/classes/round.md)** to **[Tournament](/classes/tournament.md)**. |
-| public | [`round`](#round) | `TournamentGenerator\Round` | Creates and adds new **[Round](/classes/round.md)** to **[Tournament](/classes/tournament.md)**. |
-| public | [`getRounds`](#getRounds) | `array` | Gets an array of all **[Rounds](/classes/round.md)** from **[Tournament](/classes/tournament.md)**. |
-| public | [`addTeam`](#addTeam) | `$this` | Adds created **[Team](/classes/team.md)** to **[Tournament](/classes/tournament.md)**. |
-| public | [`team`](#team) | `new TournamentGenerator\Team` | Creates and adds new **[Team](/classes/team.md)** to **[Tournament](/classes/tournament.md)**. |
-| public | [`getTeams`](#getTeams) | `array` | Gets an array of all **[Teams](/classes/team.md)** from **[Tournament](/classes/tournament.md)**. |
-| public | [`sortTeams`](#sortTeams) | `array` | Sorts all **[Teams](/classes/team.md)** from **[Tournament](/classes/tournament.md)** and returns them. |
-| public | [`getGames`](#getGames) | `array` | Gets an array of all **[Games](/classes/game.md)** from **[Tournament](/classes/tournament.md)**. |
-| public | [`splitTeams`](#splitTeams) | `$this` | Splits all **[Teams](/classes/team.md)** from **[Tournament](/classes/tournament.md)** to given **[Rounds](/classes/round.md)** (or all **[Rounds](/classes/round.md)** from a **[Tournament](/classes/tournament.md)**). |
-| public | [`genGamesSimulate`](#genGamesSimulate) | `array`/`int` | Generate and simulate all **[Games](/classes/game.md)** from **[Tournament](/classes/tournament.md)** without real teams (just to export) and returns array of all **[Games](/classes/game.md)** or caculated tournament time. |
-| public | [`genGamesSimulateReal`](#genGamesSimulateReal) | `array`/`int` | Generate and simulate all **[Games](/classes/game.md)** from **[Tournament](/classes/tournament.md)** with real teams (just as it was played for real) and returns array of all **[Games](/classes/game.md)** or caculated tournament time. |
+| public | [`addCategory`](#addCategory) | `$this` | Adds created **[Category](/classes/category/)** to **[Tournament](/classes/tournament/)**. |
+| public | [`category`](#category) | `TournamentGenerator\Category` | Creates and adds new **[Category](/classes/category/)** to **[Tournament](/classes/tournament/)**. |
+| public | [`getCategories`](#getCategories) | `array` | Gets an array of all **[Categories](/classes/category/)** from **[Tournament](/classes/tournament/)**. |
+| public | [`addRound`](#addRound) | `$this` | Adds created **[Round](/classes/round/)** to **[Tournament](/classes/tournament/)**. |
+| public | [`round`](#round) | `TournamentGenerator\Round` | Creates and adds new **[Round](/classes/round/)** to **[Tournament](/classes/tournament/)**. |
+| public | [`getRounds`](#getRounds) | `array` | Gets an array of all **[Rounds](/classes/round/)** from **[Tournament](/classes/tournament/)**. |
+| public | [`getGroups`](#getGroups) | `array` | Gets an array of all **[Groups](/classes/group/)** from **[Tournament](/classes/tournament/)**. |
+| public | [`addTeam`](#addTeam) | `$this` | Adds created **[Team](/classes/team/)** to **[Tournament](/classes/tournament/)**. |
+| public | [`team`](#team) | `new TournamentGenerator\Team` | Creates and adds new **[Team](/classes/team/)** to **[Tournament](/classes/tournament/)**. |
+| public | [`getTeams`](#getTeams) | `array` | Gets an array of all **[Teams](/classes/team/)** from **[Tournament](/classes/tournament/)**. |
+| public | [`sortTeams`](#sortTeams) | `array` | Sorts all **[Teams](/classes/team/)** from **[Tournament](/classes/tournament/)** and returns them. |
+| public | [`getGames`](#getGames) | `array` | Gets an array of all **[Games](/classes/game/)** from **[Tournament](/classes/tournament/)**. |
+| public | [`splitTeams`](#splitTeams) | `$this` | Splits all **[Teams](/classes/team/)** from **[Tournament](/classes/tournament/)** to given **[Rounds](/classes/round/)** (or all **[Rounds](/classes/round/)** from a **[Tournament](/classes/tournament/)**). |
+| public | [`genGamesSimulate`](#genGamesSimulate) | `array`/`int` | Generate and simulate all **[Games](/classes/game/)** from **[Tournament](/classes/tournament/)** without real teams (just to export) and returns array of all **[Games](/classes/game/)** or caculated tournament time. |
+| public | [`genGamesSimulateReal`](#genGamesSimulateReal) | `array`/`int` | Generate and simulate all **[Games](/classes/game/)** from **[Tournament](/classes/tournament/)** with real teams (just as it was played for real) and returns array of all **[Games](/classes/game/)** or caculated tournament time. |
 
 ---
 
 <a name="construct" id="construct"></a>
 ### TournamentGenerator\Tournament \_\_construct(string $name)
 
-Creates a new **[Tournament](/classes/tournament.md)** class
+Creates a new **[Tournament](/classes/tournament/)** class
 
 ##### Parameters
 | Name | Type | Default | Description |
@@ -107,6 +110,50 @@ string $this->name;
 
 ```php
 public function __toString() {
+	return $this->name;
+}
+```
+
+---
+
+<a name="setName" id="setName"></a>
+###  public TournamentGenerator\Tournament setName(string $name)
+
+Sets the name of the tournament.
+
+##### Parameters
+| Name | Type | Default | Description |
+| :--: | :--: | :-----: | :---------: |
+| `$name` | `string` |  | Name of the tournament |
+
+##### Return value
+```php
+TournamentGenerator\Tournament $this
+```
+#### Code
+
+```php
+public function setName(string $name) {
+	$this->name = $name;
+	return $this;
+}
+```
+
+---
+
+<a name="getName" id="getName"></a>
+###  public int getName()
+
+Gets the name of the tournament.
+
+##### Return value
+```php
+string $this->name;
+```
+#### Code
+
+```php
+public function getName() {
 	return $this->name;
 }
 ```
@@ -396,12 +443,12 @@ public function getSkip(bool $skip) {
 <a name="addCategory" id="addCategory"></a>
 ###  public bool addCategory(TournamentGenerator\\Category ...$categories)
 
-Adds created **[Categories](/classes/category.md)** to **[Tournament](/classes/tournament.md)**.
+Adds created **[Categories](/classes/category/)** to **[Tournament](/classes/tournament/)**.
 
 ##### Parameters
 | Name | Type | Default | Description |
 | :--: | :--: | :-----: | :---------: |
-| `$categories` | `TournamentGenerator\Category` | `[]` | One or more instances of **[Category](/classes/category.md)** class |
+| `$categories` | `TournamentGenerator\Category` | `[]` | One or more instances of **[Category](/classes/category/)** class |
 
 ##### Return value
 ```php
@@ -424,12 +471,12 @@ public function addCategory(Category ...$categories){
 <a name="category" id="category"></a>
 ###  public bool category(string $name)
 
-Creates and adds new **[Category](/classes/category.md)** to **[Tournament](/classes/tournament.md)**.
+Creates and adds new **[Category](/classes/category/)** to **[Tournament](/classes/tournament/)**.
 
 ##### Parameters
 | Name | Type | Default | Description |
 | :--: | :--: | :-----: | :---------: |
-| `$name` | `string` | `''` | Name of the new **[Category](/classes/category.md)**. |
+| `$name` | `string` | `''` | Name of the new **[Category](/classes/category/)**. |
 
 ##### Return value
 ```php
@@ -450,7 +497,7 @@ public function category(string $name = '') {
 <a name="getCategories" id="getCategories"></a>
 ###  public bool getCategories()
 
-Gets an array of all **[Categories](/classes/category.md)** from **[Tournament](/classes/tournament.md)**.
+Gets an array of all **[Categories](/classes/category/)** from **[Tournament](/classes/tournament/)**.
 
 ##### Return value
 ```php
@@ -469,12 +516,12 @@ public function getCategories() {
 <a name="addRound" id="addRound"></a>
 ###  public bool addRound(TournamentGenerator\\Round ...$rounds)
 
-Adds created **[Round](/classes/round.md)** to **[Tournament](/classes/tournament.md)**.
+Adds created **[Round](/classes/round/)** to **[Tournament](/classes/tournament/)**.
 
 ##### Parameters
 | Name | Type | Default | Description |
 | :--: | :--: | :-----: | :---------: |
-| `$rounds` | `TournamentGenerator\Round` | `[]` | One or more instances of **[Round](/classes/round.md)** class. |
+| `$rounds` | `TournamentGenerator\Round` | `[]` | One or more instances of **[Round](/classes/round/)** class. |
 
 ##### Return value
 ```php
@@ -497,12 +544,12 @@ public function addRound(Round ...$rounds) {
 <a name="round" id="round"></a>
 ###  public bool round(string $name)
 
-Creates and adds new **[Round](/classes/round.md)** to **[Tournament](/classes/tournament.md)**.
+Creates and adds new **[Round](/classes/round/)** to **[Tournament](/classes/tournament/)**.
 
 ##### Parameters
 | Name | Type | Default | Description |
 | :--: | :--: | :-----: | :---------: |
-| `$name` | `string` | `''` | Name of the new **[Round](/classes/round.md)**. |
+| `$name` | `string` | `''` | Name of the new **[Round](/classes/round/)**. |
 
 ##### Return value
 ```php
@@ -523,7 +570,7 @@ public function round(string $name = '') {
 <a name="getRounds" id="getRounds"></a>
 ###  public bool getRounds()
 
-Gets an array of all **[Rounds](/classes/round.md)** from **[Tournament](/classes/tournament.md)**.
+Gets an array of all **[Rounds](/classes/round/)** from **[Tournament](/classes/tournament/)**.
 
 ##### Return value
 ```php
@@ -546,15 +593,38 @@ public function getRounds() {
 
 ---
 
+<a name="getGroups" id="getGroups"></a>
+###  public bool getGroups()
+
+Gets an array of all **[Groups](/classes/round/)** from **[Tournament](/classes/tournament/)**.
+
+##### Return value
+```php
+array of TournamentGenerator\Group
+```
+#### Code
+
+```php
+public function getGroups() {
+	$groups = [];
+	foreach ($this->getRounds() as $round) {
+		$groups = array_merge($groups, $round->getGroups());
+	}
+	return $groups;
+}
+```
+
+---
+
 <a name="addTeam" id="addTeam"></a>
 ###  public bool addTeam(TournamentGenerator\\Team ...$teams)
 
-Adds created **[Team](/classes/team.md)** to **[Tournament](/classes/tournament.md)**.
+Adds created **[Team](/classes/team/)** to **[Tournament](/classes/tournament/)**.
 
 ##### Parameters
 | Name | Type | Default | Description |
 | :--: | :--: | :-----: | :---------: |
-| `$teams` | `TournamentGenerator\Team` | `[]` | One or more instances of **[Team](/classes/team.md)** class. |
+| `$teams` | `TournamentGenerator\Team` | `[]` | One or more instances of **[Team](/classes/team/)** class. |
 
 ##### Return value
 ```php
@@ -586,12 +656,12 @@ public function addTeam(Team ...$teams) {
 <a name="team" id="team"></a>
 ###  public bool team(string $name)
 
-Creates and adds new **[Team](/classes/team.md)** to **[Tournament](/classes/tournament.md)**.
+Creates and adds new **[Team](/classes/team/)** to **[Tournament](/classes/tournament/)**.
 
 ##### Parameters
 | Name | Type | Default | Description |
 | :--: | :--: | :-----: | :---------: |
-| `$name` | `string` | `''` | Name of the new **[Team](/classes/team.md)**. |
+| `$name` | `string` | `''` | Name of the new **[Team](/classes/team/)**. |
 
 ##### Return value
 ```php
@@ -612,7 +682,7 @@ public function team(string $name = '') {
 <a name="getTeams" id="getTeams"></a>
 ###  public bool getTeams(bool $ordered = false, $ordering = POINTS)
 
-Gets an array of all **[Teams](/classes/team.md)** from **[Tournament](/classes/tournament.md)**.
+Gets an array of all **[Teams](/classes/team/)** from **[Tournament](/classes/tournament/)**.
 If passed `true` as the first argument, teams will be ordered.
 
 ##### Parameters
@@ -649,7 +719,7 @@ public function getTeams(bool $ordered = false, $ordering = \POINTS) {
 <a name="sortTeams" id="sortTeams"></a>
 ###  public bool sortTeams($ordering = POINTS)
 
-Sorts all **[Teams](/classes/team.md)** from **[Tournament](/classes/tournament.md)** and returns them.
+Sorts all **[Teams](/classes/team/)** from **[Tournament](/classes/tournament/)** and returns them.
 
 ##### Parameters
 | Name | Type | Default | Description |
@@ -679,7 +749,7 @@ public function sortTeams($ordering = \POINTS) {
 <a name="getGames" id="getGames"></a>
 ###  public bool getGames()
 
-Gets an array of all **[Games](/classes/game.md)** from **[Tournament](/classes/tournament.md)**.
+Gets an array of all **[Games](/classes/game/)** from **[Tournament](/classes/tournament/)**.
 
 ##### Return value
 ```php
@@ -702,12 +772,12 @@ public function getGames() {
 <a name="splitTeams" id="splitTeams"></a>
 ###  public bool splitTeams(TournamentGenerator\\Round ...$wheres)
 
-Split all **[Teams](/classes/team.md)** from **[Tournament](/classes/tournament.md)** into given **[Rounds](/classes/round.md)**. If no argument is given, method will split into all available **[Rounds](/classes/round.md)** in **[Tournament](/classes/tournament.md)**.
+Split all **[Teams](/classes/team/)** from **[Tournament](/classes/tournament/)** into given **[Rounds](/classes/round/)**. If no argument is given, method will split into all available **[Rounds](/classes/round/)** in **[Tournament](/classes/tournament/)**.
 
 ##### Parameters
 | Name | Type | Default | Description |
 | :--: | :--: | :-----: | :---------: |
-| `$wheres` | `TournamentGenerator\Round` | `[]` | One or more instances of **[Round](/classes/round.md)** class to split the teams into. |
+| `$wheres` | `TournamentGenerator\Round` | `[]` | One or more instances of **[Round](/classes/round/)** class to split the teams into. |
 
 ##### Return value
 ```php
@@ -748,7 +818,7 @@ public function splitTeams(Round ...$wheres) {
 <a name="genGamesSimulate" id="genGamesSimulate"></a>
 ###  public bool genGamesSimulate(bool $returnTime)
 
-Generate and simulate all **[Games](/classes/game.md)** from **[Tournament](/classes/tournament.md)** without real teams (just to export) and returns array of all **[Games](/classes/game.md)** or caculated tournament time. It uses **[BlankTeam](/classes/blankTeam.md)** class for progressing.
+Generate and simulate all **[Games](/classes/game/)** from **[Tournament](/classes/tournament/)** without real teams (just to export) and returns array of all **[Games](/classes/game/)** or caculated tournament time. It uses **[BlankTeam](/classes/blankTeam/)** class for progressing.
 
 ##### Parameters
 | Name | Type | Default | Description |
@@ -782,7 +852,7 @@ public function genGamesSimulate(bool $returnTime = false) {
 <a name="genGamesSimulateReal" id="genGamesSimulateReal"></a>
 ###  public bool genGamesSimulateReal(bool $returnTime)
 
-Generate and simulate all **[Games](/classes/game.md)** from **[Tournament](/classes/tournament.md)** with real teams (just as it was played for real) and returns array of all **[Games](/classes/game.md)** or caculated tournament time.  
+Generate and simulate all **[Games](/classes/game/)** from **[Tournament](/classes/tournament/)** with real teams (just as it was played for real) and returns array of all **[Games](/classes/game/)** or caculated tournament time.  
 Could be used for testing and demonstration purposes.
 
 ##### Parameters
