@@ -45,15 +45,9 @@ class Group extends Base implements WithGeneratorSetters, WithSkipSetters, WithT
 	}
 
 	public function addTeam(...$teams) {
-		foreach ($teams as $team) {
-			if (is_array($team)) {
-				foreach ($team as $team2) {
-					$this->setTeam($team2);
-				}
-				continue;
-			}
+		\array_walk_recursive($teams, function($team){
 			$this->setTeam($team);
-		}
+		});
 		return $this;
 	}
 	private function setTeam(Team $team) {
@@ -207,11 +201,9 @@ class Group extends Base implements WithGeneratorSetters, WithSkipSetters, WithT
 		return $g;
 	}
 	public function addGame(...$games){
-		$this->games = array_merge($this->games, array_filter($games, function($a){ return ($a instanceof Game); }));
-
-		foreach (array_filter($games, function($a){return is_array($a);}) as $key => $game) {
-			$this->games = array_merge($this->games, array_filter($game, function($a){ return ($a instanceof Game); }));
-		}
+		array_walk_recursive($games, function($game){
+			if ($game instanceof Game) $this->games[] = $game;
+		});
 		return $this;
 	}
 	public function getGames() {
@@ -234,10 +226,7 @@ class Group extends Base implements WithGeneratorSetters, WithSkipSetters, WithT
 	}
 	public function isPlayed(){
 		if (count($this->games) === 0) return false;
-		foreach ($this->games as $game) {
-			if (!$game->isPlayed()) return false;
-		}
-		return true;
+		return count(array_filter($this->games, function($a){return $a->isPlayed();})) !== 0;
 	}
 
 }
