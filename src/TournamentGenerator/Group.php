@@ -25,7 +25,7 @@ class Group extends Base implements WithGeneratorSetters, WithSkipSetters, WithT
 	function __construct(string $name, $id = null) {
 		$this->setName($name);
 		$this->generator = new Utilis\Generator($this);
-		$this->setId(isset($id) ? $id : uniqid());
+		$this->setId($id ?? uniqid());
 	}
 
 	public function allowSkip(){
