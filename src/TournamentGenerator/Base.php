@@ -17,6 +17,7 @@ abstract class Base
 
 	public function setName(string $name) {
 		$this->name = $name;
+		return $this;
 	}
 	public function getName() {
 		return $this->name;
@@ -27,6 +28,7 @@ abstract class Base
 			throw new \Exception('Unsupported id type ('.gettype($id).') - expected type of string or int');
 		}
 		$this->id = $id;
+		return $this;
 	}
 	public function getId() {
 		return $this->id;

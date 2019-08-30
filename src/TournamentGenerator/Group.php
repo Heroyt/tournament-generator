@@ -14,12 +14,12 @@ class Group extends Base implements WithGeneratorSetters, WithSkipSetters, WithT
 	private $ordering = \TournamentGenerator\Constants::POINTS; // WHAT TO DECIDE ON WHEN ORDERING TEAMS
 	private $progressions = []; // ARRAY OF PROGRESSION CONDITION OBJECTS
 	private $games = []; // ARRAY OF GAME OBJECTS
-	public $winPoints = 3; // POINTS AQUIRED FROM WINNING
-	public $drawPoints = 1; // POINTS AQUIRED FROM DRAW
-	public $lostPoints = 0; // POINTS AQUIRED FROM LOOSING
-	public $secondPoints = 2; // POINTS AQUIRED FROM BEING SECOND (APPLIES ONLY FOR 3 OR 4 INGAME VALUE)
-	public $thirdPoints = 1; // POINTS AQUIRED FROM BEING THIRD (APPLIES ONLY FOR 4 INGAME VALUE)
-	public $progressPoints = 50; // POINTS AQUIRED FROM PROGRESSING TO THE NEXT ROUND
+	private $winPoints = 3; // POINTS AQUIRED FROM WINNING
+	private $drawPoints = 1; // POINTS AQUIRED FROM DRAW
+	private $lostPoints = 0; // POINTS AQUIRED FROM LOOSING
+	private $secondPoints = 2; // POINTS AQUIRED FROM BEING SECOND (APPLIES ONLY FOR 3 OR 4 INGAME VALUE)
+	private $thirdPoints = 1; // POINTS AQUIRED FROM BEING THIRD (APPLIES ONLY FOR 4 INGAME VALUE)
+	private $progressPoints = 50; // POINTS AQUIRED FROM PROGRESSING TO THE NEXT ROUND
 	private $order = 0; // ORDER OF GROUPS IN ROUND
 
 	function __construct(string $name, $id = null) {
@@ -84,6 +84,49 @@ class Group extends Base implements WithGeneratorSetters, WithSkipSetters, WithT
 		return $this->getTeams(false, null, $filters);
 	}
 
+	public function setWinPoints(int $points) {
+		$this->winPoints = $points;
+		return $this;
+	}
+	public function getWinPoints() {
+		return $this->winPoints;
+	}
+	public function setDrawPoints(int $points) {
+		$this->drawPoints = $points;
+		return $this;
+	}
+	public function getDrawPoints() {
+		return $this->drawPoints;
+	}
+	public function setLostPoints(int $points) {
+		$this->lostPoints = $points;
+		return $this;
+	}
+	public function getLostPoints() {
+		return $this->lostPoints;
+	}
+	public function setSecondPoints(int $points) {
+		$this->secondPoints = $points;
+		return $this;
+	}
+	public function getSecondPoints() {
+		return $this->secondPoints;
+	}
+	public function setThirdPoints(int $points) {
+		$this->thirdPoints = $points;
+		return $this;
+	}
+	public function getThirdPoints() {
+		return $this->thirdPoints;
+	}
+	public function setProgressPoints(int $points) {
+		$this->progressPoints = $points;
+		return $this;
+	}
+	public function getProgressPoints() {
+		return $this->progressPoints;
+	}
+
 	public function setMaxSize(int $size) {
 		$this->generator->setMaxSize($size);
 		return $this;
@@ -138,6 +181,7 @@ class Group extends Base implements WithGeneratorSetters, WithSkipSetters, WithT
 		foreach ($this->progressions as $progression) {
 			$progression->progress($blank);
 		}
+		return $this;
 	}
 	public function addProgressed(...$teams) {
 		$this->progressed = array_merge($this->progressed, array_map(function ($a) {return $a->getId();}, array_filter($teams, function($a){return $a instanceof Team;})));

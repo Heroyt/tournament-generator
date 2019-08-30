@@ -113,17 +113,17 @@ class Game
 		if (count(array_filter($results, function($a) use ($score){return $a === $score;})) > 1) {
 			$this->drawIds[] = $team->getId();
 			$team->addDraw($this->group->getId());
-			$this->results[$team->getId()] += ['points' => $this->group->drawPoints, 'type' => 'draw'];
+			$this->results[$team->getId()] += ['points' => $this->group->getDrawPoints(), 'type' => 'draw'];
 		}
 		elseif ($i === 1) {
 			$this->winId = $team->getId();
 			$team->addWin($this->group->getId());
-			$this->results[$team->getId()] += ['points' => $this->group->winPoints, 'type' => 'win'];
+			$this->results[$team->getId()] += ['points' => $this->group->getWinPoints(), 'type' => 'win'];
 		}
 		else {
 			$this->lossId = $team->getId();
 			$team->addLoss($this->group->getId());
-			$this->results[$team->getId()] += ['points' => $this->group->lostPoints, 'type' => 'loss'];
+			$this->results[$team->getId()] += ['points' => $this->group->getLostPoints(), 'type' => 'loss'];
 		}
 		return $this;
 	}
@@ -132,17 +132,17 @@ class Game
 			case 1:
 				$this->winId = $team->getId();
 				$team->addWin($this->group->getId());
-				$this->results[$team->getId()] += ['points' => $this->group->winPoints, 'type' => 'win'];
+				$this->results[$team->getId()] += ['points' => $this->group->getWinPoints(), 'type' => 'win'];
 				break;
 			case 2:
 				$this->secondId = $team->getId();
 				$team->addSecond($this->group->getId());
-				$this->results[$team->getId()] += ['points' => $this->group->secondPoints, 'type' => 'second'];
+				$this->results[$team->getId()] += ['points' => $this->group->getSecondPoints(), 'type' => 'second'];
 				break;
 			case 3:
 				$this->lossId = $team->getId();
 				$team->addLoss($this->group->getId());
-				$this->results[$team->getId()] += ['points' => $this->group->lostPoints, 'type' => 'loss'];
+				$this->results[$team->getId()] += ['points' => $this->group->getLostPoints(), 'type' => 'loss'];
 				break;
 		}
 		return $this;
@@ -152,22 +152,22 @@ class Game
 			case 1:
 				$this->winId = $team->getId();
 				$team->addWin($this->group->getId());
-				$this->results[$team->getId()] += ['points' => $this->group->winPoints, 'type' => 'win'];
+				$this->results[$team->getId()] += ['points' => $this->group->getWinPoints(), 'type' => 'win'];
 				break;
 			case 2:
 				$this->secondId = $team->getId();
 				$team->addSecond($this->group->getId());
-				$this->results[$team->getId()] += ['points' => $this->group->secondPoints, 'type' => 'second'];
+				$this->results[$team->getId()] += ['points' => $this->group->getSecondPoints(), 'type' => 'second'];
 				break;
 			case 3:
 				$this->thirdId = $team->getId();
 				$team->addThird($this->group->getId());
-				$this->results[$team->getId()] += ['points' => $this->group->thirdPoints, 'type' => 'third'];
+				$this->results[$team->getId()] += ['points' => $this->group->getThirdPoints(), 'type' => 'third'];
 				break;
 			case 4:
 				$this->lossId = $team->getId();
 				$team->addLoss($this->group->getId());
-				$this->results[$team->getId()] += ['points' => $this->group->lostPoints, 'type' => 'loss'];
+				$this->results[$team->getId()] += ['points' => $this->group->getLostPoints(), 'type' => 'loss'];
 				break;
 		}
 		return $this;
@@ -181,7 +181,7 @@ class Game
 		foreach ($this->results as $teamId => $score) {
 			$team = $this->getTeam($teamId);
 			$team->groupResults[$this->group->getId()]['score'] -= $score['score'];
-			$team->sumScore -= $score['score'];
+			$team->removeScore($score['score']);
 			switch ($score['type']) {
 				case 'win':
 					$team->removeWin($this->group->getId());

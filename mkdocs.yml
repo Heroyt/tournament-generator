@@ -14,6 +14,12 @@ nav:
   - 'Simulating a tournament': 'examples/simulating.md'
   - 'Using progressions': 'examples/progressions.md'
   - 'Using filters': 'examples/filters.md'
+- 'Interfaces and abstract classes':
+  - Base: interface/base.md
+  - WithGeneratorSetters: interface/WithGeneratorSetters.md
+  - WithRounds: interface/WithRounds.md
+  - WithSkipSetters: interface/WithSkipSetters.md
+  - WithTeams: interface/WithTeams.md
 - Classes:
   - Constants: classes/constants.md
   - Tournament: classes/tournament.md
@@ -25,6 +31,11 @@ nav:
   - Progression: classes/progression.md
   - 'Team filter': classes/teamFilter.md
   - 'Blank team': classes/blankTeam.md
+  - 'Utilis\Generator': classes/utilis/generator.md
+  - 'Utilis\Simulator': classes/utilis/simulator.md
+  - 'Utilis\filterComparator': classes/utilis/filterComparator.md
+  - 'Utilis\Sorter\Games': classes/utilis/sorter/games.md
+  - 'Utilis\Sorter\Teams': classes/utilis/sorter/teams.md
 - Templates:
   - List: template/list.md
   - 'Single elimination': template/singleElim.md

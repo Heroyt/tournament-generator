@@ -52,7 +52,7 @@ class Progression
 				$this->to->addTeam(new BlankTeam($this.' - '.$i, $team, $this->from, $this));
 				$i++;
 			}
-			else $team->sumPoints += $this->from->progressPoints;
+			else $team->addPoints($this->from->getProgressPoints());
 		}
 
 		$this->from->addProgressed($next);

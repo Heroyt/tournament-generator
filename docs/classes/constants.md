@@ -10,6 +10,7 @@
 
 ---
 
+<a id="ordering" name="ordering"></a>
 ##Ordering constants
 
 | Constant | Description |
@@ -19,13 +20,14 @@
 
 ---
 
+<a id="roundTypes" name="roundTypes"></a>
 ##Round constants
 
 | Constant | Description |
 | :--: | :--: |
 | **\TournamentGenerator\Constants::ROUND_ROBIN** | Defines a Robin - Robin style group. |
 | **\TournamentGenerator\Constants::ROUND_TWO** | Defines a group where teams play only one game against another team. |
-| **\TournamentGenerator\Constants::ROUND_SPLIT** | Defines a group which is split into two groups if number of teams exceeds maximum size and then plays as a Robin - Robin style. |
+| <a id="roundSplit" name="roundSplit"></a>**\TournamentGenerator\Constants::ROUND_SPLIT** | Defines a group which is split into two groups if number of teams exceeds maximum size and then plays as a Robin - Robin style. |
 
 ---
 

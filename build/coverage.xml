@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1566761629">
-  <project timestamp="1566761629">
+<coverage generated="1567153080">
+  <project timestamp="1567153080">
     <package name="TournamentGenerator">
       <file name="/Volumes/Heroyt-Disk/work/Moje/rozlosy/src/TournamentGenerator/Base.php">
         <class name="TournamentGenerator\Base" namespace="TournamentGenerator">
@@ -8,20 +8,20 @@
         </class>
         <line num="14" type="method" name="__toString" visibility="public" complexity="1" crap="1" count="62"/>
         <line num="15" type="stmt" count="62"/>
-        <line num="18" type="method" name="setName" visibility="public" complexity="1" crap="1" count="157"/>
-        <line num="19" type="stmt" count="157"/>
-        <line num="20" type="stmt" count="157"/>
-        <line num="21" type="method" name="getName" visibility="public" complexity="1" crap="1" count="17"/>
-        <line num="22" type="stmt" count="17"/>
-        <line num="24" type="method" name="setId" visibility="public" complexity="3" crap="3" count="157"/>
-        <line num="25" type="stmt" count="157"/>
-        <line num="26" type="stmt" count="4"/>
+        <line num="18" type="method" name="setName" visibility="public" complexity="1" crap="1" count="164"/>
+        <line num="19" type="stmt" count="164"/>
+        <line num="20" type="stmt" count="164"/>
+        <line num="22" type="method" name="getName" visibility="public" complexity="1" crap="1" count="17"/>
+        <line num="23" type="stmt" count="17"/>
+        <line num="25" type="method" name="setId" visibility="public" complexity="3" crap="3" count="164"/>
+        <line num="26" type="stmt" count="164"/>
         <line num="27" type="stmt" count="4"/>
-        <line num="29" type="stmt" count="157"/>
-        <line num="30" type="stmt" count="157"/>
-        <line num="31" type="method" name="getId" visibility="public" complexity="1" crap="1" count="122"/>
-        <line num="32" type="stmt" count="122"/>
-        <metrics loc="35" ncloc="32" classes="1" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="15" coveredelements="15"/>
+        <line num="28" type="stmt" count="4"/>
+        <line num="30" type="stmt" count="164"/>
+        <line num="31" type="stmt" count="164"/>
+        <line num="33" type="method" name="getId" visibility="public" complexity="1" crap="1" count="122"/>
+        <line num="34" type="stmt" count="122"/>
+        <metrics loc="37" ncloc="34" classes="1" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="15" coveredelements="15"/>
       </file>
       <file name="/Volumes/Heroyt-Disk/work/Moje/rozlosy/src/TournamentGenerator/BlankTeam.php">
         <class name="TournamentGenerator\BlankTeam" namespace="TournamentGenerator">
@@ -258,9 +258,9 @@
         <line num="108" type="stmt" count="73"/>
         <line num="110" type="stmt" count="73"/>
         <line num="112" type="method" name="setResults2" visibility="private" complexity="3" crap="3" count="63"/>
-        <line num="114" type="stmt" count="15"/>
-        <line num="115" type="stmt" count="15"/>
-        <line num="116" type="stmt" count="15"/>
+        <line num="114" type="stmt" count="13"/>
+        <line num="115" type="stmt" count="13"/>
+        <line num="116" type="stmt" count="13"/>
         <line num="118" type="stmt" count="61"/>
         <line num="119" type="stmt" count="61"/>
         <line num="120" type="stmt" count="61"/>
@@ -321,8 +321,8 @@
         <line num="187" type="stmt" count="19"/>
         <line num="188" type="stmt" count="19"/>
         <line num="189" type="stmt" count="20"/>
-        <line num="190" type="stmt" count="2"/>
-        <line num="191" type="stmt" count="2"/>
+        <line num="190" type="stmt" count="1"/>
+        <line num="191" type="stmt" count="1"/>
         <line num="192" type="stmt" count="19"/>
         <line num="193" type="stmt" count="19"/>
         <line num="194" type="stmt" count="19"/>
@@ -351,13 +351,13 @@
       </file>
       <file name="/Volumes/Heroyt-Disk/work/Moje/rozlosy/src/TournamentGenerator/Group.php">
         <class name="TournamentGenerator\Group" namespace="TournamentGenerator">
-          <metrics complexity="48" methods="33" coveredmethods="33" conditionals="0" coveredconditionals="0" statements="79" coveredstatements="79" elements="112" coveredelements="112"/>
+          <metrics complexity="60" methods="45" coveredmethods="45" conditionals="0" coveredconditionals="0" statements="97" coveredstatements="97" elements="142" coveredelements="142"/>
         </class>
-        <line num="25" type="method" name="__construct" complexity="2" crap="2" count="130"/>
-        <line num="26" type="stmt" count="130"/>
-        <line num="27" type="stmt" count="130"/>
-        <line num="28" type="stmt" count="130"/>
-        <line num="29" type="stmt" count="130"/>
+        <line num="25" type="method" name="__construct" complexity="2" crap="2" count="136"/>
+        <line num="26" type="stmt" count="136"/>
+        <line num="27" type="stmt" count="136"/>
+        <line num="28" type="stmt" count="136"/>
+        <line num="29" type="stmt" count="136"/>
         <line num="31" type="method" name="allowSkip" visibility="public" complexity="1" crap="1" count="1"/>
         <line num="32" type="stmt" count="1"/>
         <line num="33" type="stmt" count="1"/>
@@ -396,76 +396,106 @@
         <line num="82" type="stmt" count="39"/>
         <line num="83" type="stmt" count="39"/>
         <line num="84" type="stmt" count="39"/>
-        <line num="87" type="method" name="setMaxSize" visibility="public" complexity="1" crap="1" count="7"/>
-        <line num="88" type="stmt" count="7"/>
-        <line num="89" type="stmt" count="7"/>
-        <line num="91" type="method" name="getMaxSize" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="92" type="stmt" count="1"/>
-        <line num="95" type="method" name="setType" visibility="public" complexity="1" crap="1" count="41"/>
-        <line num="96" type="stmt" count="41"/>
-        <line num="97" type="stmt" count="41"/>
-        <line num="99" type="method" name="getType" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="100" type="stmt" count="1"/>
-        <line num="103" type="method" name="setOrder" visibility="public" complexity="1" crap="1" count="4"/>
-        <line num="104" type="stmt" count="4"/>
-        <line num="105" type="stmt" count="4"/>
-        <line num="107" type="method" name="getOrder" visibility="public" complexity="1" crap="1" count="41"/>
-        <line num="108" type="stmt" count="41"/>
-        <line num="111" type="method" name="setOrdering" visibility="public" complexity="2" crap="2" count="1"/>
-        <line num="112" type="stmt" count="1"/>
-        <line num="113" type="stmt" count="1"/>
-        <line num="114" type="stmt" count="1"/>
-        <line num="116" type="method" name="getOrdering" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="87" type="method" name="setWinPoints" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="88" type="stmt" count="1"/>
+        <line num="89" type="stmt" count="1"/>
+        <line num="91" type="method" name="getWinPoints" visibility="public" complexity="1" crap="1" count="73"/>
+        <line num="92" type="stmt" count="73"/>
+        <line num="94" type="method" name="setDrawPoints" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="95" type="stmt" count="1"/>
+        <line num="96" type="stmt" count="1"/>
+        <line num="98" type="method" name="getDrawPoints" visibility="public" complexity="1" crap="1" count="15"/>
+        <line num="99" type="stmt" count="15"/>
+        <line num="101" type="method" name="setLostPoints" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="102" type="stmt" count="1"/>
+        <line num="103" type="stmt" count="1"/>
+        <line num="105" type="method" name="getLostPoints" visibility="public" complexity="1" crap="1" count="73"/>
+        <line num="106" type="stmt" count="73"/>
+        <line num="108" type="method" name="setSecondPoints" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="109" type="stmt" count="1"/>
+        <line num="110" type="stmt" count="1"/>
+        <line num="112" type="method" name="getSecondPoints" visibility="public" complexity="1" crap="1" count="11"/>
+        <line num="113" type="stmt" count="11"/>
+        <line num="115" type="method" name="setThirdPoints" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="116" type="stmt" count="1"/>
         <line num="117" type="stmt" count="1"/>
-        <line num="120" type="method" name="setInGame" visibility="public" complexity="1" crap="1" count="53"/>
-        <line num="121" type="stmt" count="53"/>
-        <line num="122" type="stmt" count="53"/>
-        <line num="124" type="method" name="getInGame" visibility="public" complexity="1" crap="1" count="76"/>
-        <line num="125" type="stmt" count="76"/>
-        <line num="128" type="method" name="addProgression" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="129" type="stmt" count="1"/>
-        <line num="130" type="stmt" count="1"/>
-        <line num="132" type="method" name="progression" visibility="public" complexity="1" crap="1" count="33"/>
-        <line num="133" type="stmt" count="33"/>
-        <line num="134" type="stmt" count="33"/>
-        <line num="135" type="stmt" count="33"/>
-        <line num="137" type="method" name="progress" visibility="public" complexity="2" crap="2" count="33"/>
-        <line num="138" type="stmt" count="33"/>
-        <line num="139" type="stmt" count="33"/>
-        <line num="141" type="stmt" count="33"/>
-        <line num="142" type="method" name="addProgressed" visibility="public" complexity="2" crap="2" count="34"/>
-        <line num="146" type="stmt" count="33"/>
-        <line num="147" type="stmt" count="33"/>
-        <line num="149" type="stmt" count="34"/>
-        <line num="151" type="method" name="isProgressed" visibility="public" complexity="1" crap="1" count="7"/>
-        <line num="152" type="stmt" count="7"/>
-        <line num="155" type="method" name="genGames" visibility="public" complexity="1" crap="1" count="42"/>
-        <line num="156" type="stmt" count="42"/>
-        <line num="157" type="stmt" count="41"/>
-        <line num="160" type="method" name="game" visibility="public" complexity="1" crap="1" count="48"/>
-        <line num="161" type="stmt" count="48"/>
-        <line num="162" type="stmt" count="48"/>
-        <line num="163" type="stmt" count="48"/>
-        <line num="165" type="method" name="addGame" visibility="public" complexity="2" crap="2" count="36"/>
-        <line num="171" type="stmt" count="36"/>
-        <line num="173" type="method" name="getGames" visibility="public" complexity="1" crap="1" count="46"/>
-        <line num="174" type="stmt" count="46"/>
-        <line num="176" type="method" name="orderGames" visibility="public" complexity="2" crap="2" count="29"/>
-        <line num="177" type="stmt" count="29"/>
-        <line num="178" type="stmt" count="23"/>
-        <line num="179" type="stmt" count="23"/>
-        <line num="182" type="method" name="simulate" visibility="public" complexity="1" crap="1" count="31"/>
-        <line num="183" type="stmt" count="31"/>
-        <line num="185" type="method" name="resetGames" visibility="public" complexity="2" crap="2" count="15"/>
-        <line num="186" type="stmt" count="15"/>
-        <line num="187" type="stmt" count="15"/>
-        <line num="189" type="stmt" count="15"/>
-        <line num="191" type="method" name="isPlayed" visibility="public" complexity="4" crap="4" count="31"/>
-        <line num="192" type="stmt" count="31"/>
-        <line num="193" type="stmt" count="28"/>
-        <line num="194" type="stmt" count="28"/>
-        <line num="196" type="stmt" count="19"/>
-        <metrics loc="199" ncloc="170" classes="1" methods="33" coveredmethods="33" conditionals="0" coveredconditionals="0" statements="79" coveredstatements="79" elements="112" coveredelements="112"/>
+        <line num="119" type="method" name="getThirdPoints" visibility="public" complexity="1" crap="1" count="10"/>
+        <line num="120" type="stmt" count="10"/>
+        <line num="122" type="method" name="setProgressPoints" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="123" type="stmt" count="1"/>
+        <line num="124" type="stmt" count="1"/>
+        <line num="126" type="method" name="getProgressPoints" visibility="public" complexity="1" crap="1" count="17"/>
+        <line num="127" type="stmt" count="17"/>
+        <line num="130" type="method" name="setMaxSize" visibility="public" complexity="1" crap="1" count="7"/>
+        <line num="131" type="stmt" count="7"/>
+        <line num="132" type="stmt" count="7"/>
+        <line num="134" type="method" name="getMaxSize" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="135" type="stmt" count="1"/>
+        <line num="138" type="method" name="setType" visibility="public" complexity="1" crap="1" count="41"/>
+        <line num="139" type="stmt" count="41"/>
+        <line num="140" type="stmt" count="41"/>
+        <line num="142" type="method" name="getType" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="143" type="stmt" count="1"/>
+        <line num="146" type="method" name="setOrder" visibility="public" complexity="1" crap="1" count="4"/>
+        <line num="147" type="stmt" count="4"/>
+        <line num="148" type="stmt" count="4"/>
+        <line num="150" type="method" name="getOrder" visibility="public" complexity="1" crap="1" count="41"/>
+        <line num="151" type="stmt" count="41"/>
+        <line num="154" type="method" name="setOrdering" visibility="public" complexity="2" crap="2" count="1"/>
+        <line num="155" type="stmt" count="1"/>
+        <line num="156" type="stmt" count="1"/>
+        <line num="157" type="stmt" count="1"/>
+        <line num="159" type="method" name="getOrdering" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="160" type="stmt" count="1"/>
+        <line num="163" type="method" name="setInGame" visibility="public" complexity="1" crap="1" count="53"/>
+        <line num="164" type="stmt" count="53"/>
+        <line num="165" type="stmt" count="53"/>
+        <line num="167" type="method" name="getInGame" visibility="public" complexity="1" crap="1" count="76"/>
+        <line num="168" type="stmt" count="76"/>
+        <line num="171" type="method" name="addProgression" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="172" type="stmt" count="1"/>
+        <line num="173" type="stmt" count="1"/>
+        <line num="175" type="method" name="progression" visibility="public" complexity="1" crap="1" count="33"/>
+        <line num="176" type="stmt" count="33"/>
+        <line num="177" type="stmt" count="33"/>
+        <line num="178" type="stmt" count="33"/>
+        <line num="180" type="method" name="progress" visibility="public" complexity="2" crap="2" count="33"/>
+        <line num="181" type="stmt" count="33"/>
+        <line num="182" type="stmt" count="33"/>
+        <line num="184" type="stmt" count="33"/>
+        <line num="186" type="method" name="addProgressed" visibility="public" complexity="2" crap="2" count="34"/>
+        <line num="190" type="stmt" count="33"/>
+        <line num="191" type="stmt" count="33"/>
+        <line num="193" type="stmt" count="34"/>
+        <line num="195" type="method" name="isProgressed" visibility="public" complexity="1" crap="1" count="7"/>
+        <line num="196" type="stmt" count="7"/>
+        <line num="199" type="method" name="genGames" visibility="public" complexity="1" crap="1" count="42"/>
+        <line num="200" type="stmt" count="42"/>
+        <line num="201" type="stmt" count="41"/>
+        <line num="204" type="method" name="game" visibility="public" complexity="1" crap="1" count="48"/>
+        <line num="205" type="stmt" count="48"/>
+        <line num="206" type="stmt" count="48"/>
+        <line num="207" type="stmt" count="48"/>
+        <line num="209" type="method" name="addGame" visibility="public" complexity="2" crap="2" count="36"/>
+        <line num="215" type="stmt" count="36"/>
+        <line num="217" type="method" name="getGames" visibility="public" complexity="1" crap="1" count="46"/>
+        <line num="218" type="stmt" count="46"/>
+        <line num="220" type="method" name="orderGames" visibility="public" complexity="2" crap="2" count="29"/>
+        <line num="221" type="stmt" count="29"/>
+        <line num="222" type="stmt" count="23"/>
+        <line num="223" type="stmt" count="23"/>
+        <line num="226" type="method" name="simulate" visibility="public" complexity="1" crap="1" count="31"/>
+        <line num="227" type="stmt" count="31"/>
+        <line num="229" type="method" name="resetGames" visibility="public" complexity="2" crap="2" count="15"/>
+        <line num="230" type="stmt" count="15"/>
+        <line num="231" type="stmt" count="15"/>
+        <line num="233" type="stmt" count="15"/>
+        <line num="235" type="method" name="isPlayed" visibility="public" complexity="4" crap="4" count="31"/>
+        <line num="236" type="stmt" count="31"/>
+        <line num="237" type="stmt" count="28"/>
+        <line num="238" type="stmt" count="28"/>
+        <line num="240" type="stmt" count="19"/>
+        <metrics loc="243" ncloc="214" classes="1" methods="45" coveredmethods="45" conditionals="0" coveredconditionals="0" statements="97" coveredstatements="97" elements="142" coveredelements="142"/>
       </file>
       <file name="/Volumes/Heroyt-Disk/work/Moje/rozlosy/src/TournamentGenerator/Progression.php">
         <class name="TournamentGenerator\Progression" namespace="TournamentGenerator">
@@ -601,12 +631,12 @@
       </file>
       <file name="/Volumes/Heroyt-Disk/work/Moje/rozlosy/src/TournamentGenerator/Team.php">
         <class name="TournamentGenerator\Team" namespace="TournamentGenerator">
-          <metrics complexity="54" methods="24" coveredmethods="24" conditionals="0" coveredconditionals="0" statements="106" coveredstatements="106" elements="130" coveredelements="130"/>
+          <metrics complexity="56" methods="26" coveredmethods="26" conditionals="0" coveredconditionals="0" statements="110" coveredstatements="110" elements="136" coveredelements="136"/>
         </class>
-        <line num="33" type="method" name="__construct" complexity="2" crap="2" count="126"/>
-        <line num="34" type="stmt" count="126"/>
-        <line num="35" type="stmt" count="126"/>
-        <line num="36" type="stmt" count="126"/>
+        <line num="33" type="method" name="__construct" complexity="2" crap="2" count="127"/>
+        <line num="34" type="stmt" count="127"/>
+        <line num="35" type="stmt" count="127"/>
+        <line num="36" type="stmt" count="127"/>
         <line num="41" type="method" name="addGroupResults" visibility="public" complexity="1" crap="1" count="105"/>
         <line num="42" type="stmt" count="105"/>
         <line num="43" type="stmt" count="105"/>
@@ -651,8 +681,8 @@
         <line num="95" type="stmt" count="4"/>
         <line num="96" type="stmt" count="4"/>
         <line num="97" type="stmt" count="1"/>
-        <line num="100" type="method" name="getSumPoints" visibility="public" complexity="1" crap="1" count="4"/>
-        <line num="101" type="stmt" count="4"/>
+        <line num="100" type="method" name="getSumPoints" visibility="public" complexity="1" crap="1" count="5"/>
+        <line num="101" type="stmt" count="5"/>
         <line num="103" type="method" name="getSumScore" visibility="public" complexity="1" crap="1" count="5"/>
         <line num="104" type="stmt" count="5"/>
         <line num="107" type="method" name="addWin" visibility="public" complexity="2" crap="2" count="72"/>
@@ -667,18 +697,18 @@
         <line num="117" type="stmt" count="19"/>
         <line num="118" type="stmt" count="19"/>
         <line num="119" type="stmt" count="19"/>
-        <line num="122" type="method" name="addDraw" visibility="public" complexity="2" crap="2" count="16"/>
-        <line num="123" type="stmt" count="16"/>
-        <line num="124" type="stmt" count="16"/>
-        <line num="125" type="stmt" count="16"/>
-        <line num="126" type="stmt" count="16"/>
-        <line num="127" type="stmt" count="16"/>
-        <line num="129" type="method" name="removeDraw" visibility="public" complexity="2" crap="2" count="2"/>
-        <line num="130" type="stmt" count="2"/>
-        <line num="131" type="stmt" count="2"/>
-        <line num="132" type="stmt" count="2"/>
-        <line num="133" type="stmt" count="2"/>
-        <line num="134" type="stmt" count="2"/>
+        <line num="122" type="method" name="addDraw" visibility="public" complexity="2" crap="2" count="14"/>
+        <line num="123" type="stmt" count="14"/>
+        <line num="124" type="stmt" count="14"/>
+        <line num="125" type="stmt" count="14"/>
+        <line num="126" type="stmt" count="14"/>
+        <line num="127" type="stmt" count="14"/>
+        <line num="129" type="method" name="removeDraw" visibility="public" complexity="2" crap="2" count="1"/>
+        <line num="130" type="stmt" count="1"/>
+        <line num="131" type="stmt" count="1"/>
+        <line num="132" type="stmt" count="1"/>
+        <line num="133" type="stmt" count="1"/>
+        <line num="134" type="stmt" count="1"/>
         <line num="137" type="method" name="addLoss" visibility="public" complexity="2" crap="2" count="72"/>
         <line num="138" type="stmt" count="72"/>
         <line num="139" type="stmt" count="72"/>
@@ -721,19 +751,25 @@
         <line num="185" type="stmt" count="44"/>
         <line num="186" type="stmt" count="44"/>
         <line num="188" type="stmt" count="44"/>
-        <line num="190" type="method" name="sumScore" visibility="public" complexity="3" crap="3" count="30"/>
-        <line num="191" type="stmt" count="30"/>
-        <line num="192" type="stmt" count="30"/>
-        <line num="193" type="stmt" count="30"/>
-        <line num="194" type="stmt" count="30"/>
-        <line num="196" type="stmt" count="30"/>
+        <line num="190" type="method" name="sumScore" visibility="public" complexity="3" crap="3" count="29"/>
+        <line num="191" type="stmt" count="29"/>
+        <line num="192" type="stmt" count="29"/>
+        <line num="193" type="stmt" count="29"/>
+        <line num="194" type="stmt" count="29"/>
+        <line num="196" type="stmt" count="29"/>
         <line num="199" type="method" name="addScore" visibility="public" complexity="1" crap="1" count="74"/>
         <line num="200" type="stmt" count="74"/>
         <line num="201" type="stmt" count="74"/>
-        <line num="202" type="method" name="removeScore" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="203" type="stmt" count="1"/>
-        <line num="204" type="stmt" count="1"/>
-        <metrics loc="205" ncloc="187" classes="1" methods="24" coveredmethods="24" conditionals="0" coveredconditionals="0" statements="106" coveredstatements="106" elements="130" coveredelements="130"/>
+        <line num="202" type="method" name="removeScore" visibility="public" complexity="1" crap="1" count="21"/>
+        <line num="203" type="stmt" count="21"/>
+        <line num="204" type="stmt" count="21"/>
+        <line num="205" type="method" name="addPoints" visibility="public" complexity="1" crap="1" count="17"/>
+        <line num="206" type="stmt" count="17"/>
+        <line num="207" type="stmt" count="17"/>
+        <line num="208" type="method" name="removePoints" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="209" type="stmt" count="1"/>
+        <line num="210" type="stmt" count="1"/>
+        <metrics loc="211" ncloc="193" classes="1" methods="26" coveredmethods="26" conditionals="0" coveredconditionals="0" statements="110" coveredstatements="110" elements="136" coveredelements="136"/>
       </file>
       <file name="/Volumes/Heroyt-Disk/work/Moje/rozlosy/src/TournamentGenerator/TeamFilter.php">
         <class name="TournamentGenerator\TeamFilter" namespace="TournamentGenerator">
@@ -1129,9 +1165,9 @@
         <class name="TournamentGenerator\Utilis\Generator" namespace="TournamentGenerator\Utilis">
           <metrics complexity="55" methods="21" coveredmethods="21" conditionals="0" coveredconditionals="0" statements="105" coveredstatements="105" elements="126" coveredelements="126"/>
         </class>
-        <line num="17" type="method" name="__construct" complexity="1" crap="1" count="130"/>
-        <line num="18" type="stmt" count="130"/>
-        <line num="19" type="stmt" count="130"/>
+        <line num="17" type="method" name="__construct" complexity="1" crap="1" count="136"/>
+        <line num="18" type="stmt" count="136"/>
+        <line num="19" type="stmt" count="136"/>
         <line num="21" type="method" name="allowSkip" visibility="public" complexity="1" crap="1" count="1"/>
         <line num="22" type="stmt" count="1"/>
         <line num="23" type="stmt" count="1"/>
@@ -1218,18 +1254,18 @@
         <line num="136" type="stmt" count="5"/>
         <line num="137" type="stmt" count="5"/>
         <line num="139" type="stmt" count="5"/>
-        <line num="140" type="stmt" count="3"/>
-        <line num="141" type="stmt" count="3"/>
-        <line num="142" type="stmt" count="3"/>
-        <line num="143" type="stmt" count="3"/>
-        <line num="144" type="stmt" count="3"/>
-        <line num="145" type="stmt" count="3"/>
-        <line num="146" type="stmt" count="3"/>
-        <line num="147" type="stmt" count="3"/>
-        <line num="148" type="stmt" count="3"/>
-        <line num="151" type="stmt" count="3"/>
-        <line num="153" type="stmt" count="2"/>
-        <line num="155" type="stmt" count="2"/>
+        <line num="140" type="stmt" count="4"/>
+        <line num="141" type="stmt" count="4"/>
+        <line num="142" type="stmt" count="4"/>
+        <line num="143" type="stmt" count="4"/>
+        <line num="144" type="stmt" count="4"/>
+        <line num="145" type="stmt" count="4"/>
+        <line num="146" type="stmt" count="4"/>
+        <line num="147" type="stmt" count="4"/>
+        <line num="148" type="stmt" count="4"/>
+        <line num="151" type="stmt" count="4"/>
+        <line num="153" type="stmt" count="1"/>
+        <line num="155" type="stmt" count="1"/>
         <line num="158" type="method" name="orderGames" visibility="public" complexity="1" crap="1" count="23"/>
         <line num="159" type="stmt" count="23"/>
         <line num="161" type="stmt" count="23"/>
@@ -1333,8 +1369,8 @@
         <line num="48" type="stmt" count="23"/>
         <line num="51" type="stmt" count="23"/>
         <line num="55" type="stmt" count="23"/>
-        <line num="60" type="stmt" count="3"/>
-        <line num="64" type="stmt" count="3"/>
+        <line num="60" type="stmt" count="2"/>
+        <line num="64" type="stmt" count="2"/>
         <line num="68" type="stmt" count="2"/>
         <line num="72" type="stmt" count="2"/>
         <line num="75" type="stmt" count="23"/>
@@ -1356,32 +1392,32 @@
         <line num="98" type="stmt" count="23"/>
         <line num="99" type="stmt" count="23"/>
         <line num="102" type="stmt" count="23"/>
-        <line num="106" type="method" name="cycle3" visibility="private" complexity="3" crap="3" count="3"/>
-        <line num="107" type="stmt" count="3"/>
-        <line num="108" type="stmt" count="3"/>
-        <line num="109" type="stmt" count="3"/>
-        <line num="110" type="stmt" count="1"/>
-        <line num="111" type="stmt" count="1"/>
-        <line num="112" type="stmt" count="1"/>
-        <line num="113" type="stmt" count="1"/>
-        <line num="116" type="stmt" count="3"/>
-        <line num="119" type="method" name="cycle4" visibility="private" complexity="3" crap="3" count="3"/>
-        <line num="120" type="stmt" count="3"/>
-        <line num="121" type="stmt" count="3"/>
-        <line num="122" type="stmt" count="3"/>
-        <line num="123" type="stmt" count="3"/>
-        <line num="124" type="stmt" count="3"/>
-        <line num="125" type="stmt" count="3"/>
-        <line num="126" type="stmt" count="3"/>
-        <line num="129" type="stmt" count="3"/>
+        <line num="106" type="method" name="cycle3" visibility="private" complexity="3" crap="3" count="2"/>
+        <line num="107" type="stmt" count="2"/>
+        <line num="108" type="stmt" count="2"/>
+        <line num="109" type="stmt" count="2"/>
+        <line num="110" type="stmt" count="2"/>
+        <line num="111" type="stmt" count="2"/>
+        <line num="112" type="stmt" count="2"/>
+        <line num="113" type="stmt" count="2"/>
+        <line num="116" type="stmt" count="2"/>
+        <line num="119" type="method" name="cycle4" visibility="private" complexity="3" crap="3" count="2"/>
+        <line num="120" type="stmt" count="2"/>
+        <line num="121" type="stmt" count="2"/>
+        <line num="122" type="stmt" count="2"/>
+        <line num="123" type="stmt" count="2"/>
+        <line num="124" type="stmt" count="2"/>
+        <line num="125" type="stmt" count="2"/>
+        <line num="126" type="stmt" count="2"/>
+        <line num="129" type="stmt" count="2"/>
         <line num="132" type="method" name="cycle5" visibility="private" complexity="3" crap="3" count="2"/>
         <line num="133" type="stmt" count="2"/>
         <line num="134" type="stmt" count="2"/>
         <line num="135" type="stmt" count="2"/>
-        <line num="136" type="stmt" count="2"/>
-        <line num="137" type="stmt" count="2"/>
-        <line num="138" type="stmt" count="2"/>
-        <line num="139" type="stmt" count="2"/>
+        <line num="136" type="stmt" count="1"/>
+        <line num="137" type="stmt" count="1"/>
+        <line num="138" type="stmt" count="1"/>
+        <line num="139" type="stmt" count="1"/>
         <line num="142" type="stmt" count="2"/>
         <line num="145" type="method" name="moveCalculatedGames" visibility="private" complexity="8" crap="8" count="23"/>
         <line num="147" type="stmt" count="23"/>
@@ -1455,6 +1491,6 @@
       <line num="7" type="stmt" count="5"/>
       <metrics loc="8" ncloc="6" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="1" coveredelements="1"/>
     </file>
-    <metrics files="25" loc="2482" ncloc="2108" classes="19" methods="219" coveredmethods="219" conditionals="0" coveredconditionals="0" statements="1092" coveredstatements="1092" elements="1311" coveredelements="1311"/>
+    <metrics files="25" loc="2534" ncloc="2160" classes="19" methods="233" coveredmethods="233" conditionals="0" coveredconditionals="0" statements="1114" coveredstatements="1114" elements="1347" coveredelements="1347"/>
   </project>
 </coverage>

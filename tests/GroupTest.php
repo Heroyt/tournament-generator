@@ -139,6 +139,60 @@ class GroupTest extends TestCase
 	}
 
 	/** @test */
+	public function check_win_point_setting_group() {
+		$group = new \TournamentGenerator\Group('Group name 1');
+
+		$group->setWinPoints(5);
+
+		$this->assertEquals(5, $group->getWinPoints());
+	}
+
+	/** @test */
+	public function check_draw_point_setting_group() {
+		$group = new \TournamentGenerator\Group('Group name 1');
+
+		$group->setDrawPoints(5);
+
+		$this->assertEquals(5, $group->getDrawPoints());
+	}
+
+	/** @test */
+	public function check_lost_point_setting_group() {
+		$group = new \TournamentGenerator\Group('Group name 1');
+
+		$group->setLostPoints(5);
+
+		$this->assertEquals(5, $group->getLostPoints());
+	}
+
+	/** @test */
+	public function check_second_point_setting_group() {
+		$group = new \TournamentGenerator\Group('Group name 1');
+
+		$group->setSecondPoints(5);
+
+		$this->assertEquals(5, $group->getSecondPoints());
+	}
+
+	/** @test */
+	public function check_third_point_setting_group() {
+		$group = new \TournamentGenerator\Group('Group name 1');
+
+		$group->setThirdPoints(5);
+
+		$this->assertEquals(5, $group->getThirdPoints());
+	}
+
+	/** @test */
+	public function check_progress_point_setting_group() {
+		$group = new \TournamentGenerator\Group('Group name 1');
+
+		$group->setProgressPoints(5);
+
+		$this->assertEquals(5, $group->getProgressPoints());
+	}
+
+	/** @test */
 	public function check_sorting_teams_group() {
 
 		$group = new \TournamentGenerator\Group('Name of group');

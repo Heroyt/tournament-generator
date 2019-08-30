@@ -86,5 +86,22 @@ class TeamTest extends TestCase
 
 	}
 
+	/** @test */
+	public function check_adding_and_removing_points_team() {
+
+		$team = new \TournamentGenerator\Team('Team1', 1);
+
+		$this->assertEquals(0, $team->getSumPoints());
+
+		$team->addPoints(500);
+		$this->assertEquals(500, $team->getSumPoints());
+
+		$team->addPoints(1000);
+		$this->assertEquals(1500, $team->getSumPoints());
+
+		$team->removePoints(100);
+		$this->assertEquals(1400, $team->getSumPoints());
+
+	}
 
 }
