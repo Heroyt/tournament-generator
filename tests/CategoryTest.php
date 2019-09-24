@@ -29,7 +29,7 @@ class CategoryTest extends TestCase
 
 		$this->assertEquals('ID2', $category->getId());
 
-		$this->expectException(Exception::class);
+		$this->expectException(InvalidArgumentException::class);
 		$category->setId(['This', 'is', 'not', 'a', 'valid' => 'id']);
 	}
 

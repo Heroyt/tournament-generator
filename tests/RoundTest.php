@@ -29,7 +29,7 @@ class RoundTest extends TestCase
 
 		$this->assertEquals('ID2', $round->getId());
 
-		$this->expectException(Exception::class);
+		$this->expectException(InvalidArgumentException::class);
 		$round->setId(['This', 'is', 'not', 'a', 'valid' => 'id']);
 	}
 

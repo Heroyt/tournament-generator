@@ -21,7 +21,7 @@ $round->addGroup($group);
 #### From a group class
 
 **Recomended**  
-This automatically assigns the group to the group.
+This automatically assigns the group to round.
 
 ```php
 include_once 'vendor/autoload.php';

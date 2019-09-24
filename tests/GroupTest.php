@@ -29,7 +29,7 @@ class GroupTest extends TestCase
 
 		$this->assertEquals('ID2', $group->getId());
 
-		$this->expectException(Exception::class);
+		$this->expectException(InvalidArgumentException::class);
 		$group->setId(['This', 'is', 'not', 'a', 'valid' => 'id']);
 	}
 

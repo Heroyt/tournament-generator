@@ -29,7 +29,7 @@ class TeamTest extends TestCase
 
 		$this->assertEquals('ID2', $team->getId());
 
-		$this->expectException(Exception::class);
+		$this->expectException(InvalidArgumentException::class);
 		$team->setId(['This', 'is', 'not', 'a', 'valid' => 'id']);
 	}
 
