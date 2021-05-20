@@ -32,11 +32,12 @@ Tournament Generator
 
 ## Installation
 
-```php
-composer require heroyt/tournament-generator
+```shell
+$ composer require heroyt/tournament-generator
 ```
 
 ## Basic Usage
+
 ```php
 require 'vendor/autoload.php';
 
@@ -96,7 +97,7 @@ $teams = $tournament->getTeams(true); // TRUE to get teams ordered by their resu
 require 'vendor/autoload.php';
 
 // Create a tournament
-$tournament = new TournamentGenerator\Preset\Tournament_SingleElimination('Tournament name');
+$tournament = new TournamentGenerator\Preset\SingleElimination('Tournament name');
 
 // Set tournament lengths - could be omitted
 $tournament
