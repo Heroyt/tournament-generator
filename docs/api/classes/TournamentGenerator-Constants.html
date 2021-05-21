@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Tournament Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="../">
+    <link rel="icon" href="images/favicon.ico"/>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/base.css">
+            <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/template.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/js/all.min.js" integrity="sha256-0vuk8LXoyrmCjp1f0O300qo1M75ZQyhH9X3J6d+scmk=" crossorigin="anonymous"></script>
+        <script src="js/search.js"></script>
+        <script defer src="js/searchIndex.js"></script>
+    </head>
+<body id="top">
+    <header class="phpdocumentor-header phpdocumentor-section">
+    <h1 class="phpdocumentor-title"><a href="" class="phpdocumentor-title__link">Tournament Generator</a></h1>
+    <input class="phpdocumentor-header__menu-button" type="checkbox" id="menu-button" name="menu-button" />
+    <label class="phpdocumentor-header__menu-icon" for="menu-button">
+        <i class="fas fa-bars"></i>
+    </label>
+    <section data-search-form class="phpdocumentor-search">
+    <label>
+        <span class="visually-hidden">Search for</span>
+        <svg class="phpdocumentor-search__icon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <line x1="12.4892" y1="12.2727" x2="19.1559" y2="18.9393" stroke="currentColor" stroke-width="3"/>
+        </svg>
+        <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+    </label>
+</section>
+
+    <nav class="phpdocumentor-topnav">
+    <ul class="phpdocumentor-topnav__menu">
+        </ul>
+</nav>
+</header>
+
+    <main class="phpdocumentor">
+        <div class="phpdocumentor-section">
+            <input class="phpdocumentor-sidebar__menu-button" type="checkbox" id="sidebar-button" name="sidebar-button" />
+<label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
+    Menu
+</label>
+<aside class="phpdocumentor-column -four phpdocumentor-sidebar">
+    
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                                                <h4 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/tournamentgenerator.html"><abbr title="\TournamentGenerator">TournamentGenerator</abbr></a></h4>
+                <ul class="phpdocumentor-list">
+                                            <li><a href="namespaces/tournamentgenerator-helpers.html"><abbr title="\TournamentGenerator\Helpers">Helpers</abbr></a></li>
+                                            <li><a href="namespaces/tournamentgenerator-interfaces.html"><abbr title="\TournamentGenerator\Interfaces">Interfaces</abbr></a></li>
+                                            <li><a href="namespaces/tournamentgenerator-preset.html"><abbr title="\TournamentGenerator\Preset">Preset</abbr></a></li>
+                                            <li><a href="namespaces/tournamentgenerator-traits.html"><abbr title="\TournamentGenerator\Traits">Traits</abbr></a></li>
+                                    </ul>
+                        </section>
+
+        <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
+                    <h3 class="phpdocumentor-sidebar__root-package"><a href="packages/Default.html"><abbr title="\Default">Default</abbr></a></h3>
+                                <h3 class="phpdocumentor-sidebar__root-package"><a href="packages/TournamentGenerator.html"><abbr title="\TournamentGenerator">TournamentGenerator</abbr></a></h3>
+                        <ul class="phpdocumentor-list">
+                                    <li><a href="packages/TournamentGenerator-Helpers.html"><abbr title="\TournamentGenerator\Helpers">Helpers</abbr></a></li>
+                                    <li><a href="packages/TournamentGenerator-Interfaces.html"><abbr title="\TournamentGenerator\Interfaces">Interfaces</abbr></a></li>
+                                    <li><a href="packages/TournamentGenerator-Preset.html"><abbr title="\TournamentGenerator\Preset">Preset</abbr></a></li>
+                                    <li><a href="packages/TournamentGenerator-Traits.html"><abbr title="\TournamentGenerator\Traits">Traits</abbr></a></li>
+                            </ul>
+                        </section>
+    
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="graphs/classes.html">Class Diagram</a></h3>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
+    </section>
+
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
+    </section>
+</aside>
+
+            <div class="phpdocumentor-column -eight phpdocumentor-content">
+                    <ul class="phpdocumentor-breadcrumbs">
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/tournamentgenerator.html">TournamentGenerator</a></li>
+    </ul>
+
+    <article class="phpdocumentor-element -class">
+        <h2 class="phpdocumentor-content__title">
+    Constants
+
+    
+            <div class="phpdocumentor-element__package">
+            in package
+            <ul class="phpdocumentor-breadcrumbs">
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/TournamentGenerator.html">TournamentGenerator</a></li>
+                            </ul>
+        </div>
+    
+    
+    </h2>
+
+        <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Constants.php"><a href="files/src-tournamentgenerator-constants.html"><abbr title="src/TournamentGenerator/Constants.php">Constants.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">12</span>
+</aside>
+
+            <p class="phpdocumentor-summary">Constants used in the library</p>
+
+    <section class="phpdocumentor-description"></section>
+
+
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">author</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>Tomáš Vojík <a href="mailto:vojik@wboy.cz">vojik@wboy.cz</a></p>
+</section>
+
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">0.3</span>
+                                                                                
+                                                 <section class="phpdocumentor-description"></section>
+
+                                    </dd>
+                        </dl>
+
+
+
+
+
+
+<h3 id="toc">
+    Table of Contents
+    <a href="#toc" class="headerlink"><i class="fas fa-link"></i></a>
+</h3>
+
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a href="classes/TournamentGenerator-Constants.html#constant_DUMMY_TEAM">DUMMY_TEAM</a>
+    <span>
+        &nbsp;= &#039;dummyRozlosTeam&#039;                    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a href="classes/TournamentGenerator-Constants.html#constant_GroupTypes">GroupTypes</a>
+    <span>
+        &nbsp;= [&#039;ROUND_ROBIN&#039; =&gt; &#039;Robin-Robin group type&#039;, &#039;ROUND_TWO&#039; =&gt; &#039;Two-Two group type&#039;, &#039;ROUND_SPLIT&#039; =&gt; &#039;Conditional split group type&#039;]                    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a href="classes/TournamentGenerator-Constants.html#constant_OrderingTypes">OrderingTypes</a>
+    <span>
+        &nbsp;= [&#039;POINTS&#039; =&gt; &#039;Ordering based on points&#039;, &#039;SCORE&#039; =&gt; &#039;Ordering based on score&#039;]                    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a href="classes/TournamentGenerator-Constants.html#constant_POINTS">POINTS</a>
+    <span>
+        &nbsp;= &#039;Ordering based on points&#039;                    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a href="classes/TournamentGenerator-Constants.html#constant_ROUND_ROBIN">ROUND_ROBIN</a>
+    <span>
+        &nbsp;= &#039;Robin-Robin group type&#039;                    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a href="classes/TournamentGenerator-Constants.html#constant_ROUND_SPLIT">ROUND_SPLIT</a>
+    <span>
+        &nbsp;= &#039;Conditional split group type&#039;                    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a href="classes/TournamentGenerator-Constants.html#constant_ROUND_TWO">ROUND_TWO</a>
+    <span>
+        &nbsp;= &#039;Two-Two group type&#039;                    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a href="classes/TournamentGenerator-Constants.html#constant_SCORE">SCORE</a>
+    <span>
+        &nbsp;= &#039;Ordering based on score&#039;                    </span>
+</dt>
+<dd></dd>
+
+                </dl>
+
+
+
+        
+    <section class="phpdocumentor-constants">
+        <h3 class="phpdocumentor-elements__header" id="constants">
+            Constants
+            <a href="classes/TournamentGenerator-Constants.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
+        </h3>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_DUMMY_TEAM">
+        DUMMY_TEAM
+        <a href="classes/TournamentGenerator-Constants.html#constant_DUMMY_TEAM" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Constants.php"><a href="files/src-tournamentgenerator-constants.html"><abbr title="src/TournamentGenerator/Constants.php">Constants.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">15</span>
+</aside>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">DUMMY_TEAM</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;dummyRozlosTeam&#039;</span>
+</code>
+
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_GroupTypes">
+        GroupTypes
+        <a href="classes/TournamentGenerator-Constants.html#constant_GroupTypes" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Constants.php"><a href="files/src-tournamentgenerator-constants.html"><abbr title="src/TournamentGenerator/Constants.php">Constants.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">39</span>
+</aside>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">GroupTypes</span>
+    = <span class="phpdocumentor-signature__default-value">[&#039;ROUND_ROBIN&#039; =&gt; &#039;Robin-Robin group type&#039;, &#039;ROUND_TWO&#039; =&gt; &#039;Two-Two group type&#039;, &#039;ROUND_SPLIT&#039; =&gt; &#039;Conditional split group type&#039;]</span>
+</code>
+
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_OrderingTypes">
+        OrderingTypes
+        <a href="classes/TournamentGenerator-Constants.html#constant_OrderingTypes" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Constants.php"><a href="files/src-tournamentgenerator-constants.html"><abbr title="src/TournamentGenerator/Constants.php">Constants.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">33</span>
+</aside>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">OrderingTypes</span>
+    = <span class="phpdocumentor-signature__default-value">[&#039;POINTS&#039; =&gt; &#039;Ordering based on points&#039;, &#039;SCORE&#039; =&gt; &#039;Ordering based on score&#039;]</span>
+</code>
+
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_POINTS">
+        POINTS
+        <a href="classes/TournamentGenerator-Constants.html#constant_POINTS" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Constants.php"><a href="files/src-tournamentgenerator-constants.html"><abbr title="src/TournamentGenerator/Constants.php">Constants.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">27</span>
+</aside>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">POINTS</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;Ordering based on points&#039;</span>
+</code>
+
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ROUND_ROBIN">
+        ROUND_ROBIN
+        <a href="classes/TournamentGenerator-Constants.html#constant_ROUND_ROBIN" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Constants.php"><a href="files/src-tournamentgenerator-constants.html"><abbr title="src/TournamentGenerator/Constants.php">Constants.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">18</span>
+</aside>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">ROUND_ROBIN</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;Robin-Robin group type&#039;</span>
+</code>
+
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ROUND_SPLIT">
+        ROUND_SPLIT
+        <a href="classes/TournamentGenerator-Constants.html#constant_ROUND_SPLIT" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Constants.php"><a href="files/src-tournamentgenerator-constants.html"><abbr title="src/TournamentGenerator/Constants.php">Constants.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">24</span>
+</aside>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">ROUND_SPLIT</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;Conditional split group type&#039;</span>
+</code>
+
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ROUND_TWO">
+        ROUND_TWO
+        <a href="classes/TournamentGenerator-Constants.html#constant_ROUND_TWO" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Constants.php"><a href="files/src-tournamentgenerator-constants.html"><abbr title="src/TournamentGenerator/Constants.php">Constants.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">21</span>
+</aside>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">ROUND_TWO</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;Two-Two group type&#039;</span>
+</code>
+
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_SCORE">
+        SCORE
+        <a href="classes/TournamentGenerator-Constants.html#constant_SCORE" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Constants.php"><a href="files/src-tournamentgenerator-constants.html"><abbr title="src/TournamentGenerator/Constants.php">Constants.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">30</span>
+</aside>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">SCORE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;Ordering based on score&#039;</span>
+</code>
+
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+            </section>
+
+        
+
+        
+    </article>
+                <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+    <section class="phpdocumentor-search-results__dialog">
+        <header class="phpdocumentor-search-results__header">
+            <h2 class="phpdocumentor-search-results__title">Search results</h2>
+            <button class="phpdocumentor-search-results__close"><i class="fas fa-times"></i></button>
+        </header>
+        <section class="phpdocumentor-search-results__body">
+            <ul class="phpdocumentor-search-results__entries"></ul>
+        </section>
+    </section>
+</section>
+            </div>
+        </div>
+        <a href="classes/TournamentGenerator-Constants.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+
+    </main>
+
+    <script>
+        cssVars({});
+    </script>
+</body>
+</html>
