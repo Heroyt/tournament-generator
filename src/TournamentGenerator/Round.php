@@ -32,8 +32,8 @@ class Round extends Base implements WithSkipSetters, WithTeams, WithGroups, With
 	/**
 	 * Round constructor.
 	 *
-	 * @param string $name Round name
-	 * @param null   $id   Round id - if omitted -> it is generated automatically as unique string
+	 * @param string          $name Round name
+	 * @param string|int|null $id   Round id - if omitted -> it is generated automatically as unique string
 	 */
 	public function __construct(string $name = '', $id = null) {
 		$this->setName($name);
@@ -57,8 +57,8 @@ class Round extends Base implements WithSkipSetters, WithTeams, WithGroups, With
 	/**
 	 * Creates a new group and adds it to round
 	 *
-	 * @param string $name Group name
-	 * @param null   $id   Group id - if omitted -> it is generated automatically as unique string
+	 * @param string          $name Group name
+	 * @param string|int|null $id   Group id - if omitted -> it is generated automatically as unique string
 	 *
 	 * @return Group New group
 	 */

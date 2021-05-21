@@ -33,7 +33,7 @@ trait WithTeams
 	 * Create a new team and add it into the object
 	 *
 	 * @param string $name Name of the new team
-	 * @param null   $id   Id of the new team - if omitted -> it is generated automatically as unique string
+	 * @param string|int|null   $id   Id of the new team - if omitted -> it is generated automatically as unique string
 	 *
 	 * @return Team Newly created team
 	 */
@@ -118,6 +118,8 @@ trait WithTeams
 	}
 
 	/**
+	 * Filter an array of teams and return an distinct array
+	 *
 	 * @param Team[] $teams
 	 *
 	 * @return Team[]
@@ -221,6 +223,11 @@ trait WithTeams
 		return $this;
 	}
 
+	/**
+	 * Get count of the teams array
+	 *
+	 * @return int
+	 */
 	public function getRealTeamCount() : int {
 		return count($this->teams);
 	}

@@ -38,8 +38,8 @@ trait WithRounds
 	/**
 	 * Creates a new round and adds it to the category
 	 *
-	 * @param string $name Round name
-	 * @param null   $id   Round id - if omitted -> it is generated automatically as unique string
+	 * @param string          $name Round name
+	 * @param string|int|null $id   Round id - if omitted -> it is generated automatically as unique string
 	 *
 	 * @return Round The newly created round
 	 */

@@ -28,8 +28,8 @@ interface WithTeams
 	/**
 	 * Create a new team and add it into the object
 	 *
-	 * @param string $name Name of the new team
-	 * @param null   $id   Id of the new team - if omitted -> it is generated automatically as unique string
+	 * @param string          $name Name of the new team
+	 * @param string|int|null $id   Id of the new team - if omitted -> it is generated automatically as unique string
 	 *
 	 * @return Team Newly created team
 	 */

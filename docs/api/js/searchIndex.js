@@ -1663,7 +1663,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\TournamentGenerator\\Traits\\WithTeams\u003A\u003AuniqueTeams\u0028\u0029",
             "name": "uniqueTeams",
-            "summary": "",
+            "summary": "Filter\u0020an\u0020array\u0020of\u0020teams\u0020and\u0020return\u0020an\u0020distinct\u0020array",
             "url": "classes/TournamentGenerator-Traits-WithTeams.html#method_uniqueTeams"
         },                {
             "fqsen": "\\TournamentGenerator\\Traits\\WithTeams\u003A\u003AsortTeams\u0028\u0029",
@@ -1683,7 +1683,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\TournamentGenerator\\Traits\\WithTeams\u003A\u003AgetRealTeamCount\u0028\u0029",
             "name": "getRealTeamCount",
-            "summary": "",
+            "summary": "Get\u0020count\u0020of\u0020the\u0020teams\u0020array",
             "url": "classes/TournamentGenerator-Traits-WithTeams.html#method_getRealTeamCount"
         },                {
             "fqsen": "\\TournamentGenerator\\Traits\\WithTeams\u003A\u003A\u0024teams",

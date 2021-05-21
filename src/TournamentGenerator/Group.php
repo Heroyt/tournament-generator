@@ -54,8 +54,8 @@ class Group extends Base implements WithGeneratorSetters, WithSkipSetters, WithT
 	/**
 	 * Group constructor.
 	 *
-	 * @param string $name Group name
-	 * @param null   $id   Group id - if omitted -> it is generated automatically as unique string
+	 * @param string          $name Group name
+	 * @param string|int|null $id   Group id - if omitted -> it is generated automatically as unique string
 	 */
 	public function __construct(string $name, $id = null) {
 		$this->setName($name);
@@ -81,8 +81,8 @@ class Group extends Base implements WithGeneratorSetters, WithSkipSetters, WithT
 	/**
 	 * Create a new team and add it into the object
 	 *
-	 * @param string $name Name of the new team
-	 * @param null   $id   Id of the new team - if omitted -> it is generated automatically as unique string
+	 * @param string          $name Name of the new team
+	 * @param string|int|null $id   Id of the new team - if omitted -> it is generated automatically as unique string
 	 *
 	 * @return Team Newly created team
 	 */

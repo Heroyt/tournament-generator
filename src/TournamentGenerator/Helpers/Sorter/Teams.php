@@ -25,7 +25,7 @@ class Teams
 	/**
 	 * Sort teams in group by defined ordering type
 	 *
-	 * @param Team[] &                    $teams    Array of teams to be sorted
+	 * @param Team[]                      $teams    Array of teams to be sorted
 	 * @param Group                       $group    Group to get the results from
 	 * @param string                      $ordering What to order by (\TournamentGenerator\Constants::POINTS / \TournamentGenerator\Constants::SCORE)
 	 *
@@ -54,7 +54,7 @@ class Teams
 	/**
 	 * Sort teams in round by defined ordering type
 	 *
-	 * @param Team[] &                    $teams    Array of teams to be sorted
+	 * @param Team[]                      $teams    Array of teams to be sorted
 	 * @param Round                       $round    Round to get the results from
 	 * @param string                      $ordering What to order by (\TournamentGenerator\Constants::POINTS / \TournamentGenerator\Constants::SCORE)
 	 *
