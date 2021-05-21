@@ -7,7 +7,7 @@
 >
     <title>Tournament Generator</title>
     <paths>
-        <output>docs/api</output>
+        <output>docs-api</output>
         <cache>build/cache</cache>
     </paths>
     <version number="0.3.0">
