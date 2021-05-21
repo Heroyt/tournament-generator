@@ -21,7 +21,8 @@
 	"minimum-stability": "dev",
 	"prefer-stable": true,
 	"scripts": {
-		"docs": "php phpDocumentor.phar -s src/ -t docs/api/"
+		"docs": "php phpDocumentor.phar -s src/ -t docs/api/",
+		"test": "./vendor/bin/phpunit"
 	},
 	"require": {
 		"php": ">=7.4"
