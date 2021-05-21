@@ -1,7 +1,9 @@
 language: php
-rvm:
+php:
  - 7.4
  - 8.0
+dist: xenial
+os: linux
 install:
  - composer install
 script:
