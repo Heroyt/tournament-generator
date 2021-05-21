@@ -2,212 +2,176 @@
 
 namespace TournamentGenerator;
 
+use Exception;
+use TournamentGenerator\Interfaces\WithCategories;
+use TournamentGenerator\Interfaces\WithGames;
+use TournamentGenerator\Interfaces\WithGroups;
+use TournamentGenerator\Interfaces\WithRounds;
+use TournamentGenerator\Interfaces\WithSkipSetters;
+use TournamentGenerator\Interfaces\WithTeams;
+use TournamentGenerator\Traits\WithCategories as WithCategoriesTrait;
+use TournamentGenerator\Traits\WithGames as WithGamesTrait;
+use TournamentGenerator\Traits\WithGroups as WithGroupsTrait;
+use TournamentGenerator\Traits\WithRounds as WithRoundsTrait;
+use TournamentGenerator\Traits\WithSkipSetters as WithSkipSettersTrait;
+use TournamentGenerator\Traits\WithTeams as WithTeamsTrait;
+
 /**
+ * Tournament class
  *
+ * Tournament is a main class. It is a container for every other object related to one tournament (categories -> rounds -> groups -> games -> teams).
+ *
+ * @package TournamentGenerator
+ * @author  Tomáš Vojík <vojik@wboy.cz>
+ * @since   0.1
  */
-class Tournament implements WithSkipSetters, WithTeams, WithRounds
+class Tournament extends Base implements WithSkipSetters, WithTeams, WithRounds, WithCategories, WithGroups, WithGames
 {
+	use WithTeamsTrait;
+	use WithCategoriesTrait;
+	use WithRoundsTrait;
+	use WithGroupsTrait;
+	use WithSkipSettersTrait;
+	use WithGamesTrait;
 
-	private $name = '';
-	private $categories = [];
-	private $rounds = [];
-	private $teams = [];
+	/** @var int Wait time between categories */
+	protected int $expectedCategoryWait = 0;
+	/** @var int Play time for one game */
+	private int $expectedPlay = 0;
+	/** @var int Wait time between games */
+	private int $expectedGameWait = 0;
+	/** @var int Wait time between rounds */
+	private int $expectedRoundWait = 0;
 
-	private $expectedPlay = 0;
-	private $expectedGameWait = 0;
-	private $expectedRoundWait = 0;
-	private $expectedCategoryWait = 0;
-
-	private $allowSkip = false;
-
-	function __construct(string $name = ''){
+	public function __construct(string $name = '') {
 		$this->name = $name;
 	}
-	public function __toString() {
-		return $this->name;
-	}
 
-	public function setName(string $name) {
-		$this->name = $name;
-		return $this;
-	}
-	public function getName() {
-		return $this->name;
-	}
-
-	public function setPlay(int $play) {
+	/**
+	 * Set play time for one game
+	 *
+	 * @param int $play
+	 *
+	 * @return $this
+	 */
+	public function setPlay(int $play) : Tournament {
 		$this->expectedPlay = $play;
 		return $this;
 	}
-	public function getPlay() {
+
+	/**
+	 * Get play time for one game
+	 *
+	 * @return int
+	 */
+	public function getPlay() : int {
 		return $this->expectedPlay;
 	}
-	public function setGameWait(int $wait) {
+
+	/**
+	 * Set wait time between games
+	 *
+	 * @param int $wait
+	 *
+	 * @return $this
+	 */
+	public function setGameWait(int $wait) : Tournament {
 		$this->expectedGameWait = $wait;
 		return $this;
 	}
-	public function getGameWait() {
+
+	/**
+	 * Get wait time between games
+	 *
+	 * @return int
+	 */
+	public function getGameWait() : int {
 		return $this->expectedGameWait;
 	}
-	public function setRoundWait(int $wait) {
+
+	/**
+	 * Set wait time between rounds
+	 *
+	 * @param int $wait
+	 *
+	 * @return $this
+	 */
+	public function setRoundWait(int $wait) : Tournament {
 		$this->expectedRoundWait = $wait;
 		return $this;
 	}
-	public function getRoundWait() {
+
+	/**
+	 * Get wait time between rounds
+	 *
+	 * @return int
+	 */
+	public function getRoundWait() : int {
 		return $this->expectedRoundWait;
 	}
-	public function setCategoryWait(int $wait) {
+
+	/**
+	 * Set the wait time between categories
+	 *
+	 * @param int $wait
+	 *
+	 * @return $this
+	 */
+	public function setCategoryWait(int $wait) : Tournament {
 		$this->expectedCategoryWait = $wait;
 		return $this;
 	}
-	public function getCategoryWait() {
+
+	/**
+	 * Get the wait time between categories
+	 *
+	 * @return int
+	 */
+	public function getCategoryWait() : int {
 		return $this->expectedCategoryWait;
 	}
-	public function getTournamentTime(){
-		$games = count($this->getGames());
-		return $games*$this->expectedPlay+($games-1)*$this->expectedGameWait+(count($this->getRounds())-1)*$this->expectedRoundWait+(count($this->getCategories())-1)*$this->expectedCategoryWait;
-	}
 
-	public function allowSkip(){
-		$this->allowSkip = true;
-		return $this;
-	}
-	public function disallowSkip(){
-		$this->allowSkip = false;
-		return $this;
-	}
-	public function setSkip(bool $skip) {
-		$this->allowSkip = $skip;
-		return $this;
-	}
-	public function getSkip() {
-		return $this->allowSkip;
-	}
-
-	public function addCategory(Category ...$categories){
-		foreach ($categories as $category) {
-			$this->categories[] = $category;
-		}
-		return $this;
-	}
-	public function category(string $name = '', $id = null) {
-		$c = new Category($name, $id);
-		$this->categories[] = $c->setSkip($this->allowSkip);
-		return $c;
-	}
-	public function getCategories() {
-		return $this->categories;
-	}
-
-	public function addRound(Round ...$rounds) {
-		foreach ($rounds as $round) {
-			$this->rounds[] = $round;
-		}
-		return $this;
-	}
-	public function round(string $name = '', $id = null) {
-		$r = new Round($name, $id);
-		$this->rounds[] = $r->setSkip($this->allowSkip);
-		return $r;
-	}
-	public function getRounds() {
-		if (count($this->categories) > 0) {
-			$rounds = [];
-			foreach ($this->categories as $category) {
-				$rounds = array_merge($rounds, $category->getRounds());
-			}
-			return array_merge($rounds, $this->rounds);
-		}
-		return $this->rounds;
-	}
-	public function getGroups() {
-		$groups = [];
-		foreach ($this->getRounds() as $round) {
-			$groups = array_merge($groups, $round->getGroups());
-		}
-		return $groups;
-	}
-
-	public function addTeam(Team ...$teams) {
-		foreach ($teams as $team) {
-			$this->teams[] = $team;
-		}
-		return $this;
-	}
-	public function team(string $name = '', $id = null) {
-		$t = new Team($name, $id);
-		$this->teams[] = $t;
-		return $t;
-	}
-	public function getTeams(bool $ordered = false, $ordering = \TournamentGenerator\Constants::POINTS, array $filters = []) {
-		$teams = $this->teams;
-		foreach ($this->categories as $category) {
-			$teams = array_merge($teams, $category->getTeams());
-		}
-		foreach ($this->rounds as $round) {
-			$teams = array_merge($teams, $round->getTeams());
-		}
-		$teams = \array_unique($teams);
-		$this->teams = $teams;
-		if ($ordered) $teams = $this->sortTeams($ordering);
-
-		// APPLY FILTERS
-		$filter = new Filter($this->getGroups(), $filters);
-		$filter->filter($teams);
-
-		return $teams;
-	}
-	public function sortTeams($ordering = \TournamentGenerator\Constants::POINTS, array $filters = []) {
-		$teams = [];
-		for ($i = count($this->rounds)-1; $i >= 0; $i--) {
-			$rTeams = array_filter($this->rounds[$i]->getTeams(true, $ordering), function($a) use ($teams) { return !in_array($a, $teams); });
-			$teams = array_merge($teams, $rTeams);
-		}
-		$this->teams = $teams;
-
-		// APPLY FILTERS
-		$filter = new Filter($this->getGroups(), $filters);
-		$filter->filter($teams);
-
-		return $teams;
-	}
-
-	public function getGames() {
-		$games = [];
-		foreach ($this->getRounds() as $round) {
-			$games = array_merge($games, $round->getGames());
-		}
-		return $games;
-	}
-
-	public function splitTeams(Round ...$wheres) {
-
-		if (count($wheres) === 0) $wheres = $this->getRounds();
-
-		$teams = $this->getTeams();
-		shuffle($teams);
-
-		while (count($teams) > 0) {
-			foreach ($wheres as $where) {
-				if (count($teams) > 0) $where->addTeam(array_shift($teams));
-			}
-		}
-		foreach ($wheres as $where) {
-			$where->splitTeams();
-		}
-		return $this;
-	}
-
+	/**
+	 * Simulate all games as they would be played in reality - with dummy teams
+	 *
+	 * @param bool $returnTime If true - return the expected play time
+	 *
+	 * @return Game[]|int Generated games, or expected play time
+	 * @throws Exception
+	 */
 	public function genGamesSimulate(bool $returnTime = false) {
-		$games = Utilis\Simulator::simulateTournament($this);
+		$games = Helpers\Simulator::simulateTournament($this);
 
-		if ($returnTime) return $this->getTournamentTime();
+		if ($returnTime) {
+			return $this->getTournamentTime();
+		}
 		return $games;
 	}
-	public function genGamesSimulateReal(bool $returnTime = false) {
-		$games = Utilis\Simulator::simulateTournamentReal($this);
 
-		if ($returnTime) return $this->getTournamentTime();
+	/**
+	 * Get the whole tournament time
+	 *
+	 * @return int
+	 */
+	public function getTournamentTime() : int {
+		$games = count($this->getGames());
+		return $games * $this->expectedPlay + ($games - 1) * $this->expectedGameWait + (count($this->getRounds()) - 1) * $this->expectedRoundWait + (count($this->getCategories()) - 1) * $this->expectedCategoryWait;
+	}
+
+	/**
+	 * Simulate all games as they would be played in reality - with real teams
+	 *
+	 * @param bool $returnTime If true - return the expected play time
+	 *
+	 * @return int|Game[] Generated games, or expected play time
+	 * @throws Exception
+	 */
+	public function genGamesSimulateReal(bool $returnTime = false) {
+		$games = Helpers\Simulator::simulateTournamentReal($this);
+
+		if ($returnTime) {
+			return $this->getTournamentTime();
+		}
 		return $games;
 	}
 

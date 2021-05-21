@@ -31,11 +31,11 @@ nav:
   - Progression: classes/progression.md
   - 'Team filter': classes/teamFilter.md
   - 'Blank team': classes/blankTeam.md
-  - 'Utilis\Generator': classes/utilis/generator.md
-  - 'Utilis\Simulator': classes/utilis/simulator.md
-  - 'Utilis\filterComparator': classes/utilis/filterComparator.md
-  - 'Utilis\Sorter\Games': classes/utilis/sorter/games.md
-  - 'Utilis\Sorter\Teams': classes/utilis/sorter/teams.md
+  - 'Helpers\Generator': classes/Helpers/generator.md
+  - 'Helpers\Simulator': classes/Helpers/simulator.md
+  - 'Helpers\filterComparator': classes/Helpers/filterComparator.md
+  - 'Helpers\Sorter\Games': classes/Helpers/sorter/games.md
+  - 'Helpers\Sorter\Teams': classes/Helpers/sorter/teams.md
 - Templates:
   - List: template/list.md
   - 'Single elimination': template/singleElim.md

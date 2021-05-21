@@ -1,17 +1,19 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
+use TournamentGenerator\Preset\R2G;
 
 /**
  *
  */
-class TwoRoundsEliminationTest extends TestCase
+class TwoRoundsTest extends TestCase
 {
 
 	/** @test */
-	public function test_2R2G_elimination_even_teams() {
-		$tournament = new \TournamentGenerator\Preset\R2G('Tournament name');
+	public function R2G_elimination_even_teams() : void {
+		$tournament = new R2G('Tournament name');
 
-		for ($i=1; $i <= 8; $i++) {
+		for ($i = 1; $i <= 8; $i++) {
 			$tournament->team('Team '.$i);
 		}
 
@@ -19,14 +21,14 @@ class TwoRoundsEliminationTest extends TestCase
 
 		$tournament->genGamesSimulate();
 
-		$this->assertCount(12, $tournament->getGames());
+		self::assertCount(12, $tournament->getGames());
 	}
 
 	/** @test */
-	public function test_2R2G_elimination_nondivisible_by_4() {
-		$tournament = new \TournamentGenerator\Preset\R2G('Tournament name');
+	public function R2G_elimination_nondivisible_by_4() : void {
+		$tournament = new R2G('Tournament name');
 
-		for ($i=1; $i <= 6; $i++) {
+		for ($i = 1; $i <= 6; $i++) {
 			$tournament->team('Team '.$i);
 		}
 
@@ -34,15 +36,15 @@ class TwoRoundsEliminationTest extends TestCase
 
 		$tournament->genGamesSimulate();
 
-		$this->assertGreaterThanOrEqual(7, count($tournament->getGames()));
-		$this->assertLessThanOrEqual(9, count($tournament->getGames()));
+		self::assertGreaterThanOrEqual(7, count($tournament->getGames()));
+		self::assertLessThanOrEqual(9, count($tournament->getGames()));
 	}
 
 	/** @test */
-	public function test_2R2G_elimination_odd_teams() {
-		$tournament = new \TournamentGenerator\Preset\R2G('Tournament name');
+	public function R2G_elimination_odd_teams() : void {
+		$tournament = new R2G('Tournament name');
 
-		for ($i=1; $i <= 7; $i++) {
+		for ($i = 1; $i <= 7; $i++) {
 			$tournament->team('Team '.$i);
 		}
 
@@ -50,5 +52,13 @@ class TwoRoundsEliminationTest extends TestCase
 
 		$this->expectException(Exception::class);
 		$tournament->genGamesSimulate();
+	}
+
+	/** @test */
+	public function R2G_elimination_no_teams() : void {
+		$tournament = new R2G('Tournament name');
+
+		$this->expectException(Exception::class);
+		$tournament->generate();
 	}
 }

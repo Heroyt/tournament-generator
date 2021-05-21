@@ -2,145 +2,199 @@
 
 namespace TournamentGenerator;
 
+use Exception;
+use TournamentGenerator\Interfaces\WithGames;
+use TournamentGenerator\Interfaces\WithGroups;
+use TournamentGenerator\Interfaces\WithSkipSetters;
+use TournamentGenerator\Interfaces\WithTeams;
+use TournamentGenerator\Traits\WithGames as WithGamesTrait;
+use TournamentGenerator\Traits\WithGroups as WithGroupsTrait;
+use TournamentGenerator\Traits\WithSkipSetters as WithSkipSettersTrait;
+use TournamentGenerator\Traits\WithTeams as WithTeamsTrait;
+
 /**
+ * Tournament round
  *
+ * Round is a container for tournament groups. Groups in a round are played at the same time.
+ * This modifies the generation of games - generate all games for each group and play them in alternating order (game 1 from group 1, game 1 from group 2, game 2 from group 1, ...).
+ *
+ * @package TournamentGenerator
+ * @author  Tomáš Vojík <vojik@wboy.cz>
+ * @since   0.1
  */
-class Round extends Base implements WithSkipSetters, WithTeams
+class Round extends Base implements WithSkipSetters, WithTeams, WithGroups, WithGames
 {
+	use WithTeamsTrait;
+	use WithGroupsTrait;
+	use WithSkipSettersTrait;
+	use WithGamesTrait;
 
-	private $groups = [];
-	private $games = [];
-	private $teams = [];
-	private $allowSkip = false;
-
-	function __construct(string $name = '', $id = null) {
+	/**
+	 * Round constructor.
+	 *
+	 * @param string $name Round name
+	 * @param null   $id   Round id - if omitted -> it is generated automatically as unique string
+	 */
+	public function __construct(string $name = '', $id = null) {
 		$this->setName($name);
-		$this->setId(isset($id) ? $id : uniqid());
+		$this->setId($id ?? uniqid('', false));
 	}
 
-	public function addGroup(Group ...$groups){
+	/**
+	 * Adds one or more group to round
+	 *
+	 * @param Group ...$groups
+	 *
+	 * @return $this
+	 */
+	public function addGroup(Group ...$groups) : Round {
 		foreach ($groups as $group) {
 			$this->groups[] = $group;
 		}
 		return $this;
 	}
-	public function group(string $name, $id = null) {
+
+	/**
+	 * Creates a new group and adds it to round
+	 *
+	 * @param string $name Group name
+	 * @param null   $id   Group id - if omitted -> it is generated automatically as unique string
+	 *
+	 * @return Group New group
+	 */
+	public function group(string $name, $id = null) : Group {
 		$g = new Group($name, $id);
 		$this->groups[] = $g->setSkip($this->allowSkip);
 		return $g;
 	}
-	public function getGroups(){
+
+	/**
+	 * Get all group ids
+	 *
+	 * @return string[]|int[] Array of ids
+	 */
+	public function getGroupsIds() : array {
 		$this->orderGroups();
-		return $this->groups;
+		return array_map(static function($a) {
+			return $a->getId();
+		}, $this->groups);
 	}
-	public function getGroupsIds() {
-		$this->orderGroups();
-		return array_map(function($a) { return $a->getId(); }, $this->groups);
-	}
-	public function orderGroups() {
-		usort($this->groups, function($a, $b){
+
+	/**
+	 * Sort groups by their order
+	 *
+	 * @return Group[] Sorted groups
+	 */
+	public function orderGroups() : array {
+		usort($this->groups, static function($a, $b) {
 			return $a->getOrder() - $b->getOrder();
 		});
 		return $this->groups;
 	}
 
-	public function allowSkip(){
-		$this->allowSkip = true;
-		return $this;
-	}
-	public function disallowSkip(){
-		$this->allowSkip = false;
-		return $this;
-	}
-	public function setSkip(bool $skip = false) {
-		$this->allowSkip = $skip;
-		return $this;
-	}
-	public function getSkip() {
-		return $this->allowSkip;
-	}
-
-	public function genGames(){
+	/**
+	 * Generate all games
+	 *
+	 * @return array
+	 */
+	public function genGames() : array {
+		$games = [];
 		foreach ($this->groups as $group) {
 			$group->genGames();
-			$this->games = array_merge($this->games, $group->orderGames());
+			$games[] = $group->orderGames();
 		}
+		$this->games = array_merge(...$games);
 		return $this->games;
 	}
-	public function getGames() {
-		return $this->games;
-	}
-	public function isPlayed(){
-		if (count($this->games) === 0) return false;
+
+	/**
+	 * Check if all games in this round has been played
+	 *
+	 * @return bool
+	 */
+	public function isPlayed() : bool {
+		if (count($this->games) === 0) {
+			return false;
+		}
 		foreach ($this->groups as $group) {
-			if (!$group->isPlayed()) return false;
+			if (!$group->isPlayed()) {
+				return false;
+			}
 		}
 		return true;
 	}
 
-	public function addTeam(Team ...$teams) {
-		foreach ($teams as $team) {
-			$this->teams[] = $team;
+	/**
+	 * Split teams into its Groups
+	 *
+	 * @param Group[] $groups
+	 *
+	 * @return $this
+	 * @throws Exception
+	 * @noinspection CallableParameterUseCaseInTypeContextInspection
+	 */
+	public function splitTeams(Group ...$groups) : Round {
+		if (count($groups) === 0) {
+			$groups = $this->getGroups();
 		}
-		return $this;
-	}
-	public function team(string $name = '', $id = null) {
-		$t = new Team($name, $id);
-		$this->teams[] = $t;
-		return $t;
-	}
-	public function getTeams(bool $ordered = false, $ordering = \TournamentGenerator\Constants::POINTS, array $filters = []) {
-		$teams = $this->teams;
-		if (count($this->teams) == 0) {
-			foreach ($this->groups as $group) {
-				$teams = array_merge($teams, $group->getTeams());
-			}
-			$this->teams = $teams;
-		}
-		if ($ordered) $teams = $this->sortTeams($ordering);
-
-		// APPLY FILTERS
-		$filter = new Filter($this->getGroups(), $filters);
-		$filter->filter($teams);
-		return $teams;
-	}
-	public function sortTeams($ordering = \TournamentGenerator\Constants::POINTS, array $filters = []) {
-		$teams = Utilis\Sorter\Teams::sortRound($this->teams, $this, $ordering);
-
-		// APPLY FILTERS
-		$filter = new Filter($this->getGroups(), $filters);
-		$filter->filter($teams);
-
-		return $teams;
-	}
-
-	public function splitTeams(Group ...$groups) {
-
-		if (count($groups) === 0) $groups = $this->getGroups();
 
 		$teams = $this->getTeams();
 		shuffle($teams);
 
 		while (count($teams) > 0) {
 			foreach ($groups as $group) {
-				if (count($teams) > 0) $group->addTeam(array_shift($teams));
+				if (count($teams) > 0) {
+					$group->addTeam(array_shift($teams));
+				}
 			}
 		}
 		return $this;
 	}
 
-	public function progress(bool $blank = false){
+	/**
+	 * Get all groups in this round
+	 *
+	 * @return Group[]
+	 */
+	public function getGroups() : array {
+		$this->orderGroups();
+		return $this->groups;
+	}
+
+	/**
+	 * Progresses all teams from the round
+	 *
+	 * @param bool $blank If true -> creates dummy teams for (does not progress the real team objects) - used for simulation
+	 *
+	 * @return $this
+	 */
+	public function progress(bool $blank = false) : Round {
 		foreach ($this->groups as $group) {
 			$group->progress($blank);
 		}
 		return $this;
 	}
 
-	public function simulate() {
-		Utilis\Simulator::simulateRound($this);
+	/**
+	 * Simulate all games in this round as they would be played for real
+	 *
+	 * @return $this
+	 * @throws Exception
+	 */
+	public function simulate() : Round {
+		Helpers\Simulator::simulateRound($this);
 		return $this;
 	}
-	public function resetGames() {
+
+	/**
+	 * Reset all game results as if they were not played
+	 *
+	 * @post All games in this round are marked as "not played"
+	 * @post All scores in this round are deleted
+	 *
+	 * @return $this
+	 */
+	public function resetGames() : Round {
 		foreach ($this->groups as $group) {
 			$group->resetGames();
 		}

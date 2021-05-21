@@ -1,17 +1,33 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
+use TournamentGenerator\Helpers\Functions;
 
 /**
- *
+ * Test helper functions
  */
 class FunctionsTest extends TestCase
 {
 
-	/** @test */
-	public function check_power_of_2() {
-		$this->assertTrue(\TournamentGenerator\isPowerOf2(1));
-		$this->assertTrue(\TournamentGenerator\isPowerOf2(2));
-		$this->assertTrue(\TournamentGenerator\isPowerOf2(8192));
-		$this->assertFalse(\TournamentGenerator\isPowerOf2(3));
+	public function powers() : array {
+		return [
+			[1, true, 2, 1],
+			[2, true, 4, 2],
+			[8192, true, 16384, 8192],
+			[3, false, 4, 2],
+			[15, false, 16, 8],
+			[255, false, 256, 128],
+			[999, false, 1024, 512],
+		];
+	}
+
+	/**
+	 * @test
+	 * @dataProvider powers
+	 */
+	public function check_power_of_2(int $num, bool $isPower, int $nextPower, int $prevPower) : void {
+		self::assertEquals($isPower, Functions::isPowerOf2($num), 'The number is'.(!$isPower ? ' not' : '').' a power of 2, but the function returned the wrong output.');
+		self::assertEquals($nextPower, Functions::nextPowerOf2($num));
+		self::assertEquals($prevPower, Functions::previousPowerOf2($num));
 	}
 }

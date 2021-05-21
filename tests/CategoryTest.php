@@ -1,5 +1,10 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
+use TournamentGenerator\Category;
+use TournamentGenerator\Constants;
+use TournamentGenerator\Round;
+use TournamentGenerator\Team;
 
 /**
  *
@@ -8,50 +13,50 @@ class CategoryTest extends TestCase
 {
 
 	/** @test */
-	public function check_name_setup_category() {
-		$category = new \TournamentGenerator\Category('Category name 1');
+	public function check_name_setup_category() : void {
+		$category = new Category('Category name 1');
 
-		$this->assertEquals('Category name 1', $category->getName());
-		$this->assertEquals('Category name 1', (string) $category);
+		self::assertEquals('Category name 1', $category->getName());
+		self::assertEquals('Category name 1', (string) $category);
 
 		$category->setName('Category name 2');
 
-		$this->assertEquals('Category name 2', $category->getName());
+		self::assertEquals('Category name 2', $category->getName());
 	}
 
 	/** @test */
-	public function check_id_category_round() {
-		$category = new \TournamentGenerator\Category('Category name 1', 123);
+	public function check_id_category_round() : void {
+		$category = new Category('Category name 1', 123);
 
-		$this->assertEquals(123, $category->getId());
+		self::assertEquals(123, $category->getId());
 
 		$category->setId('ID2');
 
-		$this->assertEquals('ID2', $category->getId());
+		self::assertEquals('ID2', $category->getId());
 
 		$this->expectException(InvalidArgumentException::class);
 		$category->setId(['This', 'is', 'not', 'a', 'valid' => 'id']);
 	}
 
 	/** @test */
-	public function check_round_add_category() {
+	public function check_round_add_category() : void {
 
-		$category = new \TournamentGenerator\Category('Name of category 1');
+		$category = new Category('Name of category 1');
 
-		$round = new \TournamentGenerator\Round('Round name');
-		$round2 = new \TournamentGenerator\Round('Round name 2');
-		$round3 = new \TournamentGenerator\Round('Round name 3');
+		$round = new Round('Round name');
+		$round2 = new Round('Round name 2');
+		$round3 = new Round('Round name 3');
 
 		// Test adding a single round
 		$output = $category->addRound($round);
-		$this->assertCount(1, $category->getRounds());
+		self::assertCount(1, $category->getRounds());
 
 		// Test if the output is $this
-		$this->assertInstanceOf('\\TournamentGenerator\\Category', $output);
+		self::assertInstanceOf(Category::class, $output);
 
 		// Test adding multiple rounds
 		$category->addRound($round2, $round3);
-		$this->assertCount(3, $category->getRounds());
+		self::assertCount(3, $category->getRounds());
 
 		// Test adding not a round class
 		$this->expectException(TypeError::class);
@@ -60,69 +65,71 @@ class CategoryTest extends TestCase
 	}
 
 	/** @test */
-	public function check_round_creation_category() {
+	public function check_round_creation_category() : void {
 
-		$category = new \TournamentGenerator\Category('Name of category 1');
+		$category = new Category('Name of category 1');
 
-		$round = $category->round('Round name');
+		$category->round('Round name');
 
-		// Test if Round class is really created
-		$this->assertInstanceOf('\\TournamentGenerator\\Round', $round);
 		// Test if the round was added
-		$this->assertCount(1, $category->getRounds());
+		self::assertCount(1, $category->getRounds());
 
 	}
 
 	/** @test */
-	public function check_skip_category() {
+	public function check_skip_category() : void {
 
-		$category = new \TournamentGenerator\Category('Name of category 1');
+		$category = new Category('Name of category 1');
 
 		// Test allowSkip() method
 		$category->allowSkip();
-		$this->assertTrue($category->getSkip());
+		self::assertTrue($category->getSkip());
 
 		// Test disallowSkip() method
 		$category->disallowSkip();
-		$this->assertFalse($category->getSkip());
+		self::assertFalse($category->getSkip());
 
 		// Test setSkip() method
 		$category->setSkip(true);
-		$this->assertTrue($category->getSkip());
+		self::assertTrue($category->getSkip());
 
 	}
 
 	/** @test */
-	public function check_round_inherits_skip_category() {
+	public function check_round_inherits_skip_category() : void {
 
-		$category = new \TournamentGenerator\Category('Name of category 1');
+		$category = new Category('Name of category 1');
 
 		$category->allowSkip();
 		$round = $category->round('Round name');
 
-		$this->assertTrue($round->getSkip());
+		self::assertTrue($round->getSkip());
 
 	}
 
 	/** @test */
-	public function check_team_add_category() {
+	public function check_team_add_category() : void {
 
-		$category = new \TournamentGenerator\Category('Name of category 1');
+		$category = new Category('Name of category 1');
 
-		$team = new \TournamentGenerator\Team('Team name');
-		$team2 = new \TournamentGenerator\Team('Team name 2');
-		$team3 = new \TournamentGenerator\Team('Team name 3');
+		$team = new Team('Team name');
+		$team2 = new Team('Team name 2');
+		$team3 = new Team('Team name 3');
+		$team4 = new Team('Team name 4');
 
 		// Test adding a single team
-		$output = $category->addTeam($team);
-		$this->assertCount(1, $category->getTeams());
-
-		// Test if the output is $this
-		$this->assertInstanceOf('\\TournamentGenerator\\Category', $output);
+		$category->addTeam($team);
+		self::assertCount(1, $category->getTeams());
 
 		// Test adding multiple teams
 		$category->addTeam($team2, $team3);
-		$this->assertCount(3, $category->getTeams());
+		self::assertCount(3, $category->getTeams());
+
+		// Test setting teams
+		$category->setTeams([$team, $team2]);
+		self::assertCount(2, $category->getTeams());
+		$category->setTeams([$team, $team2, $team3, $team4]);
+		self::assertCount(4, $category->getTeams());
 
 		// Test adding not a team class
 		$this->expectException(TypeError::class);
@@ -131,47 +138,45 @@ class CategoryTest extends TestCase
 	}
 
 	/** @test */
-	public function check_team_creation_category() {
+	public function check_team_creation_category() : void {
 
-		$category = new \TournamentGenerator\Category('Name of category 1');
+		$category = new Category('Name of category 1');
 
-		$team = $category->team('Team name');
+		$category->team('Team name');
 
-		// Test if Team class is really created
-		$this->assertInstanceOf('\\TournamentGenerator\\Team', $team);
 		// Test if the team was added
-		$this->assertCount(1, $category->getTeams());
+		self::assertCount(1, $category->getTeams());
 
 	}
 
 	/** @test */
-	public function check_teams_from_rounds_category() {
+	public function check_teams_from_rounds_category() : void {
 
-		$category = new \TournamentGenerator\Category('Name of category 1');
+		$category = new Category('Name of category 1');
 
 		$round1 = $category->round('Round1');
 		$round2 = $category->round('Round1');
 
-		$round1->addTeam(new \TournamentGenerator\Team('Team1'),new \TournamentGenerator\Team('Team2'),new \TournamentGenerator\Team('Team3'));
-		$round2->addTeam(new \TournamentGenerator\Team('Team4'),new \TournamentGenerator\Team('Team5'),new \TournamentGenerator\Team('Team6'));
+		$round1->addTeam(new Team('Team1'), new Team('Team2'), new Team('Team3'));
+		$round2->addTeam(new Team('Team4'), new Team('Team5'), new Team('Team6'));
 
-		$round1->addTeam(new \TournamentGenerator\Team('Team7'),new \TournamentGenerator\Team('Team8'),new \TournamentGenerator\Team('Team9'));
-		$round2->addTeam(new \TournamentGenerator\Team('Team10'),new \TournamentGenerator\Team('Team11'),new \TournamentGenerator\Team('Team12'));
+		$round1->addTeam(new Team('Team7'), new Team('Team8'), new Team('Team9'));
+		$round2->addTeam(new Team('Team10'), new Team('Team11'), new Team('Team12'));
 
-		$category->addTeam(new \TournamentGenerator\Team('Team13'),new \TournamentGenerator\Team('Team14'),new \TournamentGenerator\Team('Team15'));
+		$category->addTeam(new Team('Team13'), new Team('Team14'), new Team('Team15'));
 
-		$this->assertCount(15, $category->getTeams());
+		self::assertCount(15, $category->getTeams());
 		// Test if teams does not duplicate
-		$this->assertCount(15, $category->getTeams());
+		self::assertCount(15, $category->getTeams());
 
 	}
 
 	/** @test */
-	public function check_split_teams_category() {
+	public function check_split_teams_category() : void {
 
-		$category = new \TournamentGenerator\Category('Name of category 1');
+		$category = new Category('Name of category 1');
 
-		for ($i=1; $i <= 8; $i++) {
+		for ($i = 1; $i <= 8; $i++) {
 			$category->team('Team '.$i);
 		}
 
@@ -182,17 +187,17 @@ class CategoryTest extends TestCase
 
 		$category->splitTeams();
 
-		$this->assertCount(4, $group1->getTeams());
-		$this->assertCount(4, $group2->getTeams());
+		self::assertCount(4, $group1->getTeams());
+		self::assertCount(4, $group2->getTeams());
 
 	}
 
 	/** @test */
-	public function check_split_teams_with_defined_rounds_category() {
+	public function check_split_teams_with_defined_rounds_category() : void {
 
-		$category = new \TournamentGenerator\Category('Name of category 1');
+		$category = new Category('Name of category 1');
 
-		for ($i=1; $i <= 8; $i++) {
+		for ($i = 1; $i <= 8; $i++) {
 			$category->team('Team '.$i);
 		}
 
@@ -205,16 +210,29 @@ class CategoryTest extends TestCase
 
 		$category->splitTeams($round);
 
-		$this->assertCount(4, $group1->getTeams());
-		$this->assertCount(4, $group2->getTeams());
-		$this->assertCount(0, $group3->getTeams());
+		self::assertCount(4, $group1->getTeams());
+		self::assertCount(4, $group2->getTeams());
+		self::assertCount(0, $group3->getTeams());
 
 	}
 
-	protected function gen_category() {
-		$category = new \TournamentGenerator\Category('Name of category 1');
+	/** @test */
+	public function check_gen_games_simulate_category() : void {
 
-		for ($i=1; $i <= 8; $i++) {
+		$category = $this->gen_category();
+
+		$games = $category->genGamesSimulate();
+
+		self::assertCount(18, $games);
+
+		self::assertCount(18, $category->getGames());
+
+	}
+
+	protected function gen_category() : Category {
+		$category = new Category('Name of category 1');
+
+		for ($i = 1; $i <= 8; $i++) {
 			$category->team('Team '.$i);
 		}
 		// Create a round and a final round
@@ -222,11 +240,11 @@ class CategoryTest extends TestCase
 		$final = $category->round("Final's round's name");
 
 		// Create 2 groups for the first round
-		$group_1 = $round->group('Round 1')->setInGame(2)->setType(TournamentGenerator\Constants::ROUND_ROBIN);
-		$group_2 = $round->group('Round 2')->setInGame(2)->setType(TournamentGenerator\Constants::ROUND_ROBIN);
+		$group_1 = $round->group('Round 1')->setInGame(2);
+		$group_2 = $round->group('Round 2')->setInGame(2);
 
 		// Create a final group
-		$final_group = $final->group('Finale')->setInGame(2)->setType(TournamentGenerator\Constants::ROUND_ROBIN);
+		$final_group = $final->group('Finale')->setInGame(2);
 
 		$category->splitTeams($round);
 
@@ -237,47 +255,34 @@ class CategoryTest extends TestCase
 	}
 
 	/** @test */
-	public function check_gen_games_simulate_category() {
-
-		$category = $this->gen_category();
-
-		$games = $category->genGamesSimulate();
-
-		$this->assertCount(18, $games);
-
-		$this->assertCount(18, $category->getGames());
-
-	}
-
-	/** @test */
-	public function check_gen_games_simulate_real_category() {
+	public function check_gen_games_simulate_real_category() : void {
 
 		$category = $this->gen_category();
 
 		$games = $category->genGamesSimulateReal();
 
-		$this->assertCount(18, $games);
+		self::assertCount(18, $games);
 
-		$this->assertCount(18, $category->getGames());
+		self::assertCount(18, $category->getGames());
 
 	}
 
 	/** @test */
-	public function check_sorting_teams_category() {
+	public function check_sorting_teams_category() : void {
 
-		$category = new \TournamentGenerator\Category('Name of category 1');
+		$category = new Category('Name of category 1');
 
 		$round = $category->round('Round name');
 
 		$group = $round->group('Group name');
 
-		for ($i=1; $i <= 4; $i++) {
+		for ($i = 1; $i <= 4; $i++) {
 			$category->team('Team '.$i);
 		}
 
 		$teams = $category->getTeams();
 
-		$group->addTeam($teams);
+		$group->addTeam(...$teams);
 
 
 		$group->game([$teams[0], $teams[1]])->setResults([$teams[0]->getId() => 2000, $teams[1]->getId() => 2001]);
@@ -287,30 +292,30 @@ class CategoryTest extends TestCase
 		$group->game([$teams[0], $teams[3]])->setResults([$teams[3]->getId() => 1000, $teams[0]->getId() => 1001]);
 		$group->game([$teams[1], $teams[2]])->setResults([$teams[1]->getId() => 99, $teams[2]->getId() => 100]);
 
-		$teamsSorted = array_map(function($team) {
+		$teamsSorted = array_map(static function($team) {
 			return $team->getName();
 		}, $category->sortTeams());
 
-		$this->assertSame(['Team 3', 'Team 2', 'Team 1', 'Team 4'], $teamsSorted);
+		self::assertSame(['Team 3', 'Team 2', 'Team 1', 'Team 4'], $teamsSorted);
 
 	}
 
 	/** @test */
-	public function check_sorting_teams_from_getTeams_category() {
+	public function check_sorting_teams_from_getTeams_category() : void {
 
-		$category = new \TournamentGenerator\Category('Name of category 1');
+		$category = new Category('Name of category 1');
 
 		$round = $category->round('Round name');
 
 		$group = $round->group('Group name');
 
-		for ($i=1; $i <= 4; $i++) {
+		for ($i = 1; $i <= 4; $i++) {
 			$category->team('Team '.$i);
 		}
 
 		$teams = $category->getTeams();
 
-		$group->addTeam($teams);
+		$group->addTeam(...$teams);
 
 		$group->game([$teams[0], $teams[1]])->setResults([$teams[0]->getId() => 2000, $teams[1]->getId() => 2001]);
 		$group->game([$teams[2], $teams[3]])->setResults([$teams[2]->getId() => 100, $teams[3]->getId() => 99]);
@@ -319,30 +324,30 @@ class CategoryTest extends TestCase
 		$group->game([$teams[0], $teams[3]])->setResults([$teams[3]->getId() => 1000, $teams[0]->getId() => 1001]);
 		$group->game([$teams[1], $teams[2]])->setResults([$teams[1]->getId() => 99, $teams[2]->getId() => 100]);
 
-		$teamsSorted = array_map(function($team) {
+		$teamsSorted = array_map(static function($team) {
 			return $team->getName();
 		}, $category->getTeams(true));
 
-		$this->assertSame(['Team 3', 'Team 2', 'Team 1', 'Team 4'], $teamsSorted);
+		self::assertSame(['Team 3', 'Team 2', 'Team 1', 'Team 4'], $teamsSorted);
 
 	}
 
 	/** @test */
-	public function check_sorting_teams_by_score_category() {
+	public function check_sorting_teams_by_score_category() : void {
 
-		$category = new \TournamentGenerator\Category('Name of category 1');
+		$category = new Category('Name of category 1');
 
 		$round = $category->round('Round name');
 
 		$group = $round->group('Group name');
 
-		for ($i=1; $i <= 4; $i++) {
+		for ($i = 1; $i <= 4; $i++) {
 			$category->team('Team '.$i);
 		}
 
 		$teams = $category->getTeams();
 
-		$group->addTeam($teams);
+		$group->addTeam(...$teams);
 
 		$group->game([$teams[0], $teams[1]])->setResults([$teams[0]->getId() => 2000, $teams[1]->getId() => 2001]);
 		$group->game([$teams[2], $teams[3]])->setResults([$teams[2]->getId() => 100, $teams[3]->getId() => 99]);
@@ -351,11 +356,11 @@ class CategoryTest extends TestCase
 		$group->game([$teams[0], $teams[3]])->setResults([$teams[3]->getId() => 1000, $teams[0]->getId() => 1001]);
 		$group->game([$teams[1], $teams[2]])->setResults([$teams[1]->getId() => 99, $teams[2]->getId() => 100]);
 
-		$teamsSorted = array_map(function($team) {
+		$teamsSorted = array_map(static function($team) {
 			return $team->getName();
-		}, $category->sortTeams(\TournamentGenerator\Constants::SCORE));
+		}, $category->sortTeams(Constants::SCORE));
 
-		$this->assertSame(['Team 2', 'Team 1', 'Team 4', 'Team 3'], $teamsSorted);
+		self::assertSame(['Team 2', 'Team 1', 'Team 4', 'Team 3'], $teamsSorted);
 
 	}
 

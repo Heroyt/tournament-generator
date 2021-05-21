@@ -1,5 +1,8 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
+use TournamentGenerator\Constants;
+use TournamentGenerator\Group;
 
 /**
  *
@@ -8,149 +11,149 @@ class GeneratorTest extends TestCase
 {
 
 	/** @test */
-	public function check_group_generator_r_r_2() {
-		$group = new \TournamentGenerator\Group('Group name');
+	public function check_group_generator_r_r_2() : void {
+		$group = new Group('Group name');
 
-		for ($i=1; $i <= 4; $i++) {
+		for ($i = 1; $i <= 4; $i++) {
 			$group->team('Team '.$i);
 		}
 
-		$group->setInGame(2)->setType(\TournamentGenerator\Constants::ROUND_ROBIN);
+		$group->setInGame(2);
 
 		$games = $group->genGames();
 
-		$this->assertCount(6, $games);
+		self::assertCount(6, $games);
 	}
 
 	/** @test */
-	public function check_group_generator_r_r_3() {
-		$group = new \TournamentGenerator\Group('Group name');
+	public function check_group_generator_r_r_3() : void {
+		$group = new Group('Group name');
 
-		for ($i=1; $i <= 4; $i++) {
+		for ($i = 1; $i <= 4; $i++) {
 			$group->team('Team '.$i);
 		}
 
-		$group->setInGame(3)->setType(\TournamentGenerator\Constants::ROUND_ROBIN);
+		$group->setInGame(3)->setType(Constants::ROUND_ROBIN);
 
 		$games = $group->genGames();
 
-		$this->assertCount(4, $games);
+		self::assertCount(4, $games);
 	}
 
 	/** @test */
-	public function check_group_generator_r_r_4() {
-		$group = new \TournamentGenerator\Group('Group name');
+	public function check_group_generator_r_r_4() : void {
+		$group = new Group('Group name');
 
-		for ($i=1; $i <= 5; $i++) {
+		for ($i = 1; $i <= 5; $i++) {
 			$group->team('Team '.$i);
 		}
 
-		$group->setInGame(4)->setType(\TournamentGenerator\Constants::ROUND_ROBIN);
+		$group->setInGame(4)->setType(Constants::ROUND_ROBIN);
 
 		$games = $group->genGames();
 
-		$this->assertCount(5, $games);
+		self::assertCount(5, $games);
 	}
 
 	/** @test */
-	public function check_group_generator_r_r_3_with_games_ordering() {
-		$group = new \TournamentGenerator\Group('Group name');
+	public function check_group_generator_r_r_3_with_games_ordering() : void {
+		$group = new Group('Group name');
 
-		for ($i=1; $i <= 10; $i++) {
+		for ($i = 1; $i <= 10; $i++) {
 			$group->team('Team '.$i);
 		}
 
-		$group->setInGame(3)->setType(\TournamentGenerator\Constants::ROUND_ROBIN);
+		$group->setInGame(3)->setType(Constants::ROUND_ROBIN);
 
 		$games = $group->genGames();
 
-		$this->assertCount(120, $games);
+		self::assertCount(120, $games);
 
 		$games = $group->orderGames();
 
-		$this->assertCount(120, $games);
+		self::assertCount(120, $games);
 	}
 
 	/** @test */
-	public function check_group_generator_r_r_4_with_games_ordering() {
-		$group = new \TournamentGenerator\Group('Group name');
+	public function check_group_generator_r_r_4_with_games_ordering() : void {
+		$group = new Group('Group name');
 
-		for ($i=1; $i <= 9; $i++) {
+		for ($i = 1; $i <= 9; $i++) {
 			$group->team('Team '.$i);
 		}
 
-		$group->setInGame(4)->setType(\TournamentGenerator\Constants::ROUND_ROBIN);
+		$group->setInGame(4)->setType(Constants::ROUND_ROBIN);
 
 		$games = $group->genGames();
 
-		$this->assertCount(126, $games);
+		self::assertCount(126, $games);
 
 		$games = $group->orderGames();
 
-		$this->assertCount(126, $games);
+		self::assertCount(126, $games);
 	}
 
 	/** @test */
-	public function check_group_generator_r_r_4_with_games_ordering2() {
-		$group = new \TournamentGenerator\Group('Group name');
+	public function check_group_generator_r_r_4_with_games_ordering2() : void {
+		$group = new Group('Group name');
 
-		for ($i=1; $i <= 10; $i++) {
+		for ($i = 1; $i <= 10; $i++) {
 			$group->team('Team '.$i);
 		}
 
-		$group->setInGame(4)->setType(\TournamentGenerator\Constants::ROUND_ROBIN);
+		$group->setInGame(4)->setType(Constants::ROUND_ROBIN);
 
 		$games = $group->genGames();
 
-		$this->assertCount(210, $games);
+		self::assertCount(210, $games);
 
 		$games = $group->orderGames();
 
-		$this->assertCount(210, $games);
+		self::assertCount(210, $games);
 	}
 
 	/** @test */
-	public function check_group_generator_two_two() {
-		$group = new \TournamentGenerator\Group('Group name');
+	public function check_group_generator_two_two() : void {
+		$group = new Group('Group name');
 
-		for ($i=1; $i <= 4; $i++) {
+		for ($i = 1; $i <= 4; $i++) {
 			$group->team('Team '.$i);
 		}
 
-		$group->setType(\TournamentGenerator\Constants::ROUND_TWO);
+		$group->setType(Constants::ROUND_TWO);
 
 		$games = $group->genGames();
 
-		$this->assertCount(2, $games);
+		self::assertCount(2, $games);
 	}
 
 	/** @test */
-	public function check_group_generator_cond_split() {
-		$group = new \TournamentGenerator\Group('Group name');
+	public function check_group_generator_cond_split() : void {
+		$group = new Group('Group name');
 
-		for ($i=1; $i <= 8; $i++) {
+		for ($i = 1; $i <= 8; $i++) {
 			$group->team('Team '.$i);
 		}
 
-		$group->setInGame(2)->setType(\TournamentGenerator\Constants::ROUND_SPLIT)->setMaxSize(4);
+		$group->setInGame(2)->setType(Constants::ROUND_SPLIT)->setMaxSize(4);
 
 		$games = $group->genGames();
 
-		$this->assertCount(12, $games);
+		self::assertCount(12, $games);
 	}
 
 	/** @test */
-	public function check_group_generator_cond_split_without_splitting() {
-		$group = new \TournamentGenerator\Group('Group name');
+	public function check_group_generator_cond_split_without_splitting() : void {
+		$group = new Group('Group name');
 
-		for ($i=1; $i <= 4; $i++) {
+		for ($i = 1; $i <= 4; $i++) {
 			$group->team('Team '.$i);
 		}
 
-		$group->setInGame(2)->setType(\TournamentGenerator\Constants::ROUND_SPLIT)->setMaxSize(4);
+		$group->setInGame(2)->setType(Constants::ROUND_SPLIT)->setMaxSize(4);
 
 		$games = $group->genGames();
 
-		$this->assertCount(6, $games);
+		self::assertCount(6, $games);
 	}
 }

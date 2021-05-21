@@ -1,6 +1,11 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use TournamentGenerator\Category;
+use TournamentGenerator\Constants;
+use TournamentGenerator\Round;
+use TournamentGenerator\Team;
+use TournamentGenerator\Tournament;
 
 /**
  *
@@ -9,104 +14,104 @@ class TournamentTest extends TestCase
 {
 
 	/** @test */
-	public function check_if_name_is_setup_and_can_get_tournament() {
+	public function check_if_name_is_setup_and_can_get_tournament() : void {
 
-		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
+		$tournament = new Tournament('Name of tournament 1');
 
 		// Test getName() method
-		$this->assertEquals('Name of tournament 1', $tournament->getName());
+		self::assertEquals('Name of tournament 1', $tournament->getName());
 
 		// Test __toString() method
-		$this->assertEquals('Name of tournament 1', (string) $tournament);
+		self::assertEquals('Name of tournament 1', (string) $tournament);
 
 		// Test setName() method
 		$tournament->setName('Name of tournament 2');
-		$this->assertEquals('Name of tournament 2', $tournament->getName());
+		self::assertEquals('Name of tournament 2', $tournament->getName());
 
 	}
 
 	/** @test */
-	public function check_play_time_tournament() {
+	public function check_play_time_tournament() : void {
 
-		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
+		$tournament = new Tournament('Name of tournament 1');
 
 		// Test getPlay() method
 		$tournament->setPlay(123);
-		$this->assertEquals(123, $tournament->getPlay());
+		self::assertEquals(123, $tournament->getPlay());
 
 	}
 
 	/** @test */
-	public function check_game_wait_time_tournament() {
+	public function check_game_wait_time_tournament() : void {
 
-		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
+		$tournament = new Tournament('Name of tournament 1');
 
 		// Test getPlay() method
 		$tournament->setGameWait(123);
-		$this->assertEquals(123, $tournament->getGameWait());
+		self::assertEquals(123, $tournament->getGameWait());
 
 	}
 
 	/** @test */
-	public function check_round_wait_time_tournament() {
+	public function check_round_wait_time_tournament() : void {
 
-		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
+		$tournament = new Tournament('Name of tournament 1');
 
 		// Test getPlay() method
 		$tournament->setRoundWait(123);
-		$this->assertEquals(123, $tournament->getRoundWait());
+		self::assertEquals(123, $tournament->getRoundWait());
 
 	}
 
 	/** @test */
-	public function check_category_wait_time_tournament() {
+	public function check_category_wait_time_tournament() : void {
 
-		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
+		$tournament = new Tournament('Name of tournament 1');
 
 		// Test getPlay() method
 		$tournament->setCategoryWait(123);
-		$this->assertEquals(123, $tournament->getCategoryWait());
+		self::assertEquals(123, $tournament->getCategoryWait());
 
 	}
 
 	/** @test */
-	public function check_skip_tournament() {
+	public function check_skip_tournament() : void {
 
-		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
+		$tournament = new Tournament('Name of tournament 1');
 
 		// Test allowSkip() method
 		$tournament->allowSkip();
-		$this->assertTrue($tournament->getSkip());
+		self::assertTrue($tournament->getSkip());
 
 		// Test disallowSkip() method
 		$tournament->disallowSkip();
-		$this->assertFalse($tournament->getSkip());
+		self::assertFalse($tournament->getSkip());
 
 		// Test setSkip() method
 		$tournament->setSkip(true);
-		$this->assertTrue($tournament->getSkip());
+		self::assertTrue($tournament->getSkip());
 
 	}
 
 	/** @test */
-	public function check_category_add_tournament() {
+	public function check_category_add_tournament() : void {
 
-		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
+		$tournament = new Tournament('Name of tournament 1');
 
-		$category = new \TournamentGenerator\Category('Category name');
-		$category2 = new \TournamentGenerator\Category('Category name 2');
-		$category3 = new \TournamentGenerator\Category('Category name 3');
+		$category = new Category('Category name');
+		$category2 = new Category('Category name 2');
+		$category3 = new Category('Category name 3');
 
 		// Test adding a single category
 		$output = $tournament->addCategory($category);
-		$this->assertCount(1, $tournament->getCategories());
+		self::assertCount(1, $tournament->getCategories());
 
 		// Test if the output is $this
-		$this->assertInstanceOf('\\TournamentGenerator\\Tournament', $output);
+		self::assertInstanceOf('\\TournamentGenerator\\Tournament', $output);
 
 		// Test adding multiple categories
 		$tournament->addCategory($category2, $category3);
-		$this->assertCount(3, $tournament->getCategories());
+		self::assertCount(3, $tournament->getCategories());
 
 		// Test adding not a category class
 		$this->expectException(TypeError::class);
@@ -115,50 +120,50 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_category_creation_tournament() {
+	public function check_category_creation_tournament() : void {
 
-		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
+		$tournament = new Tournament('Name of tournament 1');
 
 		$category = $tournament->category('Category name');
 
 		// Test if Category class is really created
-		$this->assertInstanceOf('\\TournamentGenerator\\Category', $category);
+		self::assertInstanceOf('\\TournamentGenerator\\Category', $category);
 		// Test if the category was added
-		$this->assertCount(1, $tournament->getCategories());
+		self::assertCount(1, $tournament->getCategories());
 
 	}
 
 	/** @test */
-	public function check_category_inherits_skip_tournament() {
+	public function check_category_inherits_skip_tournament() : void {
 
-		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
+		$tournament = new Tournament('Name of tournament 1');
 
 		$tournament->allowSkip();
 		$category = $tournament->category('Category name');
 
-		$this->assertTrue($category->getSkip());
+		self::assertTrue($category->getSkip());
 
 	}
 
 	/** @test */
-	public function check_round_add_tournament() {
+	public function check_round_add_tournament() : void {
 
-		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
+		$tournament = new Tournament('Name of tournament 1');
 
-		$round = new \TournamentGenerator\Round('Round name');
-		$round2 = new \TournamentGenerator\Round('Round name 2');
-		$round3 = new \TournamentGenerator\Round('Round name 3');
+		$round = new Round('Round name');
+		$round2 = new Round('Round name 2');
+		$round3 = new Round('Round name 3');
 
 		// Test adding a single round
 		$output = $tournament->addRound($round);
-		$this->assertCount(1, $tournament->getRounds());
+		self::assertCount(1, $tournament->getRounds());
 
 		// Test if the output is $this
-		$this->assertInstanceOf('\\TournamentGenerator\\Tournament', $output);
+		self::assertInstanceOf('\\TournamentGenerator\\Tournament', $output);
 
 		// Test adding multiple rounds
 		$tournament->addRound($round2, $round3);
-		$this->assertCount(3, $tournament->getRounds());
+		self::assertCount(3, $tournament->getRounds());
 
 		// Test adding not a round class
 		$this->expectException(TypeError::class);
@@ -167,50 +172,50 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_round_creation_tournament() {
+	public function check_round_creation_tournament() : void {
 
-		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
+		$tournament = new Tournament('Name of tournament 1');
 
 		$round = $tournament->round('Round name');
 
 		// Test if Round class is really created
-		$this->assertInstanceOf('\\TournamentGenerator\\Round', $round);
+		self::assertInstanceOf('\\TournamentGenerator\\Round', $round);
 		// Test if the round was added
-		$this->assertCount(1, $tournament->getRounds());
+		self::assertCount(1, $tournament->getRounds());
 
 	}
 
 	/** @test */
-	public function check_round_inherits_skip_tournament() {
+	public function check_round_inherits_skip_tournament() : void {
 
-		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
+		$tournament = new Tournament('Name of tournament 1');
 
 		$tournament->allowSkip();
 		$round = $tournament->round('Round name');
 
-		$this->assertTrue($round->getSkip());
+		self::assertTrue($round->getSkip());
 
 	}
 
 	/** @test */
-	public function check_team_add_tournament() {
+	public function check_team_add_tournament() : void {
 
-		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
+		$tournament = new Tournament('Name of tournament 1');
 
-		$team = new \TournamentGenerator\Team('Team name');
-		$team2 = new \TournamentGenerator\Team('Team name 2');
-		$team3 = new \TournamentGenerator\Team('Team name 3');
+		$team = new Team('Team name');
+		$team2 = new Team('Team name 2');
+		$team3 = new Team('Team name 3');
 
 		// Test adding a single team
 		$output = $tournament->addTeam($team);
-		$this->assertCount(1, $tournament->getTeams());
+		self::assertCount(1, $tournament->getTeams());
 
 		// Test if the output is $this
-		$this->assertInstanceOf('\\TournamentGenerator\\Tournament', $output);
+		self::assertInstanceOf('\\TournamentGenerator\\Tournament', $output);
 
 		// Test adding multiple teams
 		$tournament->addTeam($team2, $team3);
-		$this->assertCount(3, $tournament->getTeams());
+		self::assertCount(3, $tournament->getTeams());
 
 		// Test adding not a team class
 		$this->expectException(TypeError::class);
@@ -219,23 +224,23 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_team_creation_tournament() {
+	public function check_team_creation_tournament() : void {
 
-		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
+		$tournament = new Tournament('Name of tournament 1');
 
 		$team = $tournament->team('Team name');
 
 		// Test if Team class is really created
-		$this->assertInstanceOf('\\TournamentGenerator\\Team', $team);
+		self::assertInstanceOf('\\TournamentGenerator\\Team', $team);
 		// Test if the team was added
-		$this->assertCount(1, $tournament->getTeams());
+		self::assertCount(1, $tournament->getTeams());
 
 	}
 
 	/** @test */
-	public function check_rounds_from_categories_tournament() {
+	public function check_rounds_from_categories_tournament() : void {
 
-		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
+		$tournament = new Tournament('Name of tournament 1');
 
 		$category1 = $tournament->category('Category 1');
 		$category2 = $tournament->category('Category 2');
@@ -248,14 +253,14 @@ class TournamentTest extends TestCase
 
 		$tournament->round('Round5');
 
-		$this->assertCount(5, $tournament->getRounds());
+		self::assertCount(5, $tournament->getRounds());
 
 	}
 
 	/** @test */
-	public function check_teams_from_categories_and_rounds_tournament() {
+	public function check_teams_from_categories_and_rounds_tournament() : void {
 
-		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
+		$tournament = new Tournament('Name of tournament 1');
 
 		$category1 = $tournament->category('Category 1');
 		$category2 = $tournament->category('Category 2');
@@ -263,26 +268,26 @@ class TournamentTest extends TestCase
 		$round1 = $tournament->round('Round1');
 		$round2 = $tournament->round('Round1');
 
-		$category1->addTeam(new \TournamentGenerator\Team('Team1'),new \TournamentGenerator\Team('Team2'),new \TournamentGenerator\Team('Team3'));
-		$category2->addTeam(new \TournamentGenerator\Team('Team4'),new \TournamentGenerator\Team('Team5'),new \TournamentGenerator\Team('Team6'));
+		$category1->addTeam(new Team('Team1'), new Team('Team2'), new Team('Team3'));
+		$category2->addTeam(new Team('Team4'), new Team('Team5'), new Team('Team6'));
 
-		$round1->addTeam(new \TournamentGenerator\Team('Team7'),new \TournamentGenerator\Team('Team8'),new \TournamentGenerator\Team('Team9'));
-		$round2->addTeam(new \TournamentGenerator\Team('Team10'),new \TournamentGenerator\Team('Team11'),new \TournamentGenerator\Team('Team12'));
+		$round1->addTeam(new Team('Team7'), new Team('Team8'), new Team('Team9'));
+		$round2->addTeam(new Team('Team10'), new Team('Team11'), new Team('Team12'));
 
-		$tournament->addTeam(new \TournamentGenerator\Team('Team13'),new \TournamentGenerator\Team('Team14'),new \TournamentGenerator\Team('Team15'));
+		$tournament->addTeam(new Team('Team13'), new Team('Team14'), new Team('Team15'));
 
-		$this->assertCount(15, $tournament->getTeams());
+		self::assertCount(15, $tournament->getTeams());
 		// Test if teams does not duplicate
-		$this->assertCount(15, $tournament->getTeams());
+		self::assertCount(15, $tournament->getTeams());
 
 	}
 
 	/** @test */
-	public function check_split_teams_tournament() {
+	public function check_split_teams_tournament() : void {
 
-		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
+		$tournament = new Tournament('Name of tournament 1');
 
-		for ($i=1; $i <= 8; $i++) {
+		for ($i = 1; $i <= 8; $i++) {
 			$tournament->team('Team '.$i);
 		}
 
@@ -293,17 +298,17 @@ class TournamentTest extends TestCase
 
 		$tournament->splitTeams();
 
-		$this->assertCount(4, $group1->getTeams());
-		$this->assertCount(4, $group2->getTeams());
+		self::assertCount(4, $group1->getTeams());
+		self::assertCount(4, $group2->getTeams());
 
 	}
 
 	/** @test */
-	public function check_split_teams_with_defined_groups_tournament() {
+	public function check_split_teams_with_defined_groups_tournament() : void {
 
-		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
+		$tournament = new Tournament('Name of tournament 1');
 
-		for ($i=1; $i <= 8; $i++) {
+		for ($i = 1; $i <= 8; $i++) {
 			$tournament->team('Team '.$i);
 		}
 
@@ -316,21 +321,31 @@ class TournamentTest extends TestCase
 
 		$tournament->splitTeams($round);
 
-		$this->assertCount(4, $group1->getTeams());
-		$this->assertCount(4, $group2->getTeams());
-		$this->assertCount(0, $group3->getTeams());
+		self::assertCount(4, $group1->getTeams());
+		self::assertCount(4, $group2->getTeams());
+		self::assertCount(0, $group3->getTeams());
 
 	}
 
-	protected function gen_tournament() {
-		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
+	/** @test */
+	public function check_gen_games_simulate_tournament() : void {
+
+		$tournament = $this->gen_tournament();
+
+		$games = $tournament->genGamesSimulate();
+
+		self::assertCount(18, $games);
+	}
+
+	protected function gen_tournament() : Tournament {
+		$tournament = new Tournament('Name of tournament 1');
 
 		$tournament
-			->setPlay(7) // SET GAME TIME TO 7 MINUTES
+			->setPlay(7)     // SET GAME TIME TO 7 MINUTES
 			->setGameWait(2) // SET TIME BETWEEN GAMES TO 2 MINUTES
 			->setRoundWait(0); // SET TIME BETWEEN ROUNDS TO 0 MINUTES
 
-		for ($i=1; $i <= 8; $i++) {
+		for ($i = 1; $i <= 8; $i++) {
 			$tournament->team('Team '.$i);
 		}
 		// Create a round and a final round
@@ -338,11 +353,11 @@ class TournamentTest extends TestCase
 		$final = $tournament->round("Final's round's name");
 
 		// Create 2 groups for the first round
-		$group_1 = $round->group('Round 1')->setInGame(2)->setType(TournamentGenerator\Constants::ROUND_ROBIN);
-		$group_2 = $round->group('Round 2')->setInGame(2)->setType(TournamentGenerator\Constants::ROUND_ROBIN);
+		$group_1 = $round->group('Round 1')->setInGame(2);
+		$group_2 = $round->group('Round 2')->setInGame(2);
 
 		// Create a final group
-		$final_group = $final->group('Finale')->setInGame(2)->setType(TournamentGenerator\Constants::ROUND_ROBIN);
+		$final_group = $final->group('Finale')->setInGame(2);
 
 		$tournament->splitTeams($round);
 
@@ -352,16 +367,86 @@ class TournamentTest extends TestCase
 		return $tournament;
 	}
 
-	protected function gen_tournament_with_categories() {
-		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
+	/** @test */
+	public function check_gen_games_simulate_tournament_empty() : void {
+
+		$tournament = new Tournament('Name of tournament 1');
+
+		for ($i = 1; $i <= 8; $i++) {
+			$tournament->team('Team '.$i);
+		}
+
+		$this->expectException(Exception::class);
+		$tournament->genGamesSimulate();
+	}
+
+	/** @test */
+	public function check_gen_games_simulate_real_tournament_empty() : void {
+
+		$tournament = new Tournament('Name of tournament 1');
+
+		for ($i = 1; $i <= 8; $i++) {
+			$tournament->team('Team '.$i);
+		}
+
+		$this->expectException(Exception::class);
+		$tournament->genGamesSimulateReal();
+	}
+
+	/** @test */
+	public function check_gen_games_simulate_with_time_tournament() : void {
+
+		$tournament = $this->gen_tournament();
+
+		$time = $tournament->genGamesSimulate(true);
+
+		self::assertEquals(160, $time);
+
+	}
+
+	/** @test */
+	public function check_gen_games_simulate_real_tournament() : void {
+
+		$tournament = $this->gen_tournament();
+
+		$games = $tournament->genGamesSimulateReal();
+
+		self::assertCount(18, $games);
+
+	}
+
+	/** @test */
+	public function check_gen_games_simulate_real_with_time_tournament() : void {
+
+		$tournament = $this->gen_tournament();
+
+		$time = $tournament->genGamesSimulateReal(true);
+
+		self::assertEquals(160, $time);
+
+	}
+
+	/** @test */
+	public function check_gen_games_simulate_with_categories_tournament() : void {
+
+		$tournament = $this->gen_tournament_with_categories();
+
+		$games = $tournament->genGamesSimulate();
+
+		self::assertCount(36, $games);
+
+	}
+
+	protected function gen_tournament_with_categories() : Tournament {
+		$tournament = new Tournament('Name of tournament 1');
 
 		$tournament
 			->setPlay(7) // SET GAME TIME TO 7 MINUTES
-			->setGameWait(2) // SET TIME BETWEEN GAMES TO 2 MINUTES
+			->setGameWait(2)  // SET TIME BETWEEN GAMES TO 2 MINUTES
 			->setRoundWait(0) // SET TIME BETWEEN ROUNDS TO 0 MINUTES
 			->setCategoryWait(10); // SET TIME BETWEEN CATEGORIES TO 10 MINUTES
 
-		for ($i=1; $i <= 16; $i++) {
+		for ($i = 1; $i <= 16; $i++) {
 			$tournament->team('Team '.$i);
 		}
 
@@ -378,28 +463,28 @@ class TournamentTest extends TestCase
 		$final2 = $category2->round("Final's round's name");
 
 		// Create 2 groups for the first round for Category 1
-		$group_1 = $round->group('Group 1')->setInGame(2)->setType(TournamentGenerator\Constants::ROUND_ROBIN);
-		$group_2 = $round->group('Group 2')->setInGame(2)->setType(TournamentGenerator\Constants::ROUND_ROBIN);
+		$group_1 = $round->group('Group 1')->setInGame(2);
+		$group_2 = $round->group('Group 2')->setInGame(2);
 
 		// Create 2 groups for the first round fir Category 2
-		$group2_1 = $round2->group('Group 1')->setInGame(2)->setType(TournamentGenerator\Constants::ROUND_ROBIN);
-		$group2_2 = $round2->group('Group 2')->setInGame(2)->setType(TournamentGenerator\Constants::ROUND_ROBIN);
+		$group2_1 = $round2->group('Group 1')->setInGame(2);
+		$group2_2 = $round2->group('Group 2')->setInGame(2);
 
 		// Create a final groups
-		$final_group = $final->group('Finale')->setInGame(2)->setType(TournamentGenerator\Constants::ROUND_ROBIN);
-		$final_group2 = $final2->group('Finale')->setInGame(2)->setType(TournamentGenerator\Constants::ROUND_ROBIN);
+		$final_group = $final->group('Finale')->setInGame(2);
+		$final_group2 = $final2->group('Finale')->setInGame(2);
 
 		$tournament->splitTeams($round, $round2);
 
-		$this->assertCount(8, $round->getTeams());
-		$this->assertCount(4, $group_1->getTeams());
-		$this->assertCount(4, $group_2->getTeams());
-		$this->assertCount(8, $round2->getTeams());
-		$this->assertCount(4, $group2_1->getTeams());
-		$this->assertCount(4, $group2_2->getTeams());
+		self::assertCount(8, $round->getTeams());
+		self::assertCount(4, $group_1->getTeams());
+		self::assertCount(4, $group_2->getTeams());
+		self::assertCount(8, $round2->getTeams());
+		self::assertCount(4, $group2_1->getTeams());
+		self::assertCount(4, $group2_2->getTeams());
 
-		$group_1->progression($final_group, 0, 2); // PROGRESS 2 BEST WINNING TEAMS
-		$group_2->progression($final_group, 0, 2); // PROGRESS 2 BEST WINNING TEAMS
+		$group_1->progression($final_group, 0, 2);   // PROGRESS 2 BEST WINNING TEAMS
+		$group_2->progression($final_group, 0, 2);   // PROGRESS 2 BEST WINNING TEAMS
 		$group2_1->progression($final_group2, 0, 2); // PROGRESS 2 BEST WINNING TEAMS
 		$group2_2->progression($final_group2, 0, 2); // PROGRESS 2 BEST WINNING TEAMS
 
@@ -407,131 +492,76 @@ class TournamentTest extends TestCase
 	}
 
 	/** @test */
-	public function check_gen_games_simulate_tournament() {
-
-		$tournament = $this->gen_tournament();
-
-		$games = $tournament->genGamesSimulate();
-
-		$this->assertCount(18, $games);
-
-	}
-
-	/** @test */
-	public function check_gen_games_simulate_with_time_tournament() {
-
-		$tournament = $this->gen_tournament();
-
-		$time = $tournament->genGamesSimulate(true);
-
-		$this->assertEquals(160, $time);
-
-	}
-
-	/** @test */
-	public function check_gen_games_simulate_real_tournament() {
-
-		$tournament = $this->gen_tournament();
-
-		$games = $tournament->genGamesSimulateReal();
-
-		$this->assertCount(18, $games);
-
-	}
-
-	/** @test */
-	public function check_gen_games_simulate_real_with_time_tournament() {
-
-		$tournament = $this->gen_tournament();
-
-		$time = $tournament->genGamesSimulateReal(true);
-
-		$this->assertEquals(160, $time);
-
-	}
-
-	/** @test */
-	public function check_gen_games_simulate_with_categories_tournament() {
-
-		$tournament = $this->gen_tournament_with_categories();
-
-		$games = $tournament->genGamesSimulate();
-
-		$this->assertCount(36, $games);
-
-	}
-
-	/** @test */
-	public function check_gen_games_simulate_with_categories_with_time_tournament() {
+	public function check_gen_games_simulate_with_categories_with_time_tournament() : void {
 
 		$tournament = $this->gen_tournament_with_categories();
 
 		$time = $tournament->genGamesSimulate(true);
 
-		$this->assertEquals(161*2+10, $time);
+		self::assertEquals(161 * 2 + 10, $time);
 
 	}
 
 	/** @test */
-	public function check_gen_games_simulate_with_categories_real_tournament() {
+	public function check_gen_games_simulate_with_categories_real_tournament() : void {
 
 		$tournament = $this->gen_tournament_with_categories();
 
 		$games = $tournament->genGamesSimulateReal();
 
-		$this->assertCount(36, $games);
+		self::assertCount(36, $games);
 
 	}
 
 	/** @test */
-	public function check_gen_games_simulate_with_categories_real_with_time_tournament() {
+	public function check_gen_games_simulate_with_categories_real_with_time_tournament() : void {
 
 		$tournament = $this->gen_tournament_with_categories();
 
 		$time = $tournament->genGamesSimulateReal(true);
 
-		$this->assertEquals(161*2+10, $time);
+		self::assertEquals(161 * 2 + 10, $time);
 
 	}
 
 	/** @test */
-	public function check_tournament_time_tournament() {
+	public function check_tournament_time_tournament() : void {
 
 		$tournament = $this->gen_tournament();
 
 		$tournament->genGamesSimulate();
 
-		$this->assertEquals(160, $tournament->getTournamentTime());
+		self::assertEquals(160, $tournament->getTournamentTime());
 
 	}
 
 	/** @test */
-	public function check_getting_games_tournament() {
+	public function check_getting_games_tournament() : void {
 
 		$tournament = $this->gen_tournament();
 
 		$tournament->genGamesSimulate();
 
-		$this->assertCount(18, $tournament->getGames());
+		self::assertCount(18, $tournament->getGames());
 
 	}
 
 	/** @test */
-	public function check_sorting_teams_tournament() {
+	public function check_sorting_teams_tournament() : void {
 
-		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
+		$tournament = new Tournament('Name of tournament 1');
 
 		$round = $tournament->round('Round name');
 
 		$group = $round->group('Group name');
 
-		for ($i=1; $i <= 4; $i++) {
+		for ($i = 1; $i <= 4; $i++) {
 			$tournament->team('Team '.$i);
 		}
 
 		$teams = $tournament->getTeams();
 
-		$group->addTeam($teams);
+		$group->addTeam(...$teams);
 
 
 		$group->game([$teams[0], $teams[1]])->setResults([$teams[0]->getId() => 2000, $teams[1]->getId() => 2001]);
@@ -545,26 +575,26 @@ class TournamentTest extends TestCase
 			return $team->getName();
 		}, $tournament->sortTeams());
 
-		$this->assertSame(['Team 3', 'Team 2', 'Team 1', 'Team 4'], $teamsSorted);
+		self::assertSame(['Team 3', 'Team 2', 'Team 1', 'Team 4'], $teamsSorted);
 
 	}
 
 	/** @test */
-	public function check_sorting_teams_from_getTeams_tournament() {
+	public function check_sorting_teams_from_getTeams_tournament() : void {
 
-		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
+		$tournament = new Tournament('Name of tournament 1');
 
 		$round = $tournament->round('Round name');
 
 		$group = $round->group('Group name');
 
-		for ($i=1; $i <= 4; $i++) {
+		for ($i = 1; $i <= 4; $i++) {
 			$tournament->team('Team '.$i);
 		}
 
 		$teams = $tournament->getTeams();
 
-		$group->addTeam($teams);
+		$group->addTeam(...$teams);
 
 		$group->game([$teams[0], $teams[1]])->setResults([$teams[0]->getId() => 2000, $teams[1]->getId() => 2001]);
 		$group->game([$teams[2], $teams[3]])->setResults([$teams[2]->getId() => 100, $teams[3]->getId() => 99]);
@@ -573,43 +603,56 @@ class TournamentTest extends TestCase
 		$group->game([$teams[0], $teams[3]])->setResults([$teams[3]->getId() => 1000, $teams[0]->getId() => 1001]);
 		$group->game([$teams[1], $teams[2]])->setResults([$teams[1]->getId() => 99, $teams[2]->getId() => 100]);
 
-		$teamsSorted = array_map(function($team) {
+		$teamsSorted = array_map(static function($team) {
 			return $team->getName();
 		}, $tournament->getTeams(true));
 
-		$this->assertSame(['Team 3', 'Team 2', 'Team 1', 'Team 4'], $teamsSorted);
+		self::assertSame(['Team 3', 'Team 2', 'Team 1', 'Team 4'], $teamsSorted);
 
 	}
 
 	/** @test */
-	public function check_sorting_teams_by_score_tournament() {
+	public function check_sorting_teams_by_score_tournament() : void {
 
-		$tournament = new \TournamentGenerator\Tournament('Name of tournament 1');
+		$tournament = new Tournament('Name of tournament 1');
 
 		$round = $tournament->round('Round name');
 
 		$group = $round->group('Group name');
 
-		for ($i=1; $i <= 4; $i++) {
+		for ($i = 1; $i <= 4; $i++) {
 			$tournament->team('Team '.$i);
 		}
 
 		$teams = $tournament->getTeams();
 
-		$group->addTeam($teams);
+		$group->addTeam(...$teams);
 
-		$group->game([$teams[0], $teams[1]])->setResults([$teams[0]->getId() => 2000, $teams[1]->getId() => 2001]);
+		$group->game([$teams[0], $teams[1]])->setResults([$teams[0]->getId() => 1000, $teams[1]->getId() => 2001]);
 		$group->game([$teams[2], $teams[3]])->setResults([$teams[2]->getId() => 100, $teams[3]->getId() => 99]);
 		$group->game([$teams[0], $teams[2]])->setResults([$teams[0]->getId() => 199, $teams[2]->getId() => 200]);
-		$group->game([$teams[1], $teams[3]])->setResults([$teams[3]->getId() => 1000, $teams[1]->getId() => 5000]);
+		$group->game([$teams[1], $teams[3]])->setResults([$teams[3]->getId() => 1101, $teams[1]->getId() => 5000]);
 		$group->game([$teams[0], $teams[3]])->setResults([$teams[3]->getId() => 1000, $teams[0]->getId() => 1001]);
 		$group->game([$teams[1], $teams[2]])->setResults([$teams[1]->getId() => 99, $teams[2]->getId() => 100]);
 
-		$teamsSorted = array_map(function($team) {
+		$teamsSorted = array_map(static function($team) {
 			return $team->getName();
-		}, $tournament->sortTeams(\TournamentGenerator\Constants::SCORE));
+		}, $tournament->sortTeams(Constants::SCORE));
 
-		$this->assertSame(['Team 2', 'Team 1', 'Team 4', 'Team 3'], $teamsSorted);
+		self::assertSame(['Team 2', 'Team 1', 'Team 4', 'Team 3'], $teamsSorted);
+
+		self::assertSame(
+			[
+				'points' => 3,
+				'score'  => 2200,
+				'wins'   => 1,
+				'draws'  => 0,
+				'losses' => 2,
+				'second' => 0,
+				'third'  => 0,
+			],
+			$teams[0]->getGamesInfo($group->getId())
+		);
 
 	}
 

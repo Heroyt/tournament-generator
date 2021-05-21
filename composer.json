@@ -1,30 +1,37 @@
 {
-		"name": "heroyt/tournament-generator",
-		"description": "A set of classes used to create multiple kinds of tournament brackets in PHP.",
-		"keywords": ["generator", "tournament", "tournaments", "scheduler", "teams", "bracket"],
-		"type": "library",
-		"license": "MIT",
-		"authors": [
-				{
-						"name": "Tomáš Vojík",
-						"email": "vojik@wboy.cz"
-				}
-		],
-		"minimum-stability": "dev",
-		"prefer-stable": true,
-		"require": {
-			"php": ">=7.1"
-		},
-		"autoload": {
-			"files": ["src/TournamentGenerator/functions.php"],
-			"psr-4": {
-				 "TournamentGenerator\\": "src/TournamentGenerator/",
- 				 "TournamentGenerator\\Preset\\": "src/TournamentGenerator/Preset/",
- 				 "TournamentGenerator\\Utilis\\": "src/TournamentGenerator/Utilis/",
- 				 "TournamentGenerator\\Utilis\\Sorter\\": "src/TournamentGenerator/Utilis/Sorter/"
-			}
-		},
-		"require-dev": {
-				"phpunit/phpunit": "^8.3"
+	"name": "heroyt/tournament-generator",
+	"description": "A set of classes used to create multiple kinds of tournament brackets in PHP.",
+	"version": "0.4",
+	"keywords": [
+		"generator",
+		"tournament",
+		"tournaments",
+		"scheduler",
+		"teams",
+		"bracket"
+	],
+	"type": "library",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Tomáš Vojík",
+			"email": "vojik@wboy.cz"
 		}
+	],
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"scripts": {
+		"docs": "php phpDocumentor.phar -s src/ -t docs/api/"
+	},
+	"require": {
+		"php": ">=7.4"
+	},
+	"autoload": {
+		"psr-4": {
+			"TournamentGenerator\\": "src/TournamentGenerator/"
+		}
+	},
+	"require-dev": {
+		"phpunit/phpunit": "^9.5"
+	}
 }

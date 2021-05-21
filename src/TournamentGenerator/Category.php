@@ -2,132 +2,87 @@
 
 namespace TournamentGenerator;
 
+use Exception;
+use TournamentGenerator\Interfaces\WithGames;
+use TournamentGenerator\Interfaces\WithGroups;
+use TournamentGenerator\Interfaces\WithRounds;
+use TournamentGenerator\Interfaces\WithSkipSetters;
+use TournamentGenerator\Interfaces\WithTeams;
+use TournamentGenerator\Traits\WithGames as WithGamesTrait;
+use TournamentGenerator\Traits\WithGroups as WithGroupsTrait;
+use TournamentGenerator\Traits\WithRounds as WithRoundsTrait;
+use TournamentGenerator\Traits\WithSkipSetters as WithSkipSettersTrait;
+use TournamentGenerator\Traits\WithTeams as WithTeamsTrait;
+
+
 /**
+ * Tournament category
  *
+ * Category is an optional container for rounds in a tournament. It separates a tournament into bigger chunks that are played separately one after another.
+ * This allows "sub-tournaments" in one tournament with the possibility to progress teams from one category to the next one.
+ *
+ * @package TournamentGenerator
+ *
+ * @author  Tomáš Vojík <vojik@wboy.cz>
+ * @package TournamentGenerator
+ * @since   0.1
  */
-class Category extends Base implements WithSkipSetters, WithTeams, WithRounds
+class Category extends Base implements WithSkipSetters, WithRounds, WithTeams, WithGroups, WithGames
 {
+	use WithTeamsTrait;
+	use WithRoundsTrait;
+	use WithGroupsTrait;
+	use WithSkipSettersTrait;
+	use WithGamesTrait;
 
-	private $rounds = [];
-	private $teams = [];
-	private $allowSkip = false;
 
+	/**
+	 * Category constructor.
+	 *
+	 * @param string          $name Category name
+	 * @param string|int|null $id   Category id - if omitted -> it is generated automatically as unique string
+	 */
 	public function __construct(string $name = '', $id = null) {
 		$this->setName($name);
-		$this->setId(isset($id) ? $id : uniqid());
+		$this->setId($id ?? uniqid('', false));
 	}
 
-	public function addRound(Round ...$rounds){
-		foreach ($rounds as $round) {
-			$this->rounds[] = $round;
-		}
-		return $this;
-	}
-	public function round(string $name = '', $id = null) {
-		$r = new Round($name, $id);
-		$this->rounds[] = $r->setSkip($this->allowSkip);
-		return $r;
-	}
-	public function getRounds(){
-		return $this->rounds;
-	}
-	public function getGroups() {
-		$groups = [];
-		foreach ($this->getRounds() as $round) {
-			$groups = array_merge($groups, $round->getGroups());
-		}
-		return $groups;
-	}
-
-	public function allowSkip(){
+	/**
+	 * Allows skipping of games with less than the minimum amounts of games
+	 *
+	 * @return $this
+	 */
+	public function allowSkip() : Category {
 		$this->allowSkip = true;
 		return $this;
 	}
-	public function disallowSkip(){
-		$this->allowSkip = false;
-		return $this;
-	}
-	public function setSkip(bool $skip) {
-		$this->allowSkip = $skip;
-		return $this;
-	}
-	public function getSkip() {
-		return $this->allowSkip;
+
+	/**
+	 * Simulate all games as they would be played in reality - with dummy teams
+	 *
+	 * @return Game[] Generated games, or expected play time
+	 * @throws Exception
+	 */
+	public function genGamesSimulate() : array {
+		return Helpers\Simulator::simulateCategory($this);
 	}
 
-	public function addTeam(Team ...$teams) {
-		foreach ($teams as $team) {
-			$this->teams[] = $team;
-		}
-		return $this;
+	/**
+	 * Simulate all games as they would be played in reality - with real teams
+	 *
+	 * @return Game[] Generated games, or expected play time
+	 * @throws Exception
+	 */
+	public function genGamesSimulateReal() : array {
+		return Helpers\Simulator::simulateCategoryReal($this);
 	}
-	public function team(string $name = '', $id = null) {
-		$t = new Team($name, $id);
-		$this->teams[] = $t;
-		return $t;
-	}
-	public function getTeams(bool $ordered = false, $ordering = \TournamentGenerator\Constants::POINTS, array $filters = []) {
-		$teams = $this->teams;
-		foreach ($this->rounds as $round) {
-			$teams = \array_merge($teams, $round->getTeams());
-		}
-		$teams = \array_unique($teams);
+
+	/**
+	 * Manually set all teams for the category
+	 *
+	 * @param Team[] $teams
+	 */
+	public function setTeams(array $teams) : void {
 		$this->teams = $teams;
-		if ($ordered) $teams = $this->sortTeams($ordering);
-
-		// APPLY FILTERS
-		$filter = new Filter($this->getGroups(), $filters);
-		$filter->filter($teams);
-
-		return $teams;
-	}
-	public function sortTeams($ordering = \TournamentGenerator\Constants::POINTS, array $filters = []) {
-		$teams = [];
-		for ($i = count($this->rounds)-1; $i >= 0; $i--) {
-			$rTeams = array_filter($this->rounds[$i]->getTeams(true, $ordering), function($a) use ($teams) { return !in_array($a, $teams); });
-			$teams = array_merge($teams, $rTeams);
-		}
-		$this->teams = $teams;
-
-		// APPLY FILTERS
-		$filter = new Filter($this->getGroups(), $filters);
-		$filter->filter($teams);
-
-		return $teams;
-	}
-
-	public function getGames() {
-		$games = [];
-		foreach ($this->getRounds() as $round) {
-			$games = array_merge($games, $round->getGames());
-		}
-		return $games;
-	}
-
-	public function splitTeams(Round ...$wheres) {
-
-		if (count($wheres) === 0) $wheres = $this->getRounds();
-
-		$teams = $this->getTeams();
-		shuffle($teams);
-
-		while (count($teams) > 0) {
-			foreach ($wheres as $where) {
-				if (count($teams) > 0) $where->addTeam(array_shift($teams));
-			}
-		}
-		foreach ($wheres as $where) {
-			$where->splitTeams();
-		}
-		return $this;
-	}
-
-	public function genGamesSimulate() {
-		$games = Utilis\Simulator::simulateCategory($this);
-		return $games;
-	}
-	public function genGamesSimulateReal() {
-		$games = Utilis\Simulator::simulateCategoryReal($this);
-		return $games;
 	}
 }

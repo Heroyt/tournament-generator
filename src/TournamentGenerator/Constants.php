@@ -3,7 +3,11 @@
 namespace TournamentGenerator;
 
 /**
+ * Constants used in the library
  *
+ * @package TournamentGenerator
+ * @author  Tomáš Vojík <vojik@wboy.cz>
+ * @since   0.3
  */
 class Constants
 {
@@ -16,25 +20,25 @@ class Constants
 	/** @var string One team plays only one game in a group bracket */
 	public const ROUND_TWO = 'Two-Two group type';
 
-	 /** @var string Split into two groups if number of teams exceeds maximum size */
+	/** @var string Split into two groups if number of teams exceeds maximum size */
 	public const ROUND_SPLIT = 'Conditional split group type';
 
-	/** @var string Order teams based on their points aquired by winning, losing,.. */
+	/** @var string Order teams based on their points acquired by winning, losing,.. */
 	public const POINTS = 'Ordering based on points';
 
-	/** @var string Order teams based on their score aquired in each game */
+	/** @var string Order teams based on their score acquired in each game */
 	public const SCORE = 'Ordering based on score';
 
 	/** @var array List of all available order by types */
 	public const OrderingTypes = [
 		'POINTS' => 'Ordering based on points',
-		'SCORE' => 'Ordering based on score'
+		'SCORE'  => 'Ordering based on score'
 	];
 
 	/** @var array List of all available group bracket types */
 	public const GroupTypes = [
 		'ROUND_ROBIN' => 'Robin-Robin group type',
-		'ROUND_TWO' => 'Two-Two group type',
+		'ROUND_TWO'   => 'Two-Two group type',
 		'ROUND_SPLIT' => 'Conditional split group type'
 	];
 }
