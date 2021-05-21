@@ -2,6 +2,7 @@ site_name: Tournament Generator
 repo_url: https://github.com/Heroyt/tournament-generator
 repo_name: GitHub
 site_author: Tomáš Vojík (Heroyt)
+docs_dir: wiki
 markdown_extensions:
   - admonition
 theme:
