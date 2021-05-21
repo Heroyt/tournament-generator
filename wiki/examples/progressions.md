@@ -1,22 +1,22 @@
 ##Introduction
 
-**[Progressions](classes/progression/)** are used in order to move teams from one group to another. This can be used to progress the winning teams to semi-finals and finals round, but you can also progress teams between groups in different categories and even tournaments if you ever needed to.
+**[Progressions](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Progression.html)** are used in order to move teams from one group to another. This can be used to progress the winning teams to semi-finals and finals round, but you can also progress teams between groups in different categories and even tournaments if you ever needed to.
 
 ---
 
 ##Creating a progression
 
-**[Progression](classes/progression/)** always takes teams from a group and sorts them by their results in that group. It works the same and uses an [array_splice()](https://www.php.net/manual/en/function.array-splice.php) function.
+**[Progression](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Progression.html)** always takes teams from a group and sorts them by their results in that group. It works the same and uses an [array_splice()](https://www.php.net/manual/en/function.array-splice.php) function.
 
 ```php
 $progression = new \TournamentGenerator\Progression($from, $to, $start = 0, $length = count($from->teams));
 $group->addProgression($progression);
 ```
 
-But the **recommended** way is to initialize a **[Progression](classes/progression/)** class straight on the **[Group](classes/group/)** class.
+The **recommended** way is to initialize a **[Progression](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Progression.html)** class straight on the **[Group](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Group.html)** class.
 
 ```php
-$group->progression($to, $start = 0, $length = count($group->teams));
+$group->progression($to, $start = 0, $length = count($group->teams));
 ```
 
 * **$from**
@@ -36,11 +36,11 @@ $group->progression($to, $start = 0, $length = count($group->teams));
 
 ##Using a progression
 
-Once you setup a **[Progression](classes/progression/)** on a **[Group](classes/group/)**, you can call `progress()` method an the **[Group](classes/group/)** and all teams will be moved based on the specified rules.
+Once you set up a **[Progression](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Progression.html)** on a **[Group](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Group.html)**, you can call `progress()` method and the **[Group](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Group.html)** and all teams will be moved based on the specified rules.
 
 ```php
 
-$group->progression($finalGroup, 0, 2); // Progress 2 best teams
+$group->progression($finalGroup, 0, 2); // Progress 2 best teams
 
 /*
 Play the first group
@@ -65,6 +65,6 @@ $group->progress(true);
 
 ##Using filters and progression
 
-You can also use filters in **[Progressions](classes/progression/)**.
+You can also use filters in **[Progressions](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Progression.html)**.
 
 Please refer to [Filters example](/examples/filters/#progressions)

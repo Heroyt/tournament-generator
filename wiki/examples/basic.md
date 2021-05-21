@@ -1,7 +1,7 @@
 
 ## Creating a tournament
 
-Start with instantiating a new **[Tournament](/classes/tournament.md)** class
+Start with instantiating a new **[Tournament](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Tournament.html)** class
 
 ```php
 require 'vendor/autoload.php';
@@ -20,8 +20,8 @@ $tournament
 	->setRoundWait(0); // SET TIME BETWEEN ROUNDS TO 0 MINUTES
 ```
 
-Next, you create new **[Rounds](/classes/round.php)** for your tournaments.  
-**[Rounds](/classes/round.php)** group multiple **[Group](/classes/group.php)** classes that will be played at the same time.
+Next, you create new **[Rounds](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Round.html)** for your tournaments.  
+**[Rounds](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Round.html)** group multiple **[Group](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Group.html)** classes that will be played at the same time.
 
 ```php
 // Create a round and a final round
@@ -29,7 +29,7 @@ $round = $tournament->round("First's round's name");
 $final = $tournament->round("Final's round's name");
 ```
 
-In rounds, you create new **[Groups](/classes/group.php)**.
+In rounds, you create new **[Groups](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Group.html)**.
 
 ```php
 // Create 2 groups for the first round
@@ -45,7 +45,7 @@ $final_group = $final->group('Finale')
 	->setInGame(2) // 2 TEAMS PLAYING AGAINST EACH OTHER
 	->setType(TournamentGenerator\Constants::ROUND_ROBIN); // ROBIN-ROBIN GROUP
 ```
-We set a **[Progression](/classes/progression.php)** conditions from first groups to our final group.  
+We set a **[Progression](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Progression.html)** conditions from first groups to our final group.  
 This determines how many and which team
 
 ```php
@@ -58,7 +58,7 @@ $group_2->progression($final_group, 0, 2); // PROGRESS 2 BEST TEAMS
 
 ## Adding teams
 
-Now, you can add **[Teams](/classes/team.php)** to your tournament.
+Now, you can add **[Teams](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Team.html)** to your tournament.
 
 ```php
 // CREATE 6 TEAMS
@@ -71,7 +71,7 @@ for ($i=1; $i <= 6; $i++) {
 
 ## Generating games
 
-At last, we split all teams randomly over our starting **[Round](/classes/round.php)** and generate **[Games](/classes/game.php)** in our first **[Round](/classes/round.php)**.
+At last, we split all teams randomly over our starting **[Round](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Round.html)** and generate **[Games](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Game.html)** in our first **[Round](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Round.html)**.
 
 ```php
 // Split all teams to Groups in the first round
@@ -93,8 +93,8 @@ $games = $round->getGames();
 // Set game results
 $games[0]->setResults(
 	[
-		mixed 'teamID' => int 25, // FIRST  TEAM SCORE
-		mixed 'teamID' => int 50  // SECOND TEAM SCORE
+		(string|int) 'teamID' => (int) 25, // FIRST  TEAM SCORE
+		(string|int) 'teamID' => (int) 50  // SECOND TEAM SCORE
 	]
 );
 // Continue for all other games
@@ -107,14 +107,14 @@ or simulate it, if you want just the bracket with no real results.
 $round->simulate();
 ```
 
-After all **[Games](/classes/game.php)** in a **[Round](/classes/round.php)** are played, you should progress it and all **[Teams](/classes/team.php)** from the first **[Round](/classes/round.php)** will be moved to the next **[Round](/classes/round.php)** specified before.
+After all **[Games](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Game.html)** in a **[Round](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Round.html)** are played, you should progress it and all **[Teams](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Team.html)** from the first **[Round](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Round.html)** will be moved to the next **[Round](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Round.html)** specified before.
 
 ```php
 // Progress best teams from first round to final round
 $round->progress();
 ```
 
-Now, it's all the same for the final **[Round](/classes/round.php)**.
+Now, it's all the same for the final **[Round](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Round.html)**.
 ```php
 // Generate games in the final round
 $final->genGames();
@@ -126,8 +126,8 @@ $games = $round->getGames();
 // Set game results
 $games[0]->setResults(
 	[
-		mixed 'teamID' => int 25, // FIRST  TEAM SCORE
-		mixed 'teamID' => int 50  // SECOND TEAM SCORE
+		(string|int) 'teamID' => (int) 25, // FIRST  TEAM SCORE
+		(string|int) 'teamID' => (int) 50  // SECOND TEAM SCORE
 	]
 );
 // Continue for all other games
@@ -137,7 +137,7 @@ $games[0]->setResults(
 $final->simulate();
 ```
 
-You can also simulate a whole **[Tournament](/classes/tournament.php)** at once.
+You can also simulate a whole **[Tournament](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Tournament.html)** at once.
 
 ```php
 // Simulate games
@@ -147,7 +147,7 @@ $tournament->genGamesSimulateReal(); // Simulate games with results like a real 
 
 ## Getting results
 
-Finally, you can get all the **[Teams](/classes/team.php)** ordered by their results.
+Finally, you can get all the **[Teams](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Team.html)** ordered by their results.
 
 ```php
 // GET ALL TEAMS

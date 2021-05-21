@@ -1,9 +1,9 @@
 
 ## Introduction
 
-You also have an ability to use predefined tournament [tempates](/templates/list.md).
+You also have an ability to use predefined tournament [templates](/template/list.md).
 
-[Templates](/templates/list.md) are predefined classes, that make it easier to create commonly used tournament brackets with any number of [Teams](/templates/team.md). All [templates](/templates/list.md) are used in a similar way - see the [list of templates](/templates/list.md).
+[Templates](/template/list.md) are predefined classes, that make it easier to create commonly used tournament brackets with any number of [Teams](/templates/team.md). All [templates](/templates/list.md) are used in a similar way - see the [list of templates](/templates/list.md).
 
 ---
 
@@ -11,7 +11,7 @@ You also have an ability to use predefined tournament [tempates](/templates/list
 
 In this example, we will be looking at creating a single elimination bracket.
 
-Start with creating a new [SingleElimination](/templates/singleElim.md) class.
+Start with creating a new [SingleElimination](/template/singleElim.md) class.
 
 ```php
 require 'vendor/autoload.md';
@@ -34,7 +34,7 @@ $tournament
 
 ## Adding teams
 
-Now, you can add **[Teams](/classes/team.md)** to your tournament.
+Now, you can add **[Teams](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Team.html)** to your tournament.
 
 We will add just a few, but you can populate your tournament with your own teams.
 
@@ -45,7 +45,7 @@ for ($i=1; $i <= 6; $i++) {
 }
 ```
 
-Now, we generate all the games using a [generate()](/templates/singleElim.md#generate) method.
+Now, we generate all the games using a [generate()](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Preset-SingleElimination.html#method_generate) method.
 
 ```php
 // GENERATE ALL GAMES
@@ -56,7 +56,7 @@ $tournament->generate();
 
 ## Generating results
 
-At last you set results to all your **[Games](/classes/game.md)** one by one with your own scores.
+At last, you set results to all your **[Games](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Game.html)** one by one with your own scores.
 
 ```php
 // Get all rounds
@@ -68,14 +68,14 @@ $games = $round[0]->getGames();
 // Set game results
 $games[0]->setResults(
 	[
-		mixed 'teamID' => int 25, // FIRST  TEAM SCORE
-		mixed 'teamID' => int 50  // SECOND TEAM SCORE
+		(string|int) 'teamID' => (int) 25, // FIRST  TEAM SCORE
+		(string|int) 'teamID' => (int) 50  // SECOND TEAM SCORE
 	]
 );
 // Continue for all other games and rounds
 ```
 
-Or you simulate all the **[Rounds](/classes/round.md)**.
+Or you simulate all the **[Rounds](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Round.html)**.
 
 ```php
 // Get all rounds
@@ -87,7 +87,7 @@ foreach ($rounds as $round) {
 }
 ```
 
-Or you can simulate a whole **[Tournament](/classes/tournament.md)** at once.
+Or you can simulate a whole **[Tournament](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Tournament.html)** at once.
 
 ```php
 // Simulate games
@@ -99,7 +99,7 @@ $tournament->genGamesSimulateReal(); // Simulate games with results like a real 
 
 ## Getting final results
 
-Finally, you can get all the **[Teams](/classes/team.md)** ordered by their results.
+Finally, you can get all the **[Teams](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Team.html)** ordered by their results.
 
 ```php
 // GET ALL TEAMS

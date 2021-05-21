@@ -4,7 +4,7 @@ Simulating a tournament|category|round|group can help you to generate in advance
 
 There are two types of simulating a tournament
 
-1. Simulaing without results
+1. Simulating without results
 	- This is used only to generate brackets for example to save them for later
 	- It simulates each group being played, progresses blank teams and then resets the results
 2. Simulating with results = *real*
@@ -13,7 +13,7 @@ There are two types of simulating a tournament
 
 ##Simulating round or group
 
-**[Round](/classes/round/)** and **[Group](/classes/group/)** has a `simulate()` method which by default simulates its games with results. The `simulate()` method will however not generate any games, it will only generate random results for all the games. You have to generate the games beforehand.
+**[Round](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Round.html)** and **[Group](/https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Group.html)** has a `simulate()` method which by default simulates its games with results. The `simulate()` method will however not generate any games, it will only generate random results for all the games. You have to generate the games beforehand.
 
 ```php
 $group->simulate();
@@ -35,7 +35,7 @@ This will progress blank teams and reset all the results.
 
 ##Simulating the whole tournament or category
 
-**[Tournament](/classes/tournament/)** and **[Category](/classes/category/)** has a build in methods to simulate itself with or without results. These methods will also generate all necessary games.
+**[Tournament](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Tournament.html)** and **[Category](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Category.html)** has a build in methods to simulate itself with or without results. These methods will also generate all necessary games.
 
 ```php
 $games = $tournament->genGamesSimulate();

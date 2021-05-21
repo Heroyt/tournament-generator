@@ -16,6 +16,8 @@ Tournament Generator
 
 </p>
 
+## [API documentation](https://heroyt.github.io/tournament-generator/)
+
 ## Features
 
 - Creating a custom tournament bracket with any number of categories, rounds, groups and teams
@@ -27,8 +29,8 @@ Tournament Generator
 
 ## Installation
 
-```php
-composer require heroyt/tournament-generator
+```shell
+$ composer require heroyt/tournament-generator
 ```
 
 ## Basic Usage
@@ -90,7 +92,7 @@ $teams = $tournament->getTeams(true); // TRUE to get teams ordered by their resu
 require 'vendor/autoload.php';
 
 // Create a tournament
-$tournament = new TournamentGenerator\Preset\Tournament_SingleElimination('Tournament name');
+$tournament = new TournamentGenerator\Preset\SingleElimination('Tournament name');
 
 // Set tournament lengths - could be omitted
 $tournament

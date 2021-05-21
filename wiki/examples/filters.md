@@ -3,7 +3,7 @@
 
 Filters are special classes used in order to filter out teams only by some given criteria.
 
-You can apply filters to `getTeams()` and `sortTeams()` methods and **[Progressions](/classes/progression/)**.
+You can apply filters to `getTeams()` and `sortTeams()` methods and **[Progressions](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Progression.html)**.
 
 ---
 
@@ -43,7 +43,7 @@ List of criteria to filter teams by
 | second | number of times where the team was second (at least 3 teams in game) |
 | third | number of times where the team was third (at least 4 teams in game) |
 | team | filter a specific team |
-| notprogressed | filter only teams that have not been progressed yet from certain group |
+| not-progressed | filter only teams that have not been progressed yet from certain group |
 | progressed | filter only teams that have been progressed from certain group |
 
 ---
@@ -67,14 +67,14 @@ This will filter all teams in a tournament and give you only the ones that satis
 <a title="progressions" id="progressions"></a>
 ###Progressions
 
-You can also use filters to progress teams. Imagine a situation where you progress 2 best teams from one group and you want to progress all others to another. We can do this, no matter the number of teams with a filter.
+You can also use filters to progress teams. Imagine a situation where you progress 2 best teams from one group, and you want to progress all others to another. We can do this, no matter the number of teams with a filter.
 
 ```php
 
 $group->progression($nextGroup, 0, 2); // Setup progression to progress only the best 2 teams
 $group->progress(); // Progress the teams
 
-$filter = new \TournamentGenerator\TeamFilter('notprogressed', '', 0, [$group]); // Setup the filter
+$filter = new \TournamentGenerator\TeamFilter('not-progressed', '', 0, [$group]); // Setup the filter
 
 $group->progression($anotherGroup)->addFilter($filter); // Setup a empty progression with a filter
 $group->progress(); // Progress the teams
@@ -87,7 +87,7 @@ This will move 2 best teams from `$group` to `$nextGroup` and all others to `$an
 
 ##More complex filters
 
-If you need to, you can also combine filters to create more complex filters. This uses a helper **[Filter class](/classes/filter/)**.
+If you need to, you can also combine filters to create more complex filters. This uses a helper **[Filter class](https://heroyt.github.io/tournament-generator/classes/TournamentGenerator-Helpers-Filter.html)**.
 
 One way of combining filters is creating a list of them. Then it will require the teams to satisfy all of them.
 
@@ -121,9 +121,9 @@ $filteredTeams = $tournament->getTeams(false, null, [
 
 ```
 
-This will give you all the teams that have more than 400 score **and** more then 2 wins **or** less then 4 losses.
+This will give you all the teams that have more than 400 score **and** more than 2 wins **or** less than 4 losses.
 
-And if you ever want to filter teams with double **or** or **and**, you can wrap it in an array like so.
+If you ever want to filter teams with double **or** or **and**, you can wrap it in an array like so.
 
 ```php
 $filteredTeams = $tournament->getTeams(false, null, [

@@ -19,7 +19,9 @@ Tournament Generator
 
 </p>
 
-## [Documentation](https://tournament-generator.readthedocs.io/en/latest/)
+[Documentation](https://tournament-generator.readthedocs.io/en/latest/)
+
+[API documentation](https://heroyt.github.io/tournament-generator/)
 
 ## Features
 
