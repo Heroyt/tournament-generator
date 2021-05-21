@@ -24,8 +24,8 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 {
 	use WithSkipSettersTrait;
 
-	/** @var Group|null Group object */
-	private ?Group $group;
+	/** @var Group Group object */
+	private Group $group;
 	/** @var string Type of a round to create */
 	private string $type = Constants::ROUND_ROBIN;
 	/** @var int Number of teams in one game - 2/3/4 */

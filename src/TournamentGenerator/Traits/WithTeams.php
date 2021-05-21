@@ -8,9 +8,9 @@ use TournamentGenerator\Constants;
 use TournamentGenerator\Group;
 use TournamentGenerator\Helpers\Filter;
 use TournamentGenerator\Helpers\Sorter\Teams;
-use TournamentGenerator\Interfaces\WithCategories;
-use TournamentGenerator\Interfaces\WithGroups;
-use TournamentGenerator\Interfaces\WithRounds;
+use TournamentGenerator\Interfaces\WithCategories as WithCategoriesInterface;
+use TournamentGenerator\Interfaces\WithGroups as WithGroupsInterface;
+use TournamentGenerator\Interfaces\WithRounds as WithRoundsInterface;
 use TournamentGenerator\Interfaces\WithTeams as WithTeamsInterface;
 use TournamentGenerator\Round;
 use TournamentGenerator\Team;
@@ -88,17 +88,17 @@ trait WithTeams
 			$ordering = Constants::POINTS;
 		}
 		$teams = [$this->teams];
-		if ($this instanceof WithCategories) {
+		if ($this instanceof WithCategorieInterface) {
 			foreach ($this->getCategories() as $category) {
 				$teams[] = $category->getTeams();
 			}
 		}
-		if ($this instanceof WithRounds) {
+		if ($this instanceof WithRoundsInterface) {
 			foreach ($this->getRounds() as $round) {
 				$teams[] = $round->getTeams();
 			}
 		}
-		elseif ($this instanceof WithGroups) {
+		elseif ($this instanceof WithGroupsInterface) {
 			foreach ($this->getGroups() as $group) {
 				$teams[] = $group->getTeams();
 			}
@@ -150,7 +150,7 @@ trait WithTeams
 			$ordering = Constants::POINTS;
 		}
 		$teams = [];
-		if ($this instanceof WithRounds) {
+		if ($this instanceof WithRoundsInterface) {
 			$rounds = $this->getRounds();
 			for ($i = count($rounds) - 1; $i >= 0; $i--) {
 				foreach ($rounds[$i]->getTeams(true, $ordering) as $team) {
@@ -161,7 +161,7 @@ trait WithTeams
 				$this->teams = array_values($teams);
 			}
 		}
-		elseif ($this instanceof WithGroups) {
+		elseif ($this instanceof WithGroupsInterface) {
 			foreach ($this->getGroups() as $group) {
 				$teams[] = $group->getTeams(true);
 			}
@@ -198,7 +198,7 @@ trait WithTeams
 	 */
 	public function filterTeams(array &$teams, array $filters) : array {
 		// APPLY FILTERS
-		if ($this instanceof WithGroups) {
+		if ($this instanceof WithGroupsInterface) {
 			$filter = new Filter($filters, $this->getGroups());
 			$filter->filter($teams);
 		}

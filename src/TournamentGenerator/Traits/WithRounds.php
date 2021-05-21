@@ -5,7 +5,7 @@ namespace TournamentGenerator\Traits;
 
 
 use TournamentGenerator\Interfaces\WithRounds as WithRoundsInterface;
-use TournamentGenerator\Interfaces\WithSkipSetters;
+use TournamentGenerator\Interfaces\WithSkipSetters as WithSkipSettersInterface;
 use TournamentGenerator\Round;
 
 /**
@@ -45,7 +45,7 @@ trait WithRounds
 	 */
 	public function round(string $name = '', $id = null) : Round {
 		$r = new Round($name, $id);
-		if ($this instanceof WithSkipSetters) {
+		if ($this instanceof WithSkipSettersInterface) {
 			$this->rounds[] = $r->setSkip($this->getSkip());
 		}
 		return $r;
@@ -57,9 +57,9 @@ trait WithRounds
 	 * @return Round[]
 	 */
 	public function getRounds() : array {
-		if ($this instanceof \TournamentGenerator\Interfaces\WithCategories && count($this->categories) > 0) {
+		if ($this instanceof \TournamentGenerator\Interfaces\WithCategories && count($this->getCategories()) > 0) {
 			$rounds = [];
-			foreach ($this->categories as $category) {
+			foreach ($this->getCategories() as $category) {
 				$rounds[] = $category->getRounds();
 			}
 			$rounds[] = $this->rounds;
