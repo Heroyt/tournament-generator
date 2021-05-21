@@ -88,7 +88,7 @@ trait WithTeams
 			$ordering = Constants::POINTS;
 		}
 		$teams = [$this->teams];
-		if ($this instanceof WithCategorieInterface) {
+		if ($this instanceof WithCategoriesInterface) {
 			foreach ($this->getCategories() as $category) {
 				$teams[] = $category->getTeams();
 			}
