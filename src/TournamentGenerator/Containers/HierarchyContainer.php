@@ -13,6 +13,7 @@ use TournamentGenerator\Base;
  *
  * @package TournamentGenerator\Containers
  * @author  Tomáš Vojík <vojik@wboy.cz>
+ * @since 0.4
  */
 class HierarchyContainer extends BaseContainer
 {

@@ -10,6 +10,7 @@ namespace TournamentGenerator\Containers;
  *
  * @package TournamentGenerator\Containers
  * @author  Tomáš Vojík <vojik@wboy.cz>
+ * @since 0.4
  */
 class TeamContainer extends BaseContainer
 {

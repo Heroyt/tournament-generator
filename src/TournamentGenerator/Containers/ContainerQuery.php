@@ -14,6 +14,7 @@ use TournamentGenerator\Helpers\Sorter\BaseSorter;
  *
  * @package TournamentGenerator\Containers
  * @author  Tomáš Vojík <vojik@wboy.cz>
+ * @since 0.4
  */
 class ContainerQuery
 {

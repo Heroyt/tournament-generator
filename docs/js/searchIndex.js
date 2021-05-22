@@ -176,10 +176,20 @@ Search.appendIndex(
             "summary": "Reset\u0020the\u0020game\u0027s\u0020results",
             "url": "classes/TournamentGenerator-Game.html#method_resetResults"
         },                {
+            "fqsen": "\\TournamentGenerator\\Game\u003A\u003AresetTeamScore\u0028\u0029",
+            "name": "resetTeamScore",
+            "summary": "Resets\u0020a\u0020score\u0020for\u0020a\u0020team",
+            "url": "classes/TournamentGenerator-Game.html#method_resetTeamScore"
+        },                {
             "fqsen": "\\TournamentGenerator\\Game\u003A\u003AgetTeam\u0028\u0029",
             "name": "getTeam",
             "summary": "Get\u0020team\u0020by\u0020ID",
             "url": "classes/TournamentGenerator-Game.html#method_getTeam"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Game\u003A\u003AsetTeamScore\u0028\u0029",
+            "name": "setTeamScore",
+            "summary": "Set\u0020a\u0020score\u0020for\u0020a\u0020team",
+            "url": "classes/TournamentGenerator-Game.html#method_setTeamScore"
         },                {
             "fqsen": "\\TournamentGenerator\\Game\u003A\u003AsetResults2\u0028\u0029",
             "name": "setResults2",
@@ -641,6 +651,11 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020previous\u0020power\u0020of\u00202\u0020smaller\u0020or\u0020equal\u0020than\u0020input",
             "url": "classes/TournamentGenerator-Helpers-Functions.html#method_previousPowerOf2"
         },                {
+            "fqsen": "\\TournamentGenerator\\Helpers\\Functions\u003A\u003AnestedCount\u0028\u0029",
+            "name": "nestedCount",
+            "summary": "Calculate\u0020a\u0020count\u0020of\u00202D\u0020array",
+            "url": "classes/TournamentGenerator-Helpers-Functions.html#method_nestedCount"
+        },                {
             "fqsen": "\\TournamentGenerator\\Helpers\\Generator",
             "name": "Generator",
             "summary": "Generator\u0020class\u0020is\u0020responsible\u0020for\u0020generating\u0020all\u0020different\u0020games\u0020in\u0020rounds.",
@@ -730,6 +745,16 @@ Search.appendIndex(
             "name": "orderGames",
             "summary": "Sort\u0020games\u0020to\u0020minimize\u0020teams\u0020playing\u0020multiple\u0020games\u0020after\u0020one\u0020other",
             "url": "classes/TournamentGenerator-Helpers-Generator.html#method_orderGames"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Helpers\\Generator\u003A\u003AfillGamesFromChunks\u0028\u0029",
+            "name": "fillGamesFromChunks",
+            "summary": "Add\u0020games\u0020from\u0020chunks\u0020to\u0020groups",
+            "url": "classes/TournamentGenerator-Helpers-Generator.html#method_fillGamesFromChunks"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Helpers\\Generator\u003A\u003AsaveTwoTwoGames\u0028\u0029",
+            "name": "saveTwoTwoGames",
+            "summary": "Create\u0020games\u0020from\u0020array\u0020of\u0020teams\u0020for\u0020a\u0020Two\u002DTwo\u0020game",
+            "url": "classes/TournamentGenerator-Helpers-Generator.html#method_saveTwoTwoGames"
         },                {
             "fqsen": "\\TournamentGenerator\\Helpers\\Generator\u003A\u003A\u0024group",
             "name": "group",
@@ -1210,101 +1235,6 @@ Search.appendIndex(
             "name": "getGames",
             "summary": "Gets\u0020all\u0020game\u0020from\u0020given\u0020group",
             "url": "classes/TournamentGenerator-Team.html#method_getGames"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Team\u003A\u003AgetSumPoints\u0028\u0029",
-            "name": "getSumPoints",
-            "summary": "Gets\u0020all\u0020points\u0020that\u0020the\u0020team\u0020has\u0020acquired\u0020through\u0020the\u0020tournament",
-            "url": "classes/TournamentGenerator-Team.html#method_getSumPoints"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Team\u003A\u003AgetSumScore\u0028\u0029",
-            "name": "getSumScore",
-            "summary": "Gets\u0020all\u0020score\u0020that\u0020the\u0020team\u0020has\u0020acquired\u0020through\u0020the\u0020tournament",
-            "url": "classes/TournamentGenerator-Team.html#method_getSumScore"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Team\u003A\u003AaddWin\u0028\u0029",
-            "name": "addWin",
-            "summary": "Adds\u0020a\u0020win\u0020to\u0020the\u0020team",
-            "url": "classes/TournamentGenerator-Team.html#method_addWin"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Team\u003A\u003AremoveWin\u0028\u0029",
-            "name": "removeWin",
-            "summary": "Remove\u0020a\u0020win\u0020from\u0020the\u0020team",
-            "url": "classes/TournamentGenerator-Team.html#method_removeWin"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Team\u003A\u003AaddDraw\u0028\u0029",
-            "name": "addDraw",
-            "summary": "Adds\u0020a\u0020draw\u0020to\u0020the\u0020team",
-            "url": "classes/TournamentGenerator-Team.html#method_addDraw"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Team\u003A\u003AremoveDraw\u0028\u0029",
-            "name": "removeDraw",
-            "summary": "Remove\u0020a\u0020draw\u0020from\u0020the\u0020team",
-            "url": "classes/TournamentGenerator-Team.html#method_removeDraw"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Team\u003A\u003AaddLoss\u0028\u0029",
-            "name": "addLoss",
-            "summary": "Adds\u0020a\u0020loss\u0020to\u0020the\u0020team",
-            "url": "classes/TournamentGenerator-Team.html#method_addLoss"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Team\u003A\u003AremoveLoss\u0028\u0029",
-            "name": "removeLoss",
-            "summary": "Remove\u0020a\u0020loss\u0020from\u0020the\u0020team",
-            "url": "classes/TournamentGenerator-Team.html#method_removeLoss"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Team\u003A\u003AaddSecond\u0028\u0029",
-            "name": "addSecond",
-            "summary": "Add\u0020points\u0020for\u0020being\u0020second\u0020to\u0020the\u0020team",
-            "url": "classes/TournamentGenerator-Team.html#method_addSecond"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Team\u003A\u003AremoveSecond\u0028\u0029",
-            "name": "removeSecond",
-            "summary": "Remove\u0020points\u0020for\u0020being\u0020second\u0020from\u0020the\u0020team",
-            "url": "classes/TournamentGenerator-Team.html#method_removeSecond"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Team\u003A\u003AaddThird\u0028\u0029",
-            "name": "addThird",
-            "summary": "Add\u0020points\u0020for\u0020being\u0020third\u0020to\u0020the\u0020team",
-            "url": "classes/TournamentGenerator-Team.html#method_addThird"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Team\u003A\u003AremoveThird\u0028\u0029",
-            "name": "removeThird",
-            "summary": "Remove\u0020points\u0020for\u0020being\u0020third\u0020from\u0020the\u0020team",
-            "url": "classes/TournamentGenerator-Team.html#method_removeThird"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Team\u003A\u003A\u0024sumPoints",
-            "name": "sumPoints",
-            "summary": "",
-            "url": "classes/TournamentGenerator-Team.html#property_sumPoints"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Team\u003A\u003A\u0024sumScore",
-            "name": "sumScore",
-            "summary": "",
-            "url": "classes/TournamentGenerator-Team.html#property_sumScore"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Team\u003A\u003AaddScore\u0028\u0029",
-            "name": "addScore",
-            "summary": "Adds\u0020score\u0020to\u0020the\u0020total\u0020sum",
-            "url": "classes/TournamentGenerator-Team.html#method_addScore"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Team\u003A\u003AremoveScore\u0028\u0029",
-            "name": "removeScore",
-            "summary": "Removes\u0020score\u0020to\u0020the\u0020total\u0020sum",
-            "url": "classes/TournamentGenerator-Team.html#method_removeScore"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Team\u003A\u003AaddPoints\u0028\u0029",
-            "name": "addPoints",
-            "summary": "Adds\u0020points\u0020to\u0020the\u0020total\u0020sum",
-            "url": "classes/TournamentGenerator-Team.html#method_addPoints"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Team\u003A\u003AremovePoints\u0028\u0029",
-            "name": "removePoints",
-            "summary": "Removes\u0020points\u0020to\u0020the\u0020total\u0020sum",
-            "url": "classes/TournamentGenerator-Team.html#method_removePoints"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Team\u003A\u003A\u0024groupResults",
-            "name": "groupResults",
-            "summary": "",
-            "url": "classes/TournamentGenerator-Team.html#property_groupResults"
         },                {
             "fqsen": "\\TournamentGenerator\\Team\u003A\u003A\u0024games",
             "name": "games",
@@ -1985,6 +1915,111 @@ Search.appendIndex(
             "name": "container",
             "summary": "",
             "url": "classes/TournamentGenerator-HierarchyBase.html#property_container"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Traits\\HasPositions",
+            "name": "HasPositions",
+            "summary": "Trait\u0020Positions",
+            "url": "classes/TournamentGenerator-Traits-HasPositions.html"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Traits\\HasPositions\u003A\u003AaddWin\u0028\u0029",
+            "name": "addWin",
+            "summary": "Adds\u0020a\u0020win\u0020to\u0020the\u0020team",
+            "url": "classes/TournamentGenerator-Traits-HasPositions.html#method_addWin"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Traits\\HasPositions\u003A\u003AremoveWin\u0028\u0029",
+            "name": "removeWin",
+            "summary": "Remove\u0020a\u0020win\u0020from\u0020the\u0020team",
+            "url": "classes/TournamentGenerator-Traits-HasPositions.html#method_removeWin"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Traits\\HasPositions\u003A\u003AaddDraw\u0028\u0029",
+            "name": "addDraw",
+            "summary": "Adds\u0020a\u0020draw\u0020to\u0020the\u0020team",
+            "url": "classes/TournamentGenerator-Traits-HasPositions.html#method_addDraw"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Traits\\HasPositions\u003A\u003AremoveDraw\u0028\u0029",
+            "name": "removeDraw",
+            "summary": "Remove\u0020a\u0020draw\u0020from\u0020the\u0020team",
+            "url": "classes/TournamentGenerator-Traits-HasPositions.html#method_removeDraw"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Traits\\HasPositions\u003A\u003AaddLoss\u0028\u0029",
+            "name": "addLoss",
+            "summary": "Adds\u0020a\u0020loss\u0020to\u0020the\u0020team",
+            "url": "classes/TournamentGenerator-Traits-HasPositions.html#method_addLoss"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Traits\\HasPositions\u003A\u003AremoveLoss\u0028\u0029",
+            "name": "removeLoss",
+            "summary": "Remove\u0020a\u0020loss\u0020from\u0020the\u0020team",
+            "url": "classes/TournamentGenerator-Traits-HasPositions.html#method_removeLoss"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Traits\\HasPositions\u003A\u003AaddSecond\u0028\u0029",
+            "name": "addSecond",
+            "summary": "Add\u0020points\u0020for\u0020being\u0020second\u0020to\u0020the\u0020team",
+            "url": "classes/TournamentGenerator-Traits-HasPositions.html#method_addSecond"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Traits\\HasPositions\u003A\u003AremoveSecond\u0028\u0029",
+            "name": "removeSecond",
+            "summary": "Remove\u0020points\u0020for\u0020being\u0020second\u0020from\u0020the\u0020team",
+            "url": "classes/TournamentGenerator-Traits-HasPositions.html#method_removeSecond"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Traits\\HasPositions\u003A\u003AaddThird\u0028\u0029",
+            "name": "addThird",
+            "summary": "Add\u0020points\u0020for\u0020being\u0020third\u0020to\u0020the\u0020team",
+            "url": "classes/TournamentGenerator-Traits-HasPositions.html#method_addThird"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Traits\\HasPositions\u003A\u003AremoveThird\u0028\u0029",
+            "name": "removeThird",
+            "summary": "Remove\u0020points\u0020for\u0020being\u0020third\u0020from\u0020the\u0020team",
+            "url": "classes/TournamentGenerator-Traits-HasPositions.html#method_removeThird"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Traits\\HasPositions\u003A\u003A\u0024groupResults",
+            "name": "groupResults",
+            "summary": "",
+            "url": "classes/TournamentGenerator-Traits-HasPositions.html#property_groupResults"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Traits\\HasScore",
+            "name": "HasScore",
+            "summary": "Trait\u0020HasScore",
+            "url": "classes/TournamentGenerator-Traits-HasScore.html"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Traits\\HasScore\u003A\u003AgetSumPoints\u0028\u0029",
+            "name": "getSumPoints",
+            "summary": "Gets\u0020all\u0020points\u0020that\u0020the\u0020team\u0020has\u0020acquired\u0020through\u0020the\u0020tournament",
+            "url": "classes/TournamentGenerator-Traits-HasScore.html#method_getSumPoints"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Traits\\HasScore\u003A\u003AgetSumScore\u0028\u0029",
+            "name": "getSumScore",
+            "summary": "Gets\u0020all\u0020score\u0020that\u0020the\u0020team\u0020has\u0020acquired\u0020through\u0020the\u0020tournament",
+            "url": "classes/TournamentGenerator-Traits-HasScore.html#method_getSumScore"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Traits\\HasScore\u003A\u003A\u0024sumPoints",
+            "name": "sumPoints",
+            "summary": "",
+            "url": "classes/TournamentGenerator-Traits-HasScore.html#property_sumPoints"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Traits\\HasScore\u003A\u003A\u0024sumScore",
+            "name": "sumScore",
+            "summary": "",
+            "url": "classes/TournamentGenerator-Traits-HasScore.html#property_sumScore"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Traits\\HasScore\u003A\u003AaddScore\u0028\u0029",
+            "name": "addScore",
+            "summary": "Adds\u0020score\u0020to\u0020the\u0020total\u0020sum",
+            "url": "classes/TournamentGenerator-Traits-HasScore.html#method_addScore"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Traits\\HasScore\u003A\u003AremoveScore\u0028\u0029",
+            "name": "removeScore",
+            "summary": "Removes\u0020score\u0020to\u0020the\u0020total\u0020sum",
+            "url": "classes/TournamentGenerator-Traits-HasScore.html#method_removeScore"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Traits\\HasScore\u003A\u003AaddPoints\u0028\u0029",
+            "name": "addPoints",
+            "summary": "Adds\u0020points\u0020to\u0020the\u0020total\u0020sum",
+            "url": "classes/TournamentGenerator-Traits-HasScore.html#method_addPoints"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Traits\\HasScore\u003A\u003AremovePoints\u0028\u0029",
+            "name": "removePoints",
+            "summary": "Removes\u0020points\u0020to\u0020the\u0020total\u0020sum",
+            "url": "classes/TournamentGenerator-Traits-HasScore.html#method_removePoints"
         },                {
             "fqsen": "\\",
             "name": "\\",
