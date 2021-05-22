@@ -86,11 +86,6 @@ Search.appendIndex(
             "summary": "Simulate\u0020all\u0020games\u0020as\u0020they\u0020would\u0020be\u0020played\u0020in\u0020reality\u0020\u002D\u0020with\u0020real\u0020teams",
             "url": "classes/TournamentGenerator-Category.html#method_genGamesSimulateReal"
         },                {
-            "fqsen": "\\TournamentGenerator\\Category\u003A\u003AsetTeams\u0028\u0029",
-            "name": "setTeams",
-            "summary": "Manually\u0020set\u0020all\u0020teams\u0020for\u0020the\u0020category",
-            "url": "classes/TournamentGenerator-Category.html#method_setTeams"
-        },                {
             "fqsen": "\\TournamentGenerator\\Constants",
             "name": "Constants",
             "summary": "Constants\u0020used\u0020in\u0020the\u0020library",
@@ -801,96 +796,6 @@ Search.appendIndex(
             "summary": "Generates\u0020and\u0020simulates\u0020a\u0020category\u0020as\u0020if\u0020it\u0020was\u0020played\u0020for\u0020real.",
             "url": "classes/TournamentGenerator-Helpers-Simulator.html#method_simulateCategoryReal"
         },                {
-            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\Games",
-            "name": "Games",
-            "summary": "Tournament\u0020generator\u0020sorter\u0020for\u0020games",
-            "url": "classes/TournamentGenerator-Helpers-Sorter-Games.html"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\Games\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "Orders\u0020games\u0020from\u0020group",
-            "url": "classes/TournamentGenerator-Helpers-Sorter-Games.html#method___construct"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\Games\u003A\u003AorderGames\u0028\u0029",
-            "name": "orderGames",
-            "summary": "Orders\u0020games\u0020from\u0020group",
-            "url": "classes/TournamentGenerator-Helpers-Sorter-Games.html#method_orderGames"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\Games\u003A\u003AmoveCalculatedGames\u0028\u0029",
-            "name": "moveCalculatedGames",
-            "summary": "Move\u0020teams\u0020that\u0020did\u0020not\u0020play\u0020in\u0020the\u0020last\u0020game\u0020\u0028\u003C\u00204\u0029",
-            "url": "classes/TournamentGenerator-Helpers-Sorter-Games.html#method_moveCalculatedGames"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\Games\u003A\u003Acycle1\u0028\u0029",
-            "name": "cycle1",
-            "summary": "Teams\u0020that\u0020did\u0020not\u0020play\u0020in\u0020the\u0020last\u0020game\u0020\u0028\u003C\u00204\u0029",
-            "url": "classes/TournamentGenerator-Helpers-Sorter-Games.html#method_cycle1"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\Games\u003A\u003AorderCheckTeamsVal\u0028\u0029",
-            "name": "orderCheckTeamsVal",
-            "summary": "Get\u0020first\u0020available\u0020game",
-            "url": "classes/TournamentGenerator-Helpers-Sorter-Games.html#method_orderCheckTeamsVal"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\Games\u003A\u003Acycle2\u0028\u0029",
-            "name": "cycle2",
-            "summary": "Teams\u0020that\u0020did\u0020not\u0020play\u0020in\u0020the\u0020last\u0020two\u0020games\u0020\u0028not\u00206\u0020or\u00207\u0029",
-            "url": "classes/TournamentGenerator-Helpers-Sorter-Games.html#method_cycle2"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\Games\u003A\u003Acycle3\u0028\u0029",
-            "name": "cycle3",
-            "summary": "Teams\u0020that\u0020did\u0020not\u0020play\u0020in\u0020the\u0020last\u0020three\u0020games\u0020\u0028not\u00207\u0029\u0020and\u0020teams\u0020that\u0020did\u0020not\u0020play\u0020in\u0020the\u0020last\u0020game\u0020\u0028\u003C\u00204\u0029",
-            "url": "classes/TournamentGenerator-Helpers-Sorter-Games.html#method_cycle3"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\Games\u003A\u003Acycle4\u0028\u0029",
-            "name": "cycle4",
-            "summary": "Teams\u0020that\u0020did\u0020not\u0020play\u0020in\u0020the\u0020last\u0020three\u0020games\u0020\u0028not\u00207\u0029",
-            "url": "classes/TournamentGenerator-Helpers-Sorter-Games.html#method_cycle4"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\Games\u003A\u003Acycle5\u0028\u0029",
-            "name": "cycle5",
-            "summary": "Teams\u0020that\u0020did\u0020not\u0020play\u0020in\u0020the\u0020last\u0020game\u0020will\u0020play\u0020this\u0020game\u0020\u0028\u003C\u00204\u0029",
-            "url": "classes/TournamentGenerator-Helpers-Sorter-Games.html#method_cycle5"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\Games\u003A\u003A\u0024group",
-            "name": "group",
-            "summary": "",
-            "url": "classes/TournamentGenerator-Helpers-Sorter-Games.html#property_group"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\Games\u003A\u003A\u0024games",
-            "name": "games",
-            "summary": "",
-            "url": "classes/TournamentGenerator-Helpers-Sorter-Games.html#property_games"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\Teams",
-            "name": "Teams",
-            "summary": "TournamentGenerator\u0020sorter\u0020for\u0020teams",
-            "url": "classes/TournamentGenerator-Helpers-Sorter-Teams.html"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\Teams\u003A\u003AsortGroup\u0028\u0029",
-            "name": "sortGroup",
-            "summary": "Sort\u0020teams\u0020in\u0020group\u0020by\u0020defined\u0020ordering\u0020type",
-            "url": "classes/TournamentGenerator-Helpers-Sorter-Teams.html#method_sortGroup"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\Teams\u003A\u003AsortRound\u0028\u0029",
-            "name": "sortRound",
-            "summary": "Sort\u0020teams\u0020in\u0020round\u0020by\u0020defined\u0020ordering\u0020type",
-            "url": "classes/TournamentGenerator-Helpers-Sorter-Teams.html#method_sortRound"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\Teams\u003A\u003AsortTeamsByPoints\u0028\u0029",
-            "name": "sortTeamsByPoints",
-            "summary": "Sorter\u0020function\u0020for\u0020usort\u0020by\u0020points",
-            "url": "classes/TournamentGenerator-Helpers-Sorter-Teams.html#method_sortTeamsByPoints"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\Teams\u003A\u003AsortTeamsByScore\u0028\u0029",
-            "name": "sortTeamsByScore",
-            "summary": "Sorter\u0020function\u0020for\u0020usort\u0020by\u0020score",
-            "url": "classes/TournamentGenerator-Helpers-Sorter-Teams.html#method_sortTeamsByScore"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\Teams\u003A\u003A\u0024ids",
-            "name": "ids",
-            "summary": "",
-            "url": "classes/TournamentGenerator-Helpers-Sorter-Teams.html#property_ids"
-        },                {
             "fqsen": "\\TournamentGenerator\\Interfaces\\WithCategories",
             "name": "WithCategories",
             "summary": "Interface\u0020for\u0020objects\u0020that\u0020contain\u0020categories",
@@ -930,6 +835,16 @@ Search.appendIndex(
             "name": "getGames",
             "summary": "Get\u0020all\u0020tournament\u0020games",
             "url": "classes/TournamentGenerator-Interfaces-WithGames.html#method_getGames"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Interfaces\\WithGames\u003A\u003AgetGameContainer\u0028\u0029",
+            "name": "getGameContainer",
+            "summary": "Get\u0020the\u0020container\u0020for\u0020games",
+            "url": "classes/TournamentGenerator-Interfaces-WithGames.html#method_getGameContainer"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Interfaces\\WithGames\u003A\u003AaddGameContainer\u0028\u0029",
+            "name": "addGameContainer",
+            "summary": "Add\u0020a\u0020child\u0020container\u0020for\u0020games",
+            "url": "classes/TournamentGenerator-Interfaces-WithGames.html#method_addGameContainer"
         },                {
             "fqsen": "\\TournamentGenerator\\Interfaces\\WithGeneratorSetters",
             "name": "WithGeneratorSetters",
@@ -1050,6 +965,16 @@ Search.appendIndex(
             "name": "filterTeams",
             "summary": "Filter\u0020teams\u0020using\u0020the\u0020specified\u0020filters",
             "url": "classes/TournamentGenerator-Interfaces-WithTeams.html#method_filterTeams"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Interfaces\\WithTeams\u003A\u003AgetTeamContainer\u0028\u0029",
+            "name": "getTeamContainer",
+            "summary": "Get\u0020the\u0020container\u0020for\u0020games",
+            "url": "classes/TournamentGenerator-Interfaces-WithTeams.html#method_getTeamContainer"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Interfaces\\WithTeams\u003A\u003AaddTeamContainer\u0028\u0029",
+            "name": "addTeamContainer",
+            "summary": "Add\u0020a\u0020child\u0020container\u0020for\u0020games",
+            "url": "classes/TournamentGenerator-Interfaces-WithTeams.html#method_addTeamContainer"
         },                {
             "fqsen": "\\TournamentGenerator\\Preset\\DoubleElimination",
             "name": "DoubleElimination",
@@ -1220,11 +1145,6 @@ Search.appendIndex(
             "name": "splitTeams",
             "summary": "Split\u0020teams\u0020into\u0020its\u0020Groups",
             "url": "classes/TournamentGenerator-Round.html#method_splitTeams"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Round\u003A\u003AgetGroups\u0028\u0029",
-            "name": "getGroups",
-            "summary": "Get\u0020all\u0020groups\u0020in\u0020this\u0020round",
-            "url": "classes/TournamentGenerator-Round.html#method_getGroups"
         },                {
             "fqsen": "\\TournamentGenerator\\Round\u003A\u003Aprogress\u0028\u0029",
             "name": "progress",
@@ -1556,20 +1476,25 @@ Search.appendIndex(
             "summary": "Creates\u0020a\u0020new\u0020category\u0020and\u0020adds\u0020it\u0020to\u0020the\u0020object",
             "url": "classes/TournamentGenerator-Traits-WithCategories.html#method_category"
         },                {
-            "fqsen": "\\TournamentGenerator\\Traits\\WithCategories\u003A\u003A\u0024categories",
-            "name": "categories",
-            "summary": "",
-            "url": "classes/TournamentGenerator-Traits-WithCategories.html#property_categories"
-        },                {
             "fqsen": "\\TournamentGenerator\\Traits\\WithGames",
             "name": "WithGames",
             "summary": "Trait\u0020WithGames",
             "url": "classes/TournamentGenerator-Traits-WithGames.html"
         },                {
+            "fqsen": "\\TournamentGenerator\\Traits\\WithGames\u003A\u003AaddGameContainer\u0028\u0029",
+            "name": "addGameContainer",
+            "summary": "Add\u0020a\u0020child\u0020container\u0020for\u0020games",
+            "url": "classes/TournamentGenerator-Traits-WithGames.html#method_addGameContainer"
+        },                {
             "fqsen": "\\TournamentGenerator\\Traits\\WithGames\u003A\u003AgetGames\u0028\u0029",
             "name": "getGames",
             "summary": "Get\u0020all\u0020tournament\u0020games",
             "url": "classes/TournamentGenerator-Traits-WithGames.html#method_getGames"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Traits\\WithGames\u003A\u003AgetGameContainer\u0028\u0029",
+            "name": "getGameContainer",
+            "summary": "Get\u0020the\u0020container\u0020for\u0020games",
+            "url": "classes/TournamentGenerator-Traits-WithGames.html#method_getGameContainer"
         },                {
             "fqsen": "\\TournamentGenerator\\Traits\\WithGames\u003A\u003A\u0024games",
             "name": "games",
@@ -1585,11 +1510,6 @@ Search.appendIndex(
             "name": "getGroups",
             "summary": "Get\u0020all\u0020groups\u0020in\u0020this\u0020object",
             "url": "classes/TournamentGenerator-Traits-WithGroups.html#method_getGroups"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Traits\\WithGroups\u003A\u003A\u0024groups",
-            "name": "groups",
-            "summary": "",
-            "url": "classes/TournamentGenerator-Traits-WithGroups.html#property_groups"
         },                {
             "fqsen": "\\TournamentGenerator\\Traits\\WithRounds",
             "name": "WithRounds",
@@ -1610,11 +1530,6 @@ Search.appendIndex(
             "name": "getRounds",
             "summary": "Get\u0020all\u0020rounds\u0020in\u0020this\u0020category",
             "url": "classes/TournamentGenerator-Traits-WithRounds.html#method_getRounds"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Traits\\WithRounds\u003A\u003A\u0024rounds",
-            "name": "rounds",
-            "summary": "",
-            "url": "classes/TournamentGenerator-Traits-WithRounds.html#property_rounds"
         },                {
             "fqsen": "\\TournamentGenerator\\Traits\\WithSkipSetters",
             "name": "WithSkipSetters",
@@ -1661,11 +1576,6 @@ Search.appendIndex(
             "summary": "Get\u0020all\u0020teams\u0020in\u0020the\u0020object",
             "url": "classes/TournamentGenerator-Traits-WithTeams.html#method_getTeams"
         },                {
-            "fqsen": "\\TournamentGenerator\\Traits\\WithTeams\u003A\u003AuniqueTeams\u0028\u0029",
-            "name": "uniqueTeams",
-            "summary": "Filter\u0020an\u0020array\u0020of\u0020teams\u0020and\u0020return\u0020an\u0020distinct\u0020array",
-            "url": "classes/TournamentGenerator-Traits-WithTeams.html#method_uniqueTeams"
-        },                {
             "fqsen": "\\TournamentGenerator\\Traits\\WithTeams\u003A\u003AsortTeams\u0028\u0029",
             "name": "sortTeams",
             "summary": "Sort\u0020the\u0020teams\u0020by\u0020their\u0020score\/points",
@@ -1681,15 +1591,400 @@ Search.appendIndex(
             "summary": "Add\u0020one\u0020or\u0020more\u0020teams\u0020into\u0020the\u0020object.",
             "url": "classes/TournamentGenerator-Traits-WithTeams.html#method_addTeam"
         },                {
-            "fqsen": "\\TournamentGenerator\\Traits\\WithTeams\u003A\u003AgetRealTeamCount\u0028\u0029",
-            "name": "getRealTeamCount",
-            "summary": "Get\u0020count\u0020of\u0020the\u0020teams\u0020array",
-            "url": "classes/TournamentGenerator-Traits-WithTeams.html#method_getRealTeamCount"
+            "fqsen": "\\TournamentGenerator\\Traits\\WithTeams\u003A\u003AgetTeamContainer\u0028\u0029",
+            "name": "getTeamContainer",
+            "summary": "Get\u0020the\u0020container\u0020for\u0020games",
+            "url": "classes/TournamentGenerator-Traits-WithTeams.html#method_getTeamContainer"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Traits\\WithTeams\u003A\u003AaddTeamContainer\u0028\u0029",
+            "name": "addTeamContainer",
+            "summary": "Add\u0020a\u0020child\u0020container\u0020for\u0020games",
+            "url": "classes/TournamentGenerator-Traits-WithTeams.html#method_addTeamContainer"
         },                {
             "fqsen": "\\TournamentGenerator\\Traits\\WithTeams\u003A\u003A\u0024teams",
             "name": "teams",
             "summary": "",
             "url": "classes/TournamentGenerator-Traits-WithTeams.html#property_teams"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\BaseContainer",
+            "name": "BaseContainer",
+            "summary": "Class\u0020BaseContainer",
+            "url": "classes/TournamentGenerator-Containers-BaseContainer.html"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\BaseContainer\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "BaseContainer\u0020constructor.",
+            "url": "classes/TournamentGenerator-Containers-BaseContainer.html#method___construct"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\BaseContainer\u003A\u003Acount\u0028\u0029",
+            "name": "count",
+            "summary": "Returns\u0020the\u0020value\u0020count",
+            "url": "classes/TournamentGenerator-Containers-BaseContainer.html#method_count"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\BaseContainer\u003A\u003Aget\u0028\u0029",
+            "name": "get",
+            "summary": "Get\u0020all\u0020values\u0020from\u0020the\u0020container\u0020\u002D\u0020including\u0020child\u0020nodes",
+            "url": "classes/TournamentGenerator-Containers-BaseContainer.html#method_get"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\BaseContainer\u003A\u003AgetTopLevel\u0028\u0029",
+            "name": "getTopLevel",
+            "summary": "Get\u0020all\u0020top\u002Dlevel\u0020values\u0020from\u0020the\u0020container",
+            "url": "classes/TournamentGenerator-Containers-BaseContainer.html#method_getTopLevel"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\BaseContainer\u003A\u003AgetTopLevelQuery\u0028\u0029",
+            "name": "getTopLevelQuery",
+            "summary": "",
+            "url": "classes/TournamentGenerator-Containers-BaseContainer.html#method_getTopLevelQuery"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\BaseContainer\u003A\u003AgetQuery\u0028\u0029",
+            "name": "getQuery",
+            "summary": "",
+            "url": "classes/TournamentGenerator-Containers-BaseContainer.html#method_getQuery"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\BaseContainer\u003A\u003Acurrent\u0028\u0029",
+            "name": "current",
+            "summary": "Get\u0020the\u0020current\u0020value",
+            "url": "classes/TournamentGenerator-Containers-BaseContainer.html#method_current"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\BaseContainer\u003A\u003Anext\u0028\u0029",
+            "name": "next",
+            "summary": "Move\u0020pointer\u0020to\u0020next",
+            "url": "classes/TournamentGenerator-Containers-BaseContainer.html#method_next"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\BaseContainer\u003A\u003Akey\u0028\u0029",
+            "name": "key",
+            "summary": "Return\u0020the\u0020current\u0020key",
+            "url": "classes/TournamentGenerator-Containers-BaseContainer.html#method_key"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\BaseContainer\u003A\u003Avalid\u0028\u0029",
+            "name": "valid",
+            "summary": "Check\u0020if\u0020the\u0020current\u0020value\u0020exists",
+            "url": "classes/TournamentGenerator-Containers-BaseContainer.html#method_valid"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\BaseContainer\u003A\u003Arewind\u0028\u0029",
+            "name": "rewind",
+            "summary": "Rewind\u0020the\u0020iterator",
+            "url": "classes/TournamentGenerator-Containers-BaseContainer.html#method_rewind"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\BaseContainer\u003A\u003Ainsert\u0028\u0029",
+            "name": "insert",
+            "summary": "Insert\u0020a\u0020value\u0020into\u0020container",
+            "url": "classes/TournamentGenerator-Containers-BaseContainer.html#method_insert"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\BaseContainer\u003A\u003AaddChild\u0028\u0029",
+            "name": "addChild",
+            "summary": "Adds\u0020a\u0020child\u0020container",
+            "url": "classes/TournamentGenerator-Containers-BaseContainer.html#method_addChild"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\BaseContainer\u003A\u003AgetLeafIds\u0028\u0029",
+            "name": "getLeafIds",
+            "summary": "Gets\u0020all\u0020ids\u0020of\u0020the\u0020leaf\u0020containers",
+            "url": "classes/TournamentGenerator-Containers-BaseContainer.html#method_getLeafIds"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\BaseContainer\u003A\u003Afilter\u0028\u0029",
+            "name": "filter",
+            "summary": "Add\u0020a\u0020filter\u0020callback",
+            "url": "classes/TournamentGenerator-Containers-BaseContainer.html#method_filter"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\BaseContainer\u003A\u003Asort\u0028\u0029",
+            "name": "sort",
+            "summary": "Sort\u0020a\u0020result\u0020using\u0020a\u0020callback\u0020\u002D\u0020maintaining\u0020the\u0020index\u0020association",
+            "url": "classes/TournamentGenerator-Containers-BaseContainer.html#method_sort"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\BaseContainer\u003A\u003AsortBy\u0028\u0029",
+            "name": "sortBy",
+            "summary": "Sort\u0020a\u0020result\u0020set\u0020by\u0020a\u0020given\u0020property",
+            "url": "classes/TournamentGenerator-Containers-BaseContainer.html#method_sortBy"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\BaseContainer\u003A\u003AaddSorter\u0028\u0029",
+            "name": "addSorter",
+            "summary": "",
+            "url": "classes/TournamentGenerator-Containers-BaseContainer.html#method_addSorter"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\BaseContainer\u003A\u003Aunique\u0028\u0029",
+            "name": "unique",
+            "summary": "Get\u0020only\u0020unique\u0020values",
+            "url": "classes/TournamentGenerator-Containers-BaseContainer.html#method_unique"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\BaseContainer\u003A\u003A\u0024id",
+            "name": "id",
+            "summary": "",
+            "url": "classes/TournamentGenerator-Containers-BaseContainer.html#property_id"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\BaseContainer\u003A\u003A\u0024children",
+            "name": "children",
+            "summary": "",
+            "url": "classes/TournamentGenerator-Containers-BaseContainer.html#property_children"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\BaseContainer\u003A\u003A\u0024values",
+            "name": "values",
+            "summary": "",
+            "url": "classes/TournamentGenerator-Containers-BaseContainer.html#property_values"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\BaseContainer\u003A\u003A\u0024currentIndex",
+            "name": "currentIndex",
+            "summary": "",
+            "url": "classes/TournamentGenerator-Containers-BaseContainer.html#property_currentIndex"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\ContainerQuery",
+            "name": "ContainerQuery",
+            "summary": "Class\u0020ContainerQuery",
+            "url": "classes/TournamentGenerator-Containers-ContainerQuery.html"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\ContainerQuery\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "ContainerQuery\u0020constructor.",
+            "url": "classes/TournamentGenerator-Containers-ContainerQuery.html#method___construct"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\ContainerQuery\u003A\u003Aget\u0028\u0029",
+            "name": "get",
+            "summary": "Get\u0020the\u0020result",
+            "url": "classes/TournamentGenerator-Containers-ContainerQuery.html#method_get"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\ContainerQuery\u003A\u003Afilter\u0028\u0029",
+            "name": "filter",
+            "summary": "Add\u0020a\u0020filter\u0020callback",
+            "url": "classes/TournamentGenerator-Containers-ContainerQuery.html#method_filter"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\ContainerQuery\u003A\u003A\u0024desc",
+            "name": "desc",
+            "summary": "",
+            "url": "classes/TournamentGenerator-Containers-ContainerQuery.html#property_desc"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\ContainerQuery\u003A\u003Asort\u0028\u0029",
+            "name": "sort",
+            "summary": "Sort\u0020a\u0020result\u0020using\u0020a\u0020callback\u0020\u002D\u0020maintaining\u0020the\u0020index\u0020association",
+            "url": "classes/TournamentGenerator-Containers-ContainerQuery.html#method_sort"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\ContainerQuery\u003A\u003AsortBy\u0028\u0029",
+            "name": "sortBy",
+            "summary": "Sort\u0020a\u0020result\u0020set\u0020by\u0020a\u0020given\u0020property",
+            "url": "classes/TournamentGenerator-Containers-ContainerQuery.html#method_sortBy"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\ContainerQuery\u003A\u003AaddSorter\u0028\u0029",
+            "name": "addSorter",
+            "summary": "",
+            "url": "classes/TournamentGenerator-Containers-ContainerQuery.html#method_addSorter"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\ContainerQuery\u003A\u003Aunique\u0028\u0029",
+            "name": "unique",
+            "summary": "Get\u0020only\u0020unique\u0020values",
+            "url": "classes/TournamentGenerator-Containers-ContainerQuery.html#method_unique"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\ContainerQuery\u003A\u003AsortByPropertyCallback\u0028\u0029",
+            "name": "sortByPropertyCallback",
+            "summary": "Sort\u0020function\u0020for\u0020sorting\u0020by\u0020a\u0020defined\u0020property",
+            "url": "classes/TournamentGenerator-Containers-ContainerQuery.html#method_sortByPropertyCallback"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\ContainerQuery\u003A\u003A\u0024container",
+            "name": "container",
+            "summary": "",
+            "url": "classes/TournamentGenerator-Containers-ContainerQuery.html#property_container"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\ContainerQuery\u003A\u003A\u0024filters",
+            "name": "filters",
+            "summary": "",
+            "url": "classes/TournamentGenerator-Containers-ContainerQuery.html#property_filters"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\ContainerQuery\u003A\u003A\u0024sortClosure",
+            "name": "sortClosure",
+            "summary": "",
+            "url": "classes/TournamentGenerator-Containers-ContainerQuery.html#property_sortClosure"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\ContainerQuery\u003A\u003A\u0024sortProperty",
+            "name": "sortProperty",
+            "summary": "",
+            "url": "classes/TournamentGenerator-Containers-ContainerQuery.html#property_sortProperty"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\ContainerQuery\u003A\u003A\u0024sorter",
+            "name": "sorter",
+            "summary": "",
+            "url": "classes/TournamentGenerator-Containers-ContainerQuery.html#property_sorter"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\ContainerQuery\u003A\u003A\u0024topLevelOnly",
+            "name": "topLevelOnly",
+            "summary": "",
+            "url": "classes/TournamentGenerator-Containers-ContainerQuery.html#property_topLevelOnly"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\ContainerQuery\u003A\u003A\u0024uniqueOnly",
+            "name": "uniqueOnly",
+            "summary": "",
+            "url": "classes/TournamentGenerator-Containers-ContainerQuery.html#property_uniqueOnly"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\GameContainer",
+            "name": "GameContainer",
+            "summary": "Class\u0020GameContainer",
+            "url": "classes/TournamentGenerator-Containers-GameContainer.html"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\HierarchyContainer",
+            "name": "HierarchyContainer",
+            "summary": "Class\u0020HierarchyContainer",
+            "url": "classes/TournamentGenerator-Containers-HierarchyContainer.html"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\HierarchyContainer\u003A\u003Ainsert\u0028\u0029",
+            "name": "insert",
+            "summary": "Insert\u0020a\u0020value\u0020into\u0020container",
+            "url": "classes/TournamentGenerator-Containers-HierarchyContainer.html#method_insert"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\HierarchyContainer\u003A\u003AgetHierarchyLevel\u0028\u0029",
+            "name": "getHierarchyLevel",
+            "summary": "Returns\u0020a\u0020hierarchy\u0020level\u0020of\u0020objects\u0020that\u0020contains\u0020the\u0020given\u0020classes",
+            "url": "classes/TournamentGenerator-Containers-HierarchyContainer.html#method_getHierarchyLevel"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\HierarchyContainer\u003A\u003AgetLevelType\u0028\u0029",
+            "name": "getLevelType",
+            "summary": "Get\u0020current\u0020level\u0027s\u0020type",
+            "url": "classes/TournamentGenerator-Containers-HierarchyContainer.html#method_getLevelType"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\HierarchyContainer\u003A\u003A\u0024children",
+            "name": "children",
+            "summary": "",
+            "url": "classes/TournamentGenerator-Containers-HierarchyContainer.html#property_children"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\HierarchyContainer\u003A\u003A\u0024values",
+            "name": "values",
+            "summary": "",
+            "url": "classes/TournamentGenerator-Containers-HierarchyContainer.html#property_values"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\HierarchyContainer\u003A\u003A\u0024type",
+            "name": "type",
+            "summary": "",
+            "url": "classes/TournamentGenerator-Containers-HierarchyContainer.html#property_type"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers\\TeamContainer",
+            "name": "TeamContainer",
+            "summary": "Class\u0020TeamContainer",
+            "url": "classes/TournamentGenerator-Containers-TeamContainer.html"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\BaseSorter",
+            "name": "BaseSorter",
+            "summary": "Class\u0020BaseSorter",
+            "url": "classes/TournamentGenerator-Helpers-Sorter-BaseSorter.html"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\BaseSorter\u003A\u003Asort\u0028\u0029",
+            "name": "sort",
+            "summary": "Sort\u0020function\u0020to\u0020call",
+            "url": "classes/TournamentGenerator-Helpers-Sorter-BaseSorter.html#method_sort"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\GameSorter",
+            "name": "GameSorter",
+            "summary": "Tournament\u0020generator\u0020sorter\u0020for\u0020games",
+            "url": "classes/TournamentGenerator-Helpers-Sorter-GameSorter.html"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\GameSorter\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Orders\u0020games\u0020from\u0020group",
+            "url": "classes/TournamentGenerator-Helpers-Sorter-GameSorter.html#method___construct"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\GameSorter\u003A\u003Asort\u0028\u0029",
+            "name": "sort",
+            "summary": "Orders\u0020games\u0020from\u0020group",
+            "url": "classes/TournamentGenerator-Helpers-Sorter-GameSorter.html#method_sort"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\GameSorter\u003A\u003AmoveCalculatedGames\u0028\u0029",
+            "name": "moveCalculatedGames",
+            "summary": "Move\u0020teams\u0020that\u0020did\u0020not\u0020play\u0020in\u0020the\u0020last\u0020game\u0020\u0028\u003C\u00204\u0029",
+            "url": "classes/TournamentGenerator-Helpers-Sorter-GameSorter.html#method_moveCalculatedGames"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\GameSorter\u003A\u003Acycle1\u0028\u0029",
+            "name": "cycle1",
+            "summary": "Teams\u0020that\u0020did\u0020not\u0020play\u0020in\u0020the\u0020last\u0020game\u0020\u0028\u003C\u00204\u0029",
+            "url": "classes/TournamentGenerator-Helpers-Sorter-GameSorter.html#method_cycle1"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\GameSorter\u003A\u003AorderCheckTeamsVal\u0028\u0029",
+            "name": "orderCheckTeamsVal",
+            "summary": "Get\u0020first\u0020available\u0020game",
+            "url": "classes/TournamentGenerator-Helpers-Sorter-GameSorter.html#method_orderCheckTeamsVal"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\GameSorter\u003A\u003Acycle2\u0028\u0029",
+            "name": "cycle2",
+            "summary": "Teams\u0020that\u0020did\u0020not\u0020play\u0020in\u0020the\u0020last\u0020two\u0020games\u0020\u0028not\u00206\u0020or\u00207\u0029",
+            "url": "classes/TournamentGenerator-Helpers-Sorter-GameSorter.html#method_cycle2"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\GameSorter\u003A\u003Acycle3\u0028\u0029",
+            "name": "cycle3",
+            "summary": "Teams\u0020that\u0020did\u0020not\u0020play\u0020in\u0020the\u0020last\u0020three\u0020games\u0020\u0028not\u00207\u0029\u0020and\u0020teams\u0020that\u0020did\u0020not\u0020play\u0020in\u0020the\u0020last\u0020game\u0020\u0028\u003C\u00204\u0029",
+            "url": "classes/TournamentGenerator-Helpers-Sorter-GameSorter.html#method_cycle3"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\GameSorter\u003A\u003Acycle4\u0028\u0029",
+            "name": "cycle4",
+            "summary": "Teams\u0020that\u0020did\u0020not\u0020play\u0020in\u0020the\u0020last\u0020three\u0020games\u0020\u0028not\u00207\u0029",
+            "url": "classes/TournamentGenerator-Helpers-Sorter-GameSorter.html#method_cycle4"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\GameSorter\u003A\u003Acycle5\u0028\u0029",
+            "name": "cycle5",
+            "summary": "Teams\u0020that\u0020did\u0020not\u0020play\u0020in\u0020the\u0020last\u0020game\u0020will\u0020play\u0020this\u0020game\u0020\u0028\u003C\u00204\u0029",
+            "url": "classes/TournamentGenerator-Helpers-Sorter-GameSorter.html#method_cycle5"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\GameSorter\u003A\u003A\u0024group",
+            "name": "group",
+            "summary": "",
+            "url": "classes/TournamentGenerator-Helpers-Sorter-GameSorter.html#property_group"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\GameSorter\u003A\u003A\u0024games",
+            "name": "games",
+            "summary": "",
+            "url": "classes/TournamentGenerator-Helpers-Sorter-GameSorter.html#property_games"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\TeamSorter",
+            "name": "TeamSorter",
+            "summary": "TournamentGenerator\u0020sorter\u0020for\u0020teams",
+            "url": "classes/TournamentGenerator-Helpers-Sorter-TeamSorter.html"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\TeamSorter\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "TeamSorter\u0020constructor.",
+            "url": "classes/TournamentGenerator-Helpers-Sorter-TeamSorter.html#method___construct"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\TeamSorter\u003A\u003AsortTeamsByPoints\u0028\u0029",
+            "name": "sortTeamsByPoints",
+            "summary": "Sorter\u0020function\u0020for\u0020usort\u0020by\u0020points",
+            "url": "classes/TournamentGenerator-Helpers-Sorter-TeamSorter.html#method_sortTeamsByPoints"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\TeamSorter\u003A\u003AsortTeamsByScore\u0028\u0029",
+            "name": "sortTeamsByScore",
+            "summary": "Sorter\u0020function\u0020for\u0020usort\u0020by\u0020score",
+            "url": "classes/TournamentGenerator-Helpers-Sorter-TeamSorter.html#method_sortTeamsByScore"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\TeamSorter\u003A\u003Asort\u0028\u0029",
+            "name": "sort",
+            "summary": "Sort\u0020function\u0020to\u0020call",
+            "url": "classes/TournamentGenerator-Helpers-Sorter-TeamSorter.html#method_sort"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\TeamSorter\u003A\u003A\u0024ids",
+            "name": "ids",
+            "summary": "",
+            "url": "classes/TournamentGenerator-Helpers-Sorter-TeamSorter.html#property_ids"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\TeamSorter\u003A\u003A\u0024ordering",
+            "name": "ordering",
+            "summary": "",
+            "url": "classes/TournamentGenerator-Helpers-Sorter-TeamSorter.html#property_ordering"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Helpers\\Sorter\\TeamSorter\u003A\u003A\u0024container",
+            "name": "container",
+            "summary": "",
+            "url": "classes/TournamentGenerator-Helpers-Sorter-TeamSorter.html#property_container"
+        },                {
+            "fqsen": "\\TournamentGenerator\\HierarchyBase",
+            "name": "HierarchyBase",
+            "summary": "Class\u0020HierarchyBase",
+            "url": "classes/TournamentGenerator-HierarchyBase.html"
+        },                {
+            "fqsen": "\\TournamentGenerator\\HierarchyBase\u003A\u003AgetContainer\u0028\u0029",
+            "name": "getContainer",
+            "summary": "Get\u0020the\u0020hierarchy\u0020container",
+            "url": "classes/TournamentGenerator-HierarchyBase.html#method_getContainer"
+        },                {
+            "fqsen": "\\TournamentGenerator\\HierarchyBase\u003A\u003AinsertIntoContainer\u0028\u0029",
+            "name": "insertIntoContainer",
+            "summary": "Insert\u0020into\u0020hierarchical\u0020container",
+            "url": "classes/TournamentGenerator-HierarchyBase.html#method_insertIntoContainer"
+        },                {
+            "fqsen": "\\TournamentGenerator\\HierarchyBase\u003A\u003A\u0024container",
+            "name": "container",
+            "summary": "",
+            "url": "classes/TournamentGenerator-HierarchyBase.html#property_container"
         },                {
             "fqsen": "\\",
             "name": "\\",
@@ -1700,6 +1995,11 @@ Search.appendIndex(
             "name": "TournamentGenerator",
             "summary": "",
             "url": "namespaces/tournamentgenerator.html"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Containers",
+            "name": "Containers",
+            "summary": "",
+            "url": "namespaces/tournamentgenerator-containers.html"
         },                {
             "fqsen": "\\TournamentGenerator\\Helpers",
             "name": "Helpers",

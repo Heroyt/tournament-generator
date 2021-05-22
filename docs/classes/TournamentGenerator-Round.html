@@ -53,6 +53,7 @@
         <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                                 <h4 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/tournamentgenerator.html"><abbr title="\TournamentGenerator">TournamentGenerator</abbr></a></h4>
                 <ul class="phpdocumentor-list">
+                                            <li><a href="namespaces/tournamentgenerator-containers.html"><abbr title="\TournamentGenerator\Containers">Containers</abbr></a></li>
                                             <li><a href="namespaces/tournamentgenerator-helpers.html"><abbr title="\TournamentGenerator\Helpers">Helpers</abbr></a></li>
                                             <li><a href="namespaces/tournamentgenerator-interfaces.html"><abbr title="\TournamentGenerator\Interfaces">Interfaces</abbr></a></li>
                                             <li><a href="namespaces/tournamentgenerator-preset.html"><abbr title="\TournamentGenerator\Preset">Preset</abbr></a></li>
@@ -69,6 +70,7 @@
                                     <li><a href="packages/TournamentGenerator-Interfaces.html"><abbr title="\TournamentGenerator\Interfaces">Interfaces</abbr></a></li>
                                     <li><a href="packages/TournamentGenerator-Preset.html"><abbr title="\TournamentGenerator\Preset">Preset</abbr></a></li>
                                     <li><a href="packages/TournamentGenerator-Traits.html"><abbr title="\TournamentGenerator\Traits">Traits</abbr></a></li>
+                                    <li><a href="packages/TournamentGenerator-Containers.html"><abbr title="\TournamentGenerator\Containers">Containers</abbr></a></li>
                             </ul>
                         </section>
     
@@ -96,7 +98,7 @@
     Round
 
         <span class="phpdocumentor-element__extends">
-        extends <a href="classes/TournamentGenerator-Base.html"><abbr title="\TournamentGenerator\Base">Base</abbr></a>
+        extends <a href="classes/TournamentGenerator-HierarchyBase.html"><abbr title="\TournamentGenerator\HierarchyBase">HierarchyBase</abbr></a>
     </span>
     
             <div class="phpdocumentor-element__package">
@@ -118,7 +120,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Round.php"><a href="files/src-tournamentgenerator-round.html"><abbr title="src/TournamentGenerator/Round.php">Round.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 </aside>
 
             <p class="phpdocumentor-summary">Tournament round</p>
@@ -182,16 +184,16 @@ This modifies the generation of games - generate all games for each group and pl
 
 <dl class="phpdocumentor-table-of-contents">
                 <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/TournamentGenerator-Traits-WithGames.html#property_games">$games</a>
+    <a href="classes/TournamentGenerator-HierarchyBase.html#property_container">$container</a>
     <span>
-                &nbsp;: array&lt;string|int, mixed&gt;            </span>
+                &nbsp;: <a href="classes/TournamentGenerator-Containers-HierarchyContainer.html"><abbr title="\TournamentGenerator\Containers\HierarchyContainer">HierarchyContainer</abbr></a>            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/TournamentGenerator-Traits-WithGroups.html#property_groups">$groups</a>
+    <a href="classes/TournamentGenerator-Traits-WithGames.html#property_games">$games</a>
     <span>
-                &nbsp;: array&lt;string|int, mixed&gt;            </span>
+                &nbsp;: <a href="classes/TournamentGenerator-Containers-GameContainer.html"><abbr title="\TournamentGenerator\Containers\GameContainer">GameContainer</abbr></a>            </span>
 </dt>
 <dd></dd>
 
@@ -212,7 +214,7 @@ This modifies the generation of games - generate all games for each group and pl
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/TournamentGenerator-Traits-WithTeams.html#property_teams">$teams</a>
     <span>
-                &nbsp;: array&lt;string|int, mixed&gt;            </span>
+                &nbsp;: <a href="classes/TournamentGenerator-Containers-TeamContainer.html"><abbr title="\TournamentGenerator\Containers\TeamContainer">TeamContainer</abbr></a>            </span>
 </dt>
 <dd></dd>
 
@@ -238,6 +240,13 @@ This modifies the generation of games - generate all games for each group and pl
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/TournamentGenerator-Traits-WithGames.html#method_addGameContainer">addGameContainer()</a>
+    <span>
+                        &nbsp;: <a href="classes/TournamentGenerator-Interfaces-WithGames.html"><abbr title="\TournamentGenerator\Interfaces\WithGames">WithGames</abbr></a>    </span>
+</dt>
+<dd>Add a child container for games</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/TournamentGenerator-Round.html#method_addGroup">addGroup()</a>
     <span>
                         &nbsp;: $this    </span>
@@ -250,6 +259,13 @@ This modifies the generation of games - generate all games for each group and pl
                         &nbsp;: <a href="classes/TournamentGenerator-Interfaces-WithTeams.html"><abbr title="\TournamentGenerator\Interfaces\WithTeams">WithTeams</abbr></a>    </span>
 </dt>
 <dd>Add one or more teams into the object.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/TournamentGenerator-Traits-WithTeams.html#method_addTeamContainer">addTeamContainer()</a>
+    <span>
+                        &nbsp;: <a href="classes/TournamentGenerator-Interfaces-WithTeams.html"><abbr title="\TournamentGenerator\Interfaces\WithTeams">WithTeams</abbr></a>    </span>
+</dt>
+<dd>Add a child container for games</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/TournamentGenerator-Traits-WithSkipSetters.html#method_allowSkip">allowSkip()</a>
@@ -280,6 +296,20 @@ This modifies the generation of games - generate all games for each group and pl
 <dd>Generate all games</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/TournamentGenerator-HierarchyBase.html#method_getContainer">getContainer()</a>
+    <span>
+                        &nbsp;: <a href="classes/TournamentGenerator-Containers-HierarchyContainer.html"><abbr title="\TournamentGenerator\Containers\HierarchyContainer">HierarchyContainer</abbr></a>    </span>
+</dt>
+<dd>Get the hierarchy container</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/TournamentGenerator-Traits-WithGames.html#method_getGameContainer">getGameContainer()</a>
+    <span>
+                        &nbsp;: <a href="classes/TournamentGenerator-Containers-GameContainer.html"><abbr title="\TournamentGenerator\Containers\GameContainer">GameContainer</abbr></a>    </span>
+</dt>
+<dd>Get the container for games</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/TournamentGenerator-Traits-WithGames.html#method_getGames">getGames()</a>
     <span>
                         &nbsp;: array&lt;string|int, <a href="classes/TournamentGenerator-Game.html"><abbr title="\TournamentGenerator\Game">Game</abbr></a>&gt;    </span>
@@ -287,11 +317,11 @@ This modifies the generation of games - generate all games for each group and pl
 <dd>Get all tournament games</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/TournamentGenerator-Round.html#method_getGroups">getGroups()</a>
+    <a href="classes/TournamentGenerator-Traits-WithGroups.html#method_getGroups">getGroups()</a>
     <span>
                         &nbsp;: array&lt;string|int, <a href="classes/TournamentGenerator-Group.html"><abbr title="\TournamentGenerator\Group">Group</abbr></a>&gt;    </span>
 </dt>
-<dd>Get all groups in this round</dd>
+<dd>Get all groups in this object</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/TournamentGenerator-Round.html#method_getGroupsIds">getGroupsIds()</a>
@@ -315,18 +345,18 @@ This modifies the generation of games - generate all games for each group and pl
 <dd>Gets the name of the object</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/TournamentGenerator-Traits-WithTeams.html#method_getRealTeamCount">getRealTeamCount()</a>
-    <span>
-                        &nbsp;: int    </span>
-</dt>
-<dd>Get count of the teams array</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/TournamentGenerator-Traits-WithSkipSetters.html#method_getSkip">getSkip()</a>
     <span>
                         &nbsp;: bool    </span>
 </dt>
 <dd>Getter for round skipping</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/TournamentGenerator-Traits-WithTeams.html#method_getTeamContainer">getTeamContainer()</a>
+    <span>
+                        &nbsp;: <a href="classes/TournamentGenerator-Containers-TeamContainer.html"><abbr title="\TournamentGenerator\Containers\TeamContainer">TeamContainer</abbr></a>    </span>
+</dt>
+<dd>Get the container for games</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/TournamentGenerator-Traits-WithTeams.html#method_getTeams">getTeams()</a>
@@ -341,6 +371,13 @@ This modifies the generation of games - generate all games for each group and pl
                         &nbsp;: <a href="classes/TournamentGenerator-Group.html"><abbr title="\TournamentGenerator\Group">Group</abbr></a>    </span>
 </dt>
 <dd>Creates a new group and adds it to round</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/TournamentGenerator-HierarchyBase.html#method_insertIntoContainer">insertIntoContainer()</a>
+    <span>
+                        &nbsp;: $this    </span>
+</dt>
+<dd>Insert into hierarchical container</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/TournamentGenerator-Round.html#method_isPlayed">isPlayed()</a>
@@ -419,13 +456,6 @@ This modifies the generation of games - generate all games for each group and pl
 </dt>
 <dd>Create a new team and add it into the object</dd>
 
-            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
-    <a href="classes/TournamentGenerator-Traits-WithTeams.html#method_uniqueTeams">uniqueTeams()</a>
-    <span>
-                        &nbsp;: array&lt;string|int, <a href="classes/TournamentGenerator-Team.html"><abbr title="\TournamentGenerator\Team">Team</abbr></a>&gt;    </span>
-</dt>
-<dd>Filter an array of teams and return an distinct array</dd>
-
         </dl>
 
 
@@ -445,27 +475,26 @@ This modifies the generation of games - generate all games for each group and pl
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_games">
-        $games
-        <a href="classes/TournamentGenerator-Traits-WithGames.html#property_games" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_container">
+        $container
+        <a href="classes/TournamentGenerator-HierarchyBase.html#property_container" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Traits/WithGames.php"><a href="files/src-tournamentgenerator-traits-withgames.html"><abbr title="src/TournamentGenerator/Traits/WithGames.php">WithGames.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/HierarchyBase.php"><a href="files/src-tournamentgenerator-hierarchybase.html"><abbr title="src/TournamentGenerator/HierarchyBase.php">HierarchyBase.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">22</span>
 </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
-    <span class="phpdocumentor-signature__name">$games</span>
-     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+        <span class="phpdocumentor-signature__type"><a href="classes/TournamentGenerator-Containers-HierarchyContainer.html"><abbr title="\TournamentGenerator\Containers\HierarchyContainer">HierarchyContainer</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$container</span>
+    </code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -476,24 +505,24 @@ This modifies the generation of games - generate all games for each group and pl
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_groups">
-        $groups
-        <a href="classes/TournamentGenerator-Traits-WithGroups.html#property_groups" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_games">
+        $games
+        <a href="classes/TournamentGenerator-Traits-WithGames.html#property_games" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Traits/WithGroups.php"><a href="files/src-tournamentgenerator-traits-withgroups.html"><abbr title="src/TournamentGenerator/Traits/WithGroups.php">WithGroups.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Traits/WithGames.php"><a href="files/src-tournamentgenerator-traits-withgames.html"><abbr title="src/TournamentGenerator/Traits/WithGames.php">WithGames.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">21</span>
 </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
-    <span class="phpdocumentor-signature__name">$groups</span>
-     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+        <span class="phpdocumentor-signature__type"><a href="classes/TournamentGenerator-Containers-GameContainer.html"><abbr title="\TournamentGenerator\Containers\GameContainer">GameContainer</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$games</span>
+    </code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -516,7 +545,7 @@ This modifies the generation of games - generate all games for each group and pl
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Base.php"><a href="files/src-tournamentgenerator-base.html"><abbr title="src/TournamentGenerator/Base.php">Base.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">21</span>
+    <span class="phpdocumentor-element-found-in__line">24</span>
 </aside>
 
     
@@ -547,7 +576,7 @@ This modifies the generation of games - generate all games for each group and pl
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Base.php"><a href="files/src-tournamentgenerator-base.html"><abbr title="src/TournamentGenerator/Base.php">Base.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">22</span>
 </aside>
 
     
@@ -578,15 +607,15 @@ This modifies the generation of games - generate all games for each group and pl
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Traits/WithTeams.php"><a href="files/src-tournamentgenerator-traits-withteams.html"><abbr title="src/TournamentGenerator/Traits/WithTeams.php">WithTeams.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">32</span>
 </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
+        <span class="phpdocumentor-signature__type"><a href="classes/TournamentGenerator-Containers-TeamContainer.html"><abbr title="\TournamentGenerator\Containers\TeamContainer">TeamContainer</abbr></a></span>
     <span class="phpdocumentor-signature__name">$teams</span>
-     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+    </code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -644,7 +673,7 @@ This modifies the generation of games - generate all games for each group and pl
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Round.php"><a href="files/src-tournamentgenerator-round.html"><abbr title="src/TournamentGenerator/Round.php">Round.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">38</span>
+    <span class="phpdocumentor-element-found-in__line">42</span>
 </aside>
 
         <p class="phpdocumentor-summary">Round constructor.</p>
@@ -699,7 +728,7 @@ This modifies the generation of games - generate all games for each group and pl
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Base.php"><a href="files/src-tournamentgenerator-base.html"><abbr title="src/TournamentGenerator/Base.php">Base.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">26</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 </aside>
 
     
@@ -726,6 +755,51 @@ This modifies the generation of games - generate all games for each group and pl
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_addGameContainer">
+        addGameContainer()
+        <a href="classes/TournamentGenerator-Traits-WithGames.html#method_addGameContainer" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Traits/WithGames.php"><a href="files/src-tournamentgenerator-traits-withgames.html"><abbr title="src/TournamentGenerator/Traits/WithGames.php">WithGames.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">30</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Add a child container for games</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">addGameContainer</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/TournamentGenerator-Containers-GameContainer.html"><abbr title="\TournamentGenerator\Containers\GameContainer">GameContainer</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$container</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/TournamentGenerator-Interfaces-WithGames.html"><abbr title="\TournamentGenerator\Interfaces\WithGames">WithGames</abbr></a></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$container</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/TournamentGenerator-Containers-GameContainer.html"><abbr title="\TournamentGenerator\Containers\GameContainer">GameContainer</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/TournamentGenerator-Interfaces-WithGames.html"><abbr title="\TournamentGenerator\Interfaces\WithGames">WithGames</abbr></a></span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_addGroup">
         addGroup()
         <a href="classes/TournamentGenerator-Round.html#method_addGroup" class="headerlink"><i class="fas fa-link"></i></a>
@@ -733,7 +807,7 @@ This modifies the generation of games - generate all games for each group and pl
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Round.php"><a href="files/src-tournamentgenerator-round.html"><abbr title="src/TournamentGenerator/Round.php">Round.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">50</span>
+    <span class="phpdocumentor-element-found-in__line">57</span>
 </aside>
 
         <p class="phpdocumentor-summary">Adds one or more group to round</p>
@@ -778,7 +852,7 @@ This modifies the generation of games - generate all games for each group and pl
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Traits/WithTeams.php"><a href="files/src-tournamentgenerator-traits-withteams.html"><abbr title="src/TournamentGenerator/Traits/WithTeams.php">WithTeams.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">219</span>
+    <span class="phpdocumentor-element-found-in__line">160</span>
 </aside>
 
         <p class="phpdocumentor-summary">Add one or more teams into the object.</p>
@@ -798,6 +872,51 @@ This modifies the generation of games - generate all games for each group and pl
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>Team objects</p>
 </section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/TournamentGenerator-Interfaces-WithTeams.html"><abbr title="\TournamentGenerator\Interfaces\WithTeams">WithTeams</abbr></a></span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_addTeamContainer">
+        addTeamContainer()
+        <a href="classes/TournamentGenerator-Traits-WithTeams.html#method_addTeamContainer" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Traits/WithTeams.php"><a href="files/src-tournamentgenerator-traits-withteams.html"><abbr title="src/TournamentGenerator/Traits/WithTeams.php">WithTeams.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">183</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Add a child container for games</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">addTeamContainer</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/TournamentGenerator-Containers-TeamContainer.html"><abbr title="\TournamentGenerator\Containers\TeamContainer">TeamContainer</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$container</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/TournamentGenerator-Interfaces-WithTeams.html"><abbr title="\TournamentGenerator\Interfaces\WithTeams">WithTeams</abbr></a></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$container</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/TournamentGenerator-Containers-TeamContainer.html"><abbr title="\TournamentGenerator\Containers\TeamContainer">TeamContainer</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
 
             </dd>
             </dl>
@@ -892,7 +1011,7 @@ This modifies the generation of games - generate all games for each group and pl
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Traits/WithTeams.php"><a href="files/src-tournamentgenerator-traits-withteams.html"><abbr title="src/TournamentGenerator/Traits/WithTeams.php">WithTeams.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">199</span>
+    <span class="phpdocumentor-element-found-in__line">140</span>
 </aside>
 
         <p class="phpdocumentor-summary">Filter teams using the specified filters</p>
@@ -962,7 +1081,7 @@ This modifies the generation of games - generate all games for each group and pl
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Round.php"><a href="files/src-tournamentgenerator-round.html"><abbr title="src/TournamentGenerator/Round.php">Round.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">100</span>
+    <span class="phpdocumentor-element-found-in__line">109</span>
 </aside>
 
         <p class="phpdocumentor-summary">Generate all games</p>
@@ -975,9 +1094,92 @@ This modifies the generation of games - generate all games for each group and pl
 
     
     
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                                 <section class="phpdocumentor-description"></section>
+
+                                    </dd>
+                        </dl>
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getContainer">
+        getContainer()
+        <a href="classes/TournamentGenerator-HierarchyBase.html#method_getContainer" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/HierarchyBase.php"><a href="files/src-tournamentgenerator-hierarchybase.html"><abbr title="src/TournamentGenerator/HierarchyBase.php">HierarchyBase.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">29</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Get the hierarchy container</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">getContainer</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/TournamentGenerator-Containers-HierarchyContainer.html"><abbr title="\TournamentGenerator\Containers\HierarchyContainer">HierarchyContainer</abbr></a></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/TournamentGenerator-Containers-HierarchyContainer.html"><abbr title="\TournamentGenerator\Containers\HierarchyContainer">HierarchyContainer</abbr></a></span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getGameContainer">
+        getGameContainer()
+        <a href="classes/TournamentGenerator-Traits-WithGames.html#method_getGameContainer" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Traits/WithGames.php"><a href="files/src-tournamentgenerator-traits-withgames.html"><abbr title="src/TournamentGenerator/Traits/WithGames.php">WithGames.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">49</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Get the container for games</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">getGameContainer</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/TournamentGenerator-Containers-GameContainer.html"><abbr title="\TournamentGenerator\Containers\GameContainer">GameContainer</abbr></a></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/TournamentGenerator-Containers-GameContainer.html"><abbr title="\TournamentGenerator\Containers\GameContainer">GameContainer</abbr></a></span>
             &mdash;
             <section class="phpdocumentor-description"></section>
 
@@ -996,7 +1198,7 @@ This modifies the generation of games - generate all games for each group and pl
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Traits/WithGames.php"><a href="files/src-tournamentgenerator-traits-withgames.html"><abbr title="src/TournamentGenerator/Traits/WithGames.php">WithGames.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">26</span>
+    <span class="phpdocumentor-element-found-in__line">40</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get all tournament games</p>
@@ -1025,15 +1227,15 @@ This modifies the generation of games - generate all games for each group and pl
 >
     <h4 class="phpdocumentor-element__name" id="method_getGroups">
         getGroups()
-        <a href="classes/TournamentGenerator-Round.html#method_getGroups" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/TournamentGenerator-Traits-WithGroups.html#method_getGroups" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Round.php"><a href="files/src-tournamentgenerator-round.html"><abbr title="src/TournamentGenerator/Round.php">Round.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Traits/WithGroups.php"><a href="files/src-tournamentgenerator-traits-withgroups.html"><abbr title="src/TournamentGenerator/Traits/WithGroups.php">WithGroups.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">159</span>
+    <span class="phpdocumentor-element-found-in__line">25</span>
 </aside>
 
-        <p class="phpdocumentor-summary">Get all groups in this round</p>
+        <p class="phpdocumentor-summary">Get all groups in this object</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -1064,7 +1266,7 @@ This modifies the generation of games - generate all games for each group and pl
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Round.php"><a href="files/src-tournamentgenerator-round.html"><abbr title="src/TournamentGenerator/Round.php">Round.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">76</span>
+    <span class="phpdocumentor-element-found-in__line">83</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get all group ids</p>
@@ -1099,7 +1301,7 @@ This modifies the generation of games - generate all games for each group and pl
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Base.php"><a href="files/src-tournamentgenerator-base.html"><abbr title="src/TournamentGenerator/Base.php">Base.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">56</span>
+    <span class="phpdocumentor-element-found-in__line">59</span>
 </aside>
 
         <p class="phpdocumentor-summary">Gets the unique identifier of the object</p>
@@ -1134,7 +1336,7 @@ This modifies the generation of games - generate all games for each group and pl
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Base.php"><a href="files/src-tournamentgenerator-base.html"><abbr title="src/TournamentGenerator/Base.php">Base.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">35</span>
+    <span class="phpdocumentor-element-found-in__line">38</span>
 </aside>
 
         <p class="phpdocumentor-summary">Gets the name of the object</p>
@@ -1153,40 +1355,6 @@ This modifies the generation of games - generate all games for each group and pl
             &mdash;
             <section class="phpdocumentor-description"><p>Name of the object</p>
 </section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getRealTeamCount">
-        getRealTeamCount()
-        <a href="classes/TournamentGenerator-Traits-WithTeams.html#method_getRealTeamCount" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Traits/WithTeams.php"><a href="files/src-tournamentgenerator-traits-withteams.html"><abbr title="src/TournamentGenerator/Traits/WithTeams.php">WithTeams.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">231</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Get count of the teams array</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getRealTeamCount</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">int</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
 
     
 </article>
@@ -1230,6 +1398,40 @@ This modifies the generation of games - generate all games for each group and pl
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getTeamContainer">
+        getTeamContainer()
+        <a href="classes/TournamentGenerator-Traits-WithTeams.html#method_getTeamContainer" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Traits/WithTeams.php"><a href="files/src-tournamentgenerator-traits-withteams.html"><abbr title="src/TournamentGenerator/Traits/WithTeams.php">WithTeams.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">172</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Get the container for games</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">getTeamContainer</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/TournamentGenerator-Containers-TeamContainer.html"><abbr title="\TournamentGenerator\Containers\TeamContainer">TeamContainer</abbr></a></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/TournamentGenerator-Containers-TeamContainer.html"><abbr title="\TournamentGenerator\Containers\TeamContainer">TeamContainer</abbr></a></span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getTeams">
         getTeams()
         <a href="classes/TournamentGenerator-Traits-WithTeams.html#method_getTeams" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1237,7 +1439,7 @@ This modifies the generation of games - generate all games for each group and pl
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Traits/WithTeams.php"><a href="files/src-tournamentgenerator-traits-withteams.html"><abbr title="src/TournamentGenerator/Traits/WithTeams.php">WithTeams.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">86</span>
+    <span class="phpdocumentor-element-found-in__line">88</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get all teams in the object</p>
@@ -1316,7 +1518,7 @@ This modifies the generation of games - generate all games for each group and pl
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Round.php"><a href="files/src-tournamentgenerator-round.html"><abbr title="src/TournamentGenerator/Round.php">Round.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">65</span>
+    <span class="phpdocumentor-element-found-in__line">72</span>
 </aside>
 
         <p class="phpdocumentor-summary">Creates a new group and adds it to round</p>
@@ -1365,6 +1567,84 @@ This modifies the generation of games - generate all games for each group and pl
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_insertIntoContainer">
+        insertIntoContainer()
+        <a href="classes/TournamentGenerator-HierarchyBase.html#method_insertIntoContainer" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/HierarchyBase.php"><a href="files/src-tournamentgenerator-hierarchybase.html"><abbr title="src/TournamentGenerator/HierarchyBase.php">HierarchyBase.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">44</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Insert into hierarchical container</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">insertIntoContainer</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/TournamentGenerator-Base.html"><abbr title="\TournamentGenerator\Base">Base</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$object</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">$this</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$object</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/TournamentGenerator-Base.html"><abbr title="\TournamentGenerator\Base">Base</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">post</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>Object is added to hierarchy</p>
+</section>
+
+                                    </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">post</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>If the object has teams -&gt; add other team container to hierarchy</p>
+</section>
+
+                                    </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">post</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>If the object has games -&gt; add other game container to hierarchy</p>
+</section>
+
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">$this</span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_isPlayed">
         isPlayed()
         <a href="classes/TournamentGenerator-Round.html#method_isPlayed" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1372,7 +1652,7 @@ This modifies the generation of games - generate all games for each group and pl
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Round.php"><a href="files/src-tournamentgenerator-round.html"><abbr title="src/TournamentGenerator/Round.php">Round.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">115</span>
+    <span class="phpdocumentor-element-found-in__line">121</span>
 </aside>
 
         <p class="phpdocumentor-summary">Check if all games in this round has been played</p>
@@ -1406,7 +1686,7 @@ This modifies the generation of games - generate all games for each group and pl
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Round.php"><a href="files/src-tournamentgenerator-round.html"><abbr title="src/TournamentGenerator/Round.php">Round.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">88</span>
+    <span class="phpdocumentor-element-found-in__line">95</span>
 </aside>
 
         <p class="phpdocumentor-summary">Sort groups by their order</p>
@@ -1441,7 +1721,7 @@ This modifies the generation of games - generate all games for each group and pl
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Round.php"><a href="files/src-tournamentgenerator-round.html"><abbr title="src/TournamentGenerator/Round.php">Round.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">171</span>
+    <span class="phpdocumentor-element-found-in__line">168</span>
 </aside>
 
         <p class="phpdocumentor-summary">Progresses all teams from the round</p>
@@ -1466,6 +1746,21 @@ This modifies the generation of games - generate all games for each group and pl
             </dl>
 
     
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                                 <section class="phpdocumentor-description"></section>
+
+                                    </dd>
+                        </dl>
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">$this</span>
@@ -1487,7 +1782,7 @@ This modifies the generation of games - generate all games for each group and pl
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Round.php"><a href="files/src-tournamentgenerator-round.html"><abbr title="src/TournamentGenerator/Round.php">Round.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">197</span>
+    <span class="phpdocumentor-element-found-in__line">195</span>
 </aside>
 
         <p class="phpdocumentor-summary">Reset all game results as if they were not played</p>
@@ -1523,6 +1818,15 @@ This modifies the generation of games - generate all games for each group and pl
 </section>
 
                                     </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                                 <section class="phpdocumentor-description"></section>
+
+                                    </dd>
                         </dl>
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
@@ -1545,7 +1849,7 @@ This modifies the generation of games - generate all games for each group and pl
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Base.php"><a href="files/src-tournamentgenerator-base.html"><abbr title="src/TournamentGenerator/Base.php">Base.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">69</span>
+    <span class="phpdocumentor-element-found-in__line">72</span>
 </aside>
 
         <p class="phpdocumentor-summary">Sets the unique identifier of the object</p>
@@ -1607,7 +1911,7 @@ This modifies the generation of games - generate all games for each group and pl
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Base.php"><a href="files/src-tournamentgenerator-base.html"><abbr title="src/TournamentGenerator/Base.php">Base.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">46</span>
+    <span class="phpdocumentor-element-found-in__line">49</span>
 </aside>
 
         <p class="phpdocumentor-summary">Sets the name of the object</p>
@@ -1698,7 +2002,7 @@ This modifies the generation of games - generate all games for each group and pl
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Round.php"><a href="files/src-tournamentgenerator-round.html"><abbr title="src/TournamentGenerator/Round.php">Round.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">184</span>
+    <span class="phpdocumentor-element-found-in__line">181</span>
 </aside>
 
         <p class="phpdocumentor-summary">Simulate all games in this round as they would be played for real</p>
@@ -1747,7 +2051,7 @@ This modifies the generation of games - generate all games for each group and pl
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Traits/WithTeams.php"><a href="files/src-tournamentgenerator-traits-withteams.html"><abbr title="src/TournamentGenerator/Traits/WithTeams.php">WithTeams.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">148</span>
+    <span class="phpdocumentor-element-found-in__line">116</span>
 </aside>
 
         <p class="phpdocumentor-summary">Sort the teams by their score/points</p>
@@ -1817,7 +2121,7 @@ This modifies the generation of games - generate all games for each group and pl
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Round.php"><a href="files/src-tournamentgenerator-round.html"><abbr title="src/TournamentGenerator/Round.php">Round.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">136</span>
+    <span class="phpdocumentor-element-found-in__line">142</span>
 </aside>
 
         <p class="phpdocumentor-summary">Split teams into its Groups</p>
@@ -1886,7 +2190,7 @@ This modifies the generation of games - generate all games for each group and pl
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Traits/WithTeams.php"><a href="files/src-tournamentgenerator-traits-withteams.html"><abbr title="src/TournamentGenerator/Traits/WithTeams.php">WithTeams.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">40</span>
+    <span class="phpdocumentor-element-found-in__line">42</span>
 </aside>
 
         <p class="phpdocumentor-summary">Create a new team and add it into the object</p>
@@ -1926,51 +2230,6 @@ This modifies the generation of games - generate all games for each group and pl
             &mdash;
             <section class="phpdocumentor-description"><p>Newly created team</p>
 </section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_uniqueTeams">
-        uniqueTeams()
-        <a href="classes/TournamentGenerator-Traits-WithTeams.html#method_uniqueTeams" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Traits/WithTeams.php"><a href="files/src-tournamentgenerator-traits-withteams.html"><abbr title="src/TournamentGenerator/Traits/WithTeams.php">WithTeams.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">127</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Filter an array of teams and return an distinct array</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-                <span class="phpdocumentor-signature__name">uniqueTeams</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, <a href="classes/TournamentGenerator-Team.html"><abbr title="\TournamentGenerator\Team">Team</abbr></a>&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$teams</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/TournamentGenerator-Team.html"><abbr title="\TournamentGenerator\Team">Team</abbr></a>&gt;</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$teams</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, <a href="classes/TournamentGenerator-Team.html"><abbr title="\TournamentGenerator\Team">Team</abbr></a>&gt;</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/TournamentGenerator-Team.html"><abbr title="\TournamentGenerator\Team">Team</abbr></a>&gt;</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
 
     
 </article>
