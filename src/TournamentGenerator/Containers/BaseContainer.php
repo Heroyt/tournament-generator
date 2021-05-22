@@ -11,6 +11,8 @@ use TournamentGenerator\Helpers\Sorter\BaseSorter;
 /**
  * Class BaseContainer
  *
+ * Container is a helper class for a tree-like structure. It can be used to create a hierarchy and store objects.
+ *
  * @package TournamentGenerator\Containers
  * @author  Tomáš Vojík <vojik@wboy.cz>
  */

@@ -8,6 +8,14 @@ use TournamentGenerator\Containers\HierarchyContainer;
 use TournamentGenerator\Interfaces\WithGames as WithGamesInterface;
 use TournamentGenerator\Interfaces\WithTeams as WithTeamsInterface;
 
+/**
+ * Class HierarchyBase
+ *
+ * Extended base for hierarchy objects (Tournament, Category, Round, Group).
+ *
+ * @package TournamentGenerator
+ * @author Tomáš Vojík <vojik@wboy.cz>
+ */
 abstract class HierarchyBase extends Base
 {
 

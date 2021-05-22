@@ -10,6 +10,8 @@ use TournamentGenerator\Helpers\Sorter\BaseSorter;
 /**
  * Class ContainerQuery
  *
+ * Container query is a helper class to filter, sort, etc. the values of the container hierarchy.
+ *
  * @package TournamentGenerator\Containers
  * @author  Tomáš Vojík <vojik@wboy.cz>
  */
@@ -19,13 +21,13 @@ class ContainerQuery
 	/** @var BaseContainer Queried container */
 	protected BaseContainer $container;
 	/** @var Closure[] Filter closures */
-	protected array      $filters = [];
+	protected array      $filters      = [];
 	protected Closure    $sortClosure;
 	protected string     $sortProperty;
-	protected bool       $desc    = false;
+	protected bool       $desc         = false;
 	protected BaseSorter $sorter;
-	protected bool         $topLevelOnly = false;
-	protected bool         $uniqueOnly = false;
+	protected bool       $topLevelOnly = false;
+	protected bool       $uniqueOnly   = false;
 
 	/**
 	 * ContainerQuery constructor.

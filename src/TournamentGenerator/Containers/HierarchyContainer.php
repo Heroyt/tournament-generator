@@ -3,10 +3,13 @@
 
 namespace TournamentGenerator\Containers;
 
+use InvalidArgumentException;
 use TournamentGenerator\Base;
 
 /**
  * Class HierarchyContainer
+ *
+ * HierarchyContainer is a special type of container specifically for creating hierarchies on Tournament->Category->Round->Group.
  *
  * @package TournamentGenerator\Containers
  * @author  Tomáš Vojík <vojik@wboy.cz>
@@ -26,7 +29,7 @@ class HierarchyContainer extends BaseContainer
 		}
 		foreach ($values as $obj) {
 			if (!$obj instanceof $this->type) {
-				throw new \InvalidArgumentException('HierarchyContainer allows only one class type per level.');
+				throw new InvalidArgumentException('HierarchyContainer allows only one class type per level.');
 			}
 		}
 		parent::insert(...$values);
@@ -42,7 +45,7 @@ class HierarchyContainer extends BaseContainer
 	 */
 	public function getHierarchyLevel($class) : array {
 		if (!class_exists($class)) {
-			throw new \InvalidArgumentException(sprintf('Class %s does not exist.', $class));
+			throw new InvalidArgumentException(sprintf('Class %s does not exist.', $class));
 		}
 		if ($this->type === $class) {
 			return $this->values;
