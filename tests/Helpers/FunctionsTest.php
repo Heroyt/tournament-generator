@@ -23,6 +23,53 @@ class FunctionsTest extends TestCase
 		];
 	}
 
+	public function arrays() : array {
+		return [
+			[
+				[
+					[1]
+				],
+				1
+			],
+			[
+				[
+					[1, 2]
+				],
+				2
+			],
+			[
+				[
+					[]
+				],
+				0
+			],
+			[
+				[],
+				0
+			],
+			[
+				[
+					[1, 2, 3, 4, 5, 6],
+					[1, 2, 3, 4, 5, 6],
+				],
+				12
+			],
+			[
+				[
+					[1, 2, 3],
+					[1, 2, 3],
+					[1, 2, 3],
+					[1, 2, 3],
+					[1, 2, 3],
+					[1, 2, 3],
+					[1, 2, 3],
+					[1, 2, 3],
+				],
+				24
+			],
+		];
+	}
+
 	/**
 	 * @test
 	 * @dataProvider powers
@@ -31,5 +78,12 @@ class FunctionsTest extends TestCase
 		self::assertEquals($isPower, Functions::isPowerOf2($num), 'The number is'.(!$isPower ? ' not' : '').' a power of 2, but the function returned the wrong output.');
 		self::assertEquals($nextPower, Functions::nextPowerOf2($num));
 		self::assertEquals($prevPower, Functions::previousPowerOf2($num));
+	}
+
+	/**
+	 * @dataProvider arrays
+	 */
+	public function testNestedCount(array $array, int $expectedCount) : void {
+		self::assertEquals($expectedCount, Functions::nestedCount($array));
 	}
 }

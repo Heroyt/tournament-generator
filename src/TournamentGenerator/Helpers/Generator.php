@@ -301,20 +301,12 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 		if (count($teams) === 0) {
 			$teams = $this->group->getTeams();
 		}
-		$discard = [];
 		shuffle($teams);
-		$count = count($teams);
-		while (count($teams) % $this->inGame !== 0) {
-			$discard[] = array_shift($teams);
-		}
+		$count = count($teams); // Store original count for exception
 
-		while (count($teams) > 0) {
-			$tInGame = [];
-			for ($i = 0; $i < $this->inGame; $i++) {
-				$tInGame[] = array_shift($teams);
-			}
-			$this->group->game($tInGame);
-		}
+		$discard = array_splice($teams, 0, $count % $this->inGame);
+
+		$teams = $this->saveTwoTwoGames($teams);
 
 		if (!$this->allowSkip && count($discard) > 0) {
 			throw new Exception('Couldn\'t make games with all teams. Expected k*'.$this->inGame.' teams '.$count.' teams given - discarting '.count($discard).' teams ('.implode(', ', $discard).') in group '.$this->group.' - allow skip '.($this->allowSkip ? 'True' : 'False'));
@@ -332,29 +324,23 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 	 * @throws Exception
 	 */
 	protected function cond_splitGames(array $teams = []) : Generator {
-		$games = [];
 		if (count($teams) === 0) {
 			$teams = $this->group->getTeams();
 		}
 
-		if (count($teams) > $this->maxSize) {
-			$groups = array_chunk($teams, (int) ceil(count($teams) / ceil(count($teams) / $this->maxSize))); // SPLIT TEAMS INTO GROUP OF MAXIMUM SIZE OF $this->maxSize
+		$count = count($teams);
+		if ($count > $this->maxSize) {
+			$games = [];
+
+			// Split teams into chunks of maximum size
+			$groups = array_chunk($teams, (int) ceil($count / ceil($count / $this->maxSize)));
+			// Generate games for each chunk
 			foreach ($groups as $group) {
 				$games[] = $this->r_rGames($group);
 			}
-			$g = 0;
-			foreach ($games as $group) {
-				$g += count($group);
-			}
-			while ($g > 0) {
-				foreach ($games as $key => $group) {
-					$this->group->addGame(array_shift($games[$key]));
-					if (count($games[$key]) === 0) {
-						unset($games[$key]);
-					}
-					$g--;
-				}
-			}
+
+			$this->fillGamesFromChunks($games);
+
 			return $this;
 		}
 		$this->group->addGame(...$this->r_rGames());
@@ -372,6 +358,47 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 		$sorter = new Sorter\GameSorter($this->group);
 
 		return $sorter->sort($this->group->getGames());
+	}
+
+	/**
+	 * Add games from chunks to groups
+	 *
+	 * Fills game in alternating order (chunk 1 - 1, chunk 2 - 1 , chunk 3 - 1, chunk 1 - 2, chunk 2 - 2...)
+	 *
+	 * @param Game[][] $games
+	 */
+	protected function fillGamesFromChunks(array $games) : void {
+		$gameCount = Functions::nestedCount($games);
+		while ($gameCount > 0) {
+			foreach ($games as $key => $group) {
+				$this->group->addGame(array_shift($games[$key]));
+				if (count($games[$key]) === 0) {
+					unset($games[$key]);
+				}
+				$gameCount--;
+			}
+		}
+	}
+
+	/**
+	 * Create games from array of teams for a Two-Two game
+	 *
+	 * @param Team[] $teams
+	 *
+	 * @pre The input array must be divisible by the Generator::$inGame value
+	 *
+	 * @return array
+	 * @throws Exception
+	 */
+	protected function saveTwoTwoGames(array $teams) : array {
+		while (count($teams) > 0) {
+			$tInGame = [];
+			for ($i = 0; $i < $this->inGame; $i++) {
+				$tInGame[] = array_shift($teams);
+			}
+			$this->group->game($tInGame);
+		}
+		return $teams;
 	}
 
 }

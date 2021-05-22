@@ -49,4 +49,19 @@ class Functions
 		// Left bit shift by the bit length of the previous number
 		return 1 << (strlen(decbin($x)) - 1);
 	}
+
+	/**
+	 * Calculate a count of 2D array
+	 *
+	 * @param array[] $array
+	 *
+	 * @return int
+	 */
+	public static function nestedCount(array $array) : int {
+		$count = 0;
+		foreach ($array as $inner) {
+			$count += count($inner);
+		}
+		return $count;
+	}
 }
