@@ -11,6 +11,86 @@ use TournamentGenerator\Team;
 class TeamTest extends TestCase
 {
 
+	public function testInvalidAddWin() : void {
+		$team = new Team('Team');
+		$this->expectException(Exception::class);
+		$team->addWin('invalid ID');
+	}
+
+	public function testInvalidRemoveWin() : void {
+		$team = new Team('Team');
+		$this->expectException(Exception::class);
+		$team->removeWin('invalid ID');
+	}
+
+	public function testInvalidAddLoss() : void {
+		$team = new Team('Team');
+		$this->expectException(Exception::class);
+		$team->addLoss('invalid ID');
+	}
+
+	public function testInvalidRemoveLoss() : void {
+		$team = new Team('Team');
+		$this->expectException(Exception::class);
+		$team->removeLoss('invalid ID');
+	}
+
+	public function testInvalidAddDraw() : void {
+		$team = new Team('Team');
+		$this->expectException(Exception::class);
+		$team->addDraw('invalid ID');
+	}
+
+	public function testInvalidRemoveDraw() : void {
+		$team = new Team('Team');
+		$this->expectException(Exception::class);
+		$team->removeDraw('invalid ID');
+	}
+
+	public function testInvalidAddSecond() : void {
+		$team = new Team('Team');
+		$this->expectException(Exception::class);
+		$team->addSecond('invalid ID');
+	}
+
+	public function testInvalidRemoveSecond() : void {
+		$team = new Team('Team');
+		$this->expectException(Exception::class);
+		$team->removeSecond('invalid ID');
+	}
+
+	public function testInvalidAddThird() : void {
+		$team = new Team('Team');
+		$this->expectException(Exception::class);
+		$team->addThird('invalid ID');
+	}
+
+	public function testInvalidRemoveThird() : void {
+		$team = new Team('Team');
+		$this->expectException(Exception::class);
+		$team->removeThird('invalid ID');
+	}
+
+	public function testSumScore() : void {
+		$team = new Team('Team');
+		$team->addScore(100);
+		$team->addScore(200);
+		self::assertSame(300, $team->sumScore());
+	}
+
+	public function testSumPoints() : void {
+		$team = new Team('Team');
+		$team->addPoints(100);
+		$team->addPoints(200);
+		self::assertSame(300, $team->sumPoints());
+	}
+
+	public function testInvalidGroupResult() : void {
+		$team = new Team('Team');
+		$this->expectException(Exception::class);
+		$team->getGroupResults('invalid id');
+	}
+
 	/** @test */
 	public function check_name_setup_team() : void {
 		$team = new Team('Team name 1');

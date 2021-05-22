@@ -103,7 +103,7 @@ class TeamFilter
 	 */
 	public function validate(Team $team, array $groupsId, string $operation = 'sum', ?Group $from = null) : bool {
 		if (count($this->groups) > 0) {
-			$groupsId = array_unique(array_merge($this->groups, (is_array($groupsId) ? $groupsId : [$groupsId])), SORT_REGULAR);
+			$groupsId = array_unique(array_merge($this->groups, $groupsId), SORT_REGULAR);
 		}
 
 		if ($this->what === 'team') {
