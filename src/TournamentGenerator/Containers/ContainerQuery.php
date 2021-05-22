@@ -171,12 +171,8 @@ class ContainerQuery
 	 * @return int
 	 */
 	protected function sortByPropertyCallback($value1, $value2) : int {
-		if (!isset($this->sortProperty)) {
-			return 0;
-		}
-
 		// Get values
-		$property = $this->sortProperty;
+		$property = $this->sortProperty ?? '';
 		$property1 = null;
 		$property2 = null;
 		if (is_object($value1) && isset($value1->$property)) {

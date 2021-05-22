@@ -143,13 +143,15 @@ class BaseContainer implements Countable, Iterator
 	/**
 	 * Adds a child container
 	 *
-	 * @param BaseContainer $container
+	 * @param BaseContainer[] $containers
 	 *
 	 * @return $this
 	 */
-	public function addChild(BaseContainer $container) : BaseContainer {
-		if (!isset($this->children[$container->id])) {
-			$this->children[$container->id] = $container;
+	public function addChild(BaseContainer ...$containers) : BaseContainer {
+		foreach ($containers as $container) {
+			if (!isset($this->children[$container->id])) {
+				$this->children[$container->id] = $container;
+			}
 		}
 		return $this;
 	}
