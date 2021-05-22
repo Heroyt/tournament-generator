@@ -10,7 +10,7 @@ use TournamentGenerator\Team;
  */
 class GameTest extends TestCase
 {
-
+	
 	/** @test */
 	public function check_creation_game() : void {
 		$group = new Group('Group', 'g1');

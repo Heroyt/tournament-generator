@@ -44,17 +44,15 @@ class GameSorter implements BaseSorter
 	/**
 	 * Orders games from group
 	 *
-	 * @param array $data
+	 * @param Game[] $data
 	 *
 	 * @return array
 	 * @throws Exception
 	 */
 	public function sort(array $data) : array {
 
-		$games = $data;
-
-		if (count($games) <= 4) {
-			return $games;
+		if (count($data) < 5) {
+			return $data;
 		}
 
 		$this->games = [];
@@ -64,43 +62,43 @@ class GameSorter implements BaseSorter
 			$teams[$team->getId()] = 0;
 		}
 
-		$this->moveCalculatedGames(array_shift($games), $teams);
+		$this->moveCalculatedGames(array_shift($data), $teams);
 
-		while (count($games) > 0) {
+		while (count($data) > 0) {
 			// CYCLE 1
 			// TEAM WHICH DIDN'T PLAY IN LAST GAME (< 4)
-			if ($this->cycle1($games, $teams)) {
+			if ($this->cycle1($data, $teams)) {
 				continue;
 			}
 
 			// CYCLE 2
 			// NOT TEAM WHICH PLAYED IN LAST TWO GAMES (NOT 6 or 7)
-			if ($this->cycle2($games, $teams)) {
+			if ($this->cycle2($data, $teams)) {
 				continue;
 			}
 
 			// CYCLE 3
 			// NOT TEAM WHICH PLAYED IN LAST THREE GAMES (NOT 7)
 			// TEAMS THAT DIDN'T PLAY IN LAST GAME WILL PLAY THIS GAME (< 4)
-			if ($this->cycle3($games, $teams)) {
+			if ($this->cycle3($data, $teams)) {
 				continue;
 			}
 
 			// CYCLE 4
 			// NOT TEAM WHICH PLAYED IN LAST THREE GAMES (NOT 7)
-			if ($this->cycle4($games, $teams)) {
+			if ($this->cycle4($data, $teams)) {
 				continue;
 			}
 
 			// CYCLE 5
 			// TEAMS THAT DIDN'T PLAY IN LAST GAME WILL PLAY THIS GAME (< 4)
-			if ($this->cycle5($games, $teams)) {
+			if ($this->cycle5($data, $teams)) {
 				continue;
 			}
 
 			// CYCLE 6
 			// FIRST AVAILABLE GAME
-			$this->moveCalculatedGames(array_shift($games), $teams);
+			$this->moveCalculatedGames(array_shift($data), $teams);
 		}
 
 		return $this->games;

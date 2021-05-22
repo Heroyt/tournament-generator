@@ -510,7 +510,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 * @throws Exception
 	 */
 	public function orderGames() : array {
-		if (count($this->games) <= 4) {
+		if (count($this->games) < 5) {
 			return $this->games->get();
 		}
 		return $this->generator->orderGames();

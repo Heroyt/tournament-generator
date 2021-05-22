@@ -3,8 +3,10 @@
 namespace Helpers;
 
 use Exception;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use TournamentGenerator\Group;
+use TournamentGenerator\Team;
 use TournamentGenerator\TeamFilter;
 
 /**
@@ -12,6 +14,33 @@ use TournamentGenerator\TeamFilter;
  */
 class TeamFilterTest extends TestCase
 {
+
+	public function testConstructorInvalidType() : void {
+		$this->expectException(InvalidArgumentException::class);
+		new TeamFilter('nonexistent type');
+	}
+
+	public function testConstructorInvalidHow() : void {
+		$this->expectException(InvalidArgumentException::class);
+		new TeamFilter('points', 'nonexistent how');
+	}
+
+	public function testConstructorInvalidVal() : void {
+		$this->expectException(InvalidArgumentException::class);
+		new TeamFilter('team', '=', 'not a team');
+	}
+
+	public function testConstructorInvalidProgressedValidation() : void {
+		$filter = new TeamFilter('progressed');
+		$this->expectException(InvalidArgumentException::class);
+		$filter->validate(new Team('Team'), []);
+	}
+
+	public function testConstructorInvalidCalcValidation() : void {
+		$filter = new TeamFilter('points', '=', 1000);
+		$this->expectException(InvalidArgumentException::class);
+		$filter->validate(new Team('Team'), [1, 2, 3, 4], 'not a valid operation');
+	}
 
 	/** @test */
 	public function check_filter_setup_teamFilter() : void {

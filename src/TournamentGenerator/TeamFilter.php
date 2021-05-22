@@ -143,7 +143,7 @@ class TeamFilter
 	 */
 	protected function validateProgressed(Team $team, Group $from = null) : bool {
 		if ($from === null) {
-			throw new Exception('Group $from was not defined.');
+			throw new InvalidArgumentException('Group $from was not defined.');
 		}
 		return $from->isProgressed($team);
 	}
@@ -160,9 +160,9 @@ class TeamFilter
 	 * @see FilterComparator::compare()
 	 *
 	 */
-	private function validateCalc(Team $team, array $groupsId, string $operation = 'sum') : bool {
+	protected function validateCalc(Team $team, array $groupsId, string $operation = 'sum') : bool {
 		if (is_array($groupsId) && !in_array(strtolower($operation), ['sum', 'avg', 'max', 'min'])) {
-			throw new Exception('Unknown operation of '.$operation.'. Only "sum", "avg", "min", "max" possible.');
+			throw new InvalidArgumentException('Unknown operation of '.$operation.'. Only "sum", "avg", "min", "max" possible.');
 		}
 
 		return FilterComparator::compare($operation, $this->val, $this->how, $this->what, $team, $groupsId);

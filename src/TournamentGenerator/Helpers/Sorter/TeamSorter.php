@@ -3,10 +3,9 @@
 namespace TournamentGenerator\Helpers\Sorter;
 
 use Exception;
+use InvalidArgumentException;
 use TournamentGenerator\Constants;
 use TournamentGenerator\Containers\BaseContainer;
-use TournamentGenerator\Group;
-use TournamentGenerator\Round;
 use TournamentGenerator\Team;
 
 /**
@@ -33,11 +32,11 @@ class TeamSorter implements BaseSorter
 	 * @param BaseContainer $container
 	 * @param string        $ordering What to order by (\TournamentGenerator\Constants::POINTS / \TournamentGenerator\Constants::SCORE)
 	 *
-	 * @throws Exception
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct(BaseContainer $container, string $ordering = Constants::POINTS) {
 		if (!in_array($ordering, Constants::OrderingTypes, true)) {
-			throw new Exception('Unknown ordering type `'.$ordering.'`');
+			throw new InvalidArgumentException('Unknown ordering type `'.$ordering.'`');
 		}
 		$this->container = $container;
 		$this->ordering = $ordering;

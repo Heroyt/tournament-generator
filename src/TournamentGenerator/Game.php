@@ -158,13 +158,11 @@ class Game
 	 *
 	 * @return $this
 	 * @throws Exception
+	 * @noinspection NullPointerExceptionInspection
 	 */
 	public function resetResults() : Game {
 		foreach ($this->results as $teamId => $score) {
 			$team = $this->getTeam($teamId);
-			if (!isset($team)) {
-				throw new Exception('Cannot find team with id: '.$teamId.' in game');
-			}
 			$team->groupResults[$this->group->getId()]['score'] -= $score['score'];
 			$team->removeScore($score['score']);
 			switch ($score['type']) {
