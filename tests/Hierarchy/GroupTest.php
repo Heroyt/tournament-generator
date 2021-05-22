@@ -1,5 +1,9 @@
 <?php
 
+namespace Hierarchy;
+
+use Exception;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use TournamentGenerator\Constants;
 use TournamentGenerator\Game;
@@ -7,6 +11,7 @@ use TournamentGenerator\Group;
 use TournamentGenerator\Progression;
 use TournamentGenerator\Team;
 use TournamentGenerator\TeamFilter;
+use TypeError;
 
 /**
  *

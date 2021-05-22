@@ -1,10 +1,14 @@
 <?php
 
+namespace Hierarchy;
+
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use TournamentGenerator\Category;
 use TournamentGenerator\Constants;
 use TournamentGenerator\Round;
 use TournamentGenerator\Team;
+use TypeError;
 
 /**
  *

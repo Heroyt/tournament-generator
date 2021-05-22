@@ -1,11 +1,15 @@
 <?php
 
+namespace Hierarchy;
+
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use TournamentGenerator\BlankTeam;
 use TournamentGenerator\Constants;
 use TournamentGenerator\Group;
 use TournamentGenerator\Round;
 use TournamentGenerator\Team;
+use TypeError;
 
 /**
  *
@@ -51,9 +55,6 @@ class RoundTest extends TestCase
 		// Test adding a single group
 		$output = $round->addGroup($group);
 		self::assertCount(1, $round->getGroups());
-
-		// Test if the output is $this
-		self::assertInstanceOf(Round::class, $output);
 
 		// Test adding multiple categories
 		$round->addGroup($group2, $group3);

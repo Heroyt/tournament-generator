@@ -1,5 +1,7 @@
 <?php
 
+namespace Helpers;
+
 use PHPUnit\Framework\TestCase;
 use TournamentGenerator\Helpers\Functions;
 

@@ -1,5 +1,8 @@
 <?php
 
+namespace Helpers;
+
+use Exception;
 use PHPUnit\Framework\TestCase;
 use TournamentGenerator\Group;
 use TournamentGenerator\Round;
