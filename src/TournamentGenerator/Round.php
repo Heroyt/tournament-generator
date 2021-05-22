@@ -3,6 +3,10 @@
 namespace TournamentGenerator;
 
 use Exception;
+use TournamentGenerator\Containers\BaseContainer;
+use TournamentGenerator\Containers\GameContainer;
+use TournamentGenerator\Containers\HierarchyContainer;
+use TournamentGenerator\Containers\TeamContainer;
 use TournamentGenerator\Interfaces\WithGames;
 use TournamentGenerator\Interfaces\WithGroups;
 use TournamentGenerator\Interfaces\WithSkipSetters;
@@ -22,7 +26,7 @@ use TournamentGenerator\Traits\WithTeams as WithTeamsTrait;
  * @author  Tomáš Vojík <vojik@wboy.cz>
  * @since   0.1
  */
-class Round extends Base implements WithSkipSetters, WithTeams, WithGroups, WithGames
+class Round extends HierarchyBase implements WithSkipSetters, WithTeams, WithGroups, WithGames
 {
 	use WithTeamsTrait;
 	use WithGroupsTrait;
@@ -38,6 +42,9 @@ class Round extends Base implements WithSkipSetters, WithTeams, WithGroups, With
 	public function __construct(string $name = '', $id = null) {
 		$this->setName($name);
 		$this->setId($id ?? uniqid('', false));
+		$this->games = new GameContainer($this->id);
+		$this->teams = new TeamContainer($this->id);
+		$this->container = new HierarchyContainer($this->id);
 	}
 
 	/**
@@ -49,7 +56,7 @@ class Round extends Base implements WithSkipSetters, WithTeams, WithGroups, With
 	 */
 	public function addGroup(Group ...$groups) : Round {
 		foreach ($groups as $group) {
-			$this->groups[] = $group;
+			$this->insertIntoContainer($group);
 		}
 		return $this;
 	}
@@ -64,7 +71,7 @@ class Round extends Base implements WithSkipSetters, WithTeams, WithGroups, With
 	 */
 	public function group(string $name, $id = null) : Group {
 		$g = new Group($name, $id);
-		$this->groups[] = $g->setSkip($this->allowSkip);
+		$this->insertIntoContainer($g->setSkip($this->allowSkip));
 		return $g;
 	}
 
@@ -74,10 +81,10 @@ class Round extends Base implements WithSkipSetters, WithTeams, WithGroups, With
 	 * @return string[]|int[] Array of ids
 	 */
 	public function getGroupsIds() : array {
-		$this->orderGroups();
+		$groups = $this->orderGroups();
 		return array_map(static function($a) {
 			return $a->getId();
-		}, $this->groups);
+		}, $groups);
 	}
 
 	/**
@@ -86,25 +93,24 @@ class Round extends Base implements WithSkipSetters, WithTeams, WithGroups, With
 	 * @return Group[] Sorted groups
 	 */
 	public function orderGroups() : array {
-		usort($this->groups, static function($a, $b) {
+		$groups = $this->getGroups();
+		usort($groups, static function($a, $b) {
 			return $a->getOrder() - $b->getOrder();
 		});
-		return $this->groups;
+		return $groups;
 	}
 
 	/**
 	 * Generate all games
 	 *
 	 * @return array
+	 * @throws Exception
 	 */
 	public function genGames() : array {
-		$games = [];
-		foreach ($this->groups as $group) {
+		foreach ($this->getGroups() as $group) {
 			$group->genGames();
-			$games[] = $group->orderGames();
 		}
-		$this->games = array_merge(...$games);
-		return $this->games;
+		return $this->getGames();
 	}
 
 	/**
@@ -116,7 +122,7 @@ class Round extends Base implements WithSkipSetters, WithTeams, WithGroups, With
 		if (count($this->games) === 0) {
 			return false;
 		}
-		foreach ($this->groups as $group) {
+		foreach ($this->getGroups() as $group) {
 			if (!$group->isPlayed()) {
 				return false;
 			}
@@ -152,24 +158,15 @@ class Round extends Base implements WithSkipSetters, WithTeams, WithGroups, With
 	}
 
 	/**
-	 * Get all groups in this round
-	 *
-	 * @return Group[]
-	 */
-	public function getGroups() : array {
-		$this->orderGroups();
-		return $this->groups;
-	}
-
-	/**
 	 * Progresses all teams from the round
 	 *
 	 * @param bool $blank If true -> creates dummy teams for (does not progress the real team objects) - used for simulation
 	 *
 	 * @return $this
+	 * @throws Exception
 	 */
 	public function progress(bool $blank = false) : Round {
-		foreach ($this->groups as $group) {
+		foreach ($this->getGroups() as $group) {
 			$group->progress($blank);
 		}
 		return $this;
@@ -193,9 +190,10 @@ class Round extends Base implements WithSkipSetters, WithTeams, WithGroups, With
 	 * @post All scores in this round are deleted
 	 *
 	 * @return $this
+	 * @throws Exception
 	 */
 	public function resetGames() : Round {
-		foreach ($this->groups as $group) {
+		foreach ($this->getGroups() as $group) {
 			$group->resetGames();
 		}
 		return $this;

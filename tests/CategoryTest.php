@@ -125,12 +125,6 @@ class CategoryTest extends TestCase
 		$category->addTeam($team2, $team3);
 		self::assertCount(3, $category->getTeams());
 
-		// Test setting teams
-		$category->setTeams([$team, $team2]);
-		self::assertCount(2, $category->getTeams());
-		$category->setTeams([$team, $team2, $team3, $team4]);
-		self::assertCount(4, $category->getTeams());
-
 		// Test adding not a team class
 		$this->expectException(TypeError::class);
 		$category->addTeam('totally not a Team class');
@@ -277,13 +271,10 @@ class CategoryTest extends TestCase
 		$group = $round->group('Group name');
 
 		for ($i = 1; $i <= 4; $i++) {
-			$category->team('Team '.$i);
+			$group->team('Team '.$i);
 		}
 
-		$teams = $category->getTeams();
-
-		$group->addTeam(...$teams);
-
+		$teams = $group->getTeams();
 
 		$group->game([$teams[0], $teams[1]])->setResults([$teams[0]->getId() => 2000, $teams[1]->getId() => 2001]);
 		$group->game([$teams[2], $teams[3]])->setResults([$teams[2]->getId() => 100, $teams[3]->getId() => 99]);
@@ -310,12 +301,10 @@ class CategoryTest extends TestCase
 		$group = $round->group('Group name');
 
 		for ($i = 1; $i <= 4; $i++) {
-			$category->team('Team '.$i);
+			$group->team('Team '.$i);
 		}
 
-		$teams = $category->getTeams();
-
-		$group->addTeam(...$teams);
+		$teams = $group->getTeams();
 
 		$group->game([$teams[0], $teams[1]])->setResults([$teams[0]->getId() => 2000, $teams[1]->getId() => 2001]);
 		$group->game([$teams[2], $teams[3]])->setResults([$teams[2]->getId() => 100, $teams[3]->getId() => 99]);
@@ -342,12 +331,10 @@ class CategoryTest extends TestCase
 		$group = $round->group('Group name');
 
 		for ($i = 1; $i <= 4; $i++) {
-			$category->team('Team '.$i);
+			$group->team('Team '.$i);
 		}
 
-		$teams = $category->getTeams();
-
-		$group->addTeam(...$teams);
+		$teams = $group->getTeams();
 
 		$group->game([$teams[0], $teams[1]])->setResults([$teams[0]->getId() => 2000, $teams[1]->getId() => 2001]);
 		$group->game([$teams[2], $teams[3]])->setResults([$teams[2]->getId() => 100, $teams[3]->getId() => 99]);

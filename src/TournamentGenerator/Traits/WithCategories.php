@@ -5,6 +5,7 @@ namespace TournamentGenerator\Traits;
 
 
 use TournamentGenerator\Category;
+use TournamentGenerator\Containers\BaseContainer;
 use TournamentGenerator\Interfaces\WithCategories as WithCategoriesInterface;
 
 /**
@@ -17,16 +18,13 @@ use TournamentGenerator\Interfaces\WithCategories as WithCategoriesInterface;
 trait WithCategories
 {
 
-	/** @var Category[] */
-	protected array $categories = [];
-
 	/**
 	 * Get all categories
 	 *
 	 * @return Category[]
 	 */
 	public function getCategories() : array {
-		return $this->categories;
+		return $this->container->getTopLevel();
 	}
 
 
@@ -39,7 +37,7 @@ trait WithCategories
 	 */
 	public function addCategory(Category ...$categories) : WithCategoriesInterface {
 		foreach ($categories as $category) {
-			$this->categories[] = $category;
+			$this->insertIntoContainer($category);
 		}
 		return $this;
 	}
@@ -54,7 +52,7 @@ trait WithCategories
 	 */
 	public function category(string $name = '', $id = null) : Category {
 		$c = new Category($name, $id);
-		$this->categories[] = $c->setSkip($this->allowSkip);
+		$this->insertIntoContainer($c->setSkip($this->allowSkip));
 		return $c;
 	}
 

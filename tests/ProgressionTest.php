@@ -90,12 +90,8 @@ class ProgressionTest extends TestCase
 
 		$round->progress();
 
-		self::assertEquals(8, $final_group->getRealTeamCount());
 		self::assertCount(4, $final_group->getTeams());
-		self::assertEquals(4, $final_group->getRealTeamCount());
-		self::assertEquals(8, $second_group->getRealTeamCount());
 		self::assertCount(4, $second_group->getTeams());
-		self::assertEquals(4, $second_group->getRealTeamCount());
 	}
 
 	/** @test */

@@ -1,0 +1,69 @@
+<?php
+
+
+namespace TournamentGenerator\Containers;
+
+use TournamentGenerator\Base;
+
+/**
+ * Class HierarchyContainer
+ *
+ * @package TournamentGenerator\Containers
+ * @author  Tomáš Vojík <vojik@wboy.cz>
+ */
+class HierarchyContainer extends BaseContainer
+{
+
+	/** @var HierarchyContainer[] Direct child containers */
+	protected array $children = [];
+	/** @var Base[] Any value that the container holds */
+	protected array   $values = [];
+	protected ?string $type   = null;
+
+	public function insert(...$values) : BaseContainer {
+		if (is_null($this->type)) {
+			$this->type = get_class($values[0]);
+		}
+		foreach ($values as $obj) {
+			if (!$obj instanceof $this->type) {
+				throw new \InvalidArgumentException('HierarchyContainer allows only one class type per level.');
+			}
+		}
+		parent::insert(...$values);
+		return $this;
+	}
+
+	/**
+	 * Returns a hierarchy level of objects that contains the given classes
+	 *
+	 * @param $class
+	 *
+	 * @return Base[]
+	 */
+	public function getHierarchyLevel($class) : array {
+		if (!class_exists($class)) {
+			throw new \InvalidArgumentException(sprintf('Class %s does not exist.', $class));
+		}
+		if ($this->type === $class) {
+			return $this->values;
+		}
+		if (count($this->children) > 0) {
+			$values = [];
+			foreach ($this->children as $child) {
+				$values[] = $child->getHierarchyLevel($class);
+			}
+			return array_merge(...$values);
+		}
+		return [];
+	}
+
+	/**
+	 * Get current level's type
+	 *
+	 * @return string|null
+	 */
+	public function getLevelType() : ?string {
+		return $this->type;
+	}
+
+}

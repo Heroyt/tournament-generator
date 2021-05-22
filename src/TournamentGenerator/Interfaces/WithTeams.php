@@ -4,6 +4,7 @@ namespace TournamentGenerator\Interfaces;
 
 use Exception;
 use TournamentGenerator\Constants;
+use TournamentGenerator\Containers\TeamContainer;
 use TournamentGenerator\Team;
 use TournamentGenerator\TeamFilter;
 
@@ -66,4 +67,20 @@ interface WithTeams
 	 * @throws Exception
 	 */
 	public function filterTeams(array &$teams, array $filters) : array;
+
+	/**
+	 * Get the container for games
+	 *
+	 * @return TeamContainer
+	 */
+	public function getTeamContainer() : TeamContainer;
+
+	/**
+	 * Add a child container for games
+	 *
+	 * @param TeamContainer $container
+	 *
+	 * @return WithTeams
+	 */
+	public function addTeamContainer(TeamContainer $container) : WithTeams;
 }

@@ -5,9 +5,11 @@ namespace TournamentGenerator\Traits;
 
 use Exception;
 use TournamentGenerator\Constants;
+use TournamentGenerator\Containers\GameContainer;
+use TournamentGenerator\Containers\TeamContainer;
 use TournamentGenerator\Group;
 use TournamentGenerator\Helpers\Filter;
-use TournamentGenerator\Helpers\Sorter\Teams;
+use TournamentGenerator\Helpers\Sorter\TeamSorter;
 use TournamentGenerator\Interfaces\WithCategories as WithCategoriesInterface;
 use TournamentGenerator\Interfaces\WithGroups as WithGroupsInterface;
 use TournamentGenerator\Interfaces\WithRounds as WithRoundsInterface;
@@ -26,8 +28,8 @@ use TournamentGenerator\TeamFilter;
 trait WithTeams
 {
 
-	/** @var Team[] Teams in a object */
-	protected array $teams = [];
+	/** @var TeamContainer Teams in a object */
+	protected TeamContainer $teams;
 
 	/**
 	 * Create a new team and add it into the object
@@ -39,7 +41,7 @@ trait WithTeams
 	 */
 	public function team(string $name = '', $id = null) : Team {
 		$t = new Team($name, $id);
-		$this->teams[] = $t;
+		$this->teams->insert($t);
 		return $t;
 	}
 
@@ -87,26 +89,11 @@ trait WithTeams
 		if (is_null($ordering)) {
 			$ordering = Constants::POINTS;
 		}
-		$teams = [$this->teams];
-		if ($this instanceof WithCategoriesInterface) {
-			foreach ($this->getCategories() as $category) {
-				$teams[] = $category->getTeams();
-			}
-		}
-		if ($this instanceof WithRoundsInterface) {
-			foreach ($this->getRounds() as $round) {
-				$teams[] = $round->getTeams();
-			}
-		}
-		elseif ($this instanceof WithGroupsInterface) {
-			foreach ($this->getGroups() as $group) {
-				$teams[] = $group->getTeams();
-			}
-		}
-		$this->teams = $this->uniqueTeams(array_merge(...$teams));
-		$returnTeams = $this->teams;
 		if ($ordered) {
 			$returnTeams = $this->sortTeams($ordering);
+		}
+		else {
+			$returnTeams = $this->teams->unique()->get();
 		}
 
 		// APPLY FILTERS
@@ -115,25 +102,6 @@ trait WithTeams
 		}
 
 		return $returnTeams;
-	}
-
-	/**
-	 * Filter an array of teams and return an distinct array
-	 *
-	 * @param Team[] $teams
-	 *
-	 * @return Team[]
-	 */
-	protected function uniqueTeams(array $teams) : array {
-		$ids = [];
-		foreach ($teams as $key => $team) {
-			if (in_array($team->getId(), $ids, true)) {
-				unset($teams[$key]);
-				continue;
-			}
-			$ids[] = $team->getId();
-		}
-		return array_values($teams);
 	}
 
 	/**
@@ -149,35 +117,8 @@ trait WithTeams
 		if (is_null($ordering)) {
 			$ordering = Constants::POINTS;
 		}
-		$teams = [];
-		if ($this instanceof WithRoundsInterface) {
-			$rounds = $this->getRounds();
-			for ($i = count($rounds) - 1; $i >= 0; $i--) {
-				foreach ($rounds[$i]->getTeams(true, $ordering) as $team) {
-					if (!isset($teams[$team->getId()])) {
-						$teams[$team->getId()] = $team;
-					}
-				}
-				$this->teams = array_values($teams);
-			}
-		}
-		elseif ($this instanceof WithGroupsInterface) {
-			foreach ($this->getGroups() as $group) {
-				$teams[] = $group->getTeams(true);
-			}
-			$this->teams = array_merge(...$teams);
-		}
-
-		if ($this instanceof Round) {
-			$teams = Teams::sortRound($this->teams, $this, $ordering);
-		}
-		elseif ($this instanceof Group) {
-			$teams = Teams::sortGroup($this->teams, $this, $ordering);
-		}
-		else {
-			$teams = $this->teams;
-		}
-		$this->teams = $teams;
+		$sorter = new TeamSorter($this->getContainer(), $ordering);
+		$teams = $this->teams->addSorter($sorter)->unique()->get();
 
 		// APPLY FILTERS
 		if (count($filters) > 0) {
@@ -218,17 +159,29 @@ trait WithTeams
 	 */
 	public function addTeam(Team ...$teams) : WithTeamsInterface {
 		foreach ($teams as $team) {
-			$this->teams[] = $team;
+			$this->teams->insert($team);
 		}
 		return $this;
 	}
 
 	/**
-	 * Get count of the teams array
+	 * Get the container for games
 	 *
-	 * @return int
+	 * @return TeamContainer
 	 */
-	public function getRealTeamCount() : int {
-		return count($this->teams);
+	public function getTeamContainer() : TeamContainer {
+		return $this->teams;
+	}
+
+	/**
+	 * Add a child container for games
+	 *
+	 * @param TeamContainer $container
+	 *
+	 * @return WithTeamsInterface
+	 */
+	public function addTeamContainer(TeamContainer $container) : WithTeamsInterface {
+		$this->teams->addChild($container);
+		return $this;
 	}
 }

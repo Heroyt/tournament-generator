@@ -251,10 +251,10 @@ class TournamentTest extends TestCase
 		$category2->round('Round3');
 		$category2->round('Round4');
 
+		self::assertCount(4, $tournament->getRounds());
+
+		$this->expectException(InvalidArgumentException::class);
 		$tournament->round('Round5');
-
-		self::assertCount(5, $tournament->getRounds());
-
 	}
 
 	/** @test */
@@ -265,8 +265,8 @@ class TournamentTest extends TestCase
 		$category1 = $tournament->category('Category 1');
 		$category2 = $tournament->category('Category 2');
 
-		$round1 = $tournament->round('Round1');
-		$round2 = $tournament->round('Round1');
+		$round1 = $category1->round('Round1');
+		$round2 = $category2->round('Round1');
 
 		$category1->addTeam(new Team('Team1'), new Team('Team2'), new Team('Team3'));
 		$category2->addTeam(new Team('Team4'), new Team('Team5'), new Team('Team6'));

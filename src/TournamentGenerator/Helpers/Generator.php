@@ -366,11 +366,12 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 	 * Sort games to minimize teams playing multiple games after one other
 	 *
 	 * @return array
+	 * @throws Exception
 	 */
 	public function orderGames() : array {
-		$sorter = new Sorter\Games($this->group);
+		$sorter = new Sorter\GameSorter($this->group);
 
-		return $sorter->orderGames();
+		return $sorter->sort($this->group->getGames());
 	}
 
 }

@@ -18,9 +18,6 @@ use TournamentGenerator\Round;
 trait WithRounds
 {
 
-	/** @var Round[] Rounds in a category */
-	protected array $rounds = [];
-
 	/**
 	 * Adds round to the category
 	 *
@@ -30,7 +27,7 @@ trait WithRounds
 	 */
 	public function addRound(Round ...$rounds) : WithRoundsInterface {
 		foreach ($rounds as $round) {
-			$this->rounds[] = $round;
+			$this->insertIntoContainer($round);
 		}
 		return $this;
 	}
@@ -46,8 +43,9 @@ trait WithRounds
 	public function round(string $name = '', $id = null) : Round {
 		$r = new Round($name, $id);
 		if ($this instanceof WithSkipSettersInterface) {
-			$this->rounds[] = $r->setSkip($this->getSkip());
+			$r->setSkip($this->getSkip());
 		}
+		$this->insertIntoContainer($r);
 		return $r;
 	}
 
@@ -57,14 +55,6 @@ trait WithRounds
 	 * @return Round[]
 	 */
 	public function getRounds() : array {
-		if ($this instanceof \TournamentGenerator\Interfaces\WithCategories && count($this->getCategories()) > 0) {
-			$rounds = [];
-			foreach ($this->getCategories() as $category) {
-				$rounds[] = $category->getRounds();
-			}
-			$rounds[] = $this->rounds;
-			return array_merge(...$rounds);
-		}
-		return $this->rounds;
+		return $this->container->getHierarchyLevel(Round::class);
 	}
 }

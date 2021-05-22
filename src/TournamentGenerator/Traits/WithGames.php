@@ -4,7 +4,9 @@
 namespace TournamentGenerator\Traits;
 
 
+use TournamentGenerator\Containers\GameContainer;
 use TournamentGenerator\Game;
+use TournamentGenerator\Interfaces\WithGames as WithGamesInterface;
 
 /**
  * Trait WithGames
@@ -15,8 +17,20 @@ use TournamentGenerator\Game;
  */
 trait WithGames
 {
-	/** @var Game[] List of games */
-	protected array $games = [];
+	/** @var GameContainer List of games */
+	protected GameContainer $games;
+
+	/**
+	 * Add a child container for games
+	 *
+	 * @param GameContainer $container
+	 *
+	 * @return WithGamesInterface
+	 */
+	public function addGameContainer(GameContainer $container) : WithGamesInterface {
+		$this->games->addChild($container);
+		return $this;
+	}
 
 	/**
 	 * Get all tournament games
@@ -24,13 +38,15 @@ trait WithGames
 	 * @return Game[]
 	 */
 	public function getGames() : array {
-		if ($this instanceof \TournamentGenerator\Interfaces\WithRounds) {
-			$games = [];
-			foreach ($this->getRounds() as $round) {
-				$games[] = $round->getGames();
-			}
-			return array_merge(...$games);
-		}
+		return $this->games->get();
+	}
+
+	/**
+	 * Get the container for games
+	 *
+	 * @return GameContainer
+	 */
+	public function getGameContainer() : GameContainer {
 		return $this->games;
 	}
 }

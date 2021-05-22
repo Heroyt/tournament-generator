@@ -3,6 +3,10 @@
 namespace TournamentGenerator;
 
 use Exception;
+use TournamentGenerator\Containers\BaseContainer;
+use TournamentGenerator\Containers\GameContainer;
+use TournamentGenerator\Containers\HierarchyContainer;
+use TournamentGenerator\Containers\TeamContainer;
 use TournamentGenerator\Interfaces\WithGames;
 use TournamentGenerator\Interfaces\WithGeneratorSetters;
 use TournamentGenerator\Interfaces\WithSkipSetters;
@@ -20,7 +24,7 @@ use TournamentGenerator\Traits\WithTeams as WithTeamsTrait;
  * @author  Tomáš Vojík <vojik@wboy.cz>
  * @since   0.1
  */
-class Group extends Base implements WithGeneratorSetters, WithSkipSetters, WithTeams, WithGames
+class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSetters, WithTeams, WithGames
 {
 	use WithTeamsTrait;
 	use WithGamesTrait;
@@ -61,6 +65,9 @@ class Group extends Base implements WithGeneratorSetters, WithSkipSetters, WithT
 		$this->setName($name);
 		$this->generator = new Helpers\Generator($this);
 		$this->setId($id ?? uniqid('', false));
+		$this->games = new GameContainer($this->id);
+		$this->teams = new TeamContainer($this->id);
+		$this->container = new HierarchyContainer($this->id);
 	}
 
 	/**
@@ -72,7 +79,7 @@ class Group extends Base implements WithGeneratorSetters, WithSkipSetters, WithT
 	 */
 	public function addTeam(Team ...$teams) : Group {
 		foreach ($teams as $team) {
-			$this->teams[] = $team;
+			$this->teams->insert($team);
 			$team->addGroupResults($this);
 		}
 		return $this;
@@ -88,7 +95,7 @@ class Group extends Base implements WithGeneratorSetters, WithSkipSetters, WithT
 	 */
 	public function team(string $name = '', $id = null) : Team {
 		$t = new Team($name, $id);
-		$this->teams[] = $t;
+		$this->teams->insert($t);
 		$t->addGroupResults($this);
 		return $t;
 	}
@@ -467,8 +474,7 @@ class Group extends Base implements WithGeneratorSetters, WithSkipSetters, WithT
 	 * @throws Exception
 	 */
 	public function genGames() : array {
-		$this->generator->genGames();
-		return $this->games;
+		return $this->generator->genGames();
 	}
 
 	/**
@@ -481,7 +487,7 @@ class Group extends Base implements WithGeneratorSetters, WithSkipSetters, WithT
 	 */
 	public function game(array $teams = []) : Game {
 		$g = new Game($teams, $this);
-		$this->games[] = $g;
+		$this->games->insert($g);
 		return $g;
 	}
 
@@ -493,7 +499,7 @@ class Group extends Base implements WithGeneratorSetters, WithSkipSetters, WithT
 	 * @return $this
 	 */
 	public function addGame(Game ...$games) : Group {
-		$this->games = array_merge($this->games, $games);
+		$this->games->insert(...$games);
 		return $this;
 	}
 
@@ -501,13 +507,13 @@ class Group extends Base implements WithGeneratorSetters, WithSkipSetters, WithT
 	 * Order generated games to minimize teams playing multiple games after one other.
 	 *
 	 * @return Game[]
+	 * @throws Exception
 	 */
 	public function orderGames() : array {
 		if (count($this->games) <= 4) {
-			return $this->games;
+			return $this->games->get();
 		}
-		$this->games = $this->generator->orderGames();
-		return $this->games;
+		return $this->generator->orderGames();
 	}
 
 	/**
@@ -530,6 +536,7 @@ class Group extends Base implements WithGeneratorSetters, WithSkipSetters, WithT
 	 * @post All scores in this group are deleted
 	 *
 	 * @return $this
+	 * @throws Exception
 	 */
 	public function resetGames() : Group {
 		foreach ($this->getGames() as $game) {
@@ -547,7 +554,7 @@ class Group extends Base implements WithGeneratorSetters, WithSkipSetters, WithT
 		if (count($this->games) === 0) {
 			return false;
 		}
-		return count(array_filter($this->games, static function($a) {
+		return count(array_filter($this->getGames(), static function($a) {
 				return $a->isPlayed();
 			})) !== 0;
 	}

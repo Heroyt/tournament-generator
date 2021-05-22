@@ -3,6 +3,9 @@
 namespace TournamentGenerator;
 
 use Exception;
+use TournamentGenerator\Containers\GameContainer;
+use TournamentGenerator\Containers\HierarchyContainer;
+use TournamentGenerator\Containers\TeamContainer;
 use TournamentGenerator\Interfaces\WithGames;
 use TournamentGenerator\Interfaces\WithGroups;
 use TournamentGenerator\Interfaces\WithRounds;
@@ -27,7 +30,7 @@ use TournamentGenerator\Traits\WithTeams as WithTeamsTrait;
  * @package TournamentGenerator
  * @since   0.1
  */
-class Category extends Base implements WithSkipSetters, WithRounds, WithTeams, WithGroups, WithGames
+class Category extends HierarchyBase implements WithSkipSetters, WithRounds, WithTeams, WithGroups, WithGames
 {
 	use WithTeamsTrait;
 	use WithRoundsTrait;
@@ -45,6 +48,9 @@ class Category extends Base implements WithSkipSetters, WithRounds, WithTeams, W
 	public function __construct(string $name = '', $id = null) {
 		$this->setName($name);
 		$this->setId($id ?? uniqid('', false));
+		$this->games = new GameContainer($this->id);
+		$this->teams = new TeamContainer($this->id);
+		$this->container = new HierarchyContainer($this->id);
 	}
 
 	/**
@@ -77,12 +83,4 @@ class Category extends Base implements WithSkipSetters, WithRounds, WithTeams, W
 		return Helpers\Simulator::simulateCategoryReal($this);
 	}
 
-	/**
-	 * Manually set all teams for the category
-	 *
-	 * @param Team[] $teams
-	 */
-	public function setTeams(array $teams) : void {
-		$this->teams = $teams;
-	}
 }

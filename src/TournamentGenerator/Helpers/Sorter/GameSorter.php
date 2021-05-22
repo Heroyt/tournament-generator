@@ -2,6 +2,7 @@
 
 namespace TournamentGenerator\Helpers\Sorter;
 
+use Exception;
 use TournamentGenerator\Game;
 use TournamentGenerator\Group;
 
@@ -23,7 +24,7 @@ use TournamentGenerator\Group;
  * @package TournamentGenerator\Helpers\Sorter
  * @since   0.3
  */
-class Games
+class GameSorter implements BaseSorter
 {
 
 	/** @var Group */
@@ -43,11 +44,14 @@ class Games
 	/**
 	 * Orders games from group
 	 *
+	 * @param array $data
+	 *
 	 * @return array
+	 * @throws Exception
 	 */
-	public function orderGames() : array {
+	public function sort(array $data) : array {
 
-		$games = $this->group->getGames();
+		$games = $data;
 
 		if (count($games) <= 4) {
 			return $games;

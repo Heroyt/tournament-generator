@@ -3,6 +3,9 @@
 namespace TournamentGenerator;
 
 use Exception;
+use TournamentGenerator\Containers\GameContainer;
+use TournamentGenerator\Containers\HierarchyContainer;
+use TournamentGenerator\Containers\TeamContainer;
 use TournamentGenerator\Interfaces\WithCategories;
 use TournamentGenerator\Interfaces\WithGames;
 use TournamentGenerator\Interfaces\WithGroups;
@@ -25,7 +28,7 @@ use TournamentGenerator\Traits\WithTeams as WithTeamsTrait;
  * @author  Tomáš Vojík <vojik@wboy.cz>
  * @since   0.1
  */
-class Tournament extends Base implements WithSkipSetters, WithTeams, WithRounds, WithCategories, WithGroups, WithGames
+class Tournament extends HierarchyBase implements WithSkipSetters, WithTeams, WithRounds, WithCategories, WithGroups, WithGames
 {
 	use WithTeamsTrait;
 	use WithCategoriesTrait;
@@ -45,6 +48,9 @@ class Tournament extends Base implements WithSkipSetters, WithTeams, WithRounds,
 
 	public function __construct(string $name = '') {
 		$this->name = $name;
+		$this->games = new GameContainer(0);
+		$this->teams = new TeamContainer(0);
+		$this->container = new HierarchyContainer(0);
 	}
 
 	/**

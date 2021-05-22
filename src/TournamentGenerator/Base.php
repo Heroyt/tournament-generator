@@ -3,6 +3,9 @@
 namespace TournamentGenerator;
 
 use InvalidArgumentException;
+use TournamentGenerator\Containers\HierarchyContainer;
+use TournamentGenerator\Interfaces\WithGames as WithGamesInterface;
+use TournamentGenerator\Interfaces\WithTeams as WithTeamsInterface;
 
 /**
  * Abstract class with basic setters and getters
