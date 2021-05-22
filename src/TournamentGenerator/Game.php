@@ -121,7 +121,6 @@ class Game
 			$this->resetResults();
 		}
 		arsort($results);
-		$inGame = $this->group->getInGame();
 		$i = 1;
 		foreach ($results as $id => $score) {
 			if (!is_numeric($score)) {
@@ -131,20 +130,7 @@ class Game
 			if (!isset($team)) {
 				throw new Exception('Couldn\'t find team with id of "'.$id.'"');
 			}
-			$this->results[$team->getId()] = ['score' => $score];
-			$team->addScore($score);
-			switch ($inGame) {
-				case 2:
-					$this->setResults2($i, $score, $results, $team);
-					break;
-				case 3:
-					$this->setResults3($i, $team);
-					break;
-				case 4:
-					$this->setResults4($i, $team);
-					break;
-			}
-			$team->groupResults[$this->group->getId()]['score'] += $score;
+			$this->setTeamScore($i, $team, $results, $score);
 			$i++;
 		}
 		return $this;
@@ -158,33 +144,45 @@ class Game
 	 *
 	 * @return $this
 	 * @throws Exception
-	 * @noinspection NullPointerExceptionInspection
 	 */
 	public function resetResults() : Game {
 		foreach ($this->results as $teamId => $score) {
-			$team = $this->getTeam($teamId);
-			$team->groupResults[$this->group->getId()]['score'] -= $score['score'];
-			$team->removeScore($score['score']);
-			switch ($score['type']) {
-				case 'win':
-					$team->removeWin($this->group->getId());
-					break;
-				case 'draw':
-					$team->removeDraw($this->group->getId());
-					break;
-				case 'loss':
-					$team->removeLoss($this->group->getId());
-					break;
-				case 'second':
-					$team->removeSecond($this->group->getId());
-					break;
-				case 'third':
-					$team->removeThird($this->group->getId());
-					break;
-			}
+			$this->resetTeamScore($teamId, $score);
 		}
 		$this->results = [];
 		return $this;
+	}
+
+	/**
+	 * Resets a score for a team
+	 *
+	 * @param string|int $teamId
+	 * @param array      $score
+	 *
+	 * @throws Exception
+	 * @noinspection NullPointerExceptionInspection
+	 */
+	protected function resetTeamScore($teamId, array $score) : void {
+		$team = $this->getTeam($teamId);
+		$team->groupResults[$this->group->getId()]['score'] -= $score['score'];
+		$team->removeScore($score['score']);
+		switch ($score['type']) {
+			case 'win':
+				$team->removeWin($this->group->getId());
+				break;
+			case 'draw':
+				$team->removeDraw($this->group->getId());
+				break;
+			case 'loss':
+				$team->removeLoss($this->group->getId());
+				break;
+			case 'second':
+				$team->removeSecond($this->group->getId());
+				break;
+			case 'third':
+				$team->removeThird($this->group->getId());
+				break;
+		}
 	}
 
 	/**
@@ -199,6 +197,33 @@ class Game
 			return $a->getId();
 		}, $this->teams), true);
 		return ($key !== false ? $this->teams[$key] : null);
+	}
+
+	/**
+	 * Set a score for a team
+	 *
+	 * @param int   $position Team's position
+	 * @param Team  $team
+	 * @param int[] $results  The whole results set
+	 * @param int   $score    Team's score
+	 *
+	 * @throws Exception
+	 */
+	protected function setTeamScore(int $position, Team $team, array $results, int $score) : void {
+		$this->results[$team->getId()] = ['score' => $score];
+		$team->addScore($score);
+		switch ($this->group->getInGame()) {
+			case 2:
+				$this->setResults2($position, $score, $results, $team);
+				break;
+			case 3:
+				$this->setResults3($position, $team);
+				break;
+			case 4:
+				$this->setResults4($position, $team);
+				break;
+		}
+		$team->groupResults[$this->group->getId()]['score'] += $score;
 	}
 
 	/**
