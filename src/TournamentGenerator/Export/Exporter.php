@@ -8,9 +8,9 @@ use TournamentGenerator\Interfaces\WithGames;
 use TournamentGenerator\Interfaces\WithTeams;
 
 /**
- * Class Exporter
+ * Basic exporter
  *
- * Basic exporter class
+ * Basic exporter class for exporting all data from HierarchyBase objects. It uses all other specialized exporters and also inherits their modifiers specific.
  *
  * @package TournamentGenerator\Export
  * @author  Tomáš Vojík <vojik@wboy.cz>
@@ -56,6 +56,8 @@ class Exporter extends ExportBase
 	}
 
 	/**
+	 * Simple export query without any modifiers
+	 *
 	 * @param HierarchyBase $object
 	 *
 	 * @return array

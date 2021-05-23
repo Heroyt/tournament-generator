@@ -6,7 +6,7 @@ namespace TournamentGenerator\Export;
 use TournamentGenerator\HierarchyBase;
 
 /**
- * Class Export
+ * Interface for exporters
  *
  * @package TournamentGenerator\Export
  * @author  Tomáš Vojík <vojik@wboy.cz>

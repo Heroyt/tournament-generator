@@ -4,13 +4,13 @@
 namespace TournamentGenerator\Export;
 
 
-use TournamentGenerator\Base;
-use TournamentGenerator\Game;
 use TournamentGenerator\HierarchyBase;
-use TournamentGenerator\Interfaces\WithGames;
 
 /**
- * Class ExportBase
+ * Base class for exporters
+ *
+ * Exporters operate on some HierarchyBase class. They extract data and/or settings from these classes in a form of PHP array.
+ * Exporters also allow of adding modifiers to the exported query - adding more data. These modifiers are added via specific methods (usually starting with "with" keyword).
  *
  * @package TournamentGenerator\Export
  * @author  Tomáš Vojík <vojik@wboy.cz>
@@ -21,7 +21,7 @@ abstract class ExportBase implements Export
 
 	/** @var HierarchyBase Hierarchy object to export */
 	protected HierarchyBase $object;
-	protected array $modifiers = [];
+	protected array         $modifiers = [];
 
 	public function __construct(HierarchyBase $object) {
 		$this->object = $object;

@@ -21,11 +21,19 @@
 	"authors": [
 		{
 			"name": "Tomáš Vojík",
-			"email": "vojik@wboy.cz"
+			"email": "vojik@wboy.cz",
+			"role": "lead"
 		}
 	],
 	"minimum-stability": "dev",
 	"prefer-stable": true,
+	"config": {
+		"platform": {
+			"php": "7.4.0"
+		},
+		"optimize-autoloader": true,
+		"sort-packages": true
+	},
 	"scripts": {
 		"docs": "php phpDocumentor.phar -s src/ -t docs/api/",
 		"test": "./vendor/bin/phpunit"

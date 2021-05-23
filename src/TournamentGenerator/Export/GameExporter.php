@@ -10,7 +10,9 @@ use TournamentGenerator\HierarchyBase;
 use TournamentGenerator\Interfaces\WithGames;
 
 /**
- * Class GameExporter
+ * Exporter for games
+ *
+ * A specific exporter, taking care of games and their related data.
  *
  * @package TournamentGenerator\Export
  * @author  Tomáš Vojík <vojik@wboy.cz>
@@ -30,6 +32,8 @@ class GameExporter extends ExportBase
 	}
 
 	/**
+	 * Simple export query without any modifiers
+	 *
 	 * @param HierarchyBase $object
 	 *
 	 * @return array
@@ -48,7 +52,12 @@ class GameExporter extends ExportBase
 	public static function start(HierarchyBase $object) : Export {
 		return new self($object);
 	}
-
+	
+	/**
+	 * Gets the basic unmodified data
+	 *
+	 * @return array
+	 */
 	public function getBasic() : array {
 		return array_map(static function(Game $game) {
 			return (object) [

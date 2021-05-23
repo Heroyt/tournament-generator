@@ -11,7 +11,9 @@ use TournamentGenerator\Interfaces\WithTeams;
 use TournamentGenerator\Team;
 
 /**
- * Class TeamExporter
+ * Exporter for teams
+ *
+ * A specific exporter for teams and their related data.
  *
  * @package TournamentGenerator\Export
  * @author  Tomáš Vojík <vojik@wboy.cz>
@@ -36,6 +38,8 @@ class TeamExporter extends ExportBase
 	}
 
 	/**
+	 * Simple export query without any modifiers
+	 *
 	 * @param HierarchyBase $object
 	 *
 	 * @return array
@@ -55,6 +59,11 @@ class TeamExporter extends ExportBase
 		return new self($object);
 	}
 
+	/**
+	 * Gets the basic unmodified data
+	 *
+	 * @return array
+	 */
 	public function getBasic() : array {
 		return array_map(static function(Team $team) {
 			return (object) [
