@@ -5,6 +5,7 @@ namespace TournamentGenerator\Containers;
 
 use Closure;
 use Countable;
+use Exception;
 use Iterator;
 use TournamentGenerator\Helpers\Sorter\BaseSorter;
 
@@ -15,7 +16,7 @@ use TournamentGenerator\Helpers\Sorter\BaseSorter;
  *
  * @package TournamentGenerator\Containers
  * @author  Tomáš Vojík <vojik@wboy.cz>
- * @since 0.4
+ * @since   0.4
  */
 class BaseContainer implements Countable, Iterator
 {
@@ -24,6 +25,8 @@ class BaseContainer implements Countable, Iterator
 	public $id;
 	/** @var BaseContainer[] Direct child containers */
 	protected array $children = [];
+	/** @var BaseContainer|null Parent container reference */
+	protected ?BaseContainer $parent;
 	/** @var array Any value that the container holds */
 	protected array $values = [];
 
@@ -35,8 +38,9 @@ class BaseContainer implements Countable, Iterator
 	 *
 	 * @param string|int $id
 	 */
-	public function __construct($id) {
+	public function __construct($id, BaseContainer $parent = null) {
 		$this->id = $id;
+		$this->parent = $parent;
 	}
 
 	/**
@@ -147,10 +151,13 @@ class BaseContainer implements Countable, Iterator
 	 * @param BaseContainer[] $containers
 	 *
 	 * @return $this
+	 * @post Parent container is set for the added children
+	 * @throws Exception
 	 */
 	public function addChild(BaseContainer ...$containers) : BaseContainer {
 		foreach ($containers as $container) {
 			if (!isset($this->children[$container->id])) {
+				$container->setParent($this);
 				$this->children[$container->id] = $container;
 			}
 		}
@@ -234,5 +241,30 @@ class BaseContainer implements Countable, Iterator
 		$query = new ContainerQuery($this);
 		$query->unique();
 		return $query;
+	}
+
+	/**
+	 * Get a parent container
+	 *
+	 * @return BaseContainer|null
+	 */
+	public function getParent() : ?BaseContainer {
+		return $this->parent;
+	}
+
+	/**
+	 * Set a container's parent
+	 *
+	 * @param BaseContainer|null $parent
+	 *
+	 * @return BaseContainer
+	 * @throws Exception
+	 */
+	public function setParent(BaseContainer $parent) : BaseContainer {
+		if ($parent !== $this->parent && !is_null($this->parent)) {
+			throw new Exception('Parent container can only be set once!');
+		}
+		$this->parent = $parent;
+		return $this;
 	}
 }

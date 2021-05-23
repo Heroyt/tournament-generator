@@ -4,11 +4,50 @@
 namespace Containers;
 
 
+use Exception;
 use PHPUnit\Framework\TestCase;
 use TournamentGenerator\Containers\BaseContainer;
 
 class BaseContainerTest extends TestCase
 {
+
+	public function testContainerParents() : void {
+		$container = new BaseContainer(0);
+		self::assertNull($container->getParent());
+
+		$containerChild1 = new BaseContainer(1, $container);
+		self::assertSame($container, $containerChild1->getParent());
+
+		$container->addChild($containerChild1);
+		self::assertSame($container, $containerChild1->getParent());
+
+		$containerChild2 = new BaseContainer(2);
+		self::assertNull($containerChild2->getParent());
+
+		$containerChild2->setParent($container);
+		self::assertSame($container, $containerChild2->getParent());
+
+		$container->addChild($containerChild2);
+		self::assertSame($container, $containerChild2->getParent());
+
+		$containerChild3 = new BaseContainer(3);
+		self::assertNull($containerChild3->getParent());
+
+		$container->addChild($containerChild3);
+		self::assertSame($container, $containerChild3->getParent());
+	}
+
+	public function testContainerParentInvalid() : void {
+		$container1 = new BaseContainer(0);
+		$container2 = new BaseContainer(1);
+		self::assertNull($container1->getParent());
+
+		$containerChild1 = new BaseContainer(2, $container1);
+		self::assertSame($container1, $containerChild1->getParent());
+
+		$this->expectException(Exception::class);
+		$containerChild1->setParent($container2);
+	}
 
 	public function testContainerBasic() : void {
 		$container = new BaseContainer(1);
