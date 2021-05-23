@@ -34,7 +34,7 @@ class GameContainer extends BaseContainer
 	 *
 	 * @post  Propagates to all children but the sender
 	 * @post  Propagates to the parent if not the sender
-	 * @since 1.0
+	 * @since 0.5
 	 */
 	public function incrementId(?GameContainer $sender = null) : void {
 		// Increment
@@ -53,7 +53,7 @@ class GameContainer extends BaseContainer
 
 	/**
 	 * @return int
-	 * @since 1.0
+	 * @since 0.5
 	 */
 	public function getAutoIncrement() : int {
 		return $this->autoIncrement;
@@ -68,7 +68,7 @@ class GameContainer extends BaseContainer
 	 * @post  The firstIncrement value is set too
 	 *
 	 * @return GameContainer
-	 * @since 1.0
+	 * @since 0.5
 	 */
 	public function setAutoIncrement(int $autoIncrement) : GameContainer {
 		$this->autoIncrement = $autoIncrement;
@@ -88,7 +88,7 @@ class GameContainer extends BaseContainer
 	 * @post  Propagates to all children but the sender
 	 * @post  Propagates to the parent if not the sender
 	 *
-	 * @since 1.0
+	 * @since 0.5
 	 */
 	public function resetAutoIncrement(?GameContainer $sender = null) : GameContainer {
 		$this->autoIncrement = $this->firstIncrement;
@@ -107,7 +107,7 @@ class GameContainer extends BaseContainer
 
 	/**
 	 * @return int
-	 * @since 1.0
+	 * @since 0.5
 	 */
 	public function getFirstIncrement() : int {
 		return $this->firstIncrement;

@@ -281,7 +281,7 @@ class GameSorter implements BaseSorter
 	 * @pre   The autoincrement must be reset on the group's container
 	 * @post  All games will have reset ids in the new order
 	 *
-	 * @since 1.0
+	 * @since 0.5
 	 */
 	protected function resetGameIds() : void {
 		$container = $this->group->getGameContainer();

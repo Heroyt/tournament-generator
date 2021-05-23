@@ -381,7 +381,7 @@ class Game
 
 	/**
 	 * @return int
-	 * @since 1.0
+	 * @since 0.5
 	 */
 	public function getId() : int {
 		return $this->id;
@@ -391,7 +391,7 @@ class Game
 	 * @param int $id
 	 *
 	 * @return Game
-	 * @since 1.0
+	 * @since 0.5
 	 */
 	public function setId(int $id) : Game {
 		$this->id = $id;

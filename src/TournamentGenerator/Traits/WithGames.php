@@ -63,7 +63,7 @@ trait WithGames
 	 * @see GameContainer::setAutoIncrement()
 	 *
 	 * @return WithGamesInterface
-	 * @since 1.0
+	 * @since 0.5
 	 */
 	public function setGameAutoincrementId(int $id) : WithGamesInterface {
 		$this->games->setAutoIncrement($id);

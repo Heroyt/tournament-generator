@@ -248,7 +248,7 @@ class BaseContainer implements Countable, Iterator
 	 * Get a parent container
 	 *
 	 * @return BaseContainer|null
-	 * @since 1.0
+	 * @since 0.5
 	 */
 	public function getParent() : ?BaseContainer {
 		return $this->parent;
@@ -261,7 +261,7 @@ class BaseContainer implements Countable, Iterator
 	 *
 	 * @return BaseContainer
 	 * @throws Exception
-	 * @since 1.0
+	 * @since 0.5
 	 */
 	public function setParent(BaseContainer $parent) : BaseContainer {
 		if ($parent !== $this->parent && !is_null($this->parent)) {
