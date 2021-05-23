@@ -28,9 +28,9 @@ class GameSorter implements BaseSorter
 {
 
 	/** @var Group */
-	private Group $group;
+	protected Group $group;
 	/** @var Game[] */
-	private array $games = [];
+	protected array $games = [];
 
 	/**
 	 * Orders games from group
@@ -45,6 +45,9 @@ class GameSorter implements BaseSorter
 	 * Orders games from group
 	 *
 	 * @param Game[] $data
+	 *
+	 * @pre  The autoincrement must be reset on the group's container
+	 * @post All games will have reset ids in the new order
 	 *
 	 * @return array
 	 * @throws Exception
@@ -101,6 +104,8 @@ class GameSorter implements BaseSorter
 			$this->moveCalculatedGames(array_shift($data), $teams);
 		}
 
+		$this->resetGameIds();
+
 		return $this->games;
 	}
 
@@ -110,7 +115,7 @@ class GameSorter implements BaseSorter
 	 * @param Game  $game
 	 * @param array $teams
 	 */
-	private function moveCalculatedGames(Game $game, array &$teams) : void {
+	protected function moveCalculatedGames(Game $game, array &$teams) : void {
 
 		$this->games[] = $game;
 
@@ -144,7 +149,7 @@ class GameSorter implements BaseSorter
 	 *
 	 * @return bool
 	 */
-	private function cycle1(array &$games, array &$teams) : bool {
+	protected function cycle1(array &$games, array &$teams) : bool {
 		$found = false;
 		foreach ($games as $key => $game) {
 			if ($this->orderCheckTeamsVal($game, $teams, [4, 5, 6, 7])) {
@@ -167,7 +172,7 @@ class GameSorter implements BaseSorter
 	 *
 	 * @return bool
 	 */
-	private function orderCheckTeamsVal(Game $game, array $teams, array $checkVals, array $required = []) : bool {
+	protected function orderCheckTeamsVal(Game $game, array $teams, array $checkVals, array $required = []) : bool {
 
 		$requiredTeams = array_filter($teams, static function($a) use ($required) {
 			return in_array($a, $required, true);
@@ -194,7 +199,7 @@ class GameSorter implements BaseSorter
 	 *
 	 * @return bool
 	 */
-	private function cycle2(array &$games, array &$teams) : bool {
+	protected function cycle2(array &$games, array &$teams) : bool {
 		$found = false;
 		foreach ($games as $key => $game) {
 			if ($this->orderCheckTeamsVal($game, $teams, [6, 7])) {
@@ -215,7 +220,7 @@ class GameSorter implements BaseSorter
 	 *
 	 * @return bool
 	 */
-	private function cycle3(array &$games, array &$teams) : bool {
+	protected function cycle3(array &$games, array &$teams) : bool {
 		$found = false;
 		foreach ($games as $key => $game) {
 			if ($this->orderCheckTeamsVal($game, $teams, [7], [1, 2, 3])) {
@@ -236,7 +241,7 @@ class GameSorter implements BaseSorter
 	 *
 	 * @return bool
 	 */
-	private function cycle4(array &$games, array &$teams) : bool {
+	protected function cycle4(array &$games, array &$teams) : bool {
 		$found = false;
 		foreach ($games as $key => $game) {
 			if ($this->orderCheckTeamsVal($game, $teams, [7])) {
@@ -257,7 +262,7 @@ class GameSorter implements BaseSorter
 	 *
 	 * @return bool
 	 */
-	private function cycle5(array &$games, array &$teams) : bool {
+	protected function cycle5(array &$games, array &$teams) : bool {
 		$found = false;
 		foreach ($games as $key => $game) {
 			if ($this->orderCheckTeamsVal($game, $teams, [], [1, 2, 3])) {
@@ -268,6 +273,23 @@ class GameSorter implements BaseSorter
 			}
 		}
 		return $found;
+	}
+
+	/**
+	 * Resets the game ids
+	 *
+	 * @pre   The autoincrement must be reset on the group's container
+	 * @post  All games will have reset ids in the new order
+	 *
+	 * @since 1.0
+	 */
+	protected function resetGameIds() : void {
+		$container = $this->group->getGameContainer();
+		foreach ($this->games as $game) {
+			$game->setId($container->getAutoIncrement());
+			/** @noinspection DisconnectedForeachInstructionInspection */
+			$container->incrementId();
+		}
 	}
 
 }

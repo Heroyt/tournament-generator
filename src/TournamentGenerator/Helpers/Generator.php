@@ -314,6 +314,26 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 		return $this;
 	}
 
+	/**
+	 * Create games from array of teams for a Two-Two game
+	 *
+	 * @param Team[] $teams
+	 *
+	 * @pre The input array must be divisible by the Generator::$inGame value
+	 *
+	 * @return array
+	 * @throws Exception
+	 */
+	protected function saveTwoTwoGames(array $teams) : array {
+		while (count($teams) > 0) {
+			$tInGame = [];
+			for ($i = 0; $i < $this->inGame; $i++) {
+				$tInGame[] = array_shift($teams);
+			}
+			$this->group->game($tInGame);
+		}
+		return $teams;
+	}
 
 	/**
 	 * Automatically split teams in a group
@@ -349,23 +369,13 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 	}
 
 	/**
-	 * Sort games to minimize teams playing multiple games after one other
-	 *
-	 * @return array
-	 * @throws Exception
-	 */
-	public function orderGames() : array {
-		$sorter = new Sorter\GameSorter($this->group);
-
-		return $sorter->sort($this->group->getGames());
-	}
-
-	/**
 	 * Add games from chunks to groups
 	 *
 	 * Fills game in alternating order (chunk 1 - 1, chunk 2 - 1 , chunk 3 - 1, chunk 1 - 2, chunk 2 - 2...)
 	 *
 	 * @param Game[][] $games
+	 *
+	 * @throws Exception
 	 */
 	protected function fillGamesFromChunks(array $games) : void {
 		$gameCount = Functions::nestedCount($games);
@@ -381,24 +391,18 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 	}
 
 	/**
-	 * Create games from array of teams for a Two-Two game
+	 * Sort games to minimize teams playing multiple games after one other
 	 *
-	 * @param Team[] $teams
-	 *
-	 * @pre The input array must be divisible by the Generator::$inGame value
+	 * @pre  The autoincrement must be reset on the group's container
+	 * @post All games will have reset ids in the new order
 	 *
 	 * @return array
 	 * @throws Exception
 	 */
-	protected function saveTwoTwoGames(array $teams) : array {
-		while (count($teams) > 0) {
-			$tInGame = [];
-			for ($i = 0; $i < $this->inGame; $i++) {
-				$tInGame[] = array_shift($teams);
-			}
-			$this->group->game($tInGame);
-		}
-		return $teams;
+	public function orderGames() : array {
+		$sorter = new Sorter\GameSorter($this->group);
+
+		return $sorter->sort($this->group->getGames());
 	}
 
 }

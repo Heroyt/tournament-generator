@@ -134,6 +134,7 @@ class BaseContainer implements Countable, Iterator
 	 * @post If the value has a container -> add it to the hierarchy
 	 *
 	 * @return $this
+	 * @throws Exception
 	 */
 	public function insert(...$values) : BaseContainer {
 		foreach ($values as $value) {
@@ -247,6 +248,7 @@ class BaseContainer implements Countable, Iterator
 	 * Get a parent container
 	 *
 	 * @return BaseContainer|null
+	 * @since 1.0
 	 */
 	public function getParent() : ?BaseContainer {
 		return $this->parent;
@@ -259,6 +261,7 @@ class BaseContainer implements Countable, Iterator
 	 *
 	 * @return BaseContainer
 	 * @throws Exception
+	 * @since 1.0
 	 */
 	public function setParent(BaseContainer $parent) : BaseContainer {
 		if ($parent !== $this->parent && !is_null($this->parent)) {

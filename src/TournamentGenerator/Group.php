@@ -3,7 +3,6 @@
 namespace TournamentGenerator;
 
 use Exception;
-use TournamentGenerator\Containers\BaseContainer;
 use TournamentGenerator\Containers\GameContainer;
 use TournamentGenerator\Containers\HierarchyContainer;
 use TournamentGenerator\Containers\TeamContainer;
@@ -76,6 +75,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 * @param Team ...$teams Team objects
 	 *
 	 * @return $this
+	 * @throws Exception
 	 */
 	public function addTeam(Team ...$teams) : Group {
 		foreach ($teams as $team) {
@@ -92,6 +92,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 * @param string|int|null $id   Id of the new team - if omitted -> it is generated automatically as unique string
 	 *
 	 * @return Team Newly created team
+	 * @throws Exception
 	 */
 	public function team(string $name = '', $id = null) : Team {
 		$t = new Team($name, $id);
@@ -482,11 +483,15 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 *
 	 * @param Team[] $teams Teams that are playing
 	 *
+	 * @post The game's id is set to the current auto-incremented value
+	 *
 	 * @return Game
 	 * @throws Exception
 	 */
 	public function game(array $teams = []) : Game {
 		$g = new Game($teams, $this);
+		$g->setId($this->games->getAutoIncrement());
+		$this->games->incrementId();
 		$this->games->insert($g);
 		return $g;
 	}
@@ -496,15 +501,26 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 *
 	 * @param Game[] $games
 	 *
+	 * @post The games' id is set to the current auto-incremented value
+	 *
 	 * @return $this
+	 * @throws Exception
 	 */
 	public function addGame(Game ...$games) : Group {
 		$this->games->insert(...$games);
+		// Set the game id's
+		foreach ($games as $game) {
+			$game->setId($this->games->getAutoIncrement());
+			/** @noinspection DisconnectedForeachInstructionInspection */
+			$this->games->incrementId();
+		}
 		return $this;
 	}
 
 	/**
 	 * Order generated games to minimize teams playing multiple games after one other.
+	 *
+	 * @post The game ids are reset according to their new order
 	 *
 	 * @return Game[]
 	 * @throws Exception
@@ -513,6 +529,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 		if (count($this->games) < 5) {
 			return $this->games->get();
 		}
+		$this->games->resetAutoIncrement();
 		return $this->generator->orderGames();
 	}
 

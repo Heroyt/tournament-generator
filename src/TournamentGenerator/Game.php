@@ -15,6 +15,8 @@ use TypeError;
 class Game
 {
 
+	/** @var int Autoincrement game id */
+	protected int $id;
 	/** @var Team[] Teams playing this game */
 	protected array $teams;
 	/** @var array[] List of scores - [teamId => [score => value, type => win|loss|draw|second|third]] pairs */
@@ -376,4 +378,23 @@ class Game
 	public function isPlayed() : bool {
 		return count($this->results) > 0;
 	}
+
+	/**
+	 * @return int
+	 * @since 1.0
+	 */
+	public function getId() : int {
+		return $this->id;
+	}
+
+	/**
+	 * @param int $id
+	 *
+	 * @return Game
+	 * @since 1.0
+	 */
+	public function setId(int $id) : Game {
+		$this->id = $id;
+		return $this;
+}
 }
