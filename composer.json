@@ -36,6 +36,7 @@
 	},
 	"scripts": {
 		"docs": "php phpDocumentor.phar -s src/ -t docs/api/",
+		"doxygen": "doxygen",
 		"test": "./vendor/bin/phpunit"
 	},
 	"require": {
