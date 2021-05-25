@@ -6,6 +6,7 @@ namespace TournamentGenerator\Traits;
 
 use TournamentGenerator\Category;
 use TournamentGenerator\Containers\BaseContainer;
+use TournamentGenerator\Containers\ContainerQuery;
 use TournamentGenerator\Interfaces\WithCategories as WithCategoriesInterface;
 
 /**
@@ -24,7 +25,16 @@ trait WithCategories
 	 * @return Category[]
 	 */
 	public function getCategories() : array {
-		return $this->container->getTopLevel();
+		return $this->container->getHierarchyLevel(Category::class);
+	}
+
+	/**
+	 * Get categories container query
+	 *
+	 * @return ContainerQuery
+	 */
+	public function queryCategories() : ContainerQuery {
+		return $this->container->getHierarchyLevelQuery(Category::class);
 	}
 
 

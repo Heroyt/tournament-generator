@@ -3,6 +3,7 @@
 
 namespace TournamentGenerator\Containers;
 
+use Exception;
 use InvalidArgumentException;
 use TournamentGenerator\Base;
 
@@ -13,7 +14,7 @@ use TournamentGenerator\Base;
  *
  * @package TournamentGenerator\Containers
  * @author  Tomáš Vojík <vojik@wboy.cz>
- * @since 0.4
+ * @since   0.4
  */
 class HierarchyContainer extends BaseContainer
 {
@@ -35,6 +36,20 @@ class HierarchyContainer extends BaseContainer
 		}
 		parent::insert(...$values);
 		return $this;
+	}
+
+	/**
+	 * Returns a container query for a set hierarchy level
+	 *
+	 * @param $class
+	 *
+	 * @return ContainerQuery
+	 * @throws Exception
+	 */
+	public function getHierarchyLevelQuery($class) : ContainerQuery {
+		$objects = $this->getHierarchyLevel($class);
+		$container = BaseContainer::fromArray($objects);
+		return $container->getQuery();
 	}
 
 	/**

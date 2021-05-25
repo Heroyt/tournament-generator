@@ -7,6 +7,7 @@ namespace Export;
 use Error;
 use Exception;
 use PHPUnit\Framework\TestCase;
+use TournamentGenerator\Constants;
 use TournamentGenerator\Export\Exporter;
 use TournamentGenerator\Tournament;
 
@@ -121,6 +122,159 @@ class ExporterTest extends TestCase
 				'id'     => 12,
 				'teams'  => [5, 6],
 				'scores' => [],
+			],
+		];
+
+		$expectedSetup = [
+			'tournament'   => (object) [
+				'type'       => 'general',
+				'name'       => 'Tournament',
+				'skip'       => false,
+				'timing'     => (object) [
+					'play'         => 0,
+					'gameWait'     => 0,
+					'categoryWait' => 0,
+					'roundWait'    => 0,
+					'expectedTime' => 0,
+				],
+				'categories' => [],
+				'rounds'     => [1, 2],
+				'groups'     => [1, 2, 3, 4],
+				'teams'      => [0, 1, 2, 3, 4, 5, 6, 7],
+				'games'      => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+			],
+			'categories'   => [],
+			'rounds'       => [
+				1 => (object) [
+					'id'     => 1,
+					'name'   => 'Round 1',
+					'skip'   => false,
+					'played' => true,
+					'groups' => [1, 2],
+					'teams'  => [0, 1, 2, 3, 4, 5, 6, 7],
+					'games'  => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+				],
+				2 => (object) [
+					'id'     => 2,
+					'name'   => 'Round 2',
+					'skip'   => false,
+					'played' => false,
+					'groups' => [3, 4],
+					'teams'  => [],
+					'games'  => [],
+				],
+			],
+			'groups'       => [
+				1 => (object) [
+					'id'      => 1,
+					'name'    => 'Group 1',
+					'type'    => Constants::ROUND_ROBIN,
+					'skip'    => false,
+					'points'  => (object) [
+						'win'         => 3,
+						'loss'        => 0,
+						'draw'        => 1,
+						'second'      => 2,
+						'third'       => 1,
+						'progression' => 50,
+					],
+					'played'  => true,
+					'inGame'  => 2,
+					'maxSize' => 4,
+					'teams'   => [0, 1, 2, 3],
+					'games'   => [1, 2, 3, 4, 5, 6],
+				],
+				2 => (object) [
+					'id'      => 2,
+					'name'    => 'Group 2',
+					'type'    => Constants::ROUND_ROBIN,
+					'skip'    => false,
+					'points'  => (object) [
+						'win'         => 3,
+						'loss'        => 0,
+						'draw'        => 1,
+						'second'      => 2,
+						'third'       => 1,
+						'progression' => 50,
+					],
+					'played'  => true,
+					'inGame'  => 2,
+					'maxSize' => 4,
+					'teams'   => [4, 5, 6, 7],
+					'games'   => [7, 8, 9, 10, 11, 12],
+				],
+				3 => (object) [
+					'id'      => 3,
+					'name'    => 'Group 3',
+					'type'    => Constants::ROUND_ROBIN,
+					'skip'    => false,
+					'points'  => (object) [
+						'win'         => 3,
+						'loss'        => 0,
+						'draw'        => 1,
+						'second'      => 2,
+						'third'       => 1,
+						'progression' => 50,
+					],
+					'played'  => false,
+					'inGame'  => 2,
+					'maxSize' => 4,
+					'teams'   => [],
+					'games'   => [],
+				],
+				4 => (object) [
+					'id'      => 4,
+					'name'    => 'Group 4',
+					'type'    => Constants::ROUND_ROBIN,
+					'skip'    => false,
+					'points'  => (object) [
+						'win'         => 3,
+						'loss'        => 0,
+						'draw'        => 1,
+						'second'      => 2,
+						'third'       => 1,
+						'progression' => 50,
+					],
+					'played'  => false,
+					'inGame'  => 2,
+					'maxSize' => 4,
+					'teams'   => [],
+					'games'   => [],
+				],
+			],
+			'progressions' => [
+				(object) [
+					'from'       => 1,
+					'to'         => 3,
+					'offset'     => 0,
+					'length'     => 2,
+					'progressed' => false,
+					'filters'    => [],
+				],
+				(object) [
+					'from'       => 1,
+					'to'         => 4,
+					'offset'     => -2,
+					'length'     => null,
+					'progressed' => false,
+					'filters'    => [],
+				],
+				(object) [
+					'from'       => 2,
+					'to'         => 3,
+					'offset'     => 0,
+					'length'     => 2,
+					'progressed' => false,
+					'filters'    => [],
+				],
+				(object) [
+					'from'       => 2,
+					'to'         => 4,
+					'offset'     => -2,
+					'length'     => null,
+					'progressed' => false,
+					'filters'    => [],
+				],
 			],
 		];
 
@@ -241,6 +395,79 @@ class ExporterTest extends TestCase
 
 		if ($withSecondRound) {
 			$round1->progress();
+
+			foreach ($expectedSetup['progressions'] as $key => $progression) {
+				$expectedSetup['progressions'][$key]->progressed = true;
+			}
+			$expectedSetup['tournament']->games = array_merge($expectedSetup['tournament']->games, [
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+			]);
+			$expectedSetup['rounds'][2]->played = true;
+			$expectedSetup['rounds'][2]->teams = [
+				0,
+				3,
+				5,
+				4,
+				1,
+				2,
+				7,
+				6,
+			];
+			$expectedSetup['rounds'][2]->games = [
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+			];
+			$expectedSetup['groups'][3]->played = true;
+			$expectedSetup['groups'][4]->played = true;
+			$expectedSetup['groups'][3]->teams = [
+				0,
+				3,
+				5,
+				4,
+			];
+			$expectedSetup['groups'][3]->games = [
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+			];
+			$expectedSetup['groups'][4]->teams = [
+				1,
+				2,
+				7,
+				6,
+			];
+			$expectedSetup['groups'][4]->games = [
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+			];
 
 			$expectedGames = array_merge($expectedGames, [
 				(object) [
@@ -419,7 +646,7 @@ class ExporterTest extends TestCase
 
 		}
 
-		return [$tournament, $expectedTeams, $expectedGames];
+		return [$tournament, $expectedTeams, $expectedGames, $expectedSetup];
 	}
 
 	public function getModifiedTournamentData() : array {
@@ -441,6 +668,18 @@ class ExporterTest extends TestCase
 		self::assertEquals($expectedTeams, $export2['teams']);
 		self::assertEquals($expectedGames, $export1['games']);
 		self::assertEquals($expectedGames, $export2['games']);
+	}
+
+	/**
+	 * @dataProvider getBasicTournamentData
+	 */
+	public function testBasicExportWithSetup(Tournament $tournament, array $expectedTeams, array $expectedGames, array $expectedSetup) : void {
+
+		$export = Exporter::start($tournament)->withSetup()->get();
+
+		self::assertEquals($expectedTeams, $export['teams']);
+		self::assertEquals($expectedGames, $export['games']);
+		self::assertEquals($expectedSetup, $export['setup']);
 	}
 
 	/**

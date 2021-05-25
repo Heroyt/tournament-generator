@@ -4,6 +4,7 @@
 namespace TournamentGenerator\Interfaces;
 
 
+use TournamentGenerator\Containers\ContainerQuery;
 use TournamentGenerator\Group;
 
 /**
@@ -22,4 +23,10 @@ interface WithGroups
 	 * @return Group[]
 	 */
 	public function getGroups() : array;
+	/**
+	 * Get groups container query
+	 *
+	 * @return ContainerQuery
+	 */
+	public function queryGroups() : ContainerQuery;
 }

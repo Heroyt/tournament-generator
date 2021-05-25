@@ -29,6 +29,7 @@ class ContainerQuery
 	protected BaseSorter $sorter;
 	protected bool       $topLevelOnly = false;
 	protected bool       $uniqueOnly   = false;
+	protected ?string $pluck = null;
 
 	/**
 	 * ContainerQuery constructor.
@@ -90,6 +91,19 @@ class ContainerQuery
 		// Order reverse
 		if ($this->desc) {
 			$data = array_reverse($data, true);
+		}
+
+		// "Pluck" a specific value from an object
+		if (isset($this->pluck)) {
+			$data = array_map(function(object $item) {
+				if (property_exists($item, $this->pluck)) {
+					return $item->{$this->pluck};
+				}
+				if (method_exists($item, $this->pluck)) {
+					return $item->{$this->pluck}();
+				}
+				return $item;
+			}, $data);
 		}
 
 		return $data;
@@ -160,6 +174,16 @@ class ContainerQuery
 	 */
 	public function unique() : ContainerQuery {
 		$this->uniqueOnly = true;
+		return $this;
+	}
+
+	/**
+	 * Get only the object's ids
+	 *
+	 * @return $this
+	 */
+	public function ids() : ContainerQuery {
+		$this->pluck = 'getId';
 		return $this;
 	}
 

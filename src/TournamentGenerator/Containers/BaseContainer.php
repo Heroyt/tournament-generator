@@ -34,6 +34,20 @@ class BaseContainer implements Countable, Iterator
 	protected int $currentIndex = 0;
 
 	/**
+	 * Create a new container from array
+	 *
+	 * @param array $data
+	 *
+	 * @return BaseContainer
+	 * @throws Exception
+	 */
+	public static function fromArray(array $data) : BaseContainer {
+		$container = new self(0);
+		$container->insertFlat(...$data);
+		return $container;
+	}
+
+	/**
 	 * BaseContainer constructor.
 	 *
 	 * @param string|int $id
@@ -147,6 +161,21 @@ class BaseContainer implements Countable, Iterator
 	}
 
 	/**
+	 * Insert a value into container
+	 *
+	 * @param array $values Any value to insert into container
+	 *
+	 * @return $this
+	 * @throws Exception
+	 */
+	protected function insertFlat(...$values) : BaseContainer {
+		foreach ($values as $value) {
+			$this->values[] = $value;
+		}
+		return $this;
+	}
+
+	/**
 	 * Adds a child container
 	 *
 	 * @param BaseContainer[] $containers
@@ -241,6 +270,17 @@ class BaseContainer implements Countable, Iterator
 	public function unique() : ContainerQuery {
 		$query = new ContainerQuery($this);
 		$query->unique();
+		return $query;
+	}
+
+	/**
+	 * Get only the object's ids
+	 *
+	 * @return ContainerQuery
+	 */
+	public function ids() : ContainerQuery {
+		$query = new ContainerQuery($this);
+		$query->ids();
 		return $query;
 	}
 

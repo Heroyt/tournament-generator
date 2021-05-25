@@ -2,6 +2,7 @@
 
 namespace TournamentGenerator\Interfaces;
 
+use TournamentGenerator\Containers\ContainerQuery;
 use TournamentGenerator\Round;
 
 /**
@@ -39,4 +40,11 @@ interface WithRounds
 	 * @return Round[]
 	 */
 	public function getRounds() : array;
+
+	/**
+	 * Get rounds container query
+	 *
+	 * @return ContainerQuery
+	 */
+	public function queryRounds() : ContainerQuery;
 }

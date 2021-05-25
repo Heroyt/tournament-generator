@@ -576,4 +576,13 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 			})) !== 0;
 	}
 
+	/**
+	 * Get all progressions
+	 *
+	 * @return Progression[]
+	 */
+	public function getProgressions() : array {
+		return $this->progressions;
+	}
+
 }

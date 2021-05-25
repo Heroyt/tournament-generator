@@ -4,6 +4,7 @@
 namespace TournamentGenerator\Traits;
 
 
+use TournamentGenerator\Containers\ContainerQuery;
 use TournamentGenerator\Group;
 use TournamentGenerator\Round;
 
@@ -24,5 +25,14 @@ trait WithGroups
 	 */
 	public function getGroups() : array {
 		return $this->container->getHierarchyLevel(Group::class);
+	}
+
+	/**
+	 * Get groups container query
+	 *
+	 * @return ContainerQuery
+	 */
+	public function queryGroups() : ContainerQuery {
+		return $this->container->getHierarchyLevelQuery(Group::class);
 	}
 }

@@ -49,6 +49,9 @@ class TeamFilter
 	/** @var int|Team Value */
 	private $val;
 
+	/**
+	 * @var array|int[]|string[]
+	 */
 	private array $groups;
 
 	/**
@@ -167,6 +170,34 @@ class TeamFilter
 
 		return FilterComparator::compare($operation, $this->val, $this->how, $this->what, $team, $groupsId);
 
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getWhat() : string {
+		return $this->what;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getHow() : string {
+		return $this->how;
+	}
+
+	/**
+	 * @return int|Team
+	 */
+	public function getVal() {
+		return $this->val;
+	}
+
+	/**
+	 * @return array|int[]|string[]
+	 */
+	public function getGroups() : array {
+		return $this->groups;
 	}
 
 }

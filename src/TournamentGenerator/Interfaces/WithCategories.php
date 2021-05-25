@@ -5,6 +5,7 @@ namespace TournamentGenerator\Interfaces;
 
 
 use TournamentGenerator\Category;
+use TournamentGenerator\Containers\ContainerQuery;
 
 /**
  * Interface for objects that contain categories
@@ -22,6 +23,13 @@ interface WithCategories
 	 * @return Category[]
 	 */
 	public function getCategories() : array;
+
+	/**
+	 * Get categories container query
+	 *
+	 * @return ContainerQuery
+	 */
+	public function queryCategories() : ContainerQuery;
 
 	/**
 	 * Creates a new category and adds it to the object

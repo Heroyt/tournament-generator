@@ -138,4 +138,46 @@ class Progression
 		return $this;
 	}
 
+	/**
+	 * @return Group
+	 */
+	public function getFrom() : Group {
+		return $this->from;
+	}
+
+	/**
+	 * @return Group
+	 */
+	public function getTo() : Group {
+		return $this->to;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getStart() : int {
+		return $this->start;
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getLen() : ?int {
+		return $this->len;
+	}
+
+	/**
+	 * @return TeamFilter[]
+	 */
+	public function getFilters() : array {
+		return $this->filters;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isProgressed() : bool {
+		return $this->progressed;
+	}
+
 }

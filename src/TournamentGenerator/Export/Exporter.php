@@ -97,7 +97,22 @@ class Exporter extends ExportBase
 	 * @return array
 	 */
 	public function getBasic() : array {
-		$data = [];
-		return $data;
+		return [];
+	}
+
+	/**
+	 * @defgroup ExporterQueryModifiers Query modifiers
+	 * @brief    Modifier methods for the query
+	 */
+
+	/**
+	 * Query modifier, adding a setup exporter
+	 *
+	 * @return $this
+	 * @ingroup ExporterQueryModifiers
+	 */
+	public function withSetup() : Exporter {
+		$this->exporters['setup'] = SetupExporter::start($this->object);
+		return $this;
 	}
 }

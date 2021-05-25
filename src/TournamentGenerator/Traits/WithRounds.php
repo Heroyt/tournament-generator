@@ -4,6 +4,7 @@
 namespace TournamentGenerator\Traits;
 
 
+use TournamentGenerator\Containers\ContainerQuery;
 use TournamentGenerator\Interfaces\WithRounds as WithRoundsInterface;
 use TournamentGenerator\Interfaces\WithSkipSetters as WithSkipSettersInterface;
 use TournamentGenerator\Round;
@@ -56,5 +57,14 @@ trait WithRounds
 	 */
 	public function getRounds() : array {
 		return $this->container->getHierarchyLevel(Round::class);
+	}
+
+	/**
+	 * Get rounds container query
+	 *
+	 * @return ContainerQuery
+	 */
+	public function queryRounds() : ContainerQuery {
+		return $this->container->getHierarchyLevelQuery(Round::class);
 	}
 }
