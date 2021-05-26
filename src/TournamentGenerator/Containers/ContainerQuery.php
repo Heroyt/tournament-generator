@@ -4,6 +4,7 @@
 namespace TournamentGenerator\Containers;
 
 use Closure;
+use Exception;
 use TournamentGenerator\Base;
 use TournamentGenerator\Helpers\Sorter\BaseSorter;
 
@@ -14,7 +15,7 @@ use TournamentGenerator\Helpers\Sorter\BaseSorter;
  *
  * @package TournamentGenerator\Containers
  * @author  Tomáš Vojík <vojik@wboy.cz>
- * @since 0.4
+ * @since   0.4
  */
 class ContainerQuery
 {
@@ -29,7 +30,7 @@ class ContainerQuery
 	protected BaseSorter $sorter;
 	protected bool       $topLevelOnly = false;
 	protected bool       $uniqueOnly   = false;
-	protected ?string $pluck = null;
+	protected ?string    $pluck        = null;
 
 	/**
 	 * ContainerQuery constructor.
@@ -39,6 +40,19 @@ class ContainerQuery
 	public function __construct(BaseContainer $container, bool $topLevelOnly = false) {
 		$this->container = $container;
 		$this->topLevelOnly = $topLevelOnly;
+	}
+
+	/**
+	 * Gets the first result of container query
+	 *
+	 * @return mixed|null
+	 */
+	public function getFirst() {
+		$data = $this->get();
+		if (count($data) === 0) {
+			return null;
+		}
+		return reset($data);
 	}
 
 	/**
@@ -95,31 +109,23 @@ class ContainerQuery
 
 		// "Pluck" a specific value from an object
 		if (isset($this->pluck)) {
-			$data = array_map(function(object $item) {
-				if (property_exists($item, $this->pluck)) {
-					return $item->{$this->pluck};
+			$data = array_map(function($item) {
+				if (is_array($item) && isset($item[$this->pluck])) {
+					return $item[$this->pluck];
 				}
-				if (method_exists($item, $this->pluck)) {
-					return $item->{$this->pluck}();
+				if (is_object($item)) {
+					if (property_exists($item, $this->pluck)) {
+						return $item->{$this->pluck};
+					}
+					if (method_exists($item, $this->pluck)) {
+						return $item->{$this->pluck}();
+					}
 				}
 				return $item;
 			}, $data);
 		}
 
 		return $data;
-	}
-
-	/**
-	 * Gets the first result of container query
-	 *
-	 * @return mixed|null
-	 */
-	public function getFirst() {
-		$data = $this->get();
-		if (count($data) === 0) {
-			return null;
-		}
-		return reset($data);
 	}
 
 	/**
@@ -194,9 +200,26 @@ class ContainerQuery
 	 * Get only the object's ids
 	 *
 	 * @return $this
+	 * @throws Exception
 	 */
 	public function ids() : ContainerQuery {
-		$this->pluck = 'getId';
+		$this->only('getId');
+		return $this;
+	}
+
+	/**
+	 * Pluck a specific key from all values
+	 *
+	 * @param string $property Property, array key or method to extract from values
+	 *
+	 * @return ContainerQuery
+	 * @throws Exception
+	 */
+	public function only(string $property) : ContainerQuery {
+		if (!empty($this->pluck)) {
+			throw new Exception('only() can be only called once.');
+		}
+		$this->pluck = $property;
 		return $this;
 	}
 

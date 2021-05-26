@@ -273,10 +273,27 @@ class BaseContainer implements Countable, Iterator
 		return $query;
 	}
 
+
+
+	/**
+	 * Pluck a specific key from all values
+	 *
+	 * @param string $property Property, array key or method to extract from values
+	 *
+	 * @return ContainerQuery
+	 * @throws Exception
+	 */
+	public function only(string $property) : ContainerQuery {
+		$query = new ContainerQuery($this);
+		$query->only($property);
+		return $query;
+	}
+
 	/**
 	 * Get only the object's ids
 	 *
 	 * @return ContainerQuery
+	 * @throws Exception
 	 */
 	public function ids() : ContainerQuery {
 		$query = new ContainerQuery($this);
