@@ -70,6 +70,31 @@ class ContainerQuery
 		}
 
 		// Unique
+		$this->filterUnique($data);
+
+		// Filters
+		$this->applyFilters($data);
+
+		// Sorting
+		$this->sortData($data);
+
+		// Order reverse
+		if ($this->desc) {
+			$data = array_reverse($data, true);
+		}
+
+		// "Pluck" a specific value from an object
+		$this->pluckData($data);
+
+		return $data;
+	}
+
+	/**
+	 *  Filter data to contain only unique values
+	 *
+	 * @param array $data
+	 */
+	protected function filterUnique(array &$data) : void {
 		if ($this->uniqueOnly) {
 			if (reset($data) instanceof Base) {
 				$ids = [];
@@ -85,13 +110,25 @@ class ContainerQuery
 				$data = array_unique($data);
 			}
 		}
+	}
 
-		// Filters
+	/**
+	 * Apply predefined filters on data
+	 *
+	 * @param $data
+	 */
+	protected function applyFilters(&$data) : void {
 		foreach ($this->filters as $filter) {
 			$data = array_filter($data, $filter);
 		}
+	}
 
-		// Sorting
+	/**
+	 * Sort data using a predefined filters
+	 *
+	 * @param array $data
+	 */
+	protected function sortData(array &$data) : void {
 		if (isset($this->sorter)) {
 			$data = $this->sorter->sort($data);
 		}
@@ -101,13 +138,14 @@ class ContainerQuery
 		elseif (isset($this->sortProperty)) {
 			uasort($data, [$this, 'sortByPropertyCallback']);
 		}
+	}
 
-		// Order reverse
-		if ($this->desc) {
-			$data = array_reverse($data, true);
-		}
-
-		// "Pluck" a specific value from an object
+	/**
+	 * Pluck a predefined value from data values
+	 *
+	 * @param $data
+	 */
+	protected function pluckData(&$data) : void {
 		if (isset($this->pluck)) {
 			$data = array_map(function($item) {
 				if (is_array($item) && isset($item[$this->pluck])) {
@@ -124,8 +162,6 @@ class ContainerQuery
 				return $item;
 			}, $data);
 		}
-
-		return $data;
 	}
 
 	/**
