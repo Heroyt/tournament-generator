@@ -7,8 +7,10 @@ namespace Export;
 use Error;
 use Exception;
 use PHPUnit\Framework\TestCase;
+use TournamentGenerator\Category;
 use TournamentGenerator\Constants;
 use TournamentGenerator\Export\Exporter;
+use TournamentGenerator\Game;
 use TournamentGenerator\Tournament;
 
 class ExporterTest extends TestCase
@@ -695,4 +697,65 @@ class ExporterTest extends TestCase
 		self::assertEquals($expectedGames, $export['games']);
 	}
 
+	public function testCategoryRoundsGroupsExport() : void {
+		$category = new Category('Category', 0);
+		$round1 = $category->round('Round 1', 1);
+		$round2 = $category->round('Round 2', 2);
+		$group1 = $round1->group('Group 1', 1);
+		$group2 = $round2->group('Group 2', 2);
+		$teams = [];
+		for ($i = 0; $i < 4; $i++) {
+			$group1->team('Team '.$i, $i);
+			$teams[] = (object) [
+				'id'   => $i,
+				'name' => 'Team '.$i,
+			];
+		}
+		for ($i = 4; $i < 8; $i++) {
+			$group2->team('Team '.$i, $i);
+			$teams[] = (object) [
+				'id'   => $i,
+				'name' => 'Team '.$i,
+			];
+		}
+		$games1 = array_map(static function(Game $game) {
+			return (object) [
+				'id' => $game->getId(),
+				'teams' => $game->getTeamsIds(),
+				'scores' => [],
+			];
+		}, $group1->genGames());
+		$games2 = array_map(static function(Game $game) {
+			return (object) [
+				'id' => $game->getId(),
+				'teams' => $game->getTeamsIds(),
+				'scores' => [],
+			];
+		}, $group2->genGames());
+		$export = Exporter::export($category);
+		self::assertEquals([
+												 'teams' => $teams,
+												 'games' => array_merge($games1, $games2),
+											 ], $export);
+		$export = Exporter::export($round1);
+		self::assertEquals([
+												 'teams' => array_slice($teams, 0, 4),
+												 'games' => $games1,
+											 ], $export);
+		$export = Exporter::export($round2);
+		self::assertEquals([
+												 'teams' => array_slice($teams, -4),
+												 'games' => $games2,
+											 ], $export);
+		$export = Exporter::export($group1);
+		self::assertEquals([
+												 'teams' => array_slice($teams, 0, 4),
+												 'games' => $games1,
+											 ], $export);
+		$export = Exporter::export($group2);
+		self::assertEquals([
+												 'teams' => array_slice($teams, -4),
+												 'games' => $games2,
+											 ], $export);
+	}
 }
