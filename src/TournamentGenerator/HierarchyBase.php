@@ -40,6 +40,7 @@ abstract class HierarchyBase extends Base
 	 * @post If the object has games -> add other game container to hierarchy
 	 *
 	 * @return $this
+	 * @throws \Exception
 	 */
 	public function insertIntoContainer(Base $object) : Base {
 		$this->container->insert($object);

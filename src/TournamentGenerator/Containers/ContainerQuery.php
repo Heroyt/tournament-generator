@@ -110,6 +110,19 @@ class ContainerQuery
 	}
 
 	/**
+	 * Gets the first result of container query
+	 *
+	 * @return mixed|null
+	 */
+	public function getFirst() {
+		$data = $this->get();
+		if (count($data) === 0) {
+			return null;
+		}
+		return reset($data);
+	}
+
+	/**
 	 * Add a filter callback
 	 *
 	 * @param Closure $callback

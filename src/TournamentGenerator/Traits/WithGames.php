@@ -4,6 +4,7 @@
 namespace TournamentGenerator\Traits;
 
 
+use Exception;
 use TournamentGenerator\Containers\GameContainer;
 use TournamentGenerator\Game;
 use TournamentGenerator\Interfaces\WithGames as WithGamesInterface;
@@ -26,7 +27,7 @@ trait WithGames
 	 * @param GameContainer $container
 	 *
 	 * @return WithGamesInterface
-	 * @throws \Exception
+	 * @throws Exception
 	 */
 	public function addGameContainer(GameContainer $container) : WithGamesInterface {
 		$this->games->addChild($container);
@@ -58,15 +59,37 @@ trait WithGames
 	 *
 	 * @warning Do this on the top-level hierarchy element (Tournament class) or else, it might be reset later
 	 *
-	 * @post Propagates the value to all child hierarchy objects
-	 *
-	 * @see GameContainer::setAutoIncrement()
+	 * @post    Propagates the value to all child hierarchy objects
 	 *
 	 * @return WithGamesInterface
-	 * @since 0.5
+	 * @see     GameContainer::setAutoIncrement()
+	 *
+	 * @since   0.5
 	 */
 	public function setGameAutoincrementId(int $id) : WithGamesInterface {
 		$this->games->setAutoIncrement($id);
 		return $this;
+	}
+
+	/**
+	 * Set the game's results
+	 *
+	 * Results is an array of [teamId => teamScore] key-value pairs. This method will look for a game with given teams and try to set the first not played.
+	 *
+	 * @param int[] $results array of [teamId => teamScore] key-value pairs
+	 *
+	 * @return Game|null
+	 * @throws Exception
+	 */
+	public function setResults(array $results) : ?Game {
+		$ids = array_keys($results);
+		/** @var Game|null $game */
+		$game = $this->games->filter(static function(Game $game) use ($ids) {
+			return !$game->isPlayed() && count(array_diff($ids, $game->getTeamsIds())) === 0;
+		})->getFirst();
+		if (isset($game)) {
+			$game->setResults($results);
+		}
+		return $game;
 	}
 }
