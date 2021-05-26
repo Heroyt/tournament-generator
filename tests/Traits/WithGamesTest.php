@@ -99,7 +99,7 @@ class WithGamesTest extends TestCase
 	 * @param WithGames $class
 	 */
 	public function testSettingResult(WithGames $class) : void {
-		$games = $this->setupGames($class);
+		$this->setupGames($class);
 		$teams = [];
 		$games = [];
 		if ($class instanceof WithGroups) {
@@ -121,7 +121,7 @@ class WithGamesTest extends TestCase
 		}
 
 		// Test setting results for existing games
-		foreach ($games as $groupId => $groupGames) {
+		foreach ($games as $groupGames) {
 			foreach ($groupGames as $game) {
 				$ids = $game->getTeamsIds();
 				$results = [];

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1622052259">
-  <project timestamp="1622052259">
+<coverage generated="1622052535">
+  <project timestamp="1622052535">
     <file name="/Users/heroyt/Projects/tournament-generator/src/TournamentGenerator/Base.php">
       <class name="TournamentGenerator\Base" namespace="global">
         <metrics complexity="7" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="15" coveredelements="15"/>
@@ -272,7 +272,7 @@
       <line num="44" type="stmt" count="110"/>
       <line num="47" type="stmt" count="178"/>
       <line num="48" type="stmt" count="110"/>
-      <line num="49" type="stmt" count="98"/>
+      <line num="49" type="stmt" count="97"/>
       <line num="52" type="stmt" count="178"/>
       <line num="58" type="method" name="getAutoIncrement" visibility="public" complexity="1" crap="1" count="178"/>
       <line num="59" type="stmt" count="178"/>
@@ -875,7 +875,7 @@
       <line num="562" type="stmt" count="15"/>
       <line num="570" type="method" name="isPlayed" visibility="public" complexity="2" crap="2" count="35"/>
       <line num="571" type="stmt" count="35"/>
-      <line num="572" type="stmt" count="10"/>
+      <line num="572" type="stmt" count="11"/>
       <line num="574" type="stmt" count="30"/>
       <line num="575" type="stmt" count="30"/>
       <line num="576" type="stmt" count="30"/>
@@ -1062,11 +1062,11 @@
       <line num="38" type="stmt" count="9"/>
       <line num="48" type="method" name="previousPowerOf2" visibility="public" complexity="1" crap="1" count="9"/>
       <line num="50" type="stmt" count="9"/>
-      <line num="60" type="method" name="nestedCount" visibility="public" complexity="2" crap="2" count="9"/>
-      <line num="61" type="stmt" count="9"/>
-      <line num="62" type="stmt" count="9"/>
-      <line num="63" type="stmt" count="8"/>
-      <line num="65" type="stmt" count="9"/>
+      <line num="60" type="method" name="nestedCount" visibility="public" complexity="2" crap="2" count="10"/>
+      <line num="61" type="stmt" count="10"/>
+      <line num="62" type="stmt" count="10"/>
+      <line num="63" type="stmt" count="9"/>
+      <line num="65" type="stmt" count="10"/>
       <line num="67" type="stmt" count="1"/>
       <metrics loc="66" ncloc="29" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="11" coveredelements="11"/>
     </file>
@@ -1124,7 +1124,7 @@
       <line num="167" type="stmt" count="37"/>
       <line num="179" type="method" name="circle_genGames2" visibility="public" complexity="3" crap="3" count="37"/>
       <line num="181" type="stmt" count="37"/>
-      <line num="182" type="stmt" count="7"/>
+      <line num="182" type="stmt" count="8"/>
       <line num="185" type="stmt" count="37"/>
       <line num="187" type="stmt" count="37"/>
       <line num="188" type="stmt" count="37"/>
@@ -1138,7 +1138,7 @@
       <line num="213" type="stmt" count="37"/>
       <line num="214" type="stmt" count="37"/>
       <line num="216" type="stmt" count="37"/>
-      <line num="217" type="stmt" count="7"/>
+      <line num="217" type="stmt" count="8"/>
       <line num="220" type="stmt" count="37"/>
       <line num="224" type="stmt" count="37"/>
       <line num="235" type="method" name="circle_rotateBracket" visibility="public" complexity="1" crap="1" count="37"/>
@@ -1188,23 +1188,23 @@
       <line num="348" type="stmt" count="5"/>
       <line num="351" type="stmt" count="5"/>
       <line num="352" type="stmt" count="5"/>
-      <line num="353" type="stmt" count="3"/>
-      <line num="356" type="stmt" count="3"/>
-      <line num="358" type="stmt" count="3"/>
-      <line num="359" type="stmt" count="3"/>
-      <line num="362" type="stmt" count="3"/>
-      <line num="364" type="stmt" count="3"/>
-      <line num="366" type="stmt" count="2"/>
-      <line num="368" type="stmt" count="2"/>
-      <line num="380" type="method" name="fillGamesFromChunks" visibility="protected" complexity="4" crap="4" count="3"/>
-      <line num="381" type="stmt" count="3"/>
-      <line num="382" type="stmt" count="3"/>
-      <line num="383" type="stmt" count="3"/>
-      <line num="384" type="stmt" count="3"/>
-      <line num="385" type="stmt" count="3"/>
-      <line num="386" type="stmt" count="3"/>
-      <line num="388" type="stmt" count="3"/>
-      <line num="391" type="stmt" count="3"/>
+      <line num="353" type="stmt" count="4"/>
+      <line num="356" type="stmt" count="4"/>
+      <line num="358" type="stmt" count="4"/>
+      <line num="359" type="stmt" count="4"/>
+      <line num="362" type="stmt" count="4"/>
+      <line num="364" type="stmt" count="4"/>
+      <line num="366" type="stmt" count="1"/>
+      <line num="368" type="stmt" count="1"/>
+      <line num="380" type="method" name="fillGamesFromChunks" visibility="protected" complexity="4" crap="4" count="4"/>
+      <line num="381" type="stmt" count="4"/>
+      <line num="382" type="stmt" count="4"/>
+      <line num="383" type="stmt" count="4"/>
+      <line num="384" type="stmt" count="4"/>
+      <line num="385" type="stmt" count="4"/>
+      <line num="386" type="stmt" count="4"/>
+      <line num="388" type="stmt" count="4"/>
+      <line num="391" type="stmt" count="4"/>
       <line num="402" type="method" name="orderGames" visibility="public" complexity="1" crap="1" count="5"/>
       <line num="403" type="stmt" count="5"/>
       <line num="405" type="stmt" count="5"/>
@@ -1287,11 +1287,11 @@
       <line num="79" type="stmt" count="4"/>
       <line num="80" type="stmt" count="4"/>
       <line num="86" type="stmt" count="3"/>
-      <line num="87" type="stmt" count="2"/>
+      <line num="87" type="stmt" count="1"/>
       <line num="92" type="stmt" count="3"/>
       <line num="93" type="stmt" count="3"/>
-      <line num="98" type="stmt" count="3"/>
-      <line num="99" type="stmt" count="2"/>
+      <line num="98" type="stmt" count="2"/>
+      <line num="99" type="stmt" count="1"/>
       <line num="104" type="stmt" count="2"/>
       <line num="107" type="stmt" count="4"/>
       <line num="109" type="stmt" count="4"/>
@@ -1341,10 +1341,10 @@
       <line num="224" type="stmt" count="3"/>
       <line num="225" type="stmt" count="3"/>
       <line num="226" type="stmt" count="3"/>
-      <line num="227" type="stmt" count="2"/>
-      <line num="228" type="stmt" count="2"/>
-      <line num="229" type="stmt" count="2"/>
-      <line num="230" type="stmt" count="2"/>
+      <line num="227" type="stmt" count="1"/>
+      <line num="228" type="stmt" count="1"/>
+      <line num="229" type="stmt" count="1"/>
+      <line num="230" type="stmt" count="1"/>
       <line num="233" type="stmt" count="3"/>
       <line num="244" type="method" name="cycle4" visibility="protected" complexity="3" crap="3" count="3"/>
       <line num="245" type="stmt" count="3"/>
@@ -1355,15 +1355,15 @@
       <line num="250" type="stmt" count="3"/>
       <line num="251" type="stmt" count="3"/>
       <line num="254" type="stmt" count="3"/>
-      <line num="265" type="method" name="cycle5" visibility="protected" complexity="3" crap="3" count="3"/>
-      <line num="266" type="stmt" count="3"/>
-      <line num="267" type="stmt" count="3"/>
-      <line num="268" type="stmt" count="3"/>
-      <line num="269" type="stmt" count="2"/>
-      <line num="270" type="stmt" count="2"/>
-      <line num="271" type="stmt" count="2"/>
-      <line num="272" type="stmt" count="2"/>
-      <line num="275" type="stmt" count="3"/>
+      <line num="265" type="method" name="cycle5" visibility="protected" complexity="3" crap="3" count="2"/>
+      <line num="266" type="stmt" count="2"/>
+      <line num="267" type="stmt" count="2"/>
+      <line num="268" type="stmt" count="2"/>
+      <line num="269" type="stmt" count="1"/>
+      <line num="270" type="stmt" count="1"/>
+      <line num="271" type="stmt" count="1"/>
+      <line num="272" type="stmt" count="1"/>
+      <line num="275" type="stmt" count="2"/>
       <line num="286" type="method" name="resetGameIds" visibility="protected" complexity="2" crap="2" count="4"/>
       <line num="287" type="stmt" count="4"/>
       <line num="288" type="stmt" count="4"/>
