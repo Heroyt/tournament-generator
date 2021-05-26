@@ -7,6 +7,7 @@ namespace Containers;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use TournamentGenerator\Containers\BaseContainer;
+use TournamentGenerator\Team;
 
 class BaseContainerTest extends TestCase
 {
@@ -260,6 +261,94 @@ class BaseContainerTest extends TestCase
 											 ],
 											 array_values($result) // Get rid of array keys
 		);
+	}
+
+	public function testContainerQueryPluckPrimitive() : void {
+		$container = new BaseContainer(0);
+
+		for ($i = 0; $i < 10; $i++) {
+			$container->insert($i);
+		}
+
+		$values = $container->only('value1')->get();
+		self::assertEquals(range(0, 9), $values);
+
+		$values = $container->only('value2')->get();
+		self::assertEquals(range(0, 9), $values);
+
+		$values = $container->only('value3')->get();
+		self::assertEquals(range(0, 9), $values);
+	}
+	public function testContainerQueryPluckArray() : void {
+		$container = new BaseContainer(0);
+
+		for ($i = 0; $i < 10; $i++) {
+			$container->insert([
+													 'value1' => $i,
+													 'value2' => $i + 1,
+													 'value3' => 10 - $i,
+												 ]);
+		}
+
+		$values = $container->only('value1')->get();
+		self::assertEquals(range(0, 9), $values);
+
+		$values = $container->only('value2')->get();
+		self::assertEquals(range(1, 10), $values);
+
+		$values = $container->only('value3')->get();
+		self::assertEquals(range(10, 1), $values);
+	}
+
+	public function testContainerQueryPluckObject() : void {
+		$container = new BaseContainer(0);
+
+		for ($i = 0; $i < 10; $i++) {
+			$container->insert((object) [
+													 'value1' => $i,
+													 'value2' => $i + 1,
+													 'value3' => 10 - $i,
+												 ]);
+		}
+
+		$values = $container->only('value1')->get();
+		self::assertEquals(range(0, 9), $values);
+
+		$values = $container->only('value2')->get();
+		self::assertEquals(range(1, 10), $values);
+
+		$values = $container->only('value3')->get();
+		self::assertEquals(range(10, 1), $values);
+	}
+
+	public function testContainerQueryPluckClass() : void {
+		$container = new BaseContainer(0);
+
+		$names = [];
+		for ($i = 0; $i < 10; $i++) {
+			$names[] = 'Team '.$i;
+			$container->insert(new Team('Team '.$i, $i));
+		}
+
+		$values = $container->only('getId')->get();
+		self::assertEquals(range(0, 9), $values);
+
+		$values = $container->only('getName')->get();
+		self::assertEquals($names, $values);
+
+		$values = $container->only('nonexistentValue')->get();
+		self::assertEquals($container->get(), $values);
+	}
+
+	public function testContainerQueryPluckInvalid() : void {
+		$container = new BaseContainer(0);
+
+		for ($i = 0; $i < 10; $i++) {
+			$container->insert(new Team('Team '.$i, $i));
+		}
+
+		$this->expectException(Exception::class);
+		$values = $container->only('getId')->only('getName')->get();
 	}
 
 }

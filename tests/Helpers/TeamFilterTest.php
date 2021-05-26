@@ -15,6 +15,47 @@ use TournamentGenerator\TeamFilter;
 class TeamFilterTest extends TestCase
 {
 
+	public function testConstructDefault() : void {
+		// Default values
+		$filter = new TeamFilter();
+		self::assertEquals('points', $filter->getWhat());
+		self::assertEquals('>', $filter->getHow());
+		self::assertEquals(0, $filter->getVal());
+		self::assertEquals([], $filter->getGroups());
+	}
+
+	public function filterConstruct() : array {
+		return [
+			['points', '=', 10, [new Group('Group'), new Group('Group', 123)]],
+			['score', '<', 9999, []],
+			['wins', '>', 10, [new Group('Group'), new Group('Group')]],
+			['losses', '>=', 54, [new Group('Group'), new Group('Group', 123)]],
+			['draws', '<=', 168, [new Group('Group'), new Group('Group', 123), new Group('Group'), new Group('Group', 8888)]],
+			['second', '!=', 85, [new Group('Group'), new Group('Group', 123)]],
+			['third', '<', 16, [new Group('Group'), new Group('Group', 123)]],
+			['team', '=', new Team('Team'), [new Group('Group'), new Group('Group', 123)]],
+			['team', '!=', new Team('Team'), []],
+			['progressed', '=', 0, [new Group('Group')]],
+			['not-progressed', '=', 0, [new Group('Group'), new Group('Group', 'aaaaa')]],
+		];
+	}
+
+	/**
+	 * @dataProvider filterConstruct
+	 *
+	 * @param string $what
+	 * @param string $how
+	 * @param        $value
+	 * @param array  $groups
+	 */
+	public function testConstructCustom(string $what, string $how, $value, array $groups) : void {
+		$filter = new TeamFilter($what, $how, $value, $groups);
+		self::assertEquals($what, $filter->getWhat());
+		self::assertEquals($how, $filter->getHow());
+		self::assertEquals($value, $filter->getVal());
+		self::assertEquals(array_map(static function(Group $group) { return $group->getId(); }, $groups), $filter->getGroups());
+	}
+
 	public function testConstructorInvalidType() : void {
 		$this->expectException(InvalidArgumentException::class);
 		new TeamFilter('nonexistent type');
