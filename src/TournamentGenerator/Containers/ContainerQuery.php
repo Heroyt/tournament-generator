@@ -146,7 +146,7 @@ class ContainerQuery
 	 * @param $data
 	 */
 	protected function pluckData(&$data) : void {
-		if (isset($this->pluck)) {
+		if (!empty($this->pluck)) {
 			$data = array_map(function($item) {
 				if (is_array($item) && isset($item[$this->pluck])) {
 					return $item[$this->pluck];
