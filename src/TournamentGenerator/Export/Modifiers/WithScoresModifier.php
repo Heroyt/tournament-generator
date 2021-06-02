@@ -18,14 +18,14 @@ class WithScoresModifier implements Modifier
 		// Check for "single" export
 		if (isset($data['object'])) {
 			if (!$data['object'] instanceof Team) {
-				throw new \InvalidArgumentException('WithScores modifier works only with Team data.');
+				throw new \InvalidArgumentException('WithScores modifier needs a Team object.');
 			}
 			return self::processArray($data);
 		}
 
 		foreach ($data as $object) {
-			if (!$object->object instanceof Team) {
-				throw new \InvalidArgumentException('WithScores modifier works only with Team data.');
+			if (!isset($object->object) || !$object->object instanceof Team) {
+				throw new \InvalidArgumentException('WithScores modifier needs a Team object.');
 			}
 			self::processObject($object);
 		}

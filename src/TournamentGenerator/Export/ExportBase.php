@@ -42,17 +42,18 @@ abstract class ExportBase implements Export, JsonSerializable
 	 *
 	 */
 	public function getJson() : string {
-		return $this->jsonSerialize();
+		return json_encode($this->get(), JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
 	}
 
 	/**
 	 * Serialize exported data as JSON
 	 *
-	 * @return string
-	 * @throws JsonException
+	 * @see json_encode()
+	 *
+	 * @return array
 	 */
-	public function jsonSerialize() : string {
-		return json_encode($this->get(), JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
+	public function jsonSerialize() : array {
+		return $this->get();
 	}
 
 	/**
