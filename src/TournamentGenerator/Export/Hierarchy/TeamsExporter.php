@@ -8,7 +8,7 @@ use InvalidArgumentException;
 use TournamentGenerator\Export\Export;
 use TournamentGenerator\Export\ExportBase;
 use TournamentGenerator\Export\Modifiers\WithScoresModifier;
-use TournamentGenerator\Export\Single\SingleTeamExporter;
+use TournamentGenerator\Export\Single\TeamExporter;
 use TournamentGenerator\HierarchyBase;
 use TournamentGenerator\Interfaces\WithId;
 use TournamentGenerator\Interfaces\WithTeams;
@@ -70,7 +70,7 @@ class TeamsExporter extends ExportBase
 	 */
 	public function getBasic() : array {
 		return array_map(static function(Team $team) {
-			return (object) SingleTeamExporter::exportBasic($team);
+			return (object) TeamExporter::exportBasic($team);
 		}, $this->object->getTeams());
 	}
 

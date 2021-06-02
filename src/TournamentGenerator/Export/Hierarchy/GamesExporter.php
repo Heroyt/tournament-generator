@@ -7,7 +7,7 @@ namespace TournamentGenerator\Export\Hierarchy;
 use InvalidArgumentException;
 use TournamentGenerator\Export\Export;
 use TournamentGenerator\Export\ExportBase;
-use TournamentGenerator\Export\Single\SingleGameExporter;
+use TournamentGenerator\Export\Single\GameExporter;
 use TournamentGenerator\Game;
 use TournamentGenerator\HierarchyBase;
 use TournamentGenerator\Interfaces\WithGames;
@@ -61,12 +61,12 @@ class GamesExporter extends ExportBase
 	 * Gets the basic unmodified data
 	 *
 	 * @return array
-	 * @see SingleGameExporter::export()
+	 * @see GameExporter::export()
 	 *
 	 */
 	public function getBasic() : array {
 		return array_map(static function(Game $game) {
-			return (object) SingleGameExporter::exportBasic($game);
+			return (object) GameExporter::exportBasic($game);
 		}, $this->object->getGames());
 	}
 }

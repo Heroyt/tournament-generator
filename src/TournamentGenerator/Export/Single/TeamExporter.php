@@ -5,41 +5,42 @@
 namespace TournamentGenerator\Export\Single;
 
 use TournamentGenerator\Export\Export;
+use TournamentGenerator\Export\Modifiers\WithScoresModifier;
 use TournamentGenerator\Export\SingleExportBase;
-use TournamentGenerator\Game;
 use TournamentGenerator\Interfaces\WithId;
+use TournamentGenerator\Team;
 
 /**
- * Exporter for games
+ * Exporter for teams
  *
- * A specific exporter, taking care of games and their related data. Exports data from a single Game object.
+ * A specific exporter, taking care of teams and their related data. Exports a single team object.
  *
  * @package TournamentGenerator\Export
  * @author  Tomáš Vojík <vojik@wboy.cz>
  * @since   0.5
  */
-class SingleGameExporter extends SingleExportBase
+class TeamExporter extends SingleExportBase
 {
 
-	/** @var Game */
+	/** @var Team */
 	protected WithId $object;
 
 	/**
-	 * SingleGameExporter constructor.
+	 * SingleTeamExporter constructor.
 	 *
-	 * @param Game $game
+	 * @param Team $game
 	 *
 	 * @noinspection MagicMethodsValidityInspection
 	 * @noinspection PhpMissingParentConstructorInspection
 	 */
-	public function __construct(Game $game) {
+	public function __construct(Team $game) {
 		$this->object = $game;
 	}
 
 	/**
 	 * Simple export query without any modifiers
 	 *
-	 * @param Game $object
+	 * @param Team $object
 	 *
 	 * @return array
 	 */
@@ -50,9 +51,9 @@ class SingleGameExporter extends SingleExportBase
 	/**
 	 * Start an export query
 	 *
-	 * @param Game $object
+	 * @param Team $object
 	 *
-	 * @return Expo\textsl{}rt
+	 * @return Export
 	 */
 	public static function start(WithId $object) : Export {
 		return new self($object);
@@ -61,13 +62,18 @@ class SingleGameExporter extends SingleExportBase
 	/**
 	 * Simple export query without any modifiers
 	 *
-	 * @param Game $object
+	 * @param Team $object
 	 *
 	 * @return array The query result including the object reference
 	 */
 	public static function exportBasic(WithId $object) : array {
 		return (new self($object))->getWithObject();
 	}
+
+	/**
+	 * @defgroup TeamExporterQueryModifiers Query modifiers
+	 * @brief    Modifier methods for the query
+	 */
 
 	/**
 	 * Gets the basic unmodified data
@@ -78,8 +84,18 @@ class SingleGameExporter extends SingleExportBase
 		return [
 			'object' => $this->object, // Passed for reference in the modifier methods
 			'id'     => $this->object->getId(),
-			'teams'  => $this->object->getTeamsIds(),
-			'scores' => $this->object->getResults(),
+			'name'   => $this->object->getName(),
 		];
+	}
+
+	/**
+	 * Include team scores in the result set
+	 *
+	 * @return TeamExporter
+	 * @ingroup TeamExporterQueryModifiers
+	 */
+	public function withScores() : TeamExporter {
+		$this->modifiers[] = WithScoresModifier::class;
+		return $this;
 	}
 }
