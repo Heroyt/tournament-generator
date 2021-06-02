@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Export;
+namespace Export\Hierarchy;
 
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use TournamentGenerator\Export\GameExporter;
+use TournamentGenerator\Export\Hierarchy\GamesExporter;
 use TournamentGenerator\HierarchyBase;
 use TournamentGenerator\Tournament;
 
@@ -15,7 +15,7 @@ class GameExporterTest extends TestCase
 
 	public function testInvalidConstruct() : void {
 		$this->expectException(InvalidArgumentException::class);
-		GameExporter::export(new HelperGameExporterClass());
+		GamesExporter::export(new HelperGameExporterClass());
 	}
 
 	public function testBasicExport() : void {
@@ -35,8 +35,8 @@ class GameExporterTest extends TestCase
 		$group->game([$teams[0], $teams[3]]);
 		$group->game([$teams[1], $teams[2]]);
 
-		$export1 = GameExporter::export($tournament);
-		$export2 = GameExporter::start($tournament)->get();
+		$export1 = GamesExporter::export($tournament);
+		$export2 = GamesExporter::start($tournament)->get();
 		$expectedExport = [
 			(object) [
 				'id'     => 1,
@@ -103,8 +103,8 @@ class GameExporterTest extends TestCase
 		$group2->game([$teams[0 + 4], $teams[3 + 4]]);
 		$group2->game([$teams[1 + 4], $teams[2 + 4]]);
 
-		$export1 = GameExporter::export($tournament);
-		$export2 = GameExporter::start($tournament)->get();
+		$export1 = GamesExporter::export($tournament);
+		$export2 = GamesExporter::start($tournament)->get();
 		$expectedExport = [
 			(object) [
 				'id'     => 1,

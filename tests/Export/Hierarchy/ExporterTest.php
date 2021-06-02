@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Export;
+namespace Export\Hierarchy;
 
 
 use Error;
@@ -9,7 +9,7 @@ use Exception;
 use PHPUnit\Framework\TestCase;
 use TournamentGenerator\Category;
 use TournamentGenerator\Constants;
-use TournamentGenerator\Export\Exporter;
+use TournamentGenerator\Export\Hierarchy\Exporter;
 use TournamentGenerator\Game;
 use TournamentGenerator\Tournament;
 

@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Export;
+namespace Export\Hierarchy;
 
 
 use PHPUnit\Framework\TestCase;
 use TournamentGenerator\Constants;
-use TournamentGenerator\Export\SetupExporter;
+use TournamentGenerator\Export\Hierarchy\SetupExporter;
 use TournamentGenerator\Round;
 use TournamentGenerator\TeamFilter;
 use TournamentGenerator\Tournament;

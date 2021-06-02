@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Export;
+namespace Export\Hierarchy;
 
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use TournamentGenerator\Export\TeamExporter;
+use TournamentGenerator\Export\Hierarchy\TeamsExporter;
 use TournamentGenerator\HierarchyBase;
 use TournamentGenerator\Tournament;
 
@@ -15,7 +15,7 @@ class TeamExporterTest extends TestCase
 
 	public function testInvalidConstruct() : void {
 		$this->expectException(InvalidArgumentException::class);
-		TeamExporter::export(new HelperTeamExporterClass());
+		TeamsExporter::export(new HelperTeamExporterClass());
 	}
 
 	public function testBasicExport() : void {
@@ -30,8 +30,8 @@ class TeamExporterTest extends TestCase
 			];
 		}
 
-		$export = TeamExporter::export($tournament);
-		$exportQuery = TeamExporter::start($tournament)->get();
+		$export = TeamsExporter::export($tournament);
+		$exportQuery = TeamsExporter::start($tournament)->get();
 		self::assertCount(10, $export);
 		self::assertCount(10, $exportQuery);
 		self::assertEquals($expectedExport, $export);
@@ -78,8 +78,8 @@ class TeamExporterTest extends TestCase
 			];
 		}
 
-		$export = TeamExporter::export($tournament);
-		$exportQuery = TeamExporter::start($tournament)->get();
+		$export = TeamsExporter::export($tournament);
+		$exportQuery = TeamsExporter::start($tournament)->get();
 		self::assertCount(20, $export);
 		self::assertCount(20, $exportQuery);
 		self::assertEquals($expectedExport, $exportQuery);
@@ -98,7 +98,7 @@ class TeamExporterTest extends TestCase
 			];
 		}
 
-		$export = TeamExporter::start($tournament)->withScores()->get();
+		$export = TeamsExporter::start($tournament)->withScores()->get();
 		self::assertCount(10, $export);
 		self::assertEquals($expectedExport, $export);
 	}
@@ -128,7 +128,7 @@ class TeamExporterTest extends TestCase
 			];
 		}
 
-		$export = TeamExporter::start($tournament)->withScores()->get();
+		$export = TeamsExporter::start($tournament)->withScores()->get();
 		self::assertCount(10, $export);
 		self::assertEquals($expectedExport, $export);
 
@@ -169,7 +169,7 @@ class TeamExporterTest extends TestCase
 			}
 		}
 
-		$export = TeamExporter::start($tournament)->withScores()->get();
+		$export = TeamsExporter::start($tournament)->withScores()->get();
 		self::assertCount(10, $export);
 		self::assertEquals($expectedExport, $export);
 	}
@@ -210,7 +210,7 @@ class TeamExporterTest extends TestCase
 			];
 		}
 
-		$export = TeamExporter::start($tournament)->withScores()->get();
+		$export = TeamsExporter::start($tournament)->withScores()->get();
 		self::assertCount(10, $export);
 		self::assertEquals($expectedExport, $export);
 
@@ -253,7 +253,7 @@ class TeamExporterTest extends TestCase
 			}
 		}
 
-		$export = TeamExporter::start($tournament)->withScores()->get();
+		$export = TeamsExporter::start($tournament)->withScores()->get();
 		self::assertCount(10, $export);
 		self::assertEquals($expectedExport, $export);
 	}

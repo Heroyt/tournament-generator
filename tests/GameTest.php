@@ -10,7 +10,35 @@ use TournamentGenerator\Team;
  */
 class GameTest extends TestCase
 {
-	
+
+	public function testIdSetting() : void {
+		$group = new Group('Group', 1);
+		$team1 = $group->team('Team 1', 1);
+		$team2 = $group->team('Team 2', 2);
+		$game = new Game([$team1, $team2], $group);
+
+		$game->setId(1);
+		self::assertEquals(1, $game->getId());
+
+		// Change the id
+		$game->setId(5);
+		self::assertEquals(5, $game->getId());
+	}
+
+	public function testIdSettingInvalid() : void {
+		$group = new Group('Group', 1);
+		$team1 = $group->team('Team 1', 1);
+		$team2 = $group->team('Team 2', 2);
+		$game = new Game([$team1, $team2], $group);
+
+		$game->setId(1);
+		self::assertEquals(1, $game->getId());
+
+		// Change the id to invalid id
+		$this->expectException(TypeError::class);
+		$game->setId('not an int');
+	}
+
 	/** @test */
 	public function check_creation_game() : void {
 		$group = new Group('Group', 'g1');
