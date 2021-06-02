@@ -14,7 +14,7 @@ use TournamentGenerator\Interfaces\WithId;
  * @author Tomáš Vojík <vojik@wboy.cz>
  * @since 0.5
  */
-abstract class SingleExportBase extends ExportBase implements SingleExport
+abstract class SingleExporterBase extends ExporterBase implements SingleExporter
 {
 
 	/**

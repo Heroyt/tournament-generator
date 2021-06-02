@@ -12,7 +12,7 @@ use TournamentGenerator\Interfaces\WithId;
  * @author  Tomáš Vojík <vojik@wboy.cz>
  * @since   0.5
  */
-interface SingleExport
+interface SingleExporter
 {
 
 	/**

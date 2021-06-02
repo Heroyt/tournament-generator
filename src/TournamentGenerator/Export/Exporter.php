@@ -13,7 +13,7 @@ use TournamentGenerator\Interfaces\WithId;
  * @author  Tomáš Vojík <vojik@wboy.cz>
  * @since   0.5
  */
-interface Export
+interface Exporter
 {
 
 	/**
@@ -30,9 +30,9 @@ interface Export
 	 *
 	 * @param WithId $object
 	 *
-	 * @return Export
+	 * @return Exporter
 	 */
-	public static function start(WithId $object) : Export;
+	public static function start(WithId $object) : Exporter;
 
 	/**
 	 * Return result as json

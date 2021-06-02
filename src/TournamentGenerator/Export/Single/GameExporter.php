@@ -4,8 +4,8 @@
 
 namespace TournamentGenerator\Export\Single;
 
-use TournamentGenerator\Export\Export;
-use TournamentGenerator\Export\SingleExportBase;
+use TournamentGenerator\Export\Exporter;
+use TournamentGenerator\Export\SingleExporterBase;
 use TournamentGenerator\Game;
 use TournamentGenerator\Interfaces\WithId;
 
@@ -18,7 +18,7 @@ use TournamentGenerator\Interfaces\WithId;
  * @author  Tomáš Vojík <vojik@wboy.cz>
  * @since   0.5
  */
-class GameExporter extends SingleExportBase
+class GameExporter extends SingleExporterBase
 {
 
 	/** @var Game */
@@ -52,9 +52,9 @@ class GameExporter extends SingleExportBase
 	 *
 	 * @param Game $object
 	 *
-	 * @return Export
+	 * @return Exporter
 	 */
-	public static function start(WithId $object) : Export {
+	public static function start(WithId $object) : Exporter {
 		return new self($object);
 	}
 

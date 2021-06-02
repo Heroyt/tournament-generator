@@ -4,8 +4,8 @@
 namespace TournamentGenerator\Export\Hierarchy;
 
 use Error;
-use TournamentGenerator\Export\Export;
-use TournamentGenerator\Export\ExportBase;
+use TournamentGenerator\Export\Exporter;
+use TournamentGenerator\Export\ExporterBase;
 use TournamentGenerator\HierarchyBase;
 use TournamentGenerator\Interfaces\WithGames;
 use TournamentGenerator\Interfaces\WithId;
@@ -20,10 +20,10 @@ use TournamentGenerator\Interfaces\WithTeams;
  * @author  Tomáš Vojík <vojik@wboy.cz>
  * @since   0.5
  */
-class Exporter extends ExportBase
+class Exporter extends ExporterBase
 {
 
-	/** @var ExportBase[] Other exporters used */
+	/** @var ExporterBase[] Other exporters used */
 	protected array $exporters = [];
 
 	public function __construct(HierarchyBase $object) {
@@ -52,9 +52,9 @@ class Exporter extends ExportBase
 	 *
 	 * @param HierarchyBase $object
 	 *
-	 * @return Export
+	 * @return Exporter
 	 */
-	public static function start(WithId $object) : Export {
+	public static function start(WithId $object) : Exporter {
 		return new self($object);
 	}
 

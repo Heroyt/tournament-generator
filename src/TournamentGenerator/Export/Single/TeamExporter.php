@@ -4,9 +4,9 @@
 
 namespace TournamentGenerator\Export\Single;
 
-use TournamentGenerator\Export\Export;
+use TournamentGenerator\Export\Exporter;
 use TournamentGenerator\Export\Modifiers\WithScoresModifier;
-use TournamentGenerator\Export\SingleExportBase;
+use TournamentGenerator\Export\SingleExporterBase;
 use TournamentGenerator\Interfaces\WithId;
 use TournamentGenerator\Team;
 
@@ -19,7 +19,7 @@ use TournamentGenerator\Team;
  * @author  Tomáš Vojík <vojik@wboy.cz>
  * @since   0.5
  */
-class TeamExporter extends SingleExportBase
+class TeamExporter extends SingleExporterBase
 {
 
 	/** @var Team */
@@ -53,9 +53,9 @@ class TeamExporter extends SingleExportBase
 	 *
 	 * @param Team $object
 	 *
-	 * @return Export
+	 * @return Exporter
 	 */
-	public static function start(WithId $object) : Export {
+	public static function start(WithId $object) : Exporter {
 		return new self($object);
 	}
 

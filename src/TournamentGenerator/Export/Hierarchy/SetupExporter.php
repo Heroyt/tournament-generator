@@ -6,8 +6,8 @@ namespace TournamentGenerator\Export\Hierarchy;
 
 use Exception;
 use TournamentGenerator\Category;
-use TournamentGenerator\Export\Export;
-use TournamentGenerator\Export\ExportBase;
+use TournamentGenerator\Export\Exporter;
+use TournamentGenerator\Export\ExporterBase;
 use TournamentGenerator\Group;
 use TournamentGenerator\Interfaces\WithCategories;
 use TournamentGenerator\Interfaces\WithGames;
@@ -28,7 +28,7 @@ use TournamentGenerator\Tournament;
  * @author  Tomáš Vojík <vojik@wboy.cz>
  * @since   0.5
  */
-class SetupExporter extends ExportBase
+class SetupExporter extends ExporterBase
 {
 
 	/**
@@ -41,7 +41,7 @@ class SetupExporter extends ExportBase
 	/**
 	 * @inheritDoc
 	 */
-	public static function start(WithId $object) : Export {
+	public static function start(WithId $object) : Exporter {
 		return new self($object);
 	}
 

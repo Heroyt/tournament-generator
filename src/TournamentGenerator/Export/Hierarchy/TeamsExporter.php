@@ -5,8 +5,8 @@
 namespace TournamentGenerator\Export\Hierarchy;
 
 use InvalidArgumentException;
-use TournamentGenerator\Export\Export;
-use TournamentGenerator\Export\ExportBase;
+use TournamentGenerator\Export\Exporter;
+use TournamentGenerator\Export\ExporterBase;
 use TournamentGenerator\Export\Modifiers\WithScoresModifier;
 use TournamentGenerator\Export\Single\TeamExporter;
 use TournamentGenerator\HierarchyBase;
@@ -23,7 +23,7 @@ use TournamentGenerator\Team;
  * @author  Tomáš Vojík <vojik@wboy.cz>
  * @since   0.5
  */
-class TeamsExporter extends ExportBase
+class TeamsExporter extends ExporterBase
 {
 
 	/** @var WithTeams */
@@ -57,9 +57,9 @@ class TeamsExporter extends ExportBase
 	 *
 	 * @param HierarchyBase $object
 	 *
-	 * @return Export
+	 * @return Exporter
 	 */
-	public static function start(WithId $object) : Export {
+	public static function start(WithId $object) : Exporter {
 		return new self($object);
 	}
 
