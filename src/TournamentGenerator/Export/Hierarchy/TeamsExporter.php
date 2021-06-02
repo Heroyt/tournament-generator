@@ -2,28 +2,32 @@
 /** @noinspection PhpDocFieldTypeMismatchInspection */
 
 
-namespace TournamentGenerator\Export;
+namespace TournamentGenerator\Export\Hierarchy;
 
-use Exception;
 use InvalidArgumentException;
+use TournamentGenerator\Export\Export;
+use TournamentGenerator\Export\ExportBase;
+use TournamentGenerator\Export\Modifiers\WithScoresModifier;
+use TournamentGenerator\Export\Single\SingleTeamExporter;
 use TournamentGenerator\HierarchyBase;
+use TournamentGenerator\Interfaces\WithId;
 use TournamentGenerator\Interfaces\WithTeams;
 use TournamentGenerator\Team;
 
 /**
  * Exporter for teams
  *
- * A specific exporter for teams and their related data.
+ * A specific exporter for teams and their related data. Exports all teams from a hierarchy object.
  *
  * @package TournamentGenerator\Export
  * @author  Tomáš Vojík <vojik@wboy.cz>
  * @since   0.5
  */
-class TeamExporter extends ExportBase
+class TeamsExporter extends ExportBase
 {
 
 	/** @var WithTeams */
-	protected HierarchyBase $object;
+	protected WithId $object;
 
 	/**
 	 * TeamExporter constructor.
@@ -44,7 +48,7 @@ class TeamExporter extends ExportBase
 	 *
 	 * @return array
 	 */
-	public static function export(HierarchyBase $object) : array {
+	public static function export(WithId $object) : array {
 		return self::start($object)->get();
 	}
 
@@ -55,7 +59,7 @@ class TeamExporter extends ExportBase
 	 *
 	 * @return Export
 	 */
-	public static function start(HierarchyBase $object) : Export {
+	public static function start(WithId $object) : Export {
 		return new self($object);
 	}
 
@@ -66,11 +70,7 @@ class TeamExporter extends ExportBase
 	 */
 	public function getBasic() : array {
 		return array_map(static function(Team $team) {
-			return (object) [
-				'object' => $team, // Passed for reference in the modifier methods
-				'id'     => $team->getId(),
-				'name'   => $team->getName(),
-			];
+			return (object) SingleTeamExporter::exportBasic($team);
 		}, $this->object->getTeams());
 	}
 
@@ -82,38 +82,11 @@ class TeamExporter extends ExportBase
 	/**
 	 * Include team scores in the result set
 	 *
-	 * @return TeamExporter
+	 * @return TeamsExporter
 	 * @ingroup TeamExporterQueryModifiers
 	 */
-	public function withScores() : TeamExporter {
-		$this->modifiers[] = 'withScoresModifier';
+	public function withScores() : TeamsExporter {
+		$this->modifiers[] = WithScoresModifier::class;
 		return $this;
-	}
-
-	/**
-	 * @defgroup TeamExporterModifiers Modifier callbacks
-	 * @brief    Modifier callbacks
-	 * @details  Modifier callbacks alter the input in some way and return the modified result.
-	 */
-
-	/**
-	 * Includes team scores in the result set
-	 *
-	 * @param array $data
-	 *
-	 * @return array
-	 * @ingroup TeamExporterModifiers
-	 * @throws Exception
-	 */
-	protected function withScoresModifier(array &$data) : array {
-		foreach ($data as $object) {
-			/** @var Team $team */
-			$team = $object->object;
-			$object->scores = array_map(static function(array $group) {
-				unset($group['group']); // Get rid of the Group object reference
-				return $group;
-			}, $team->getGroupResults());
-		}
-		return $data;
 	}
 }

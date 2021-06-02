@@ -2,27 +2,31 @@
 /** @noinspection PhpDocFieldTypeMismatchInspection */
 
 
-namespace TournamentGenerator\Export;
+namespace TournamentGenerator\Export\Hierarchy;
 
 use InvalidArgumentException;
+use TournamentGenerator\Export\Export;
+use TournamentGenerator\Export\ExportBase;
+use TournamentGenerator\Export\Single\SingleGameExporter;
 use TournamentGenerator\Game;
 use TournamentGenerator\HierarchyBase;
 use TournamentGenerator\Interfaces\WithGames;
+use TournamentGenerator\Interfaces\WithId;
 
 /**
  * Exporter for games
  *
- * A specific exporter, taking care of games and their related data.
+ * A specific exporter, taking care of games and their related data. Exports all games from a hierarchy object.
  *
  * @package TournamentGenerator\Export
  * @author  Tomáš Vojík <vojik@wboy.cz>
  * @since   0.5
  */
-class GameExporter extends ExportBase
+class GamesExporter extends ExportBase
 {
 
-	/** @var WithGames */
-	protected HierarchyBase $object;
+	/** @var Game */
+	protected WithId $object;
 
 	public function __construct(HierarchyBase $object) {
 		if (!$object instanceof WithGames) {
@@ -38,7 +42,7 @@ class GameExporter extends ExportBase
 	 *
 	 * @return array
 	 */
-	public static function export(HierarchyBase $object) : array {
+	public static function export(WithId $object) : array {
 		return self::start($object)->get();
 	}
 
@@ -49,23 +53,20 @@ class GameExporter extends ExportBase
 	 *
 	 * @return Export
 	 */
-	public static function start(HierarchyBase $object) : Export {
+	public static function start(WithId $object) : Export {
 		return new self($object);
 	}
-	
+
 	/**
 	 * Gets the basic unmodified data
 	 *
 	 * @return array
+	 * @see SingleGameExporter::export()
+	 *
 	 */
 	public function getBasic() : array {
 		return array_map(static function(Game $game) {
-			return (object) [
-				'object' => $game, // Passed for reference in the modifier methods
-				'id'     => $game->getId(),
-				'teams'  => $game->getTeamsIds(),
-				'scores' => $game->getResults(),
-			];
+			return (object) SingleGameExporter::exportBasic($game);
 		}, $this->object->getGames());
 	}
 }

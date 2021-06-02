@@ -3,7 +3,8 @@
 
 namespace TournamentGenerator\Export;
 
-use TournamentGenerator\HierarchyBase;
+use JsonException;
+use TournamentGenerator\Interfaces\WithId;
 
 /**
  * Interface for exporters
@@ -18,20 +19,28 @@ interface Export
 	/**
 	 * Simple export query without any modifiers
 	 *
-	 * @param HierarchyBase $object
+	 * @param WithId $object
 	 *
 	 * @return array The query result
 	 */
-	public static function export(HierarchyBase $object) : array;
+	public static function export(WithId $object) : array;
 
 	/**
 	 * Start an export query
 	 *
-	 * @param HierarchyBase $object
+	 * @param WithId $object
 	 *
 	 * @return Export
 	 */
-	public static function start(HierarchyBase $object) : Export;
+	public static function start(WithId $object) : Export;
+
+	/**
+	 * Return result as json
+	 *
+	 * @return string
+	 * @throws JsonException
+	 */
+	public function getJson() : string;
 
 	/**
 	 * Finish the export query -> get the result

@@ -1,10 +1,14 @@
 <?php
 
 
-namespace TournamentGenerator\Export;
+namespace TournamentGenerator\Export\Hierarchy;
 
+use Error;
+use TournamentGenerator\Export\Export;
+use TournamentGenerator\Export\ExportBase;
 use TournamentGenerator\HierarchyBase;
 use TournamentGenerator\Interfaces\WithGames;
+use TournamentGenerator\Interfaces\WithId;
 use TournamentGenerator\Interfaces\WithTeams;
 
 /**
@@ -24,12 +28,34 @@ class Exporter extends ExportBase
 
 	public function __construct(HierarchyBase $object) {
 		if ($object instanceof WithTeams) {
-			$this->exporters['teams'] = TeamExporter::start($object);
+			$this->exporters['teams'] = TeamsExporter::start($object);
 		}
 		if ($object instanceof WithGames) {
-			$this->exporters['games'] = GameExporter::start($object);
+			$this->exporters['games'] = GamesExporter::start($object);
 		}
 		parent::__construct($object);
+	}
+
+	/**
+	 * Simple export query without any modifiers
+	 *
+	 * @param HierarchyBase $object
+	 *
+	 * @return array
+	 */
+	public static function export(WithId $object) : array {
+		return self::start($object)->get();
+	}
+
+	/**
+	 * Start an export query
+	 *
+	 * @param HierarchyBase $object
+	 *
+	 * @return Export
+	 */
+	public static function start(WithId $object) : Export {
+		return new self($object);
 	}
 
 	/**
@@ -52,29 +78,7 @@ class Exporter extends ExportBase
 			return $this;
 		}
 
-		throw new \Error('Call to undefined method '.__CLASS__.'::'.$name.'()');
-	}
-
-	/**
-	 * Simple export query without any modifiers
-	 *
-	 * @param HierarchyBase $object
-	 *
-	 * @return array
-	 */
-	public static function export(HierarchyBase $object) : array {
-		return self::start($object)->get();
-	}
-
-	/**
-	 * Start an export query
-	 *
-	 * @param HierarchyBase $object
-	 *
-	 * @return Export
-	 */
-	public static function start(HierarchyBase $object) : Export {
-		return new self($object);
+		throw new Error('Call to undefined method '.__CLASS__.'::'.$name.'()');
 	}
 
 	/**

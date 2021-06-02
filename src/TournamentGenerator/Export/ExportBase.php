@@ -4,7 +4,11 @@
 namespace TournamentGenerator\Export;
 
 
+use JsonException;
+use JsonSerializable;
+use TournamentGenerator\Export\Modifiers\Modifier;
 use TournamentGenerator\HierarchyBase;
+use TournamentGenerator\Interfaces\WithId;
 
 /**
  * Base class for exporters
@@ -16,15 +20,39 @@ use TournamentGenerator\HierarchyBase;
  * @author  Tomáš Vojík <vojik@wboy.cz>
  * @since   0.5
  */
-abstract class ExportBase implements Export
+abstract class ExportBase implements Export, JsonSerializable
 {
 
 	/** @var HierarchyBase Hierarchy object to export */
-	protected HierarchyBase $object;
-	protected array         $modifiers = [];
+	protected WithId $object;
+	/** @var Modifier[] Modifiers to apply to exported data */
+	protected array  $modifiers = [];
 
-	public function __construct(HierarchyBase $object) {
+	public function __construct(WithId $object) {
 		$this->object = $object;
+	}
+
+	/**
+	 * Return result as json
+	 *
+	 * @return string
+	 * @throws JsonException
+	 * @see ExportBase::jsonSerialize()
+	 * @see ExportBase::get()
+	 *
+	 */
+	public function getJson() : string {
+		return $this->jsonSerialize();
+	}
+
+	/**
+	 * Serialize exported data as JSON
+	 *
+	 * @return string
+	 * @throws JsonException
+	 */
+	public function jsonSerialize() : string {
+		return json_encode($this->get(), JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
 	}
 
 	/**
@@ -48,7 +76,7 @@ abstract class ExportBase implements Export
 	 */
 	protected function applyModifiers(array &$data) : void {
 		foreach ($this->modifiers as $modifier) {
-			$this->$modifier($data);
+			$modifier::process($data);
 		}
 	}
 }
