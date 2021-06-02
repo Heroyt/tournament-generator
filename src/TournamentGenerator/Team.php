@@ -4,6 +4,9 @@ namespace TournamentGenerator;
 
 use Exception;
 use InvalidArgumentException;
+use TournamentGenerator\Export\Exporter;
+use TournamentGenerator\Export\Single\TeamExporter;
+use TournamentGenerator\Interfaces\Exportable;
 use TournamentGenerator\Traits\HasPositions;
 use TournamentGenerator\Traits\HasScore;
 
@@ -15,7 +18,7 @@ use TournamentGenerator\Traits\HasScore;
  * @since   0.1
  * @package TournamentGenerator
  */
-class Team extends Base
+class Team extends Base implements Exportable
 {
 	use HasScore;
 	use HasPositions;
@@ -194,4 +197,12 @@ class Team extends Base
 		return $this->games;
 	}
 
+	/**
+	 * Prepares an export query for the object
+	 *
+	 * @return Exporter Exporter for this class
+	 */
+	public function export() : Exporter {
+		return TeamExporter::start($this);
+	}
 }

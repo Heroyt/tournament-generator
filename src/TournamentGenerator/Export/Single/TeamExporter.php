@@ -28,13 +28,13 @@ class TeamExporter extends SingleExporterBase
 	/**
 	 * SingleTeamExporter constructor.
 	 *
-	 * @param Team $game
+	 * @param Team $team
 	 *
 	 * @noinspection MagicMethodsValidityInspection
 	 * @noinspection PhpMissingParentConstructorInspection
 	 */
-	public function __construct(Team $game) {
-		$this->object = $game;
+	public function __construct(Team $team) {
+		$this->object = $team;
 	}
 
 	/**

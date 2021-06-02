@@ -4,7 +4,10 @@
 namespace TournamentGenerator;
 
 
+use Exception;
 use TournamentGenerator\Containers\HierarchyContainer;
+use TournamentGenerator\Export\Exporter;
+use TournamentGenerator\Interfaces\Exportable;
 use TournamentGenerator\Interfaces\WithGames as WithGamesInterface;
 use TournamentGenerator\Interfaces\WithTeams as WithTeamsInterface;
 
@@ -14,9 +17,9 @@ use TournamentGenerator\Interfaces\WithTeams as WithTeamsInterface;
  * Extended base for hierarchy objects (Tournament, Category, Round, Group).
  *
  * @package TournamentGenerator
- * @author Tomáš Vojík <vojik@wboy.cz>
+ * @author  Tomáš Vojík <vojik@wboy.cz>
  */
-abstract class HierarchyBase extends Base
+abstract class HierarchyBase extends Base implements Exportable
 {
 
 	protected HierarchyContainer $container;
@@ -40,7 +43,7 @@ abstract class HierarchyBase extends Base
 	 * @post If the object has games -> add other game container to hierarchy
 	 *
 	 * @return $this
-	 * @throws \Exception
+	 * @throws Exception
 	 */
 	public function insertIntoContainer(Base $object) : Base {
 		$this->container->insert($object);
@@ -51,6 +54,15 @@ abstract class HierarchyBase extends Base
 			$this->addTeamContainer($object->getTeamContainer());
 		}
 		return $this;
+	}
+
+	/**
+	 * Prepares a general hierarchy exporter for this hierarchy class
+	 *
+	 * @return Exporter
+	 */
+	public function export() : Exporter {
+		return Export\Hierarchy\Exporter::start($this);
 	}
 
 }

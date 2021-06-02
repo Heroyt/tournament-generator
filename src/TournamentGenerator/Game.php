@@ -3,6 +3,9 @@
 namespace TournamentGenerator;
 
 use Exception;
+use TournamentGenerator\Export\Exporter;
+use TournamentGenerator\Export\Single\GameExporter;
+use TournamentGenerator\Interfaces\Exportable;
 use TournamentGenerator\Interfaces\WithId;
 use TypeError;
 
@@ -13,7 +16,7 @@ use TypeError;
  * @author  Tomáš Vojík <vojik@wboy.cz>
  * @since   0.1
  */
-class Game implements WithId
+class Game implements WithId, Exportable
 {
 
 	/** @var int Autoincrement game id */
@@ -400,5 +403,14 @@ class Game implements WithId
 		}
 		$this->id = $id;
 		return $this;
-}
+	}
+
+	/**
+	 * Prepares an export query for the object
+	 *
+	 * @return Exporter Exporter for this class
+	 */
+	public function export() : Exporter {
+		return GameExporter::start($this);
+	}
 }
