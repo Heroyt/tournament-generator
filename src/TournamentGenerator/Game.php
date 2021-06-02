@@ -3,6 +3,7 @@
 namespace TournamentGenerator;
 
 use Exception;
+use TournamentGenerator\Interfaces\WithId;
 use TypeError;
 
 /**
@@ -12,7 +13,7 @@ use TypeError;
  * @author  Tomáš Vojík <vojik@wboy.cz>
  * @since   0.1
  */
-class Game
+class Game implements WithId
 {
 
 	/** @var int Autoincrement game id */
@@ -393,7 +394,10 @@ class Game
 	 * @return Game
 	 * @since 0.5
 	 */
-	public function setId(int $id) : Game {
+	public function setId($id) : Game {
+		if (!is_int($id)) {
+			throw new TypeError('Game\'s ID needs to be an integer.');
+		}
 		$this->id = $id;
 		return $this;
 }

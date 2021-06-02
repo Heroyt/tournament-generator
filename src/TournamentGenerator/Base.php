@@ -12,7 +12,7 @@ use InvalidArgumentException;
  *
  * @since   0.3
  */
-abstract class Base
+abstract class Base implements Interfaces\WithId
 {
 
 	/** @var string $name The name of the object */
