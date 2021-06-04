@@ -22,21 +22,21 @@ class Progression
 	/** @var Group What group to progress to */
 	protected Group $to;
 	/** @var int Offset to start picking teams */
-	protected int   $start;
+	protected int $start;
 	/** @var int|null Maximum number of teams to progress */
-	protected ?int  $len;
+	protected ?int $len;
 	/** @var TeamFilter[] Filters to use */
-	protected array $filters    = [];
+	protected array $filters = [];
 	/** @var bool If the progression was already called */
-	protected bool  $progressed = false;
+	protected bool $progressed = false;
 
 	/**
 	 * Progression constructor.
 	 *
-	 * @param Group    $from What group to progress from
-	 * @param Group    $to What group to progress to
+	 * @param Group    $from  What group to progress from
+	 * @param Group    $to    What group to progress to
 	 * @param int      $start Offset to start picking teams
-	 * @param int|null $len Maximum number of teams to progress
+	 * @param int|null $len   Maximum number of teams to progress
 	 */
 	public function __construct(Group $from, Group $to, int $start = 0, ?int $len = null) {
 		$this->from = $from;
@@ -52,18 +52,6 @@ class Progression
 	 */
 	public function __toString() {
 		return 'Team from '.$this->from;
-	}
-
-	/**
-	 * Sets progression's filters
-	 *
-	 * @param TeamFilter[] $filters
-	 *
-	 * @return $this
-	 */
-	public function setFilters(array $filters) : Progression {
-		$this->filters = $filters;
-		return $this;
 	}
 
 	/**
@@ -171,6 +159,18 @@ class Progression
 	 */
 	public function getFilters() : array {
 		return $this->filters;
+	}
+
+	/**
+	 * Sets progression's filters
+	 *
+	 * @param TeamFilter[] $filters
+	 *
+	 * @return $this
+	 */
+	public function setFilters(array $filters) : Progression {
+		$this->filters = $filters;
+		return $this;
 	}
 
 	/**

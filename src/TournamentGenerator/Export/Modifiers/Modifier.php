@@ -10,7 +10,7 @@ namespace TournamentGenerator\Export\Modifiers;
  *
  * @package TournamentGenerator\Export\Modifiers
  * @author  Tomáš Vojík <vojik@wboy.cz>
- * @since 0.5
+ * @since   0.5
  */
 interface Modifier
 {

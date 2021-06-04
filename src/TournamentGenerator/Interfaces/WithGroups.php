@@ -23,6 +23,7 @@ interface WithGroups
 	 * @return Group[]
 	 */
 	public function getGroups() : array;
+
 	/**
 	 * Get groups container query
 	 *

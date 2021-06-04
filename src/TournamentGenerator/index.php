@@ -3,12 +3,12 @@
 
 /**
  * @package TournamentGenerator
- * @brief Base package namespace
+ * @brief   Base package namespace
  * @details Contains basic classes
  */
 
 /**
  * @namespace TournamentGenerator
- * @brief Base package namespace
- * @details Contains basic classes
+ * @brief     Base package namespace
+ * @details   Contains basic classes
  */

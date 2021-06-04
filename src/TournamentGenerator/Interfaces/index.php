@@ -3,10 +3,10 @@
 
 /**
  * @package TournamentGenerator\Interfaces
- * @brief All package interfaces
+ * @brief   All package interfaces
  */
 
 /**
  * @namespace TournamentGenerator\Interfaces
- * @brief All package interfaces
+ * @brief     All package interfaces
  */

@@ -53,7 +53,9 @@ class TeamFilterTest extends TestCase
 		self::assertEquals($what, $filter->getWhat());
 		self::assertEquals($how, $filter->getHow());
 		self::assertEquals($value, $filter->getVal());
-		self::assertEquals(array_map(static function(Group $group) { return $group->getId(); }, $groups), $filter->getGroups());
+		self::assertEquals(array_map(static function(Group $group) {
+			return $group->getId();
+		}, $groups), $filter->getGroups());
 	}
 
 	public function testConstructorInvalidType() : void {

@@ -5,6 +5,7 @@ namespace TournamentGenerator\Export\Modifiers;
 
 
 use Exception;
+use InvalidArgumentException;
 use TournamentGenerator\Team;
 
 class WithScoresModifier implements Modifier
@@ -18,14 +19,14 @@ class WithScoresModifier implements Modifier
 		// Check for "single" export
 		if (isset($data['object'])) {
 			if (!$data['object'] instanceof Team) {
-				throw new \InvalidArgumentException('WithScores modifier needs a Team object.');
+				throw new InvalidArgumentException('WithScores modifier needs a Team object.');
 			}
 			return self::processArray($data);
 		}
 
 		foreach ($data as $object) {
 			if (!isset($object->object) || !$object->object instanceof Team) {
-				throw new \InvalidArgumentException('WithScores modifier needs a Team object.');
+				throw new InvalidArgumentException('WithScores modifier needs a Team object.');
 			}
 			self::processObject($object);
 		}

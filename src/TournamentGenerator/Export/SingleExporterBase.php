@@ -3,16 +3,14 @@
 
 namespace TournamentGenerator\Export;
 
-use TournamentGenerator\Interfaces\WithId;
-
 /**
  * Class SingleExportBase
  *
  * Base class for all "Single" exporters = exporting only one specific class (Team, Game) and not a hierarchy class (Tournament, Category, Round, Group).
  *
  * @package TournamentGenerator\Export
- * @author Tomáš Vojík <vojik@wboy.cz>
- * @since 0.5
+ * @author  Tomáš Vojík <vojik@wboy.cz>
+ * @since   0.5
  */
 abstract class SingleExporterBase extends ExporterBase implements SingleExporter
 {

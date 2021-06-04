@@ -2,7 +2,6 @@
 
 namespace TournamentGenerator\Helpers\Sorter;
 
-use Exception;
 use InvalidArgumentException;
 use TournamentGenerator\Constants;
 use TournamentGenerator\Containers\BaseContainer;

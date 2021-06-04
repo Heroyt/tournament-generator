@@ -2,7 +2,6 @@
 
 namespace Presets;
 
-use Exception;
 use PHPUnit\Framework\TestCase;
 use TournamentGenerator\Preset\SingleElimination;
 

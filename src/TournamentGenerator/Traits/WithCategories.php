@@ -5,7 +5,6 @@ namespace TournamentGenerator\Traits;
 
 
 use TournamentGenerator\Category;
-use TournamentGenerator\Containers\BaseContainer;
 use TournamentGenerator\Containers\ContainerQuery;
 use TournamentGenerator\Interfaces\WithCategories as WithCategoriesInterface;
 
@@ -55,8 +54,8 @@ trait WithCategories
 	/**
 	 * Creates a new category and adds it to the object
 	 *
-	 * @param string $name New category name
-	 * @param string|int|null   $id   Id of the new category - if omitted -> it is generated automatically as unique string
+	 * @param string          $name New category name
+	 * @param string|int|null $id   Id of the new category - if omitted -> it is generated automatically as unique string
 	 *
 	 * @return Category New category
 	 */

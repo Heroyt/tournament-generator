@@ -10,8 +10,8 @@ use InvalidArgumentException;
  * Identifies an object with an ID
  *
  * @package TournamentGenerator\Interfaces
- * @author Tomáš Vojík <vojik@wboy.cz>
- * @since 0.5
+ * @author  Tomáš Vojík <vojik@wboy.cz>
+ * @since   0.5
  */
 interface WithId
 {

@@ -720,15 +720,15 @@ class ExporterTest extends TestCase
 		}
 		$games1 = array_map(static function(Game $game) {
 			return (object) [
-				'id' => $game->getId(),
-				'teams' => $game->getTeamsIds(),
+				'id'     => $game->getId(),
+				'teams'  => $game->getTeamsIds(),
 				'scores' => [],
 			];
 		}, $group1->genGames());
 		$games2 = array_map(static function(Game $game) {
 			return (object) [
-				'id' => $game->getId(),
-				'teams' => $game->getTeamsIds(),
+				'id'     => $game->getId(),
+				'teams'  => $game->getTeamsIds(),
 				'scores' => [],
 			];
 		}, $group2->genGames());

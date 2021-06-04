@@ -7,12 +7,10 @@ namespace Traits;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use TournamentGenerator\Category;
-use TournamentGenerator\Game;
 use TournamentGenerator\Group;
 use TournamentGenerator\Interfaces\WithGames;
 use TournamentGenerator\Interfaces\WithGroups;
 use TournamentGenerator\Interfaces\WithRounds;
-use TournamentGenerator\Interfaces\WithTeams;
 use TournamentGenerator\Round;
 use TournamentGenerator\Tournament;
 
@@ -60,6 +58,77 @@ class WithGamesTest extends TestCase
 		$gotGames = $class->getGameContainer()->get();
 		self::assertCount(count($games), $gotGames);
 		self::assertEquals($games, $gotGames);
+	}
+
+	/**
+	 * @param WithGames $class
+	 *
+	 * @return array
+	 * @throws Exception
+	 */
+	protected function setupGames(WithGames $class) : array {
+		$games = [];
+		$teams = [];
+		// Create 10 teams
+		for ($i = 0; $i < 10; $i++) {
+			$teams[$i] = $class->team('Team '.$i, $i);
+		}
+
+		// Create random rounds, groups and games
+		if ($class instanceof WithRounds) {
+			$rounds = random_int(1, 10);
+			for ($i = 0; $i < $rounds; $i++) {
+				$round = $class->round('Round '.$i, $i);
+				$groups = random_int(1, 4);
+				for ($ii = 0; $ii < $groups; $ii++) {
+					$id = 4 * $i + $ii;
+					$group = $round->group('Group '.$id, $id);
+					$groupTeams = array_rand($teams, 4);
+					foreach ($groupTeams as $team) {
+						$group->addTeam($teams[$team]);
+					}
+					$gamesNum = random_int(3, 10);
+					for ($iii = 0; $iii < $gamesNum; $iii++) {
+						$teamsGame = array_map(static function(int $key) use ($teams, $groupTeams) {
+							return $teams[$groupTeams[$key]];
+						}, array_rand($groupTeams, 2));
+						$games[] = $group->game($teamsGame);
+					}
+				}
+			}
+		}
+		elseif ($class instanceof WithGroups) {
+			$groups = random_int(2, 4);
+			for ($ii = 0; $ii < $groups; $ii++) {
+				$id = 4 * $i + $ii;
+				$group = $class->group('Group '.$id, $id);
+				$groupTeams = array_rand($teams, 4);
+				foreach ($groupTeams as $team) {
+					$group->addTeam($teams[$team]);
+				}
+				$gamesNum = random_int(3, 10);
+				for ($iii = 0; $iii < $gamesNum; $iii++) {
+					$teamsGame = array_map(static function(int $key) use ($teams, $groupTeams) {
+						return $teams[$groupTeams[$key]];
+					}, array_rand($groupTeams, 2));
+					$games[] = $group->game($teamsGame);
+				}
+			}
+		}
+		else {
+			$groupTeams = array_rand($teams, 4);
+			foreach ($groupTeams as $team) {
+				$class->addTeam($teams[$team]);
+			}
+			$gamesNum = random_int(3, 10);
+			for ($iii = 0; $iii < $gamesNum; $iii++) {
+				$teamsGame = array_map(static function(int $key) use ($teams, $groupTeams) {
+					return $teams[$groupTeams[$key]];
+				}, array_rand($groupTeams, 2));
+				$games[] = $class->game($teamsGame);
+			}
+		}
+		return $games;
 	}
 
 	/**
@@ -146,76 +215,5 @@ class WithGamesTest extends TestCase
 				self::assertNull($game);
 			}
 		}
-	}
-
-	/**
-	 * @param WithGames $class
-	 *
-	 * @return array
-	 * @throws Exception
-	 */
-	protected function setupGames(WithGames $class) : array {
-		$games = [];
-		$teams = [];
-		// Create 10 teams
-		for ($i = 0; $i < 10; $i++) {
-			$teams[$i] = $class->team('Team '.$i, $i);
-		}
-
-		// Create random rounds, groups and games
-		if ($class instanceof WithRounds) {
-			$rounds = random_int(1, 10);
-			for ($i = 0; $i < $rounds; $i++) {
-				$round = $class->round('Round '.$i, $i);
-				$groups = random_int(1, 4);
-				for ($ii = 0; $ii < $groups; $ii++) {
-					$id = 4 * $i + $ii;
-					$group = $round->group('Group '.$id, $id);
-					$groupTeams = array_rand($teams, 4);
-					foreach ($groupTeams as $team) {
-						$group->addTeam($teams[$team]);
-					}
-					$gamesNum = random_int(3, 10);
-					for ($iii = 0; $iii < $gamesNum; $iii++) {
-						$teamsGame = array_map(static function(int $key) use ($teams, $groupTeams) {
-							return $teams[$groupTeams[$key]];
-						}, array_rand($groupTeams, 2));
-						$games[] = $group->game($teamsGame);
-					}
-				}
-			}
-		}
-		elseif ($class instanceof WithGroups) {
-			$groups = random_int(2, 4);
-			for ($ii = 0; $ii < $groups; $ii++) {
-				$id = 4 * $i + $ii;
-				$group = $class->group('Group '.$id, $id);
-				$groupTeams = array_rand($teams, 4);
-				foreach ($groupTeams as $team) {
-					$group->addTeam($teams[$team]);
-				}
-				$gamesNum = random_int(3, 10);
-				for ($iii = 0; $iii < $gamesNum; $iii++) {
-					$teamsGame = array_map(static function(int $key) use ($teams, $groupTeams) {
-						return $teams[$groupTeams[$key]];
-					}, array_rand($groupTeams, 2));
-					$games[] = $group->game($teamsGame);
-				}
-			}
-		}
-		else {
-			$groupTeams = array_rand($teams, 4);
-			foreach ($groupTeams as $team) {
-				$class->addTeam($teams[$team]);
-			}
-			$gamesNum = random_int(3, 10);
-			for ($iii = 0; $iii < $gamesNum; $iii++) {
-				$teamsGame = array_map(static function(int $key) use ($teams, $groupTeams) {
-					return $teams[$groupTeams[$key]];
-				}, array_rand($groupTeams, 2));
-				$games[] = $class->game($teamsGame);
-			}
-		}
-		return $games;
 	}
 }

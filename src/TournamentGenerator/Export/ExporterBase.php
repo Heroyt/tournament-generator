@@ -26,7 +26,7 @@ abstract class ExporterBase implements Exporter, JsonSerializable
 	/** @var HierarchyBase Hierarchy object to export */
 	protected WithId $object;
 	/** @var Modifier[] Modifiers to apply to exported data */
-	protected array  $modifiers = [];
+	protected array $modifiers = [];
 
 	public function __construct(WithId $object) {
 		$this->object = $object;
@@ -43,17 +43,6 @@ abstract class ExporterBase implements Exporter, JsonSerializable
 	 */
 	public function getJson() : string {
 		return json_encode($this->get(), JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
-	}
-
-	/**
-	 * Serialize exported data as JSON
-	 *
-	 * @see json_encode()
-	 *
-	 * @return array
-	 */
-	public function jsonSerialize() : array {
-		return $this->get();
 	}
 
 	/**
@@ -79,5 +68,16 @@ abstract class ExporterBase implements Exporter, JsonSerializable
 		foreach ($this->modifiers as $modifier) {
 			$modifier::process($data);
 		}
+	}
+
+	/**
+	 * Serialize exported data as JSON
+	 *
+	 * @return array
+	 * @see json_encode()
+	 *
+	 */
+	public function jsonSerialize() : array {
+		return $this->get();
 	}
 }

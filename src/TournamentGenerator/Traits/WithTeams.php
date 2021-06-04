@@ -5,14 +5,11 @@ namespace TournamentGenerator\Traits;
 
 use Exception;
 use TournamentGenerator\Constants;
-use TournamentGenerator\Containers\GameContainer;
 use TournamentGenerator\Containers\TeamContainer;
 use TournamentGenerator\Group;
 use TournamentGenerator\Helpers\Filter;
 use TournamentGenerator\Helpers\Sorter\TeamSorter;
-use TournamentGenerator\Interfaces\WithCategories as WithCategoriesInterface;
 use TournamentGenerator\Interfaces\WithGroups as WithGroupsInterface;
-use TournamentGenerator\Interfaces\WithRounds as WithRoundsInterface;
 use TournamentGenerator\Interfaces\WithTeams as WithTeamsInterface;
 use TournamentGenerator\Round;
 use TournamentGenerator\Team;
@@ -34,8 +31,8 @@ trait WithTeams
 	/**
 	 * Create a new team and add it into the object
 	 *
-	 * @param string $name Name of the new team
-	 * @param string|int|null   $id   Id of the new team - if omitted -> it is generated automatically as unique string
+	 * @param string          $name Name of the new team
+	 * @param string|int|null $id   Id of the new team - if omitted -> it is generated automatically as unique string
 	 *
 	 * @return Team Newly created team
 	 */

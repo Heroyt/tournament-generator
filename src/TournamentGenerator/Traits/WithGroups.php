@@ -6,7 +6,6 @@ namespace TournamentGenerator\Traits;
 
 use TournamentGenerator\Containers\ContainerQuery;
 use TournamentGenerator\Group;
-use TournamentGenerator\Round;
 
 /**
  * Trait WithGroups

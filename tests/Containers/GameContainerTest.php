@@ -4,6 +4,7 @@
 namespace Containers;
 
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use TournamentGenerator\Category;
 use TournamentGenerator\Containers\BaseContainer;
@@ -84,7 +85,7 @@ class GameContainerTest extends TestCase
 		$gameContainer = new GameContainer(0);
 		$baseContainer = new BaseContainer(1);
 
-		$this->expectException(\InvalidArgumentException::class);
+		$this->expectException(InvalidArgumentException::class);
 		$gameContainer->addChild($baseContainer);
 	}
 
@@ -167,7 +168,7 @@ class GameContainerTest extends TestCase
 		$group2->addTeam($team1, $team2);
 		$group3->addTeam($team1, $team2);
 		$group4->addTeam($team1, $team2);
-		
+
 		$groups = [$group1, $group2, $group3, $group4];
 
 		$containers = [$categoryContainer, $round1Container, $round2Container, $group1Container, $group2Container, $group3Container, $group4Container];
@@ -180,7 +181,7 @@ class GameContainerTest extends TestCase
 			$game = $group->game([$team1, $team2]);
 			self::assertEquals($i, $game->getId());
 			foreach ($containers as $container) {
-				self::assertEquals($i+1, $container->getAutoIncrement());
+				self::assertEquals($i + 1, $container->getAutoIncrement());
 			}
 		}
 	}
@@ -218,7 +219,7 @@ class GameContainerTest extends TestCase
 			$game = $group->game([$team1, $team2]);
 			self::assertEquals($i, $game->getId());
 			foreach ($containers as $container) {
-				self::assertEquals($i+1, $container->getAutoIncrement());
+				self::assertEquals($i + 1, $container->getAutoIncrement());
 			}
 		}
 	}

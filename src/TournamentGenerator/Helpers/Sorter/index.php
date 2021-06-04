@@ -3,12 +3,12 @@
 
 /**
  * @package TournamentGenerator\Helpers\Sorter
- * @brief Sorter classes
+ * @brief   Sorter classes
  * @details Classes containing logic of sorting teams / games.
  */
 
 /**
  * @namespace TournamentGenerator\Helpers\Sorter
- * @brief Sorter classes
- * @details Classes containing logic of sorting teams / games.
+ * @brief     Sorter classes
+ * @details   Classes containing logic of sorting teams / games.
  */

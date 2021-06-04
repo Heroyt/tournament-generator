@@ -279,6 +279,7 @@ class BaseContainerTest extends TestCase
 		$values = $container->only('value3')->get();
 		self::assertEquals(range(0, 9), $values);
 	}
+
 	public function testContainerQueryPluckArray() : void {
 		$container = new BaseContainer(0);
 
@@ -305,10 +306,10 @@ class BaseContainerTest extends TestCase
 
 		for ($i = 0; $i < 10; $i++) {
 			$container->insert((object) [
-													 'value1' => $i,
-													 'value2' => $i + 1,
-													 'value3' => 10 - $i,
-												 ]);
+				'value1' => $i,
+				'value2' => $i + 1,
+				'value3' => 10 - $i,
+			]);
 		}
 
 		$values = $container->only('value1')->get();

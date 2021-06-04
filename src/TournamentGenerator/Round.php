@@ -3,7 +3,6 @@
 namespace TournamentGenerator;
 
 use Exception;
-use TournamentGenerator\Containers\BaseContainer;
 use TournamentGenerator\Containers\GameContainer;
 use TournamentGenerator\Containers\HierarchyContainer;
 use TournamentGenerator\Containers\TeamContainer;

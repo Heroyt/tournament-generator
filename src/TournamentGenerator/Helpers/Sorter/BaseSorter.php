@@ -7,7 +7,7 @@ namespace TournamentGenerator\Helpers\Sorter;
  * Class BaseSorter
  *
  * @package TournamentGenerator\Helpers\Sorter
- * @author Tomáš Vojík <vojik@wboy.cz>
+ * @author  Tomáš Vojík <vojik@wboy.cz>
  */
 interface BaseSorter
 {

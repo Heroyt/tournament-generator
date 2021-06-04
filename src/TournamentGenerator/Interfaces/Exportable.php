@@ -11,8 +11,8 @@ use TournamentGenerator\Export\Exporter;
  * Marks all classes that are exportable by some kind of exporter.
  *
  * @package TournamentGenerator\Interfaces
- * @author Tomáš Vojík <vojik@wboy.cz>
- * @since 0.5
+ * @author  Tomáš Vojík <vojik@wboy.cz>
+ * @since   0.5
  */
 interface Exportable
 {
