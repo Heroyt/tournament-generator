@@ -4,7 +4,7 @@
 namespace TournamentGenerator\Export\Hierarchy;
 
 use Error;
-use TournamentGenerator\Export\Exporter;
+use TournamentGenerator\Export\Exporter as ExporterInterface;
 use TournamentGenerator\Export\ExporterBase;
 use TournamentGenerator\HierarchyBase;
 use TournamentGenerator\Interfaces\WithGames;
@@ -54,7 +54,7 @@ class Exporter extends ExporterBase
 	 *
 	 * @return Exporter
 	 */
-	public static function start(WithId $object) : Exporter {
+	public static function start(WithId $object) : ExporterInterface {
 		return new self($object);
 	}
 
@@ -115,7 +115,7 @@ class Exporter extends ExporterBase
 	 * @return $this
 	 * @ingroup ExporterQueryModifiers
 	 */
-	public function withSetup() : Exporter {
+	public function withSetup() : ExporterInterface {
 		$this->exporters['setup'] = SetupExporter::start($this->object);
 		return $this;
 	}
