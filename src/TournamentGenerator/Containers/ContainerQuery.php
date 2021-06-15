@@ -7,6 +7,7 @@ use Closure;
 use Exception;
 use TournamentGenerator\Base;
 use TournamentGenerator\Helpers\Sorter\BaseSorter;
+use TournamentGenerator\Interfaces\WithId;
 
 /**
  * Class ContainerQuery
@@ -121,6 +122,7 @@ class ContainerQuery
 		foreach ($this->filters as $filter) {
 			$data = array_filter($data, $filter);
 		}
+		$data = array_values($data); // Reset array keys
 	}
 
 	/**
@@ -173,6 +175,20 @@ class ContainerQuery
 	 */
 	public function filter(Closure $callback) : ContainerQuery {
 		$this->filters[] = $callback;
+		return $this;
+	}
+
+	/**
+	 * Filter results to only contain those with a specific ID
+	 *
+	 * @param string|int $id
+	 *
+	 * @return ContainerQuery
+	 */
+	public function whereId($id) : ContainerQuery {
+		$this->filters[] = static function($object) use ($id) {
+			return $object InstanceOf WithId && $object->getId() === $id;
+		};
 		return $this;
 	}
 

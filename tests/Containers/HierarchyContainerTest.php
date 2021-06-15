@@ -78,6 +78,14 @@ class HierarchyContainerTest extends TestCase
 		$result = $container->getHierarchyLevel(Category::class);
 		self::assertCount(0, $result);
 		self::assertEquals([], $result);
+
+		// Test id filter
+		$result = $container->whereId(2)->get();
+		self::assertCount(2, $result);
+		self::assertEquals([
+			$round2,
+			$groups[1],
+											 ], $result);
 	}
 
 	public function testInvalidLevelClass() : void {

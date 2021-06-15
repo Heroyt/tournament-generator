@@ -224,6 +224,19 @@ class BaseContainer implements Countable, Iterator
 	}
 
 	/**
+	 * Filter results to only contain those with a specific ID
+	 *
+	 * @param string|int $id
+	 *
+	 * @return ContainerQuery
+	 */
+	public function whereId($id) : ContainerQuery {
+		$query = new ContainerQuery($this);
+		$query->whereId($id);
+		return $query;
+	}
+
+	/**
 	 * Sort a result using a callback - maintaining the index association
 	 *
 	 * @param Closure $callback
