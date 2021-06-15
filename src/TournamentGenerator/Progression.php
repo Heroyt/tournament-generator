@@ -180,4 +180,11 @@ class Progression
 		return $this->progressed;
 	}
 
+	/**
+	 * @param bool $progressed
+	 */
+	public function setProgressed(bool $progressed) : void {
+		$this->progressed = $progressed;
+	}
+
 }
