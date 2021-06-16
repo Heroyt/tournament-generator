@@ -173,7 +173,7 @@ class ImporterTest extends TestCase
 							'skip'    => true,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
-							'type'    => array_rand(Constants::GroupTypes),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
 								'win'         => random_int(1, 100),
 								'loss'        => random_int(1, 100),
@@ -189,7 +189,7 @@ class ImporterTest extends TestCase
 							'skip'    => true,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
-							'type'    => array_rand(Constants::GroupTypes),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
 								'win'         => random_int(1, 100),
 								'loss'        => random_int(1, 100),
@@ -205,7 +205,7 @@ class ImporterTest extends TestCase
 							'skip'    => true,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
-							'type'    => array_rand(Constants::GroupTypes),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
 								'win'         => random_int(1, 100),
 								'loss'        => random_int(1, 100),
@@ -221,7 +221,7 @@ class ImporterTest extends TestCase
 							'skip'    => true,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
-							'type'    => array_rand(Constants::GroupTypes),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
 								'win'         => random_int(1, 100),
 								'loss'        => random_int(1, 100),
@@ -292,7 +292,7 @@ class ImporterTest extends TestCase
 							'skip'    => true,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
-							'type'    => array_rand(Constants::GroupTypes),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
 								'win'         => random_int(1, 100),
 								'loss'        => random_int(1, 100),
@@ -309,7 +309,7 @@ class ImporterTest extends TestCase
 							'skip'    => true,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
-							'type'    => array_rand(Constants::GroupTypes),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
 								'win'         => random_int(1, 100),
 								'loss'        => random_int(1, 100),
@@ -326,7 +326,7 @@ class ImporterTest extends TestCase
 							'skip'    => true,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
-							'type'    => array_rand(Constants::GroupTypes),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
 								'win'         => random_int(1, 100),
 								'loss'        => random_int(1, 100),
@@ -343,7 +343,7 @@ class ImporterTest extends TestCase
 							'skip'    => true,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
-							'type'    => array_rand(Constants::GroupTypes),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
 								'win'         => random_int(1, 100),
 								'loss'        => random_int(1, 100),
@@ -462,7 +462,7 @@ class ImporterTest extends TestCase
 							'skip'    => true,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
-							'type'    => array_rand(Constants::GroupTypes),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
 								'win'         => random_int(1, 100),
 								'loss'        => random_int(1, 100),
@@ -480,7 +480,7 @@ class ImporterTest extends TestCase
 							'skip'    => true,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
-							'type'    => array_rand(Constants::GroupTypes),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
 								'win'         => random_int(1, 100),
 								'loss'        => random_int(1, 100),
@@ -498,7 +498,7 @@ class ImporterTest extends TestCase
 							'skip'    => true,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
-							'type'    => array_rand(Constants::GroupTypes),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
 								'win'         => random_int(1, 100),
 								'loss'        => random_int(1, 100),
@@ -516,7 +516,7 @@ class ImporterTest extends TestCase
 							'skip'    => true,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
-							'type'    => array_rand(Constants::GroupTypes),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
 								'win'         => random_int(1, 100),
 								'loss'        => random_int(1, 100),
@@ -637,7 +637,7 @@ class ImporterTest extends TestCase
 							'skip'    => true,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
-							'type'    => array_rand(Constants::GroupTypes),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
 								'win'         => random_int(1, 100),
 								'loss'        => random_int(1, 100),
@@ -655,7 +655,7 @@ class ImporterTest extends TestCase
 							'skip'    => true,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
-							'type'    => array_rand(Constants::GroupTypes),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
 								'win'         => random_int(1, 100),
 								'loss'        => random_int(1, 100),
@@ -729,7 +729,7 @@ class ImporterTest extends TestCase
 							'skip'    => true,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
-							'type'    => array_rand(Constants::GroupTypes),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
 								'win'         => random_int(1, 100),
 								'loss'        => random_int(1, 100),
@@ -747,7 +747,7 @@ class ImporterTest extends TestCase
 							'skip'    => true,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
-							'type'    => array_rand(Constants::GroupTypes),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
 								'win'         => random_int(1, 100),
 								'loss'        => random_int(1, 100),
@@ -811,7 +811,7 @@ class ImporterTest extends TestCase
 							'skip'    => true,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
-							'type'    => array_rand(Constants::GroupTypes),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
 								'win'         => random_int(1, 100),
 								'loss'        => random_int(1, 100),
@@ -851,7 +851,7 @@ class ImporterTest extends TestCase
 							'skip'    => true,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
-							'type'    => array_rand(Constants::GroupTypes),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
 								'win'         => 10,
 								'loss'        => -5,
@@ -929,7 +929,7 @@ class ImporterTest extends TestCase
 							'skip'    => true,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
-							'type'    => array_rand(Constants::GroupTypes),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
 								'win'         => random_int(1, 100),
 								'loss'        => random_int(1, 100),
@@ -946,7 +946,7 @@ class ImporterTest extends TestCase
 							'skip'    => true,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
-							'type'    => array_rand(Constants::GroupTypes),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
 								'win'         => random_int(1, 100),
 								'loss'        => random_int(1, 100),
@@ -963,7 +963,7 @@ class ImporterTest extends TestCase
 							'skip'    => true,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
-							'type'    => array_rand(Constants::GroupTypes),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
 								'win'         => random_int(1, 100),
 								'loss'        => random_int(1, 100),
@@ -980,7 +980,7 @@ class ImporterTest extends TestCase
 							'skip'    => true,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
-							'type'    => array_rand(Constants::GroupTypes),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
 								'win'         => random_int(1, 100),
 								'loss'        => random_int(1, 100),
@@ -1053,7 +1053,7 @@ class ImporterTest extends TestCase
 							'skip'    => true,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
-							'type'    => array_rand(Constants::GroupTypes),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
 								'win'         => random_int(1, 100),
 								'loss'        => random_int(1, 100),
@@ -1069,7 +1069,7 @@ class ImporterTest extends TestCase
 							'skip'    => true,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
-							'type'    => array_rand(Constants::GroupTypes),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
 								'win'         => random_int(1, 100),
 								'loss'        => random_int(1, 100),
@@ -1253,7 +1253,7 @@ class ImporterTest extends TestCase
 							'id'      => 1,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
-							'type'    => array_rand(Constants::GroupTypes),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
 								'win'         => random_int(1, 100),
 								'loss'        => random_int(1, 100),
@@ -1275,7 +1275,7 @@ class ImporterTest extends TestCase
 							'skip'    => true,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
-							'type'    => array_rand(Constants::GroupTypes),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
 								'win'         => random_int(1, 100),
 								'loss'        => random_int(1, 100),
@@ -1297,7 +1297,7 @@ class ImporterTest extends TestCase
 							'skip'    => false,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
-							'type'    => array_rand(Constants::GroupTypes),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
 								'win'         => random_int(1, 100),
 								'loss'        => random_int(1, 100),
@@ -1318,7 +1318,7 @@ class ImporterTest extends TestCase
 							'skip'    => false,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
-							'type'    => array_rand(Constants::GroupTypes),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
 								'win'         => random_int(1, 100),
 								'loss'        => random_int(1, 100),

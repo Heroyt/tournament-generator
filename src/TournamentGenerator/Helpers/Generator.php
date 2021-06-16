@@ -60,7 +60,7 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 	 * @throws Exception
 	 */
 	public function setType(string $type = Constants::ROUND_ROBIN) : Generator {
-		if (isset(Constants::GroupTypes[$type])) {
+		if (in_array($type, Constants::GroupTypes, true)) {
 			$this->type = $type;
 		}
 		else {

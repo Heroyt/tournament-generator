@@ -37,8 +37,8 @@ class Constants
 
 	/** @var array List of all available group bracket types */
 	public const GroupTypes = [
-		'ROUND_ROBIN' => 'Robin-Robin group type',
-		'ROUND_TWO'   => 'Two-Two group type',
-		'ROUND_SPLIT' => 'Conditional split group type'
+		Constants::ROUND_ROBIN,
+		Constants::ROUND_TWO,
+		Constants::ROUND_SPLIT,
 	];
 }
