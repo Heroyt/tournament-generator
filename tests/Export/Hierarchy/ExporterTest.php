@@ -652,7 +652,6 @@ class ExporterTest extends TestCase
 	}
 
 	public function getModifiedTournamentData() : array {
-		echo json_encode($this->tournamentSetup(true, true));
 		return [
 			$this->tournamentSetup(false, true),
 			$this->tournamentSetup(true, true),
