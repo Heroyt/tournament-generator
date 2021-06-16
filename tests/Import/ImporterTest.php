@@ -7,6 +7,7 @@ namespace Import;
 use PHPUnit\Framework\TestCase;
 use TournamentGenerator\Category;
 use TournamentGenerator\Constants;
+use TournamentGenerator\Game;
 use TournamentGenerator\Group;
 use TournamentGenerator\Import\Importer;
 use TournamentGenerator\Preset\DoubleElimination;
@@ -14,6 +15,7 @@ use TournamentGenerator\Preset\R2G;
 use TournamentGenerator\Preset\SingleElimination;
 use TournamentGenerator\Round;
 use TournamentGenerator\Team;
+use TournamentGenerator\TeamFilter;
 use TournamentGenerator\Tournament;
 
 class ImporterTest extends TestCase
@@ -712,7 +714,7 @@ class ImporterTest extends TestCase
 			],
 			[
 				[
-					'rounds'     => [
+					'rounds' => [
 						(object) [
 							'name'   => 'Round 1',
 							'id'     => 1,
@@ -722,7 +724,7 @@ class ImporterTest extends TestCase
 							'games'  => [1, 2, 3, 4],
 						],
 					],
-					'groups'     => [
+					'groups' => [
 						(object) [
 							'name'    => 'Group 1',
 							'id'      => 1,
@@ -760,7 +762,7 @@ class ImporterTest extends TestCase
 							'games'   => [2, 3, 4],
 						],
 					],
-					'teams'      => [
+					'teams'  => [
 						(object) [
 							'id'   => 1,
 							'name' => 'Team 1',
@@ -782,7 +784,7 @@ class ImporterTest extends TestCase
 							'name' => 'Team 5',
 						],
 					],
-					'games'      => [
+					'games'  => [
 						(object) [
 							'id'    => 1,
 							'teams' => [1, 2],
@@ -804,7 +806,260 @@ class ImporterTest extends TestCase
 			],
 			[
 				[
-					'groups'     => [
+					'rounds'       => [
+						(object) [
+							'name'   => 'Round 1',
+							'id'     => 1,
+							'skip'   => true,
+							'groups' => [1, 2],
+							'teams'  => [1, 2, 3, 4, 5],
+							'games'  => [1, 2, 3, 4],
+						],
+					],
+					'groups'       => [
+						(object) [
+							'name'    => 'Group 1',
+							'id'      => 1,
+							'skip'    => true,
+							'inGame'  => random_int(2, 4),
+							'maxSize' => random_int(5, 99),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
+							'points'  => (object) [
+								'win'         => random_int(1, 100),
+								'loss'        => random_int(1, 100),
+								'draw'        => random_int(1, 100),
+								'second'      => random_int(1, 100),
+								'third'       => random_int(1, 100),
+								'progression' => random_int(1, 100),
+							],
+							'teams'   => [1, 2],
+							'games'   => [1],
+						],
+						(object) [
+							'name'    => 'Group 2',
+							'id'      => 2,
+							'skip'    => true,
+							'inGame'  => random_int(2, 4),
+							'maxSize' => random_int(5, 99),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
+							'points'  => (object) [
+								'win'         => random_int(1, 100),
+								'loss'        => random_int(1, 100),
+								'draw'        => random_int(1, 100),
+								'second'      => random_int(1, 100),
+								'third'       => random_int(1, 100),
+								'progression' => random_int(1, 100),
+							],
+							'teams'   => [3, 4, 5],
+							'games'   => [2, 3, 4],
+						],
+					],
+					'progressions' => [
+						(object) [
+							'from'       => 1,
+							'to'         => 2,
+							'offset'     => 0,
+							'length'     => 2,
+							'progressed' => false,
+						],
+						(object) [
+							'from'       => 1,
+							'to'         => 2,
+							'offset'     => -2,
+							'progressed' => true,
+						],
+						(object) [
+							'from'    => 1,
+							'to'      => 2,
+							'filters' => [
+								(object) [
+									'what' => 'points',
+									'how'  => '>',
+									'val'  => 10,
+								],
+								(object) [
+									'what'   => 'wins',
+									'how'    => '=',
+									'val'    => 1,
+									'groups' => [1, 2],
+								],
+							],
+						],
+					],
+					'teams'        => [
+						(object) [
+							'id'   => 1,
+							'name' => 'Team 1',
+						],
+						(object) [
+							'id'   => 2,
+							'name' => 'Team 2',
+						],
+						(object) [
+							'id'   => 3,
+							'name' => 'Team 3',
+						],
+						(object) [
+							'id'   => 4,
+							'name' => 'Team 4',
+						],
+						(object) [
+							'id'   => 5,
+							'name' => 'Team 5',
+						],
+					],
+					'games'        => [
+						(object) [
+							'id'    => 1,
+							'teams' => [1, 2],
+						],
+						(object) [
+							'id'    => 2,
+							'teams' => [3, 4],
+						],
+						(object) [
+							'id'    => 3,
+							'teams' => [4, 5],
+						],
+						(object) [
+							'id'    => 4,
+							'teams' => [3, 5],
+						],
+					],
+				]
+			],
+			[
+				[
+					'rounds'       => [
+						(object) [
+							'name'   => 'Round 1',
+							'id'     => 1,
+							'skip'   => true,
+							'groups' => [1, 2],
+							'teams'  => [1, 2, 3, 4, 5],
+							'games'  => [1, 2, 3, 4],
+						],
+					],
+					'groups'       => [
+						(object) [
+							'name'    => 'Group 1',
+							'id'      => 1,
+							'skip'    => true,
+							'inGame'  => random_int(2, 4),
+							'maxSize' => random_int(5, 99),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
+							'points'  => (object) [
+								'win'         => random_int(1, 100),
+								'loss'        => random_int(1, 100),
+								'draw'        => random_int(1, 100),
+								'second'      => random_int(1, 100),
+								'third'       => random_int(1, 100),
+								'progression' => random_int(1, 100),
+							],
+							'teams'   => [1, 2],
+							'games'   => [1],
+						],
+						(object) [
+							'name'    => 'Group 2',
+							'id'      => 2,
+							'skip'    => true,
+							'inGame'  => random_int(2, 4),
+							'maxSize' => random_int(5, 99),
+							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
+							'points'  => (object) [
+								'win'         => random_int(1, 100),
+								'loss'        => random_int(1, 100),
+								'draw'        => random_int(1, 100),
+								'second'      => random_int(1, 100),
+								'third'       => random_int(1, 100),
+								'progression' => random_int(1, 100),
+							],
+							'teams'   => [3, 4, 5],
+							'games'   => [2, 3, 4],
+						],
+					],
+					'progressions' => [
+						(object) [
+							'from'       => 1,
+							'to'         => 2,
+							'length'     => 2,
+						],
+						(object) [
+							'from'       => 1,
+							'to'         => 2,
+							'offset'     => -2,
+							'progressed' => true,
+						],
+						(object) [
+							'from'    => 1,
+							'to'      => 2,
+							'filters' => [
+								(object) [
+									'how'  => '>',
+									'val'  => 10,
+								],
+								(object) [
+									'what'   => 'wins',
+									'val'    => 1,
+									'groups' => [1, 2],
+								],
+								(object) [
+									'val'    => 1,
+								],
+								(object) [
+									'what'   => 'wins',
+								],
+								(object) [
+									'groups' => [1, 2],
+								],
+							],
+						],
+					],
+					'teams'        => [
+						(object) [
+							'id'   => 1,
+							'name' => 'Team 1',
+						],
+						(object) [
+							'id'   => 2,
+							'name' => 'Team 2',
+						],
+						(object) [
+							'id'   => 3,
+							'name' => 'Team 3',
+						],
+						(object) [
+							'id'   => 4,
+							'name' => 'Team 4',
+						],
+						(object) [
+							'id'   => 5,
+							'name' => 'Team 5',
+						],
+					],
+					'games'        => [
+						(object) [
+							'id'    => 1,
+							'teams' => [1, 2],
+						],
+						(object) [
+							'id'    => 2,
+							'teams' => [3, 4],
+						],
+						(object) [
+							'id'    => 3,
+							'teams' => [4, 5],
+						],
+						(object) [
+							'id'    => 4,
+							'teams' => [3, 5],
+						],
+					],
+				]
+			],
+			[
+				[
+					'groups' => [
 						(object) [
 							'name'    => 'Group 1',
 							'id'      => 1,
@@ -824,7 +1079,7 @@ class ImporterTest extends TestCase
 							'games'   => [1],
 						],
 					],
-					'teams'      => [
+					'teams'  => [
 						(object) [
 							'id'   => 1,
 							'name' => 'Team 1',
@@ -834,7 +1089,7 @@ class ImporterTest extends TestCase
 							'name' => 'Team 2',
 						],
 					],
-					'games'      => [
+					'games'  => [
 						(object) [
 							'id'    => 1,
 							'teams' => [1, 2],
@@ -844,12 +1099,12 @@ class ImporterTest extends TestCase
 			],
 			[
 				[
-					'groups'     => [
+					'groups' => [
 						(object) [
 							'name'    => 'Group 1',
 							'id'      => 1,
 							'skip'    => true,
-							'inGame'  => random_int(2, 4),
+							'inGame'  => 2,
 							'maxSize' => random_int(5, 99),
 							'type'    => Constants::GroupTypes[array_rand(Constants::GroupTypes)],
 							'points'  => (object) [
@@ -864,7 +1119,7 @@ class ImporterTest extends TestCase
 							'games'   => [1],
 						],
 					],
-					'teams'      => [
+					'teams'  => [
 						(object) [
 							'id'   => 1,
 							'name' => 'Team 1',
@@ -874,20 +1129,20 @@ class ImporterTest extends TestCase
 							'name' => 'Team 2',
 						],
 					],
-					'games'      => [
+					'games'  => [
 						(object) [
-							'id'    => 1,
-							'teams' => [1, 2],
+							'id'     => 1,
+							'teams'  => [1, 2],
 							'scores' => [
 								1 => (object) [
-									'score' => 5000,
+									'score'  => 5000,
 									'points' => 10,
-									'type' => 'win',
+									'type'   => 'win',
 								],
 								2 => (object) [
-									'score' => 1000,
+									'score'  => 1000,
 									'points' => -5,
-									'type' => 'loss',
+									'type'   => 'loss',
 								],
 							],
 						],
@@ -1770,11 +2025,361 @@ class ImporterTest extends TestCase
 			}
 		}
 
-		// TODO: Test teams
-		// TODO: Test progressions
-		// TODO: Test games
-		// TODO: Test scores
+		foreach ($data['teams'] ?? [] as $setting) {
+			if (!isset($data['tournament']) && !isset($data['categories']) && !isset($data['rounds']) && !isset($data['groups'])) {
+				self::assertInstanceOf(Team::class, $object);
+				self::assertInstanceOf(Team::class, $object2);
+			}
+			elseif (isset($data['tournament'])) {
+				$object = $tournament1->getTeamContainer()->whereId($setting->id)->getFirst();
+				$object2 = $tournament2->getTeamContainer()->whereId($setting->id)->getFirst();
+			}
+			elseif (isset($data['categories'])) {
+				$object = $category1->getTeamContainer()->whereId($setting->id)->getFirst();
+				$object2 = $category2->getTeamContainer()->whereId($setting->id)->getFirst();
+			}
+			elseif (isset($data['rounds'])) {
+				$object = $round1->getTeamContainer()->whereId($setting->id)->getFirst();
+				$object2 = $round2->getTeamContainer()->whereId($setting->id)->getFirst();
+			}
+			else {
+				$object = $group1->getTeamContainer()->whereId($setting->id)->getFirst();
+				$object2 = $group2->getTeamContainer()->whereId($setting->id)->getFirst();
+			}
+			if (isset($setting->id)) {
+				self::assertEquals($setting->id, $object->getId());
+				self::assertEquals($setting->id, $object2->getId());
+			}
+			if (isset($setting->name)) {
+				self::assertEquals($setting->name, $object->getName());
+				self::assertEquals($setting->name, $object2->getName());
+			}
+		}
 
+		foreach ($data['games'] ?? [] as $setting) {
+			if (!isset($data['tournament']) && !isset($data['categories']) && !isset($data['rounds']) && !isset($data['groups'])) {
+				self::assertTrue(false, 'No container to get the game objects from.');
+			}
+
+			if (isset($data['tournament'])) {
+				$object = $tournament1->getGameContainer()->whereId($setting->id)->getFirst();
+				$object2 = $tournament2->getGameContainer()->whereId($setting->id)->getFirst();
+			}
+			elseif (isset($data['categories'])) {
+				$object = $category1->getGameContainer()->whereId($setting->id)->getFirst();
+				$object2 = $category2->getGameContainer()->whereId($setting->id)->getFirst();
+			}
+			elseif (isset($data['rounds'])) {
+				$object = $round1->getGameContainer()->whereId($setting->id)->getFirst();
+				$object2 = $round2->getGameContainer()->whereId($setting->id)->getFirst();
+			}
+			else {
+				$object = $group1->getGameContainer()->whereId($setting->id)->getFirst();
+				$object2 = $group2->getGameContainer()->whereId($setting->id)->getFirst();
+			}
+			/** @var Game|null $object */
+			/** @var Game|null $object1 */
+
+			if (isset($setting->id)) {
+				self::assertEquals($setting->id, $object->getId());
+				self::assertEquals($setting->id, $object2->getId());
+			}
+			if (isset($setting->teams)) {
+				self::assertEquals($setting->teams, $object->getTeamsIds());
+				self::assertEquals($setting->teams, $object2->getTeamsIds());
+			}
+			if (isset($setting->scores)) {
+				$expected = array_map(static function($object) {
+					return (array) $object;
+				}, $setting->scores);
+				self::assertEquals($expected, $object->getResults());
+				self::assertEquals($expected, $object2->getResults());
+			}
+		}
+
+		foreach ($data['progressions'] ?? [] as $key => $setting) {
+			if (!isset($setting->from, $setting->to)) {
+				continue;
+			}
+
+			if (!isset($data['tournament']) && !isset($data['categories']) && !isset($data['rounds'])) {
+				self::assertTrue(false, 'No container to get the group object from.');
+			}
+
+			if (isset($data['tournament'])) {
+				$from1 = $tournament1->getContainer()->getHierarchyLevelQuery(Group::class)->whereId($setting->from)->getFirst();
+				$from2 = $tournament2->getContainer()->getHierarchyLevelQuery(Group::class)->whereId($setting->from)->getFirst();
+				$to1 = $tournament1->getContainer()->getHierarchyLevelQuery(Group::class)->whereId($setting->to)->getFirst();
+				$to2 = $tournament2->getContainer()->getHierarchyLevelQuery(Group::class)->whereId($setting->to)->getFirst();
+			}
+			elseif (isset($data['categories'])) {
+				$from1 = $category1->getContainer()->getHierarchyLevelQuery(Group::class)->whereId($setting->from)->getFirst();
+				$from2 = $category2->getContainer()->getHierarchyLevelQuery(Group::class)->whereId($setting->from)->getFirst();
+				$to1 = $category1->getContainer()->getHierarchyLevelQuery(Group::class)->whereId($setting->to)->getFirst();
+				$to2 = $category2->getContainer()->getHierarchyLevelQuery(Group::class)->whereId($setting->to)->getFirst();
+			}
+			else {
+				$from1 = $round1->getContainer()->getHierarchyLevelQuery(Group::class)->whereId($setting->from)->getFirst();
+				$from2 = $round2->getContainer()->getHierarchyLevelQuery(Group::class)->whereId($setting->from)->getFirst();
+				$to1 = $round1->getContainer()->getHierarchyLevelQuery(Group::class)->whereId($setting->to)->getFirst();
+				$to2 = $round2->getContainer()->getHierarchyLevelQuery(Group::class)->whereId($setting->to)->getFirst();
+			}
+
+			/** @var Group $from1 */
+			/** @var Group $from2 */
+			/** @var Group $to1 */
+			/** @var Group $to2 */
+
+			$progressions1 = $from1->getProgressions();
+			$progressions2 = $from2->getProgressions();
+
+			foreach ([[$progressions1, $to1], [$progressions2, $to2]] as [$progressions, $to]) {
+				$found = false;
+				foreach ($progressions as $progression) {
+					if ($progression->getTo() === $to) {
+						if (isset($setting->offset, $setting->length, $setting->filters)
+						&& $progression->getStart() === $setting->offset
+						&& $progression->getLen() === $setting->length
+						&& count($progression->getFilters()) === count($setting->filters)) {
+							$found = true;
+							$this->checkFilters($setting->filters, $progression->getFilters());
+							if (isset($setting->progressed)) {
+								self::assertSame($setting->progressed, $progression->isProgressed());
+							}
+							break;
+						}
+
+						if (isset($setting->offset, $setting->length)
+						&& $progression->getStart() === $setting->offset
+						&& $progression->getLen() === $setting->length
+						&& count($progression->getFilters()) === 0) {
+							$found = true;
+							if (isset($setting->progressed)) {
+								self::assertSame($setting->progressed, $progression->isProgressed());
+							}
+							break;
+						}
+
+						if (isset($setting->offset, $setting->filters)
+						&& $progression->getStart() === $setting->offset
+						&& $progression->getLen() === null
+						&& count($progression->getFilters()) === count($setting->filters)) {
+							$found = true;
+							$this->checkFilters($setting->filters, $progression->getFilters());
+							if (isset($setting->progressed)) {
+								self::assertSame($setting->progressed, $progression->isProgressed());
+							}
+							break;
+						}
+
+						if (isset($setting->length, $setting->filters)
+						&& $progression->getStart() === 0
+						&& $progression->getLen() === $setting->length
+						&& count($progression->getFilters()) === count($setting->filters)) {
+							$found = true;
+							$this->checkFilters($setting->filters, $progression->getFilters());
+							if (isset($setting->progressed)) {
+								self::assertSame($setting->progressed, $progression->isProgressed());
+							}
+							break;
+						}
+
+						if (isset($setting->offset)
+						&& $progression->getStart() === $setting->offset
+						&& $progression->getLen() === null
+						&& count($progression->getFilters()) === 0) {
+							$found = true;
+							if (isset($setting->progressed)) {
+								self::assertSame($setting->progressed, $progression->isProgressed());
+							}
+							break;
+						}
+
+						if (isset($setting->length)
+						&& $progression->getStart() === 0
+						&& $progression->getLen() === $setting->length
+						&& count($progression->getFilters()) === 0) {
+							$found = true;
+							if (isset($setting->progressed)) {
+								self::assertSame($setting->progressed, $progression->isProgressed());
+							}
+							break;
+						}
+
+						if (
+							isset($setting->filters)
+							&& $progression->getStart() === 0
+							&& $progression->getLen() === null
+							&& count($progression->getFilters()) === count($setting->filters)
+						) {
+							$found = true;
+							$this->checkFilters($setting->filters, $progression->getFilters());
+							if (isset($setting->progressed)) {
+								self::assertSame($setting->progressed, $progression->isProgressed());
+							}
+							break;
+						}
+					}
+				}
+				if (!$found) {
+					self::assertTrue(false, 'Progression ('.$key.') is not set on group ('.$setting->from.')');
+				}
+			}
+		}
+
+	}
+
+	/**
+	 * @param object[]     $setting
+	 * @param TeamFilter[] $filters
+	 */
+	private function checkFilters(array $setting, array $filters) : void {
+		foreach ($setting as $key => $filterSetting) {
+			$found = false;
+			foreach ($filters as $filter) {
+
+				if (isset($filterSetting->what, $filterSetting->how, $filterSetting->val, $filterSetting->groups)
+				&& $filterSetting->what === $filter->getWhat()
+				&& $filterSetting->how === $filter->getHow()
+				&& $filterSetting->val === $filter->getVal()
+				&& $filterSetting->groups === $filter->getGroups()) {
+					$found = true;
+					break;
+				}
+
+				if (isset($filterSetting->how, $filterSetting->val, $filterSetting->groups)
+				&& 'points' === $filter->getWhat()
+				&& $filterSetting->how === $filter->getHow()
+				&& $filterSetting->val === $filter->getVal()
+				&& $filterSetting->groups === $filter->getGroups()) {
+					$found = true;
+					break;
+				}
+
+				if (isset($filterSetting->what, $filterSetting->val, $filterSetting->groups)
+				&& $filterSetting->what === $filter->getWhat()
+				&& '>' === $filter->getHow()
+				&& $filterSetting->val === $filter->getVal()
+				&& $filterSetting->groups === $filter->getGroups()) {
+					$found = true;
+					break;
+				}
+
+				if (isset($filterSetting->what, $filterSetting->how, $filterSetting->groups)
+				&& $filterSetting->what === $filter->getWhat()
+				&& $filterSetting->how === $filter->getHow()
+				&& 0 === $filter->getVal()
+				&& $filterSetting->groups === $filter->getGroups()) {
+					$found = true;
+					break;
+				}
+
+				if (
+					isset($filterSetting->what, $filterSetting->how, $filterSetting->val)
+					&& $filterSetting->what === $filter->getWhat()
+					&& $filterSetting->how === $filter->getHow()
+					&& $filterSetting->val === $filter->getVal()
+					&& [] === $filter->getGroups()
+				) {
+					$found = true;
+					break;
+				}
+
+				if (isset($filterSetting->what, $filterSetting->how)
+					&& $filterSetting->what === $filter->getWhat()
+					&& $filterSetting->how === $filter->getHow()
+					&& 0 === $filter->getVal()
+					&& [] === $filter->getGroups()) {
+					$found = true;
+					break;
+				}
+
+				if (isset($filterSetting->what, $filterSetting->groups)
+					&& $filterSetting->what === $filter->getWhat()
+					&& '>' === $filter->getHow()
+					&& 0 === $filter->getVal()
+					&& $filterSetting->groups === $filter->getGroups()) {
+					$found = true;
+					break;
+				}
+
+				if (isset($filterSetting->val, $filterSetting->groups)
+					&& 'points' === $filter->getWhat()
+					&& '>' === $filter->getHow()
+					&& $filterSetting->val === $filter->getVal()
+					&& $filterSetting->groups === $filter->getGroups()) {
+					$found = true;
+					break;
+				}
+
+				if (isset($filterSetting->what, $filterSetting->val)
+					&& $filterSetting->what === $filter->getWhat()
+					&& '>' === $filter->getHow()
+					&& $filterSetting->val === $filter->getVal()
+					&& [] === $filter->getGroups()) {
+					$found = true;
+					break;
+				}
+
+				if (isset($filterSetting->how, $filterSetting->groups)
+					&& 'points' === $filter->getWhat()
+					&& $filterSetting->how === $filter->getHow()
+					&& 0 === $filter->getVal()
+					&& $filterSetting->groups === $filter->getGroups()) {
+					$found = true;
+					break;
+				}
+
+				if (isset($filterSetting->what, $filterSetting->groups)
+					&& $filterSetting->what === $filter->getWhat()
+					&& '>' === $filter->getHow()
+					&& 0 === $filter->getVal()
+					&& $filterSetting->groups === $filter->getGroups()) {
+					$found = true;
+					break;
+				}
+
+				if (isset($filterSetting->what)
+					&& $filterSetting->what === $filter->getWhat()
+					&& '>' === $filter->getHow()
+					&& 0 === $filter->getVal()
+					&& [] === $filter->getGroups()) {
+					$found = true;
+					break;
+				}
+
+				if (isset($filterSetting->how)
+					&& 'points' === $filter->getWhat()
+					&& $filterSetting->how === $filter->getHow()
+					&& 0 === $filter->getVal()
+					&& [] === $filter->getGroups()) {
+					$found = true;
+					break;
+				}
+
+				if (isset($filterSetting->val)
+					&& 'points' === $filter->getWhat()
+					&& '>' === $filter->getHow()
+					&& $filterSetting->val === $filter->getVal()
+					&& [] === $filter->getGroups()) {
+					$found = true;
+					break;
+				}
+
+				if (isset($filterSetting->groups)
+					&& 'points' === $filter->getWhat()
+					&& '>' === $filter->getHow()
+					&& 0 === $filter->getVal()
+					&& $filterSetting->groups === $filter->getGroups()) {
+					$found = true;
+					break;
+				}
+
+			}
+			if (!$found) {
+				self::assertTrue(false, 'Filter ('.$key.') not found');
+			}
+		}
 	}
 
 	// TODO: Test invalid values
