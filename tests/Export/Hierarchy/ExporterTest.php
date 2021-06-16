@@ -665,11 +665,14 @@ class ExporterTest extends TestCase
 
 		$export1 = Exporter::export($tournament);
 		$export2 = Exporter::start($tournament)->get();
+		$export3 = $tournament->export()->get();
 
 		self::assertEquals($expectedTeams, $export1['teams']);
 		self::assertEquals($expectedTeams, $export2['teams']);
+		self::assertEquals($expectedTeams, $export3['teams']);
 		self::assertEquals($expectedGames, $export1['games']);
 		self::assertEquals($expectedGames, $export2['games']);
+		self::assertEquals($expectedGames, $export3['games']);
 	}
 
 	/**
@@ -678,10 +681,14 @@ class ExporterTest extends TestCase
 	public function testBasicExportWithSetup(Tournament $tournament, array $expectedTeams, array $expectedGames, array $expectedSetup) : void {
 
 		$export = Exporter::start($tournament)->withSetup()->get();
+		$export2 = $tournament->export()->withSetup()->get();
 
 		self::assertEquals($expectedTeams, $export['teams']);
+		self::assertEquals($expectedTeams, $export2['teams']);
 		self::assertEquals($expectedGames, $export['games']);
+		self::assertEquals($expectedGames, $export2['games']);
 		self::assertEquals($expectedSetup, $export['setup']);
+		self::assertEquals($expectedSetup, $export2['setup']);
 	}
 
 	/**
@@ -692,9 +699,14 @@ class ExporterTest extends TestCase
 		$export = Exporter::start($tournament)
 											->withScores()
 											->get();
+		$export2 = $tournament->export()
+											->withScores()
+											->get();
 
 		self::assertEquals($expectedTeams, $export['teams']);
 		self::assertEquals($expectedGames, $export['games']);
+		self::assertEquals($expectedTeams, $export2['teams']);
+		self::assertEquals($expectedGames, $export2['games']);
 	}
 
 	public function testCategoryRoundsGroupsExport() : void {
@@ -733,29 +745,54 @@ class ExporterTest extends TestCase
 			];
 		}, $group2->genGames());
 		$export = Exporter::export($category);
+		$export2 = $category->export()->get();
 		self::assertEquals([
 												 'teams' => $teams,
 												 'games' => array_merge($games1, $games2),
 											 ], $export);
+		self::assertEquals([
+												 'teams' => $teams,
+												 'games' => array_merge($games1, $games2),
+											 ], $export2);
 		$export = Exporter::export($round1);
+		$export2 = $round1->export()->get();
 		self::assertEquals([
 												 'teams' => array_slice($teams, 0, 4),
 												 'games' => $games1,
 											 ], $export);
+		self::assertEquals([
+												 'teams' => array_slice($teams, 0, 4),
+												 'games' => $games1,
+											 ], $export2);
 		$export = Exporter::export($round2);
+		$export2 = $round2->export()->get();
 		self::assertEquals([
 												 'teams' => array_slice($teams, -4),
 												 'games' => $games2,
 											 ], $export);
+		self::assertEquals([
+												 'teams' => array_slice($teams, -4),
+												 'games' => $games2,
+											 ], $export2);
 		$export = Exporter::export($group1);
+		$export2 = $group1->export()->get();
 		self::assertEquals([
 												 'teams' => array_slice($teams, 0, 4),
 												 'games' => $games1,
 											 ], $export);
+		self::assertEquals([
+												 'teams' => array_slice($teams, 0, 4),
+												 'games' => $games1,
+											 ], $export2);
 		$export = Exporter::export($group2);
+		$export2 = $group2->export()->get();
 		self::assertEquals([
 												 'teams' => array_slice($teams, -4),
 												 'games' => $games2,
 											 ], $export);
+		self::assertEquals([
+												 'teams' => array_slice($teams, -4),
+												 'games' => $games2,
+											 ], $export2);
 	}
 }

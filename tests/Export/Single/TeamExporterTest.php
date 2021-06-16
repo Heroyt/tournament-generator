@@ -84,12 +84,14 @@ class TeamExporterTest extends TestCase
 	public function testBasicExport(Team $team, array $expectedOutput) : void {
 		$export1 = TeamExporter::export($team);
 		$export2 = TeamExporter::start($team)->get();
+		$export3 = $team->export()->get();
 		$exportJson = TeamExporter::start($team)->getJson();
 		$exportJsonSerialized = json_encode(TeamExporter::start($team), JSON_UNESCAPED_SLASHES);
 		$exportBasic = TeamExporter::exportBasic($team);
 
 		self::assertEquals($expectedOutput, $export1);
 		self::assertEquals($expectedOutput, $export2);
+		self::assertEquals($expectedOutput, $export3);
 		self::assertEquals(json_encode($expectedOutput, JSON_UNESCAPED_SLASHES), $exportJson);
 		self::assertEquals(json_encode($expectedOutput, JSON_UNESCAPED_SLASHES), $exportJsonSerialized);
 

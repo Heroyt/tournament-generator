@@ -7,7 +7,10 @@ namespace Export\Hierarchy;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use TournamentGenerator\Export\Hierarchy\TeamsExporter;
+use TournamentGenerator\Export\Single\TeamExporter;
+use TournamentGenerator\Group;
 use TournamentGenerator\HierarchyBase;
+use TournamentGenerator\Team;
 use TournamentGenerator\Tournament;
 
 class TeamExporterTest extends TestCase
@@ -256,6 +259,130 @@ class TeamExporterTest extends TestCase
 		$export = TeamsExporter::start($tournament)->withScores()->get();
 		self::assertCount(10, $export);
 		self::assertEquals($expectedExport, $export);
+	}
+
+	public function getSingleTeam() : array {
+		$group = new Group('Group', 0);
+		$team1 = $group->team('Team 1', 1);
+		$team2 = $group->team('Team 2', 2);
+		$team3 = $group->team('Team 3', 3);
+		$team4 = $group->team('Team 4', 4);
+		$group->game([$team1, $team2])->setResults([1 => 100, 2 => 200]);
+		$group->game([$team2, $team3])->setResults([2 => 200, 3 => 300]);
+		$group->game([$team3, $team4])->setResults([4 => 400, 3 => 300]);
+		$group->game([$team1, $team3])->setResults([1 => 100, 3 => 300]);
+		$group->game([$team2, $team4])->setResults([2 => 200, 4 => 400]);
+		$group->game([$team1, $team4])->setResults([1 => 100, 4 => 400]);
+		return [
+			[
+				new Team('Team', 1),
+				[
+					'id'   => 1,
+					'name' => 'Team',
+				],
+				[],
+			],
+			[
+				$team1,
+				[
+					'id'   => 1,
+					'name' => 'Team 1',
+				],
+				[
+					0 => [
+						'points' => $group->getLostPoints() * 3,
+						'score' => 300,
+						'wins' => 0,
+						'losses' => 3,
+						'draws' => 0,
+						'second' => 0,
+						'third' => 0,
+					],
+				],
+			],
+			[
+				$team2,
+				[
+					'id'   => 2,
+					'name' => 'Team 2',
+				],
+				[
+					0 => [
+						'points' => $group->getLostPoints() * 2 + $group->getWinPoints() * 1,
+						'score' => 600,
+						'wins' => 1,
+						'losses' => 2,
+						'draws' => 0,
+						'second' => 0,
+						'third' => 0,
+					],
+				],
+			],
+			[
+				$team3,
+				[
+					'id'   => 3,
+					'name' => 'Team 3',
+				],
+				[
+					0 => [
+						'points' => $group->getLostPoints() * 1 + $group->getWinPoints() * 2,
+						'score' => 900,
+						'wins' => 2,
+						'losses' => 1,
+						'draws' => 0,
+						'second' => 0,
+						'third' => 0,
+					],
+				],
+			],
+			[
+				$team4,
+				[
+					'id'   => 4,
+					'name' => 'Team 4',
+				],
+				[
+					0 => [
+						'points' => $group->getWinPoints() * 3,
+						'score' => 1200,
+						'wins' => 3,
+						'losses' => 0,
+						'draws' => 0,
+						'second' => 0,
+						'third' => 0,
+					],
+				],
+			],
+		];
+	}
+
+	/**
+	 * @dataProvider getSingleTeam
+	 *
+	 * @param Team $team
+	 * @param      $expected
+	 */
+	public function testSingleTeamExport(Team $team, $expected) : void {
+		$export = $team->export()->get();
+		$export2 = TeamExporter::export($team);
+		self::assertEquals($expected, $export);
+		self::assertEquals($expected, $export2);
+	}
+
+	/**
+	 * @dataProvider getSingleTeam
+	 *
+	 * @param Team $team
+	 * @param      $expected
+	 * @param      $scores
+	 */
+	public function testSingleTeamExportWithScores(Team $team, $expected, $scores) : void {
+		$export = $team->export()->withScores()->get();
+		$export2 = TeamExporter::start($team)->withScores()->get();
+		$expected['scores'] = $scores;
+		self::assertEquals($expected, $export);
+		self::assertEquals($expected, $export2);
 	}
 
 }

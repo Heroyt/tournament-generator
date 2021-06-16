@@ -74,12 +74,14 @@ class GameExporterTest extends TestCase
 	public function testBasicExport(Game $game, array $expectedOutput) : void {
 		$export1 = GameExporter::export($game);
 		$export2 = GameExporter::start($game)->get();
+		$export3 = $game->export()->get();
 		$exportJson = GameExporter::start($game)->getJson();
 		$exportJsonSerialized = json_encode(GameExporter::start($game), JSON_UNESCAPED_SLASHES);
 		$exportBasic = GameExporter::exportBasic($game);
 
 		self::assertEquals($expectedOutput, $export1);
 		self::assertEquals($expectedOutput, $export2);
+		self::assertEquals($expectedOutput, $export3);
 		self::assertEquals(json_encode($expectedOutput, JSON_UNESCAPED_SLASHES), $exportJson);
 		self::assertEquals(json_encode($expectedOutput, JSON_UNESCAPED_SLASHES), $exportJsonSerialized);
 

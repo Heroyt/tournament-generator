@@ -2,6 +2,8 @@
 
 use PHPUnit\Framework\TestCase;
 use TournamentGenerator\BlankTeam;
+use TournamentGenerator\Group;
+use TournamentGenerator\Progression;
 use TournamentGenerator\TeamFilter;
 use TournamentGenerator\Tournament;
 
@@ -10,6 +12,16 @@ use TournamentGenerator\Tournament;
  */
 class ProgressionTest extends TestCase
 {
+
+	public function testProgressedSetting() : void {
+		$group1 = new Group('Group1');
+		$group2 = new Group('Group2');
+		$progression = new Progression($group1, $group2);
+
+		self::assertFalse($progression->isProgressed());
+		$progression->setProgressed(true);
+		self::assertTrue($progression->isProgressed());
+	}
 
 	/** @test */
 	public function check_progressing() : void {
