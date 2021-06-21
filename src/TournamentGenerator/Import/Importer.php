@@ -190,7 +190,7 @@ class Importer
 		self::addIds(self::$categories, $object, $setting['categories'] ?? []);
 		self::addIds(self::$rounds, $object, $setting['rounds'] ?? []);
 		self::addIds(self::$groups, $object, $setting['groups'] ?? []);
-		self::addIds(self::$teams, $object, $setting['teams'] ?? []);
+		self::addIds(self::$teams, $object, $setting['teams'] ?? [], true);
 		self::addIds(self::$games, $object, $setting['games'] ?? []);
 		/** @noinspection NotOptimalIfConditionsInspection */
 		if (self::$root === $object && isset($setting['games']) && $object instanceof WithGames) {
@@ -207,8 +207,15 @@ class Importer
 	 * @param Base  $object Object to log
 	 * @param array $ids    List of child object ids
 	 */
-	protected static function addIds(array &$group, Base $object, array $ids) : void {
+	protected static function addIds(array &$group, Base $object, array $ids, bool $multiple = false) : void {
 		foreach ($ids as $id) {
+			if ($multiple) {
+				if (!isset($group[$id])) {
+					$group[$id] = [];
+				}
+				$group[$id][] = $object;
+				continue;
+			}
 			$group[$id] = $object;
 		}
 	}
@@ -417,7 +424,9 @@ class Importer
 
 			// Set parent if exists
 			if (isset(self::$teams[$setting['id'] ?? $team->getId()])) {
-				self::$teams[$setting['id'] ?? $team->getId()]->addTeam($team);
+				foreach (self::$teams[$setting['id'] ?? $team->getId()] as $object) {
+					$object->addTeam($team);
+				}
 			}
 		}
 	}
