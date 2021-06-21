@@ -26,3 +26,8 @@ nav:
       - 'Game containers': containers/gameContainer.md
       - 'Team containers': containers/teamContainer.md
       - 'Hierarchy containers': containers/hierarchyContainer.md
+  - Export/Import:
+      - 'Basics': export/basic.md
+      - 'Export structure': export/structure.md
+      - 'Export modifiers': export/modifiers.md
+      - 'Import': export/import.md
