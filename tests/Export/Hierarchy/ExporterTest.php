@@ -681,14 +681,17 @@ class ExporterTest extends TestCase
 	public function testBasicExportWithSetup(Tournament $tournament, array $expectedTeams, array $expectedGames, array $expectedSetup) : void {
 
 		$export = Exporter::start($tournament)->withSetup()->get();
+		//print_r($export);
 		$export2 = $tournament->export()->withSetup()->get();
 
-		self::assertEquals($expectedTeams, $export['teams']);
-		self::assertEquals($expectedTeams, $export2['teams']);
-		self::assertEquals($expectedGames, $export['games']);
-		self::assertEquals($expectedGames, $export2['games']);
-		self::assertEquals($expectedSetup, $export['setup']);
-		self::assertEquals($expectedSetup, $export2['setup']);
+		$expected = [
+			'teams' => $expectedTeams,
+			'games' => $expectedGames,
+		];
+		$expected += $expectedSetup;
+
+		self::assertEquals($expected, $export);
+		self::assertEquals($expected, $export2);
 	}
 
 	/**

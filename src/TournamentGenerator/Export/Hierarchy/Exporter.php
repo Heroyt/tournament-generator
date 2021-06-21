@@ -90,7 +90,12 @@ class Exporter extends ExporterBase
 		$data = $this->getBasic();
 		$this->applyModifiers($data);
 		foreach ($this->exporters as $name => $exporter) {
-			$data[$name] = $exporter->get();
+			if ($name === 'setup') {
+				$data += $exporter->get();
+			}
+			else {
+				$data[$name] = $exporter->get();
+			}
 		}
 		return $data;
 	}
