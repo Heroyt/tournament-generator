@@ -65,7 +65,7 @@ class BaseContainer implements Countable, Iterator
 	 * @return $this
 	 * @throws Exception
 	 */
-	protected function insertFlat(...$values) : BaseContainer {
+	public function insertFlat(...$values) : BaseContainer {
 		foreach ($values as $value) {
 			$this->values[] = $value;
 		}

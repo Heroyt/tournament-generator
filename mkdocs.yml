@@ -8,15 +8,21 @@ markdown_extensions:
 theme:
   name: readthedocs
 nav:
-- Introduction: index.md
-- Examples:
-  - 'Basic tournament': examples/basic.md
-  - 'Tournament from a template': 'examples/preset.md'
-  - 'Simulating a tournament': 'examples/simulating.md'
-  - 'Using progressions': 'examples/progressions.md'
-  - 'Using filters': 'examples/filters.md'
-- Templates:
-  - List: template/list.md
-  - 'Single elimination': template/singleElim.md
-  - 'Double elimination': template/doubleElim.md
-  - '2 rounds to groups': template/2R2G.md
+  - Introduction: index.md
+  - Examples:
+      - 'Basic tournament': examples/basic.md
+      - 'Tournament from a template': 'examples/preset.md'
+      - 'Simulating a tournament': 'examples/simulating.md'
+      - 'Using progressions': 'examples/progressions.md'
+      - 'Using filters': 'examples/filters.md'
+  - Templates:
+      - List: template/list.md
+      - 'Single elimination': template/singleElim.md
+      - 'Double elimination': template/doubleElim.md
+      - '2 rounds to groups': template/2R2G.md
+  - Containers:
+      - 'Basics': containers/basics.md
+      - 'Getting values': containers/getting.md
+      - 'Game containers': containers/gameContainer.md
+      - 'Team containers': containers/teamContainer.md
+      - 'Hierarchy containers': containers/hierarchyContainer.md
