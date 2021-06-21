@@ -56,6 +56,7 @@
                                             <li><a href="namespaces/tournamentgenerator-containers.html"><abbr title="\TournamentGenerator\Containers">Containers</abbr></a></li>
                                             <li><a href="namespaces/tournamentgenerator-export.html"><abbr title="\TournamentGenerator\Export">Export</abbr></a></li>
                                             <li><a href="namespaces/tournamentgenerator-helpers.html"><abbr title="\TournamentGenerator\Helpers">Helpers</abbr></a></li>
+                                            <li><a href="namespaces/tournamentgenerator-import.html"><abbr title="\TournamentGenerator\Import">Import</abbr></a></li>
                                             <li><a href="namespaces/tournamentgenerator-interfaces.html"><abbr title="\TournamentGenerator\Interfaces">Interfaces</abbr></a></li>
                                             <li><a href="namespaces/tournamentgenerator-preset.html"><abbr title="\TournamentGenerator\Preset">Preset</abbr></a></li>
                                             <li><a href="namespaces/tournamentgenerator-traits.html"><abbr title="\TournamentGenerator\Traits">Traits</abbr></a></li>
@@ -73,6 +74,7 @@
                                     <li><a href="packages/TournamentGenerator-Traits.html"><abbr title="\TournamentGenerator\Traits">Traits</abbr></a></li>
                                     <li><a href="packages/TournamentGenerator-Containers.html"><abbr title="\TournamentGenerator\Containers">Containers</abbr></a></li>
                                     <li><a href="packages/TournamentGenerator-Export.html"><abbr title="\TournamentGenerator\Export">Export</abbr></a></li>
+                                    <li><a href="packages/TournamentGenerator-Import.html"><abbr title="\TournamentGenerator\Import">Import</abbr></a></li>
                             </ul>
                         </section>
     
@@ -118,7 +120,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/HierarchyContainer.php"><a href="files/src-tournamentgenerator-containers-hierarchycontainer.html"><abbr title="src/TournamentGenerator/Containers/HierarchyContainer.php">HierarchyContainer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 </aside>
 
             <p class="phpdocumentor-summary">Class HierarchyContainer</p>
@@ -248,6 +250,13 @@
 <dd>Add a filter callback</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/TournamentGenerator-Containers-BaseContainer.html#method_fromArray">fromArray()</a>
+    <span>
+                        &nbsp;: <a href="classes/TournamentGenerator-Containers-BaseContainer.html"><abbr title="\TournamentGenerator\Containers\BaseContainer">BaseContainer</abbr></a>    </span>
+</dt>
+<dd>Create a new container from array</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/TournamentGenerator-Containers-BaseContainer.html#method_get">get()</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;    </span>
@@ -260,6 +269,13 @@
                         &nbsp;: array&lt;string|int, <a href="classes/TournamentGenerator-Base.html"><abbr title="\TournamentGenerator\Base">Base</abbr></a>&gt;    </span>
 </dt>
 <dd>Returns a hierarchy level of objects that contains the given classes</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/TournamentGenerator-Containers-HierarchyContainer.html#method_getHierarchyLevelQuery">getHierarchyLevelQuery()</a>
+    <span>
+                        &nbsp;: <a href="classes/TournamentGenerator-Containers-ContainerQuery.html"><abbr title="\TournamentGenerator\Containers\ContainerQuery">ContainerQuery</abbr></a>    </span>
+</dt>
+<dd>Returns a container query for a set hierarchy level</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/TournamentGenerator-Containers-BaseContainer.html#method_getLeafIds">getLeafIds()</a>
@@ -304,7 +320,21 @@
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/TournamentGenerator-Containers-BaseContainer.html#method_ids">ids()</a>
+    <span>
+                        &nbsp;: <a href="classes/TournamentGenerator-Containers-ContainerQuery.html"><abbr title="\TournamentGenerator\Containers\ContainerQuery">ContainerQuery</abbr></a>    </span>
+</dt>
+<dd>Get only the object&#039;s ids</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/TournamentGenerator-Containers-HierarchyContainer.html#method_insert">insert()</a>
+    <span>
+                        &nbsp;: $this    </span>
+</dt>
+<dd>Insert a value into container</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/TournamentGenerator-Containers-BaseContainer.html#method_insertFlat">insertFlat()</a>
     <span>
                         &nbsp;: $this    </span>
 </dt>
@@ -323,6 +353,13 @@
                         &nbsp;: void    </span>
 </dt>
 <dd>Move pointer to next</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/TournamentGenerator-Containers-BaseContainer.html#method_only">only()</a>
+    <span>
+                        &nbsp;: <a href="classes/TournamentGenerator-Containers-ContainerQuery.html"><abbr title="\TournamentGenerator\Containers\ContainerQuery">ContainerQuery</abbr></a>    </span>
+</dt>
+<dd>Pluck a specific key from all values</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/TournamentGenerator-Containers-BaseContainer.html#method_rewind">rewind()</a>
@@ -365,6 +402,13 @@
                         &nbsp;: bool    </span>
 </dt>
 <dd>Check if the current value exists</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/TournamentGenerator-Containers-BaseContainer.html#method_whereId">whereId()</a>
+    <span>
+                        &nbsp;: <a href="classes/TournamentGenerator-Containers-ContainerQuery.html"><abbr title="\TournamentGenerator\Containers\ContainerQuery">ContainerQuery</abbr></a>    </span>
+</dt>
+<dd>Filter results to only contain those with a specific ID</dd>
 
         </dl>
 
@@ -425,7 +469,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/HierarchyContainer.php"><a href="files/src-tournamentgenerator-containers-hierarchycontainer.html"><abbr title="src/TournamentGenerator/Containers/HierarchyContainer.php">HierarchyContainer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">23</span>
 </aside>
 
     
@@ -518,7 +562,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/HierarchyContainer.php"><a href="files/src-tournamentgenerator-containers-hierarchycontainer.html"><abbr title="src/TournamentGenerator/Containers/HierarchyContainer.php">HierarchyContainer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">26</span>
 </aside>
 
     
@@ -548,7 +592,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/HierarchyContainer.php"><a href="files/src-tournamentgenerator-containers-hierarchycontainer.html"><abbr title="src/TournamentGenerator/Containers/HierarchyContainer.php">HierarchyContainer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">25</span>
 </aside>
 
     
@@ -635,7 +679,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/BaseContainer.php"><a href="files/src-tournamentgenerator-containers-basecontainer.html"><abbr title="src/TournamentGenerator/Containers/BaseContainer.php">BaseContainer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">158</span>
+    <span class="phpdocumentor-element-found-in__line">187</span>
 </aside>
 
         <p class="phpdocumentor-summary">Adds a child container</p>
@@ -704,7 +748,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/BaseContainer.php"><a href="files/src-tournamentgenerator-containers-basecontainer.html"><abbr title="src/TournamentGenerator/Containers/BaseContainer.php">BaseContainer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">230</span>
+    <span class="phpdocumentor-element-found-in__line">272</span>
 </aside>
 
     
@@ -748,7 +792,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/BaseContainer.php"><a href="files/src-tournamentgenerator-containers-basecontainer.html"><abbr title="src/TournamentGenerator/Containers/BaseContainer.php">BaseContainer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">51</span>
+    <span class="phpdocumentor-element-found-in__line">80</span>
 </aside>
 
         <p class="phpdocumentor-summary">Returns the value count</p>
@@ -782,7 +826,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/BaseContainer.php"><a href="files/src-tournamentgenerator-containers-basecontainer.html"><abbr title="src/TournamentGenerator/Containers/BaseContainer.php">BaseContainer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">93</span>
+    <span class="phpdocumentor-element-found-in__line">122</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get the current value</p>
@@ -816,7 +860,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/BaseContainer.php"><a href="files/src-tournamentgenerator-containers-basecontainer.html"><abbr title="src/TournamentGenerator/Containers/BaseContainer.php">BaseContainer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">191</span>
+    <span class="phpdocumentor-element-found-in__line">220</span>
 </aside>
 
         <p class="phpdocumentor-summary">Add a filter callback</p>
@@ -852,6 +896,66 @@
         class="phpdocumentor-element
             -method
             -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_fromArray">
+        fromArray()
+        <a href="classes/TournamentGenerator-Containers-BaseContainer.html#method_fromArray" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/BaseContainer.php"><a href="files/src-tournamentgenerator-containers-basecontainer.html"><abbr title="src/TournamentGenerator/Containers/BaseContainer.php">BaseContainer.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">54</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Create a new container from array</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">fromArray</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/TournamentGenerator-Containers-BaseContainer.html"><abbr title="\TournamentGenerator\Containers\BaseContainer">BaseContainer</abbr></a></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$data</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                                 <section class="phpdocumentor-description"></section>
+
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/TournamentGenerator-Containers-BaseContainer.html"><abbr title="\TournamentGenerator\Containers\BaseContainer">BaseContainer</abbr></a></span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
                                                         "
 >
     <h4 class="phpdocumentor-element__name" id="method_get">
@@ -861,7 +965,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/BaseContainer.php"><a href="files/src-tournamentgenerator-containers-basecontainer.html"><abbr title="src/TournamentGenerator/Containers/BaseContainer.php">BaseContainer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">60</span>
+    <span class="phpdocumentor-element-found-in__line">89</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get all values from the container - including child nodes</p>
@@ -896,7 +1000,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/HierarchyContainer.php"><a href="files/src-tournamentgenerator-containers-hierarchycontainer.html"><abbr title="src/TournamentGenerator/Containers/HierarchyContainer.php">HierarchyContainer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">47</span>
+    <span class="phpdocumentor-element-found-in__line">62</span>
 </aside>
 
         <p class="phpdocumentor-summary">Returns a hierarchy level of objects that contains the given classes</p>
@@ -934,6 +1038,66 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getHierarchyLevelQuery">
+        getHierarchyLevelQuery()
+        <a href="classes/TournamentGenerator-Containers-HierarchyContainer.html#method_getHierarchyLevelQuery" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/HierarchyContainer.php"><a href="files/src-tournamentgenerator-containers-hierarchycontainer.html"><abbr title="src/TournamentGenerator/Containers/HierarchyContainer.php">HierarchyContainer.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">49</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Returns a container query for a set hierarchy level</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">getHierarchyLevelQuery</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href=""><abbr title=""></abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$class</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/TournamentGenerator-Containers-ContainerQuery.html"><abbr title="\TournamentGenerator\Containers\ContainerQuery">ContainerQuery</abbr></a></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$class</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href=""><abbr title=""></abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                                 <section class="phpdocumentor-description"></section>
+
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/TournamentGenerator-Containers-ContainerQuery.html"><abbr title="\TournamentGenerator\Containers\ContainerQuery">ContainerQuery</abbr></a></span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getLeafIds">
         getLeafIds()
         <a href="classes/TournamentGenerator-Containers-BaseContainer.html#method_getLeafIds" class="headerlink"><i class="fas fa-link"></i></a>
@@ -941,7 +1105,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/BaseContainer.php"><a href="files/src-tournamentgenerator-containers-basecontainer.html"><abbr title="src/TournamentGenerator/Containers/BaseContainer.php">BaseContainer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">173</span>
+    <span class="phpdocumentor-element-found-in__line">202</span>
 </aside>
 
         <p class="phpdocumentor-summary">Gets all ids of the leaf containers</p>
@@ -975,7 +1139,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/HierarchyContainer.php"><a href="files/src-tournamentgenerator-containers-hierarchycontainer.html"><abbr title="src/TournamentGenerator/Containers/HierarchyContainer.php">HierarchyContainer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">69</span>
+    <span class="phpdocumentor-element-found-in__line">84</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get current level&#039;s type</p>
@@ -1009,7 +1173,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/BaseContainer.php"><a href="files/src-tournamentgenerator-containers-basecontainer.html"><abbr title="src/TournamentGenerator/Containers/BaseContainer.php">BaseContainer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">253</span>
+    <span class="phpdocumentor-element-found-in__line">322</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get a parent container</p>
@@ -1058,7 +1222,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/BaseContainer.php"><a href="files/src-tournamentgenerator-containers-basecontainer.html"><abbr title="src/TournamentGenerator/Containers/BaseContainer.php">BaseContainer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">84</span>
+    <span class="phpdocumentor-element-found-in__line">113</span>
 </aside>
 
     
@@ -1090,7 +1254,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/BaseContainer.php"><a href="files/src-tournamentgenerator-containers-basecontainer.html"><abbr title="src/TournamentGenerator/Containers/BaseContainer.php">BaseContainer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">76</span>
+    <span class="phpdocumentor-element-found-in__line">105</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get all top-level values from the container</p>
@@ -1125,7 +1289,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/BaseContainer.php"><a href="files/src-tournamentgenerator-containers-basecontainer.html"><abbr title="src/TournamentGenerator/Containers/BaseContainer.php">BaseContainer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">80</span>
+    <span class="phpdocumentor-element-found-in__line">109</span>
 </aside>
 
     
@@ -1150,6 +1314,55 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_ids">
+        ids()
+        <a href="classes/TournamentGenerator-Containers-BaseContainer.html#method_ids" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/BaseContainer.php"><a href="files/src-tournamentgenerator-containers-basecontainer.html"><abbr title="src/TournamentGenerator/Containers/BaseContainer.php">BaseContainer.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">310</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Get only the object&#039;s ids</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">ids</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/TournamentGenerator-Containers-ContainerQuery.html"><abbr title="\TournamentGenerator\Containers\ContainerQuery">ContainerQuery</abbr></a></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                                 <section class="phpdocumentor-description"></section>
+
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/TournamentGenerator-Containers-ContainerQuery.html"><abbr title="\TournamentGenerator\Containers\ContainerQuery">ContainerQuery</abbr></a></span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_insert">
         insert()
         <a href="classes/TournamentGenerator-Containers-HierarchyContainer.html#method_insert" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1157,7 +1370,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/HierarchyContainer.php"><a href="files/src-tournamentgenerator-containers-hierarchycontainer.html"><abbr title="src/TournamentGenerator/Containers/HierarchyContainer.php">HierarchyContainer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">27</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 </aside>
 
         <p class="phpdocumentor-summary">Insert a value into container</p>
@@ -1196,6 +1409,67 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_insertFlat">
+        insertFlat()
+        <a href="classes/TournamentGenerator-Containers-BaseContainer.html#method_insertFlat" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/BaseContainer.php"><a href="files/src-tournamentgenerator-containers-basecontainer.html"><abbr title="src/TournamentGenerator/Containers/BaseContainer.php">BaseContainer.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">68</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Insert a value into container</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">insertFlat</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__variadic-operator">...</span><span class="phpdocumentor-signature__argument__name">$values</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">$this</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$values</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Any value to insert into container</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                                 <section class="phpdocumentor-description"></section>
+
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">$this</span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_key">
         key()
         <a href="classes/TournamentGenerator-Containers-BaseContainer.html#method_key" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1203,7 +1477,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/BaseContainer.php"><a href="files/src-tournamentgenerator-containers-basecontainer.html"><abbr title="src/TournamentGenerator/Containers/BaseContainer.php">BaseContainer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">109</span>
+    <span class="phpdocumentor-element-found-in__line">138</span>
 </aside>
 
         <p class="phpdocumentor-summary">Return the current key</p>
@@ -1237,7 +1511,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/BaseContainer.php"><a href="files/src-tournamentgenerator-containers-basecontainer.html"><abbr title="src/TournamentGenerator/Containers/BaseContainer.php">BaseContainer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">100</span>
+    <span class="phpdocumentor-element-found-in__line">129</span>
 </aside>
 
         <p class="phpdocumentor-summary">Move pointer to next</p>
@@ -1264,6 +1538,67 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_only">
+        only()
+        <a href="classes/TournamentGenerator-Containers-BaseContainer.html#method_only" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/BaseContainer.php"><a href="files/src-tournamentgenerator-containers-basecontainer.html"><abbr title="src/TournamentGenerator/Containers/BaseContainer.php">BaseContainer.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">298</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Pluck a specific key from all values</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">only</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$property</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/TournamentGenerator-Containers-ContainerQuery.html"><abbr title="\TournamentGenerator\Containers\ContainerQuery">ContainerQuery</abbr></a></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$property</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Property, array key or method to extract from values</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                                 <section class="phpdocumentor-description"></section>
+
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/TournamentGenerator-Containers-ContainerQuery.html"><abbr title="\TournamentGenerator\Containers\ContainerQuery">ContainerQuery</abbr></a></span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_rewind">
         rewind()
         <a href="classes/TournamentGenerator-Containers-BaseContainer.html#method_rewind" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1271,7 +1606,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/BaseContainer.php"><a href="files/src-tournamentgenerator-containers-basecontainer.html"><abbr title="src/TournamentGenerator/Containers/BaseContainer.php">BaseContainer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">125</span>
+    <span class="phpdocumentor-element-found-in__line">154</span>
 </aside>
 
         <p class="phpdocumentor-summary">Rewind the iterator</p>
@@ -1305,7 +1640,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/BaseContainer.php"><a href="files/src-tournamentgenerator-containers-basecontainer.html"><abbr title="src/TournamentGenerator/Containers/BaseContainer.php">BaseContainer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">266</span>
+    <span class="phpdocumentor-element-found-in__line">335</span>
 </aside>
 
         <p class="phpdocumentor-summary">Set a container&#039;s parent</p>
@@ -1374,7 +1709,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/BaseContainer.php"><a href="files/src-tournamentgenerator-containers-basecontainer.html"><abbr title="src/TournamentGenerator/Containers/BaseContainer.php">BaseContainer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">204</span>
+    <span class="phpdocumentor-element-found-in__line">246</span>
 </aside>
 
         <p class="phpdocumentor-summary">Sort a result using a callback - maintaining the index association</p>
@@ -1419,7 +1754,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/BaseContainer.php"><a href="files/src-tournamentgenerator-containers-basecontainer.html"><abbr title="src/TournamentGenerator/Containers/BaseContainer.php">BaseContainer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">219</span>
+    <span class="phpdocumentor-element-found-in__line">261</span>
 </aside>
 
         <p class="phpdocumentor-summary">Sort a result set by a given property</p>
@@ -1479,7 +1814,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/BaseContainer.php"><a href="files/src-tournamentgenerator-containers-basecontainer.html"><abbr title="src/TournamentGenerator/Containers/BaseContainer.php">BaseContainer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">241</span>
+    <span class="phpdocumentor-element-found-in__line">283</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get only unique values</p>
@@ -1513,7 +1848,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/BaseContainer.php"><a href="files/src-tournamentgenerator-containers-basecontainer.html"><abbr title="src/TournamentGenerator/Containers/BaseContainer.php">BaseContainer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">118</span>
+    <span class="phpdocumentor-element-found-in__line">147</span>
 </aside>
 
         <p class="phpdocumentor-summary">Check if the current value exists</p>
@@ -1529,6 +1864,51 @@
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">bool</span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_whereId">
+        whereId()
+        <a href="classes/TournamentGenerator-Containers-BaseContainer.html#method_whereId" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Containers/BaseContainer.php"><a href="files/src-tournamentgenerator-containers-basecontainer.html"><abbr title="src/TournamentGenerator/Containers/BaseContainer.php">BaseContainer.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">233</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Filter results to only contain those with a specific ID</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">whereId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string|int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/TournamentGenerator-Containers-ContainerQuery.html"><abbr title="\TournamentGenerator\Containers\ContainerQuery">ContainerQuery</abbr></a></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$id</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/TournamentGenerator-Containers-ContainerQuery.html"><abbr title="\TournamentGenerator\Containers\ContainerQuery">ContainerQuery</abbr></a></span>
             &mdash;
             <section class="phpdocumentor-description"></section>
 

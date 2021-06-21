@@ -56,6 +56,7 @@
                                             <li><a href="namespaces/tournamentgenerator-containers.html"><abbr title="\TournamentGenerator\Containers">Containers</abbr></a></li>
                                             <li><a href="namespaces/tournamentgenerator-export.html"><abbr title="\TournamentGenerator\Export">Export</abbr></a></li>
                                             <li><a href="namespaces/tournamentgenerator-helpers.html"><abbr title="\TournamentGenerator\Helpers">Helpers</abbr></a></li>
+                                            <li><a href="namespaces/tournamentgenerator-import.html"><abbr title="\TournamentGenerator\Import">Import</abbr></a></li>
                                             <li><a href="namespaces/tournamentgenerator-interfaces.html"><abbr title="\TournamentGenerator\Interfaces">Interfaces</abbr></a></li>
                                             <li><a href="namespaces/tournamentgenerator-preset.html"><abbr title="\TournamentGenerator\Preset">Preset</abbr></a></li>
                                             <li><a href="namespaces/tournamentgenerator-traits.html"><abbr title="\TournamentGenerator\Traits">Traits</abbr></a></li>
@@ -73,6 +74,7 @@
                                     <li><a href="packages/TournamentGenerator-Traits.html"><abbr title="\TournamentGenerator\Traits">Traits</abbr></a></li>
                                     <li><a href="packages/TournamentGenerator-Containers.html"><abbr title="\TournamentGenerator\Containers">Containers</abbr></a></li>
                                     <li><a href="packages/TournamentGenerator-Export.html"><abbr title="\TournamentGenerator\Export">Export</abbr></a></li>
+                                    <li><a href="packages/TournamentGenerator-Import.html"><abbr title="\TournamentGenerator\Import">Import</abbr></a></li>
                             </ul>
                         </section>
     
@@ -110,13 +112,16 @@
                             </ul>
         </div>
     
+            <span class="phpdocumentor-element__implements">
+            implements
+                            <a href="classes/TournamentGenerator-Interfaces-Exportable.html"><abbr title="\TournamentGenerator\Interfaces\Exportable">Exportable</abbr></a>                    </span>
     
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/HierarchyBase.php"><a href="files/src-tournamentgenerator-hierarchybase.html"><abbr title="src/TournamentGenerator/HierarchyBase.php">HierarchyBase.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">22</span>
 </aside>
 
             <p class="phpdocumentor-summary">Class HierarchyBase</p>
@@ -144,6 +149,17 @@
 
 
 
+<h3 id="interfaces_class_traits">
+    Interfaces, Classes and Traits
+    <a href="#interfaces_class_traits" class="headerlink"><i class="fas fa-link"></i></a>
+</h3>
+
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/TournamentGenerator-Interfaces-Exportable.html"><abbr title="\TournamentGenerator\Interfaces\Exportable">Exportable</abbr></a></dt>
+        <dd>Interface Exportable</dd>
+    
+    
+    </dl>
 
 
 <h3 id="toc">
@@ -179,6 +195,13 @@
                         &nbsp;: string    </span>
 </dt>
 <dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/TournamentGenerator-HierarchyBase.html#method_export">export()</a>
+    <span>
+                        &nbsp;: <a href="classes/TournamentGenerator-Export-Exporter.html"><abbr title="\TournamentGenerator\Export\Exporter">Exporter</abbr></a>    </span>
+</dt>
+<dd>Prepares a general hierarchy exporter for this hierarchy class</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/TournamentGenerator-HierarchyBase.html#method_getContainer">getContainer()</a>
@@ -250,7 +273,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/HierarchyBase.php"><a href="files/src-tournamentgenerator-hierarchybase.html"><abbr title="src/TournamentGenerator/HierarchyBase.php">HierarchyBase.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">25</span>
 </aside>
 
     
@@ -373,6 +396,40 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_export">
+        export()
+        <a href="classes/TournamentGenerator-HierarchyBase.html#method_export" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/HierarchyBase.php"><a href="files/src-tournamentgenerator-hierarchybase.html"><abbr title="src/TournamentGenerator/HierarchyBase.php">HierarchyBase.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">64</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Prepares a general hierarchy exporter for this hierarchy class</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">export</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/TournamentGenerator-Export-Exporter.html"><abbr title="\TournamentGenerator\Export\Exporter">Exporter</abbr></a></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/TournamentGenerator-Export-Exporter.html"><abbr title="\TournamentGenerator\Export\Exporter">Exporter</abbr></a></span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getContainer">
         getContainer()
         <a href="classes/TournamentGenerator-HierarchyBase.html#method_getContainer" class="headerlink"><i class="fas fa-link"></i></a>
@@ -380,7 +437,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/HierarchyBase.php"><a href="files/src-tournamentgenerator-hierarchybase.html"><abbr title="src/TournamentGenerator/HierarchyBase.php">HierarchyBase.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">32</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get the hierarchy container</p>
@@ -484,7 +541,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/HierarchyBase.php"><a href="files/src-tournamentgenerator-hierarchybase.html"><abbr title="src/TournamentGenerator/HierarchyBase.php">HierarchyBase.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">44</span>
+    <span class="phpdocumentor-element-found-in__line">48</span>
 </aside>
 
         <p class="phpdocumentor-summary">Insert into hierarchical container</p>
@@ -538,6 +595,15 @@
                                                                                 
                                                  <section class="phpdocumentor-description"><p>If the object has games -&gt; add other game container to hierarchy</p>
 </section>
+
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                                 <section class="phpdocumentor-description"></section>
 
                                     </dd>
                         </dl>

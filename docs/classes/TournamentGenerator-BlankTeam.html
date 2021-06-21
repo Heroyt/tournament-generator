@@ -56,6 +56,7 @@
                                             <li><a href="namespaces/tournamentgenerator-containers.html"><abbr title="\TournamentGenerator\Containers">Containers</abbr></a></li>
                                             <li><a href="namespaces/tournamentgenerator-export.html"><abbr title="\TournamentGenerator\Export">Export</abbr></a></li>
                                             <li><a href="namespaces/tournamentgenerator-helpers.html"><abbr title="\TournamentGenerator\Helpers">Helpers</abbr></a></li>
+                                            <li><a href="namespaces/tournamentgenerator-import.html"><abbr title="\TournamentGenerator\Import">Import</abbr></a></li>
                                             <li><a href="namespaces/tournamentgenerator-interfaces.html"><abbr title="\TournamentGenerator\Interfaces">Interfaces</abbr></a></li>
                                             <li><a href="namespaces/tournamentgenerator-preset.html"><abbr title="\TournamentGenerator\Preset">Preset</abbr></a></li>
                                             <li><a href="namespaces/tournamentgenerator-traits.html"><abbr title="\TournamentGenerator\Traits">Traits</abbr></a></li>
@@ -73,6 +74,7 @@
                                     <li><a href="packages/TournamentGenerator-Traits.html"><abbr title="\TournamentGenerator\Traits">Traits</abbr></a></li>
                                     <li><a href="packages/TournamentGenerator-Containers.html"><abbr title="\TournamentGenerator\Containers">Containers</abbr></a></li>
                                     <li><a href="packages/TournamentGenerator-Export.html"><abbr title="\TournamentGenerator\Export">Export</abbr></a></li>
+                                    <li><a href="packages/TournamentGenerator-Import.html"><abbr title="\TournamentGenerator\Import">Import</abbr></a></li>
                             </ul>
                         </section>
     
@@ -316,6 +318,13 @@ It keeps the original team's id, but everything else can be different.</p>
                         &nbsp;: $this    </span>
 </dt>
 <dd>Adds a win to the team</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/TournamentGenerator-Team.html#method_export">export()</a>
+    <span>
+                        &nbsp;: <a href="classes/TournamentGenerator-Export-Exporter.html"><abbr title="\TournamentGenerator\Export\Exporter">Exporter</abbr></a>    </span>
+</dt>
+<dd>Prepares an export query for the object</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/TournamentGenerator-Team.html#method_getGames">getGames()</a>
@@ -600,7 +609,7 @@ It keeps the original team's id, but everything else can be different.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Team.php"><a href="files/src-tournamentgenerator-team.html"><abbr title="src/TournamentGenerator/Team.php">Team.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">32</span>
 </aside>
 
     
@@ -631,7 +640,7 @@ It keeps the original team's id, but everything else can be different.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Team.php"><a href="files/src-tournamentgenerator-team.html"><abbr title="src/TournamentGenerator/Team.php">Team.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 </aside>
 
     
@@ -1000,7 +1009,7 @@ It keeps the original team's id, but everything else can be different.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Team.php"><a href="files/src-tournamentgenerator-team.html"><abbr title="src/TournamentGenerator/Team.php">Team.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">170</span>
+    <span class="phpdocumentor-element-found-in__line">173</span>
 </aside>
 
         <p class="phpdocumentor-summary">Adds a game to this team</p>
@@ -1046,7 +1055,7 @@ It keeps the original team's id, but everything else can be different.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Team.php"><a href="files/src-tournamentgenerator-team.html"><abbr title="src/TournamentGenerator/Team.php">Team.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">111</span>
+    <span class="phpdocumentor-element-found-in__line">114</span>
 </aside>
 
         <p class="phpdocumentor-summary">Adds a record of a game with another team in a group</p>
@@ -1101,7 +1110,7 @@ It keeps the original team's id, but everything else can be different.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Team.php"><a href="files/src-tournamentgenerator-team.html"><abbr title="src/TournamentGenerator/Team.php">Team.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">156</span>
+    <span class="phpdocumentor-element-found-in__line">159</span>
 </aside>
 
         <p class="phpdocumentor-summary">Adds a group to a team and creates an array for all games to be played</p>
@@ -1147,7 +1156,7 @@ It keeps the original team's id, but everything else can be different.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Team.php"><a href="files/src-tournamentgenerator-team.html"><abbr title="src/TournamentGenerator/Team.php">Team.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">89</span>
+    <span class="phpdocumentor-element-found-in__line">92</span>
 </aside>
 
         <p class="phpdocumentor-summary">Creates a new data-array to store statistics for a new group</p>
@@ -1567,6 +1576,41 @@ It keeps the original team's id, but everything else can be different.</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_export">
+        export()
+        <a href="classes/TournamentGenerator-Team.html#method_export" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Team.php"><a href="files/src-tournamentgenerator-team.html"><abbr title="src/TournamentGenerator/Team.php">Team.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">205</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Prepares an export query for the object</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">export</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/TournamentGenerator-Export-Exporter.html"><abbr title="\TournamentGenerator\Export\Exporter">Exporter</abbr></a></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/TournamentGenerator-Export-Exporter.html"><abbr title="\TournamentGenerator\Export\Exporter">Exporter</abbr></a></span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>Exporter for this class</p>
+</section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getGames">
         getGames()
         <a href="classes/TournamentGenerator-Team.html#method_getGames" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1574,7 +1618,7 @@ It keeps the original team's id, but everything else can be different.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Team.php"><a href="files/src-tournamentgenerator-team.html"><abbr title="src/TournamentGenerator/Team.php">Team.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">187</span>
+    <span class="phpdocumentor-element-found-in__line">190</span>
 </aside>
 
         <p class="phpdocumentor-summary">Gets all game from given group</p>
@@ -1630,7 +1674,7 @@ It keeps the original team's id, but everything else can be different.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Team.php"><a href="files/src-tournamentgenerator-team.html"><abbr title="src/TournamentGenerator/Team.php">Team.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">55</span>
+    <span class="phpdocumentor-element-found-in__line">58</span>
 </aside>
 
         <p class="phpdocumentor-summary">Gets team statistics from the given group without the group object</p>
@@ -1693,7 +1737,7 @@ It keeps the original team's id, but everything else can be different.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Team.php"><a href="files/src-tournamentgenerator-team.html"><abbr title="src/TournamentGenerator/Team.php">Team.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">127</span>
+    <span class="phpdocumentor-element-found-in__line">130</span>
 </aside>
 
         <p class="phpdocumentor-summary">Gets a record of a game with another team or teams</p>
@@ -1749,7 +1793,7 @@ It keeps the original team's id, but everything else can be different.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Team.php"><a href="files/src-tournamentgenerator-team.html"><abbr title="src/TournamentGenerator/Team.php">Team.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">70</span>
+    <span class="phpdocumentor-element-found-in__line">73</span>
 </aside>
 
         <p class="phpdocumentor-summary">Gets team statistics from the given group</p>

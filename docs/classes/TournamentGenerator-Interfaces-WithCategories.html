@@ -56,6 +56,7 @@
                                             <li><a href="namespaces/tournamentgenerator-containers.html"><abbr title="\TournamentGenerator\Containers">Containers</abbr></a></li>
                                             <li><a href="namespaces/tournamentgenerator-export.html"><abbr title="\TournamentGenerator\Export">Export</abbr></a></li>
                                             <li><a href="namespaces/tournamentgenerator-helpers.html"><abbr title="\TournamentGenerator\Helpers">Helpers</abbr></a></li>
+                                            <li><a href="namespaces/tournamentgenerator-import.html"><abbr title="\TournamentGenerator\Import">Import</abbr></a></li>
                                             <li><a href="namespaces/tournamentgenerator-interfaces.html"><abbr title="\TournamentGenerator\Interfaces">Interfaces</abbr></a></li>
                                             <li><a href="namespaces/tournamentgenerator-preset.html"><abbr title="\TournamentGenerator\Preset">Preset</abbr></a></li>
                                             <li><a href="namespaces/tournamentgenerator-traits.html"><abbr title="\TournamentGenerator\Traits">Traits</abbr></a></li>
@@ -73,6 +74,7 @@
                                     <li><a href="packages/TournamentGenerator-Traits.html"><abbr title="\TournamentGenerator\Traits">Traits</abbr></a></li>
                                     <li><a href="packages/TournamentGenerator-Containers.html"><abbr title="\TournamentGenerator\Containers">Containers</abbr></a></li>
                                     <li><a href="packages/TournamentGenerator-Export.html"><abbr title="\TournamentGenerator\Export">Export</abbr></a></li>
+                                    <li><a href="packages/TournamentGenerator-Import.html"><abbr title="\TournamentGenerator\Import">Import</abbr></a></li>
                             </ul>
                         </section>
     
@@ -111,7 +113,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Interfaces/WithCategories.php"><a href="files/src-tournamentgenerator-interfaces-withcategories.html"><abbr title="src/TournamentGenerator/Interfaces/WithCategories.php">WithCategories.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">16</span>
+    <span class="phpdocumentor-element-found-in__line">17</span>
 </aside>
 
             <p class="phpdocumentor-summary">Interface for objects that contain categories</p>
@@ -184,6 +186,13 @@
 <dd>Get the wait time between categories</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/TournamentGenerator-Interfaces-WithCategories.html#method_queryCategories">queryCategories()</a>
+    <span>
+                        &nbsp;: <a href="classes/TournamentGenerator-Containers-ContainerQuery.html"><abbr title="\TournamentGenerator\Containers\ContainerQuery">ContainerQuery</abbr></a>    </span>
+</dt>
+<dd>Get categories container query</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/TournamentGenerator-Interfaces-WithCategories.html#method_setCategoryWait">setCategoryWait()</a>
     <span>
                         &nbsp;: <a href="classes/TournamentGenerator-Interfaces-WithCategories.html"><abbr title="\TournamentGenerator\Interfaces\WithCategories">WithCategories</abbr></a>    </span>
@@ -214,7 +223,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Interfaces/WithCategories.php"><a href="files/src-tournamentgenerator-interfaces-withcategories.html"><abbr title="src/TournamentGenerator/Interfaces/WithCategories.php">WithCategories.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">43</span>
+    <span class="phpdocumentor-element-found-in__line">51</span>
 </aside>
 
         <p class="phpdocumentor-summary">Add one or more category to object</p>
@@ -260,7 +269,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Interfaces/WithCategories.php"><a href="files/src-tournamentgenerator-interfaces-withcategories.html"><abbr title="src/TournamentGenerator/Interfaces/WithCategories.php">WithCategories.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">34</span>
+    <span class="phpdocumentor-element-found-in__line">42</span>
 </aside>
 
         <p class="phpdocumentor-summary">Creates a new category and adds it to the object</p>
@@ -316,7 +325,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Interfaces/WithCategories.php"><a href="files/src-tournamentgenerator-interfaces-withcategories.html"><abbr title="src/TournamentGenerator/Interfaces/WithCategories.php">WithCategories.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">25</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get all categories</p>
@@ -350,7 +359,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Interfaces/WithCategories.php"><a href="files/src-tournamentgenerator-interfaces-withcategories.html"><abbr title="src/TournamentGenerator/Interfaces/WithCategories.php">WithCategories.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">59</span>
+    <span class="phpdocumentor-element-found-in__line">67</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get the wait time between categories</p>
@@ -377,6 +386,40 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_queryCategories">
+        queryCategories()
+        <a href="classes/TournamentGenerator-Interfaces-WithCategories.html#method_queryCategories" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Interfaces/WithCategories.php"><a href="files/src-tournamentgenerator-interfaces-withcategories.html"><abbr title="src/TournamentGenerator/Interfaces/WithCategories.php">WithCategories.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">32</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Get categories container query</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">queryCategories</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/TournamentGenerator-Containers-ContainerQuery.html"><abbr title="\TournamentGenerator\Containers\ContainerQuery">ContainerQuery</abbr></a></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/TournamentGenerator-Containers-ContainerQuery.html"><abbr title="\TournamentGenerator\Containers\ContainerQuery">ContainerQuery</abbr></a></span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_setCategoryWait">
         setCategoryWait()
         <a href="classes/TournamentGenerator-Interfaces-WithCategories.html#method_setCategoryWait" class="headerlink"><i class="fas fa-link"></i></a>
@@ -384,7 +427,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Interfaces/WithCategories.php"><a href="files/src-tournamentgenerator-interfaces-withcategories.html"><abbr title="src/TournamentGenerator/Interfaces/WithCategories.php">WithCategories.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">52</span>
+    <span class="phpdocumentor-element-found-in__line">60</span>
 </aside>
 
         <p class="phpdocumentor-summary">Set the wait time between categories</p>
