@@ -4,7 +4,7 @@ namespace TournamentGenerator;
 
 use Exception;
 use InvalidArgumentException;
-use TournamentGenerator\Export\Exporter;
+use TournamentGenerator\Export\ExporterInterface;
 use TournamentGenerator\Export\Single\TeamExporter;
 use TournamentGenerator\Interfaces\Exportable;
 use TournamentGenerator\Traits\HasPositions;
@@ -200,9 +200,9 @@ class Team extends Base implements Exportable
 	/**
 	 * Prepares an export query for the object
 	 *
-	 * @return Exporter Exporter for this class
+	 * @return ExporterInterface Exporter for this class
 	 */
-	public function export() : Exporter {
+	public function export() : ExporterInterface {
 		return TeamExporter::start($this);
 	}
 }

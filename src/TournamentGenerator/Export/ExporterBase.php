@@ -20,7 +20,7 @@ use TournamentGenerator\Interfaces\WithId;
  * @author  Tomáš Vojík <vojik@wboy.cz>
  * @since   0.5
  */
-abstract class ExporterBase implements Exporter, JsonSerializable
+abstract class ExporterBase implements ExporterInterface, JsonSerializable
 {
 
 	/** @var HierarchyBase Hierarchy object to export */

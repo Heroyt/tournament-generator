@@ -5,7 +5,7 @@
 namespace TournamentGenerator\Export\Hierarchy;
 
 use InvalidArgumentException;
-use TournamentGenerator\Export\Exporter;
+use TournamentGenerator\Export\ExporterInterface;
 use TournamentGenerator\Export\ExporterBase;
 use TournamentGenerator\Export\Single\GameExporter;
 use TournamentGenerator\Game;
@@ -51,9 +51,9 @@ class GamesExporter extends ExporterBase
 	 *
 	 * @param HierarchyBase $object
 	 *
-	 * @return Exporter
+	 * @return ExporterInterface
 	 */
-	public static function start(WithId $object) : Exporter {
+	public static function start(WithId $object) : ExporterInterface {
 		return new self($object);
 	}
 

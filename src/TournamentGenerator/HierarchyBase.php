@@ -6,7 +6,7 @@ namespace TournamentGenerator;
 
 use Exception;
 use TournamentGenerator\Containers\HierarchyContainer;
-use TournamentGenerator\Export\Exporter;
+use TournamentGenerator\Export\ExporterInterface;
 use TournamentGenerator\Interfaces\Exportable;
 use TournamentGenerator\Interfaces\WithGames as WithGamesInterface;
 use TournamentGenerator\Interfaces\WithTeams as WithTeamsInterface;
@@ -59,9 +59,9 @@ abstract class HierarchyBase extends Base implements Exportable
 	/**
 	 * Prepares a general hierarchy exporter for this hierarchy class
 	 *
-	 * @return Exporter
+	 * @return ExporterInterface
 	 */
-	public function export() : Exporter {
+	public function export() : ExporterInterface {
 		return Export\Hierarchy\Exporter::start($this);
 	}
 

@@ -6,7 +6,7 @@ namespace TournamentGenerator\Export\Hierarchy;
 
 use Exception;
 use TournamentGenerator\Category;
-use TournamentGenerator\Export\Exporter;
+use TournamentGenerator\Export\ExporterInterface;
 use TournamentGenerator\Export\ExporterBase;
 use TournamentGenerator\Group;
 use TournamentGenerator\Interfaces\WithCategories;
@@ -41,7 +41,7 @@ class SetupExporter extends ExporterBase
 	/**
 	 * @inheritDoc
 	 */
-	public static function start(WithId $object) : Exporter {
+	public static function start(WithId $object) : ExporterInterface {
 		return new self($object);
 	}
 

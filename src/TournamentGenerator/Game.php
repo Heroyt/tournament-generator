@@ -3,7 +3,7 @@
 namespace TournamentGenerator;
 
 use Exception;
-use TournamentGenerator\Export\Exporter;
+use TournamentGenerator\Export\ExporterInterface;
 use TournamentGenerator\Export\Single\GameExporter;
 use TournamentGenerator\Interfaces\Exportable;
 use TournamentGenerator\Interfaces\WithId;
@@ -408,9 +408,9 @@ class Game implements WithId, Exportable
 	/**
 	 * Prepares an export query for the object
 	 *
-	 * @return Exporter Exporter for this class
+	 * @return ExporterInterface Exporter for this class
 	 */
-	public function export() : Exporter {
+	public function export() : ExporterInterface {
 		return GameExporter::start($this);
 	}
 }

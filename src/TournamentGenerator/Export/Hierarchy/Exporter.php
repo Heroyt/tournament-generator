@@ -4,7 +4,7 @@
 namespace TournamentGenerator\Export\Hierarchy;
 
 use Error;
-use TournamentGenerator\Export\Exporter as ExporterInterface;
+use TournamentGenerator\Export\ExporterInterface;
 use TournamentGenerator\Export\ExporterBase;
 use TournamentGenerator\HierarchyBase;
 use TournamentGenerator\Interfaces\WithGames;
