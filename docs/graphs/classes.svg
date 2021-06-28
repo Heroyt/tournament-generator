@@ -26,8 +26,8 @@
 </g>
 <g id="clust4" class="cluster">
 <title>cluster_\TournamentGenerator\Export</title>
-<polygon fill="none" stroke="black" points="64.5,-1012 64.5,-1496 844,-1496 844,-1012 64.5,-1012"/>
-<text text-anchor="middle" x="454.25" y="-1483.2" font-family="Times,serif" font-size="11.00" fill="gray">Export</text>
+<polygon fill="none" stroke="black" points="34.5,-1012 34.5,-1496 844,-1496 844,-1012 34.5,-1012"/>
+<text text-anchor="middle" x="439.25" y="-1483.2" font-family="Times,serif" font-size="11.00" fill="gray">Export</text>
 </g>
 <g id="clust5" class="cluster">
 <title>cluster_\TournamentGenerator\Export\Hierarchy</title>
@@ -250,17 +250,17 @@
 <path fill="none" stroke="black" d="M709.88,-1057.06C678.58,-1064.25 637.05,-1073.79 601.09,-1082.06"/>
 <polygon fill="none" stroke="black" points="600.07,-1078.7 591.1,-1084.35 601.63,-1085.52 600.07,-1078.7"/>
 </g>
-<!-- \\TournamentGenerator\\Export\\Exporter -->
-<g id="node16" class="node">
-<title>\\TournamentGenerator\\Export\\Exporter</title>
-<polygon fill="none" stroke="black" points="143.5,-1359 72.5,-1359 72.5,-1323 143.5,-1323 143.5,-1359"/>
-<text text-anchor="middle" x="108" y="-1338.2" font-family="Courier,monospace" font-size="11.00">Exporter</text>
+<!-- \\TournamentGenerator\\Export\\ExporterInterface -->
+<g id="node17" class="node">
+<title>\\TournamentGenerator\\Export\\ExporterInterface</title>
+<polygon fill="none" stroke="black" points="173.5,-1359 42.5,-1359 42.5,-1323 173.5,-1323 173.5,-1359"/>
+<text text-anchor="middle" x="108" y="-1338.2" font-family="Courier,monospace" font-size="11.00">ExporterInterface</text>
 </g>
-<!-- \\TournamentGenerator\\Export\\ExporterBase&#45;&gt;\\TournamentGenerator\\Export\\Exporter -->
+<!-- \\TournamentGenerator\\Export\\ExporterBase&#45;&gt;\\TournamentGenerator\\Export\\ExporterInterface -->
 <g id="edge47" class="edge">
-<title>\\TournamentGenerator\\Export\\ExporterBase&#45;&gt;\\TournamentGenerator\\Export\\Exporter</title>
-<path fill="none" stroke="black" stroke-dasharray="1,5" d="M269.4,-1341C234.53,-1341 187.7,-1341 153.65,-1341"/>
-<polygon fill="none" stroke="black" points="153.52,-1337.5 143.52,-1341 153.52,-1344.5 153.52,-1337.5"/>
+<title>\\TournamentGenerator\\Export\\ExporterBase&#45;&gt;\\TournamentGenerator\\Export\\ExporterInterface</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M269.4,-1341C244.13,-1341 212.57,-1341 184.15,-1341"/>
+<polygon fill="none" stroke="black" points="183.84,-1337.5 173.84,-1341 183.84,-1344.5 183.84,-1337.5"/>
 </g>
 <!-- JsonSerializable -->
 <g id="node64" class="node">
@@ -281,7 +281,7 @@
 <polygon fill="none" stroke="black" points="331.31,-1312.56 329.39,-1322.98 337.39,-1316.03 331.31,-1312.56"/>
 </g>
 <!-- \\TournamentGenerator\\Export\\SingleExporter -->
-<g id="node17" class="node">
+<g id="node16" class="node">
 <title>\\TournamentGenerator\\Export\\SingleExporter</title>
 <polygon fill="none" stroke="black" points="374,-1118 263,-1118 263,-1082 374,-1082 374,-1118"/>
 <text text-anchor="middle" x="318.5" y="-1097.2" font-family="Courier,monospace" font-size="11.00">SingleExporter</text>

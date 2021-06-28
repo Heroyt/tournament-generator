@@ -2306,36 +2306,6 @@ Search.appendIndex(
             "summary": "Removes\u0020points\u0020to\u0020the\u0020total\u0020sum",
             "url": "classes/TournamentGenerator-Traits-HasScore.html#method_removePoints"
         },                {
-            "fqsen": "\\TournamentGenerator\\Export\\Exporter",
-            "name": "Exporter",
-            "summary": "Interface\u0020for\u0020exporters",
-            "url": "classes/TournamentGenerator-Export-Exporter.html"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Export\\Exporter\u003A\u003Aexport\u0028\u0029",
-            "name": "export",
-            "summary": "Simple\u0020export\u0020query\u0020without\u0020any\u0020modifiers",
-            "url": "classes/TournamentGenerator-Export-Exporter.html#method_export"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Export\\Exporter\u003A\u003Astart\u0028\u0029",
-            "name": "start",
-            "summary": "Start\u0020an\u0020export\u0020query",
-            "url": "classes/TournamentGenerator-Export-Exporter.html#method_start"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Export\\Exporter\u003A\u003AgetJson\u0028\u0029",
-            "name": "getJson",
-            "summary": "Return\u0020result\u0020as\u0020json",
-            "url": "classes/TournamentGenerator-Export-Exporter.html#method_getJson"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Export\\Exporter\u003A\u003Aget\u0028\u0029",
-            "name": "get",
-            "summary": "Finish\u0020the\u0020export\u0020query\u0020\u002D\u003E\u0020get\u0020the\u0020result",
-            "url": "classes/TournamentGenerator-Export-Exporter.html#method_get"
-        },                {
-            "fqsen": "\\TournamentGenerator\\Export\\Exporter\u003A\u003AgetBasic\u0028\u0029",
-            "name": "getBasic",
-            "summary": "Gets\u0020the\u0020basic\u0020unmodified\u0020data",
-            "url": "classes/TournamentGenerator-Export-Exporter.html#method_getBasic"
-        },                {
             "fqsen": "\\TournamentGenerator\\Export\\ExporterBase",
             "name": "ExporterBase",
             "summary": "Base\u0020class\u0020for\u0020exporters",
@@ -2870,6 +2840,36 @@ Search.appendIndex(
             "name": "setId",
             "summary": "Sets\u0020the\u0020unique\u0020identifier\u0020of\u0020the\u0020object",
             "url": "classes/TournamentGenerator-Interfaces-WithId.html#method_setId"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Export\\ExporterInterface",
+            "name": "ExporterInterface",
+            "summary": "Interface\u0020for\u0020exporters",
+            "url": "classes/TournamentGenerator-Export-ExporterInterface.html"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Export\\ExporterInterface\u003A\u003Aexport\u0028\u0029",
+            "name": "export",
+            "summary": "Simple\u0020export\u0020query\u0020without\u0020any\u0020modifiers",
+            "url": "classes/TournamentGenerator-Export-ExporterInterface.html#method_export"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Export\\ExporterInterface\u003A\u003Astart\u0028\u0029",
+            "name": "start",
+            "summary": "Start\u0020an\u0020export\u0020query",
+            "url": "classes/TournamentGenerator-Export-ExporterInterface.html#method_start"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Export\\ExporterInterface\u003A\u003AgetJson\u0028\u0029",
+            "name": "getJson",
+            "summary": "Return\u0020result\u0020as\u0020json",
+            "url": "classes/TournamentGenerator-Export-ExporterInterface.html#method_getJson"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Export\\ExporterInterface\u003A\u003Aget\u0028\u0029",
+            "name": "get",
+            "summary": "Finish\u0020the\u0020export\u0020query\u0020\u002D\u003E\u0020get\u0020the\u0020result",
+            "url": "classes/TournamentGenerator-Export-ExporterInterface.html#method_get"
+        },                {
+            "fqsen": "\\TournamentGenerator\\Export\\ExporterInterface\u003A\u003AgetBasic\u0028\u0029",
+            "name": "getBasic",
+            "summary": "Gets\u0020the\u0020basic\u0020unmodified\u0020data",
+            "url": "classes/TournamentGenerator-Export-ExporterInterface.html#method_getBasic"
         },                {
             "fqsen": "\\",
             "name": "\\",

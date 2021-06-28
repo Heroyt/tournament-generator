@@ -98,36 +98,27 @@
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/tournamentgenerator-export.html">Export</a></li>
     </ul>
 
-    <article class="phpdocumentor-element -class">
+    <article class="phpdocumentor-element -interface">
         <h2 class="phpdocumentor-content__title">
-    ExporterBase
-
-    
-            <div class="phpdocumentor-element__package">
-            in package
+    ExporterInterface
+                <div class="phpdocumentor-element__package">
+            in
             <ul class="phpdocumentor-breadcrumbs">
-                                    <li class="phpdocumentor-breadcrumb"><a href="packages/TournamentGenerator.html">TournamentGenerator</a></li>
-                                    <li class="phpdocumentor-breadcrumb"><a href="packages/TournamentGenerator-Export.html">Export</a></li>
+                                    <li><a href="packages/TournamentGenerator.html">TournamentGenerator</a></li>
+                                    <li><a href="packages/TournamentGenerator-Export.html">Export</a></li>
                             </ul>
         </div>
-    
-            <span class="phpdocumentor-element__implements">
-            implements
-                            <a href="classes/TournamentGenerator-Export-ExporterInterface.html"><abbr title="\TournamentGenerator\Export\ExporterInterface">ExporterInterface</abbr></a>,                             <abbr title="\JsonSerializable">JsonSerializable</abbr>                    </span>
-    
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Export/ExporterBase.php"><a href="files/src-tournamentgenerator-export-exporterbase.html"><abbr title="src/TournamentGenerator/Export/ExporterBase.php">ExporterBase.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Export/ExporterInterface.php"><a href="files/src-tournamentgenerator-export-exporterinterface.html"><abbr title="src/TournamentGenerator/Export/ExporterInterface.php">ExporterInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">23</span>
+    <span class="phpdocumentor-element-found-in__line">16</span>
 </aside>
 
-            <p class="phpdocumentor-summary">Base class for exporters</p>
+            <p class="phpdocumentor-summary">Interface for exporters</p>
 
-    <section class="phpdocumentor-description"><p>Exporters operate on some HierarchyBase class. They extract data and/or settings from these classes in a form of PHP array.
-Exporters also allow of adding modifiers to the exported query - adding more data. These modifiers are added via specific methods (usually starting with &quot;with&quot; keyword).</p>
-</section>
+    <section class="phpdocumentor-description"></section>
 
 
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
@@ -158,19 +149,6 @@ Exporters also allow of adding modifiers to the exported query - adding more dat
 
 
 
-<h3 id="interfaces_class_traits">
-    Interfaces, Classes and Traits
-    <a href="#interfaces_class_traits" class="headerlink"><i class="fas fa-link"></i></a>
-</h3>
-
-<dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/TournamentGenerator-Export-ExporterInterface.html"><abbr title="\TournamentGenerator\Export\ExporterInterface">ExporterInterface</abbr></a></dt>
-        <dd>Interface for exporters</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\JsonSerializable">JsonSerializable</abbr></dt>
-        <dd></dd>
-    
-    
-    </dl>
 
 
 <h3 id="toc">
@@ -179,54 +157,40 @@ Exporters also allow of adding modifiers to the exported query - adding more dat
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-                <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/TournamentGenerator-Export-ExporterBase.html#property_modifiers">$modifiers</a>
+                    <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/TournamentGenerator-Export-ExporterInterface.html#method_export">export()</a>
     <span>
-                &nbsp;: array&lt;string|int, mixed&gt;            </span>
+                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
 </dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/TournamentGenerator-Export-ExporterBase.html#property_object">$object</a>
-    <span>
-                &nbsp;: <a href="classes/TournamentGenerator-Interfaces-WithId.html"><abbr title="\TournamentGenerator\Interfaces\WithId">WithId</abbr></a>            </span>
-</dt>
-<dd></dd>
-
-                <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/TournamentGenerator-Export-ExporterBase.html#method___construct">__construct()</a>
-    <span>
-                        &nbsp;: mixed    </span>
-</dt>
-<dd></dd>
+<dd>Simple export query without any modifiers</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/TournamentGenerator-Export-ExporterBase.html#method_get">get()</a>
+    <a href="classes/TournamentGenerator-Export-ExporterInterface.html#method_get">get()</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;    </span>
 </dt>
 <dd>Finish the export query -&gt; get the result</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/TournamentGenerator-Export-ExporterBase.html#method_getJson">getJson()</a>
+    <a href="classes/TournamentGenerator-Export-ExporterInterface.html#method_getBasic">getBasic()</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>Gets the basic unmodified data</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/TournamentGenerator-Export-ExporterInterface.html#method_getJson">getJson()</a>
     <span>
                         &nbsp;: string    </span>
 </dt>
 <dd>Return result as json</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/TournamentGenerator-Export-ExporterBase.html#method_jsonSerialize">jsonSerialize()</a>
+    <a href="classes/TournamentGenerator-Export-ExporterInterface.html#method_start">start()</a>
     <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
+                        &nbsp;: <a href="classes/TournamentGenerator-Export-ExporterInterface.html"><abbr title="\TournamentGenerator\Export\ExporterInterface">ExporterInterface</abbr></a>    </span>
 </dt>
-<dd>Serialize exported data as JSON</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
-    <a href="classes/TournamentGenerator-Export-ExporterBase.html#method_applyModifiers">applyModifiers()</a>
-    <span>
-                        &nbsp;: void    </span>
-</dt>
-<dd>Apply set modifiers to data array</dd>
+<dd>Start an export query</dd>
 
         </dl>
 
@@ -234,103 +198,35 @@ Exporters also allow of adding modifiers to the exported query - adding more dat
 
         
 
-        
-    <section class="phpdocumentor-properties">
-        <h3 class="phpdocumentor-elements__header" id="properties">
-            Properties
-            <a href="classes/TournamentGenerator-Export-ExporterBase.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
-        </h3>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_modifiers">
-        $modifiers
-        <a href="classes/TournamentGenerator-Export-ExporterBase.html#property_modifiers" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Export/ExporterBase.php"><a href="files/src-tournamentgenerator-export-exporterbase.html"><abbr title="src/TournamentGenerator/Export/ExporterBase.php">ExporterBase.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">29</span>
-</aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
-    <span class="phpdocumentor-signature__name">$modifiers</span>
-     = <span class="phpdocumentor-signature__default-value">[]</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_object">
-        $object
-        <a href="classes/TournamentGenerator-Export-ExporterBase.html#property_object" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Export/ExporterBase.php"><a href="files/src-tournamentgenerator-export-exporterbase.html"><abbr title="src/TournamentGenerator/Export/ExporterBase.php">ExporterBase.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">27</span>
-</aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type"><a href="classes/TournamentGenerator-Interfaces-WithId.html"><abbr title="\TournamentGenerator\Interfaces\WithId">WithId</abbr></a></span>
-    <span class="phpdocumentor-signature__name">$object</span>
-    </code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-
-</article>
-            </section>
-
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/TournamentGenerator-Export-ExporterBase.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/TournamentGenerator-Export-ExporterInterface.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
             -method
             -public
-                                                        "
+                                    -static                    "
 >
-    <h4 class="phpdocumentor-element__name" id="method___construct">
-        __construct()
-        <a href="classes/TournamentGenerator-Export-ExporterBase.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_export">
+        export()
+        <a href="classes/TournamentGenerator-Export-ExporterInterface.html#method_export" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Export/ExporterBase.php"><a href="files/src-tournamentgenerator-export-exporterbase.html"><abbr title="src/TournamentGenerator/Export/ExporterBase.php">ExporterBase.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Export/ExporterInterface.php"><a href="files/src-tournamentgenerator-export-exporterinterface.html"><abbr title="src/TournamentGenerator/Export/ExporterInterface.php">ExporterInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">26</span>
 </aside>
 
-    
+        <p class="phpdocumentor-summary">Simple export query without any modifiers</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/TournamentGenerator-Interfaces-WithId.html"><abbr title="\TournamentGenerator\Interfaces\WithId">WithId</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$object</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">export</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/TournamentGenerator-Interfaces-WithId.html"><abbr title="\TournamentGenerator\Interfaces\WithId">WithId</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$object</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
 
-    
+        <section class="phpdocumentor-description"></section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -338,16 +234,18 @@ Exporters also allow of adding modifiers to the exported query - adding more dat
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/TournamentGenerator-Interfaces-WithId.html"><abbr title="\TournamentGenerator\Interfaces\WithId">WithId</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"></section>
+
             </dd>
             </dl>
 
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
+            <section class="phpdocumentor-description"><p>The query result</p>
+</section>
 
     
 </article>
@@ -359,12 +257,12 @@ Exporters also allow of adding modifiers to the exported query - adding more dat
 >
     <h4 class="phpdocumentor-element__name" id="method_get">
         get()
-        <a href="classes/TournamentGenerator-Export-ExporterBase.html#method_get" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/TournamentGenerator-Export-ExporterInterface.html#method_get" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Export/ExporterBase.php"><a href="files/src-tournamentgenerator-export-exporterbase.html"><abbr title="src/TournamentGenerator/Export/ExporterBase.php">ExporterBase.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Export/ExporterInterface.php"><a href="files/src-tournamentgenerator-export-exporterinterface.html"><abbr title="src/TournamentGenerator/Export/ExporterInterface.php">ExporterInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">53</span>
+    <span class="phpdocumentor-element-found-in__line">50</span>
 </aside>
 
         <p class="phpdocumentor-summary">Finish the export query -&gt; get the result</p>
@@ -392,14 +290,48 @@ Exporters also allow of adding modifiers to the exported query - adding more dat
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getJson">
-        getJson()
-        <a href="classes/TournamentGenerator-Export-ExporterBase.html#method_getJson" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getBasic">
+        getBasic()
+        <a href="classes/TournamentGenerator-Export-ExporterInterface.html#method_getBasic" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Export/ExporterBase.php"><a href="files/src-tournamentgenerator-export-exporterbase.html"><abbr title="src/TournamentGenerator/Export/ExporterBase.php">ExporterBase.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Export/ExporterInterface.php"><a href="files/src-tournamentgenerator-export-exporterinterface.html"><abbr title="src/TournamentGenerator/Export/ExporterInterface.php">ExporterInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">44</span>
+    <span class="phpdocumentor-element-found-in__line">57</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Gets the basic unmodified data</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">getBasic</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getJson">
+        getJson()
+        <a href="classes/TournamentGenerator-Export-ExporterInterface.html#method_getJson" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Export/ExporterInterface.php"><a href="files/src-tournamentgenerator-export-exporterinterface.html"><abbr title="src/TournamentGenerator/Export/ExporterInterface.php">ExporterInterface.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">43</span>
 </aside>
 
         <p class="phpdocumentor-summary">Return result as json</p>
@@ -426,24 +358,6 @@ Exporters also allow of adding modifiers to the exported query - adding more dat
                                                  <section class="phpdocumentor-description"></section>
 
                                     </dd>
-                                                <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">see</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                    <span class="phpdocumentor-tag-link"><a href="classes/TournamentGenerator-Export-ExporterBase.html#method_jsonSerialize"><abbr title="\TournamentGenerator\Export\ExporterBase::jsonSerialize()">ExporterBase::jsonSerialize()</abbr></a></span>
-                                        
-                                                 <section class="phpdocumentor-description"></section>
-
-                                    </dd>
-                            <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">see</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                    <span class="phpdocumentor-tag-link"><a href="classes/TournamentGenerator-Export-ExporterBase.html#method_get"><abbr title="\TournamentGenerator\Export\ExporterBase::get()">ExporterBase::get()</abbr></a></span>
-                                        
-                                                 <section class="phpdocumentor-description"></section>
-
-                                    </dd>
                         </dl>
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
@@ -457,80 +371,31 @@ Exporters also allow of adding modifiers to the exported query - adding more dat
         class="phpdocumentor-element
             -method
             -public
-                                                        "
+                                    -static                    "
 >
-    <h4 class="phpdocumentor-element__name" id="method_jsonSerialize">
-        jsonSerialize()
-        <a href="classes/TournamentGenerator-Export-ExporterBase.html#method_jsonSerialize" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_start">
+        start()
+        <a href="classes/TournamentGenerator-Export-ExporterInterface.html#method_start" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Export/ExporterBase.php"><a href="files/src-tournamentgenerator-export-exporterbase.html"><abbr title="src/TournamentGenerator/Export/ExporterBase.php">ExporterBase.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Export/ExporterInterface.php"><a href="files/src-tournamentgenerator-export-exporterinterface.html"><abbr title="src/TournamentGenerator/Export/ExporterInterface.php">ExporterInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">80</span>
+    <span class="phpdocumentor-element-found-in__line">35</span>
 </aside>
 
-        <p class="phpdocumentor-summary">Serialize exported data as JSON</p>
+        <p class="phpdocumentor-summary">Start an export query</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">jsonSerialize</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">see</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                    <span class="phpdocumentor-tag-link"><abbr title="\TournamentGenerator\Export\json_encode()">json_encode()</abbr></span>
-                                        
-                                                 <section class="phpdocumentor-description"></section>
-
-                                    </dd>
-                        </dl>
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_applyModifiers">
-        applyModifiers()
-        <a href="classes/TournamentGenerator-Export-ExporterBase.html#method_applyModifiers" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/TournamentGenerator/Export/ExporterBase.php"><a href="files/src-tournamentgenerator-export-exporterbase.html"><abbr title="src/TournamentGenerator/Export/ExporterBase.php">ExporterBase.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">67</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Apply set modifiers to data array</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-                <span class="phpdocumentor-signature__name">applyModifiers</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__reference-operator">&amp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">start</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/TournamentGenerator-Interfaces-WithId.html"><abbr title="\TournamentGenerator\Interfaces\WithId">WithId</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$object</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/TournamentGenerator-Export-ExporterInterface.html"><abbr title="\TournamentGenerator\Export\ExporterInterface">ExporterInterface</abbr></a></span></code>
 
         <section class="phpdocumentor-description"></section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$data</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                <span class="phpdocumentor-signature__argument__name">$object</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/TournamentGenerator-Interfaces-WithId.html"><abbr title="\TournamentGenerator\Interfaces\WithId">WithId</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -541,7 +406,7 @@ Exporters also allow of adding modifiers to the exported query - adding more dat
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/TournamentGenerator-Export-ExporterInterface.html"><abbr title="\TournamentGenerator\Export\ExporterInterface">ExporterInterface</abbr></a></span>
             &mdash;
             <section class="phpdocumentor-description"></section>
 
@@ -563,7 +428,7 @@ Exporters also allow of adding modifiers to the exported query - adding more dat
 </section>
             </div>
         </div>
-        <a href="classes/TournamentGenerator-Export-ExporterBase.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/TournamentGenerator-Export-ExporterInterface.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 
