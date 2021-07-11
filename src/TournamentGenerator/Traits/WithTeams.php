@@ -8,6 +8,7 @@ use TournamentGenerator\Constants;
 use TournamentGenerator\Containers\TeamContainer;
 use TournamentGenerator\Group;
 use TournamentGenerator\Helpers\Filter;
+use TournamentGenerator\Helpers\Functions;
 use TournamentGenerator\Helpers\Sorter\TeamSorter;
 use TournamentGenerator\Interfaces\WithGroups as WithGroupsInterface;
 use TournamentGenerator\Interfaces\WithTeams as WithTeamsInterface;
@@ -35,6 +36,7 @@ trait WithTeams
 	 * @param string|int|null $id   Id of the new team - if omitted -> it is generated automatically as unique string
 	 *
 	 * @return Team Newly created team
+	 * @throws Exception
 	 */
 	public function team(string $name = '', $id = null) : Team {
 		$t = new Team($name, $id);
@@ -56,14 +58,18 @@ trait WithTeams
 			$wheres = $this->getRounds();
 		}
 
-		$teams = $this->getTeams();
-		shuffle($teams);
+		$teams = $this->getTeams(true, Constants::SEED);
+		if ($this::isSeeded($teams)) {
+			Functions::sortAlternate($teams);
+		}
+		else {
+			shuffle($teams);
+		}
 
-		while (count($teams) > 0) {
-			foreach ($wheres as $where) {
-				if (count($teams) > 0) {
-					$where->addTeam(array_shift($teams));
-				}
+		$split = ceil(count($teams) / count($wheres));
+		foreach ($wheres as $where) {
+			if (count($teams) > 0) {
+				$where->addTeam(...array_splice($teams, 0, $split));
 			}
 		}
 		foreach ($wheres as $where) {
@@ -148,11 +154,26 @@ trait WithTeams
 	}
 
 	/**
+	 * @param Team[] $teams
+	 *
+	 * @return bool
+	 */
+	public static function isSeeded(array $teams) : bool {
+		foreach ($teams as $team) {
+			if ($team->getSeed() > 0) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * Add one or more teams into the object.
 	 *
 	 * @param Team ...$teams Team objects
 	 *
 	 * @return WithTeamsInterface
+	 * @throws Exception
 	 */
 	public function addTeam(Team ...$teams) : WithTeamsInterface {
 		foreach ($teams as $team) {
@@ -176,6 +197,7 @@ trait WithTeams
 	 * @param TeamContainer $container
 	 *
 	 * @return WithTeamsInterface
+	 * @throws Exception
 	 */
 	public function addTeamContainer(TeamContainer $container) : WithTeamsInterface {
 		$this->teams->addChild($container);

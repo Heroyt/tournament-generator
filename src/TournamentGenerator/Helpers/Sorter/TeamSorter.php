@@ -73,6 +73,19 @@ class TeamSorter implements BaseSorter
 	}
 
 	/**
+	 * Sorter function for usort by seed
+	 *
+	 * @param Team $a First team
+	 * @param Team $b Second team
+	 */
+	protected static function sortTeamsBySeed(Team $a, Team $b) : int {
+		if ($a->getSeed() === $b->getSeed()) {
+			return 0;
+		}
+		return ($a->getSeed() > $b->getSeed() ? -1 : 1);
+	}
+
+	/**
 	 * Sort function to call
 	 *
 	 * @param array $data
@@ -87,6 +100,9 @@ class TeamSorter implements BaseSorter
 				break;
 			case Constants::SCORE:
 				usort($data, [__CLASS__, 'sortTeamsByScore']);
+				break;
+			case Constants::SEED:
+				usort($data, [__CLASS__, 'sortTeamsBySeed']);
 				break;
 		}
 		return $data;

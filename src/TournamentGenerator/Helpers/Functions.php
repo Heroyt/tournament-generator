@@ -64,4 +64,27 @@ class Functions
 		}
 		return $count;
 	}
+
+	/**
+	 * @param array $array
+	 *
+	 * @return array
+	 */
+	public static function sortAlternate(array &$array) : array {
+		$new = [];
+		$new2 = [];
+		$count = count($array) / 2;
+		for ($i = 0; $i < $count; $i++) {
+			if ($i % 2 === 0) {
+				$new[] = array_shift($array);
+				$new[] = array_pop($array);
+			}
+			else {
+				$new2[] = array_shift($array);
+				$new2[] = array_pop($array);
+			}
+		}
+		$array = array_values(array_filter(array_merge($new, array_reverse($new2))));
+		return $array;
+	}
 }

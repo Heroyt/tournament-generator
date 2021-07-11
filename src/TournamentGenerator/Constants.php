@@ -29,10 +29,14 @@ class Constants
 	/** @var string Order teams based on their score acquired in each game */
 	public const SCORE = 'Ordering based on score';
 
+	/** @var string Order teams based on their seed points */
+	public const SEED = 'Ordering based on seed';
+
 	/** @var array List of all available order by types */
 	public const OrderingTypes = [
 		'POINTS' => 'Ordering based on points',
-		'SCORE'  => 'Ordering based on score'
+		'SCORE'  => 'Ordering based on score',
+		'SEED'   => 'Ordering based on seed'
 	];
 
 	/** @var array List of all available group bracket types */

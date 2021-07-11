@@ -32,6 +32,8 @@ class Team extends Base implements Exportable
 	protected array $games = [];
 	/** @var array $gamesWith Multi-dimensional associative array of number of games together with other teams */
 	protected array $gamesWith = [];
+	/** @var int Seeding score */
+	protected int $seed = 0;
 
 	/**
 	 * Initiates a team class
@@ -44,6 +46,11 @@ class Team extends Base implements Exportable
 	public function __construct(string $name = 'team', $id = null) {
 		$this->setName($name);
 		$this->setId($id ?? uniqid('', false));
+	}
+
+	public function seed(int $score) : Team {
+		$this->seed = $score;
+		return $this;
 	}
 
 	/**
@@ -204,5 +211,14 @@ class Team extends Base implements Exportable
 	 */
 	public function export() : ExporterInterface {
 		return TeamExporter::start($this);
+	}
+
+	/**
+	 * Get seeding score
+	 *
+	 * @return int
+	 */
+	public function getSeed() : int {
+		return $this->seed;
 	}
 }

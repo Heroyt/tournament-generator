@@ -239,11 +239,11 @@ class BaseContainer implements Countable, Iterator
 	/**
 	 * Sort a result using a callback - maintaining the index association
 	 *
-	 * @param Closure $callback
+	 * @param Closure|null $callback
 	 *
 	 * @return ContainerQuery
 	 */
-	public function sort(Closure $callback) : ContainerQuery {
+	public function sort(?Closure $callback = null) : ContainerQuery {
 		$query = new ContainerQuery($this);
 		$query->sort($callback);
 		return $query;

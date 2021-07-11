@@ -91,6 +91,16 @@ class ContainerQuery
 	}
 
 	/**
+	 * Get query results as an container
+	 *
+	 * @return BaseContainer
+	 * @throws Exception
+	 */
+	public function getContainer() : BaseContainer {
+		return BaseContainer::fromArray($this->get());
+	}
+
+	/**
 	 *  Filter data to contain only unique values
 	 *
 	 * @param array $data
@@ -205,12 +215,22 @@ class ContainerQuery
 	/**
 	 * Sort a result using a callback - maintaining the index association
 	 *
-	 * @param Closure $callback
+	 * @param Closure|null $callback
 	 *
 	 * @return $this
 	 */
-	public function sort(Closure $callback) : ContainerQuery {
-		$this->sortClosure = $callback;
+	public function sort(?Closure $callback = null) : ContainerQuery {
+		if (!isset($callback)) {
+			$this->sortClosure = static function($a, $b) {
+				if ($a === $b) {
+					return 0;
+				}
+				return $a < $b ? -1 : 1;
+			};
+		}
+		else {
+			$this->sortClosure = $callback;
+		}
 		return $this;
 	}
 

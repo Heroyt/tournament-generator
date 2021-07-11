@@ -6,6 +6,7 @@ use Exception;
 use TournamentGenerator\Containers\GameContainer;
 use TournamentGenerator\Containers\HierarchyContainer;
 use TournamentGenerator\Containers\TeamContainer;
+use TournamentGenerator\Helpers\Functions;
 use TournamentGenerator\Interfaces\WithGames;
 use TournamentGenerator\Interfaces\WithGroups;
 use TournamentGenerator\Interfaces\WithSkipSetters;
@@ -143,14 +144,18 @@ class Round extends HierarchyBase implements WithSkipSetters, WithTeams, WithGro
 			$groups = $this->getGroups();
 		}
 
-		$teams = $this->getTeams();
-		shuffle($teams);
+		$teams = $this->getTeams(true, Constants::SEED);
+		if ($this::isSeeded($teams)) {
+			Functions::sortAlternate($teams);
+		}
+		else {
+			shuffle($teams);
+		}
 
-		while (count($teams) > 0) {
-			foreach ($groups as $group) {
-				if (count($teams) > 0) {
-					$group->addTeam(array_shift($teams));
-				}
+		$split = ceil(count($teams) / count($groups));
+		foreach ($groups as $where) {
+			if (count($teams) > 0) {
+				$where->addTeam(...array_splice($teams, 0, $split));
 			}
 		}
 		return $this;

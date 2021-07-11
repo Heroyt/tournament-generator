@@ -86,4 +86,28 @@ class FunctionsTest extends TestCase
 	public function testNestedCount(array $array, int $expectedCount) : void {
 		self::assertEquals($expectedCount, Functions::nestedCount($array));
 	}
+
+	public function arraysToSort() : array {
+		return [
+			[
+				[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+				[1, 10, 3, 8, 5, 6, 7, 4, 9, 2]
+			],
+			[
+				[1, 2, 3, 4, 5],
+				[1, 5, 3, 4, 2]
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider arraysToSort
+	 * 
+	 * @param array $input
+	 * @param array $expected
+	 */
+	public function testSortAlternate(array $input, array $expected) : void {
+		Functions::sortAlternate($input);
+		self::assertEquals($expected, $input);
+	}
 }
