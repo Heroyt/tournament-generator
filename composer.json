@@ -37,7 +37,8 @@
 	"scripts": {
 		"docs": "php phpDocumentor.phar -s src/ -t docs/api/",
 		"doxygen": "doxygen",
-		"test": "./vendor/bin/phpunit"
+		"test": "./vendor/bin/phpunit",
+		"testMutation": "./vendor/bin/infection --threads=4"
 	},
 	"require": {
 		"php": ">=7.4"
@@ -48,6 +49,7 @@
 		}
 	},
 	"require-dev": {
+		"infection/infection": "^0.21.5",
 		"phpunit/phpunit": "^9.5"
 	}
 }

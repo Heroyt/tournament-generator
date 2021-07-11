@@ -49,3 +49,6 @@ phpDocumentor.phar
 *cache/
 
 docs/html
+
+build/infection/infection.log
+build/infection/infection-log.json

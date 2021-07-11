@@ -34,3 +34,6 @@ jobs:
 
     - name: Run test suite
       run: composer run-script test
+
+    - name: Run mutation test suite
+      run: composer run-script testMutation

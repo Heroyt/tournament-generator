@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="/Users/heroyt/Projects/tournament-generator//vendor/autoload.php" colors="false" verbose="true" stopOnFailure="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd" executionOrder="random" resolveDependencies="true" failOnRisky="true" failOnWarning="true" cacheResult="false" stderr="false">
+  <coverage>
+    <include>
+      <directory>/Users/heroyt/Projects/tournament-generator//src</directory>
+      <directory>/Users/heroyt/Projects/tournament-generator//build</directory>
+    </include>
+  </coverage>
+  <testsuites>
+    <testsuite name="Tournament Generator">
+      <directory>/Users/heroyt/Projects/tournament-generator//tests</directory>
+    </testsuite>
+  </testsuites>
+</phpunit>

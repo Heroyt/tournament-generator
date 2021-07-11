@@ -1,0 +1,32 @@
+{
+	"source": {
+		"directories": [
+			"src"
+		]
+	},
+	"timeout": 10,
+	"logs": {
+		"text": "build/infection/infection.log",
+		"summary": "build/infection/summary.log",
+		"json": "build/infection/infection-log.json",
+		"perMutator": "build/infection/per-mutator.md",
+		"github": true,
+		"badge": {
+			"branch": "master"
+		}
+	},
+	"mutators": {
+		"@default": true,
+		"ProtectedVisibility": false,
+		"global-ignore": [
+			"new self(0)"
+		]
+	},
+	"tmpDir": "build",
+	"phpUnit": {
+		"configDir": "./",
+		"customPath": "./vendor/bin/phpunit"
+	},
+	"testFramework":"phpunit",
+	"testFrameworkOptions": ""
+}

@@ -16,7 +16,7 @@ Tournament Generator
 <a href='https://tournament-generator.readthedocs.io/en/latest/?badge=latest'>
     <img src='https://readthedocs.org/projects/tournament-generator/badge/?version=latest' alt='Documentation Status' />
 </a>
-
+<img src='https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2FHeroyt%2Ftournament-generator%2Fmaster' alt="Mutation testing badge" />
 </p>
 
 [Documentation](https://tournament-generator.readthedocs.io/en/latest/)
