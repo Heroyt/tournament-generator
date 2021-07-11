@@ -63,6 +63,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	public function __construct(string $name, $id = null) {
 		$this->setName($name);
 		$this->generator = new Helpers\Generator($this);
+		/** @infection-ignore-all */
 		$this->setId($id ?? uniqid('', false));
 		$this->games = new GameContainer($this->id);
 		$this->teams = new TeamContainer($this->id);
@@ -113,8 +114,6 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 
 	/**
 	 * Set round skipping
-	 *
-	 * @param bool $skip
 	 *
 	 * @return $this
 	 */

@@ -41,6 +41,7 @@ class Round extends HierarchyBase implements WithSkipSetters, WithTeams, WithGro
 	 */
 	public function __construct(string $name = '', $id = null) {
 		$this->setName($name);
+		/** @infection-ignore-all */
 		$this->setId($id ?? uniqid('', false));
 		$this->games = new GameContainer($this->id);
 		$this->teams = new TeamContainer($this->id);
@@ -53,6 +54,7 @@ class Round extends HierarchyBase implements WithSkipSetters, WithTeams, WithGro
 	 * @param Group ...$groups
 	 *
 	 * @return $this
+	 * @throws Exception
 	 */
 	public function addGroup(Group ...$groups) : Round {
 		foreach ($groups as $group) {
@@ -68,6 +70,7 @@ class Round extends HierarchyBase implements WithSkipSetters, WithTeams, WithGro
 	 * @param string|int|null $id   Group id - if omitted -> it is generated automatically as unique string
 	 *
 	 * @return Group New group
+	 * @throws Exception
 	 */
 	public function group(string $name, $id = null) : Group {
 		$g = new Group($name, $id);

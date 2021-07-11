@@ -125,6 +125,8 @@ class BaseContainer implements Countable, Iterator
 
 	/**
 	 * Move pointer to next
+	 *
+	 * @infection-ignore-all
 	 */
 	public function next() : void {
 		++$this->currentIndex;
@@ -150,6 +152,8 @@ class BaseContainer implements Countable, Iterator
 
 	/**
 	 * Rewind the iterator
+	 *
+	 * @infection-ignore-all
 	 */
 	public function rewind() : void {
 		$this->currentIndex = 0;

@@ -114,6 +114,7 @@ class TeamTest extends TestCase
 		self::assertEquals('ID2', $team->getId());
 
 		$this->expectException(InvalidArgumentException::class);
+		$this->expectExceptionMessage('Unsupported id type (array) - expected type of string or int');
 		$team->setId(['This', 'is', 'not', 'a', 'valid' => 'id']);
 	}
 

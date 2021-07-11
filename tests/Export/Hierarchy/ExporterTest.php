@@ -18,6 +18,7 @@ class ExporterTest extends TestCase
 
 	public function testInvalidModifier() : void {
 		$this->expectException(Error::class);
+		$this->expectExceptionMessage('Call to undefined method '.Exporter::class.'::invalidModifier()');
 		Exporter::start(new Tournament('Tournament'))->invalidModifier();
 	}
 

@@ -68,6 +68,7 @@ abstract class Base implements Interfaces\WithId
 	 */
 	public function setId($id) : Base {
 		if (!is_string($id) && !is_int($id)) {
+			/** @infection-ignore-all */
 			$this->id = uniqid('', false);
 			throw new InvalidArgumentException('Unsupported id type ('.gettype($id).') - expected type of string or int');
 		}

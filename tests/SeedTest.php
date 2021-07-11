@@ -101,12 +101,12 @@ class SeedTest extends TestCase
 
 		/** @var Team[][] $generated */
 		$generated = $tournament->getGameContainer()->only('getTeams')->get();
-		foreach ($generated as $game) {
+		/*foreach ($generated as $game) {
 			$names = array_map(static function(Team $a) {
 				return $a->getName().' ('.$a->getSeed().')';
 			}, $game);
 			echo implode(' - ', $names).PHP_EOL;
-		}
+		}*/
 
 		self::assertTrue(true);
 	}

@@ -86,6 +86,7 @@ class GameContainerTest extends TestCase
 		$baseContainer = new BaseContainer(1);
 
 		$this->expectException(InvalidArgumentException::class);
+		$this->expectExceptionMessage('GameContainer must contain only other GameContainers.');
 		$gameContainer->addChild($baseContainer);
 	}
 

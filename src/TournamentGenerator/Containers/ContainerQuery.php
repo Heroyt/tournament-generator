@@ -5,7 +5,6 @@ namespace TournamentGenerator\Containers;
 
 use Closure;
 use Exception;
-use TournamentGenerator\Base;
 use TournamentGenerator\Helpers\Sorter\BaseSorter;
 use TournamentGenerator\Interfaces\WithId;
 
@@ -91,23 +90,13 @@ class ContainerQuery
 	}
 
 	/**
-	 * Get query results as an container
-	 *
-	 * @return BaseContainer
-	 * @throws Exception
-	 */
-	public function getContainer() : BaseContainer {
-		return BaseContainer::fromArray($this->get());
-	}
-
-	/**
 	 *  Filter data to contain only unique values
 	 *
 	 * @param array $data
 	 */
 	protected function filterUnique(array &$data) : void {
 		if ($this->uniqueOnly) {
-			if (reset($data) instanceof Base) {
+			if (reset($data) instanceof WithId) {
 				$ids = [];
 				foreach ($data as $key => $obj) {
 					if (in_array($obj->getId(), $ids, true)) {
@@ -177,6 +166,16 @@ class ContainerQuery
 	}
 
 	/**
+	 * Get query results as an container
+	 *
+	 * @return BaseContainer
+	 * @throws Exception
+	 */
+	public function getContainer() : BaseContainer {
+		return BaseContainer::fromArray($this->get());
+	}
+
+	/**
 	 * Add a filter callback
 	 *
 	 * @param Closure $callback
@@ -197,7 +196,7 @@ class ContainerQuery
 	 */
 	public function whereId($id) : ContainerQuery {
 		$this->filters[] = static function($object) use ($id) {
-			return $object InstanceOf WithId && $object->getId() === $id;
+			return $object instanceof WithId && $object->getId() === $id;
 		};
 		return $this;
 	}
@@ -220,7 +219,7 @@ class ContainerQuery
 	 * @return $this
 	 */
 	public function sort(?Closure $callback = null) : ContainerQuery {
-		if (!isset($callback)) {
+		if (is_null($callback)) {
 			$this->sortClosure = static function($a, $b) {
 				if ($a === $b) {
 					return 0;

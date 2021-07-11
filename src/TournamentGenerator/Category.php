@@ -47,6 +47,7 @@ class Category extends HierarchyBase implements WithSkipSetters, WithRounds, Wit
 	 */
 	public function __construct(string $name = '', $id = null) {
 		$this->setName($name);
+		/** @infection-ignore-all */
 		$this->setId($id ?? uniqid('', false));
 		$this->games = new GameContainer($this->id);
 		$this->teams = new TeamContainer($this->id);
