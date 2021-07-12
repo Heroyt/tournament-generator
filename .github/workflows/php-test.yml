@@ -44,7 +44,11 @@ jobs:
     # Docs: https://getcomposer.org/doc/articles/scripts.md
 
     - name: Run test suite
+      env: 
+        XDEBUG_MODE: coverage 
       run: composer run-script test
 
     - name: Run mutation test suite
+      env: 
+        XDEBUG_MODE: coverage 
       run: composer run-script testMutation
