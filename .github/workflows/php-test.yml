@@ -9,7 +9,18 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.operating-system }}
+
+    strategy:
+      matrix:
+        operating-system: [ubuntu-latest]
+        php-version: ['7.4']
+        dependencies: ['']
+        coverage-driver: [pcov, xdebug]
+        include:
+          - { operating-system: 'windows-latest', php-version: '7.4', dependencies: '', coverage-driver: 'xdebug' }
+          - { operating-system: 'ubuntu-latest', php-version: '7.4', dependencies: '--prefer-lowest', coverage-driver: 'pcov' }
+          - { operating-system: 'ubuntu-latest', php-version: '8.0', dependencies: '--ignore-platform-req=php', coverage-driver: 'pcov' }
 
     steps:
     - uses: actions/checkout@v2
