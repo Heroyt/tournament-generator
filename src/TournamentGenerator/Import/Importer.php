@@ -193,7 +193,7 @@ class Importer
 		self::addIds(self::$teams, $object, $setting['teams'] ?? [], true);
 		self::addIds(self::$games, $object, $setting['games'] ?? []);
 		/** @noinspection NotOptimalIfConditionsInspection */
-		if (self::$root === $object && isset($setting['games']) && $object instanceof WithGames) {
+		if (self::$root === $object && !empty($setting['games']) && $object instanceof WithGames) {
 			$object->getGameContainer()->setAutoIncrement(min($setting['games']));
 		}
 	}
