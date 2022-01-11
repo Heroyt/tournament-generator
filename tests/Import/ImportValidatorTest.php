@@ -476,7 +476,7 @@ class ImportValidatorTest extends TestCase
 							'filters'    => [],
 						],
 					],
-					'teams' => [],
+					'teams'        => [],
 				],
 				false
 			],
@@ -504,7 +504,7 @@ class ImportValidatorTest extends TestCase
 			],
 			[
 				[
-					'tournament'   => [
+					'tournament' => [
 						'type'       => 'invalid',
 						'name'       => 'Tournament',
 						'skip'       => false,
@@ -526,7 +526,7 @@ class ImportValidatorTest extends TestCase
 			],
 			[
 				[
-					'tournament'   => [
+					'tournament' => [
 						'type'       => 'general',
 						'name'       => 'Tournament',
 						'skip'       => false,
@@ -557,7 +557,7 @@ class ImportValidatorTest extends TestCase
 	 * @dataProvider getExports
 	 *
 	 * @param array $export
-	 * @param bool $valid
+	 * @param bool  $valid
 	 */
 	public function testBasicValidation(array $export, bool $valid) : void {
 		self::assertEquals($valid, ImportValidator::validate($export));
@@ -567,7 +567,7 @@ class ImportValidatorTest extends TestCase
 	 * @dataProvider getExports
 	 *
 	 * @param array $export
-	 * @param bool $valid
+	 * @param bool  $valid
 	 */
 	public function testValidationExceptions(array $export, bool $valid) : void {
 		if (!$valid) {
@@ -618,6 +618,85 @@ class ImportValidatorTest extends TestCase
 		if ($valid) {
 			self::assertTrue(true);
 		}
+	}
+
+	public function groupParents() : array {
+		return [
+			[
+				[
+					'groups' => [
+						[
+							'id'   => 1,
+							'name' => 'Group 1',
+						],
+					],
+					'rounds' => [],
+				],
+				false
+			],
+			[
+				[
+					'groups' => [
+						[
+							'id'   => 1,
+							'name' => 'Group 1',
+						],
+						[
+							'id'   => 2,
+							'name' => 'Group 2',
+						],
+						[
+							'id'   => 3,
+							'name' => 'Group 3',
+						],
+					],
+					'rounds' => [
+						[
+							'id'     => 1,
+							'name'   => 'Round 1',
+							'groups' => [1, 2],
+						],
+					],
+				],
+				false
+			],
+			[
+				[
+					'groups' => [
+						[
+							'id'   => 1,
+							'name' => 'Group 1',
+						],
+					],
+					'rounds' => [
+						[
+							'id'     => 1,
+							'name'   => 'Round 1',
+							'groups' => [1],
+						],
+					],
+				],
+				true
+			],
+		];
+	}
+
+	/**
+	 * @dataProvider groupParents
+	 *
+	 * @param array $data
+	 * @param bool  $success
+	 *
+	 * @return void
+	 */
+	public function testGroupParentsValidation(array $data, bool $success) : void {
+		if (!$success) {
+			$this->expectException(InvalidImportDataException::class);
+		}
+		else {
+			$this->assertTrue(true);
+		}
+		ImportValidator::validateGroupParents($data);
 	}
 
 }

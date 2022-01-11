@@ -980,9 +980,9 @@ class ImporterTest extends TestCase
 					],
 					'progressions' => [
 						(object) [
-							'from'       => 1,
-							'to'         => 2,
-							'length'     => 2,
+							'from'   => 1,
+							'to'     => 2,
+							'length' => 2,
 						],
 						(object) [
 							'from'       => 1,
@@ -995,8 +995,8 @@ class ImporterTest extends TestCase
 							'to'      => 2,
 							'filters' => [
 								(object) [
-									'how'  => '>',
-									'val'  => 10,
+									'how' => '>',
+									'val' => 10,
 								],
 								(object) [
 									'what'   => 'wins',
@@ -1004,10 +1004,10 @@ class ImporterTest extends TestCase
 									'groups' => [1, 2],
 								],
 								(object) [
-									'val'    => 1,
+									'val' => 1,
 								],
 								(object) [
-									'what'   => 'wins',
+									'what' => 'wins',
 								],
 								(object) [
 									'groups' => [1, 2],
@@ -1570,6 +1570,7 @@ class ImporterTest extends TestCase
 					'groups' => [
 						(object) [
 							'name'    => 'Test123',
+							'id'      => 'hiii',
 							'skip'    => false,
 							'inGame'  => random_int(2, 4),
 							'maxSize' => random_int(5, 99),
@@ -2138,9 +2139,9 @@ class ImporterTest extends TestCase
 				foreach ($progressions as $progression) {
 					if ($progression->getTo() === $to) {
 						if (isset($setting->offset, $setting->length, $setting->filters)
-						&& $progression->getStart() === $setting->offset
-						&& $progression->getLen() === $setting->length
-						&& count($progression->getFilters()) === count($setting->filters)) {
+							&& $progression->getStart() === $setting->offset
+							&& $progression->getLen() === $setting->length
+							&& count($progression->getFilters()) === count($setting->filters)) {
 							$found = true;
 							$this->checkFilters($setting->filters, $progression->getFilters());
 							if (isset($setting->progressed)) {
@@ -2150,9 +2151,9 @@ class ImporterTest extends TestCase
 						}
 
 						if (isset($setting->offset, $setting->length)
-						&& $progression->getStart() === $setting->offset
-						&& $progression->getLen() === $setting->length
-						&& count($progression->getFilters()) === 0) {
+							&& $progression->getStart() === $setting->offset
+							&& $progression->getLen() === $setting->length
+							&& count($progression->getFilters()) === 0) {
 							$found = true;
 							if (isset($setting->progressed)) {
 								self::assertSame($setting->progressed, $progression->isProgressed());
@@ -2161,9 +2162,9 @@ class ImporterTest extends TestCase
 						}
 
 						if (isset($setting->offset, $setting->filters)
-						&& $progression->getStart() === $setting->offset
-						&& $progression->getLen() === null
-						&& count($progression->getFilters()) === count($setting->filters)) {
+							&& $progression->getStart() === $setting->offset
+							&& $progression->getLen() === null
+							&& count($progression->getFilters()) === count($setting->filters)) {
 							$found = true;
 							$this->checkFilters($setting->filters, $progression->getFilters());
 							if (isset($setting->progressed)) {
@@ -2173,9 +2174,9 @@ class ImporterTest extends TestCase
 						}
 
 						if (isset($setting->length, $setting->filters)
-						&& $progression->getStart() === 0
-						&& $progression->getLen() === $setting->length
-						&& count($progression->getFilters()) === count($setting->filters)) {
+							&& $progression->getStart() === 0
+							&& $progression->getLen() === $setting->length
+							&& count($progression->getFilters()) === count($setting->filters)) {
 							$found = true;
 							$this->checkFilters($setting->filters, $progression->getFilters());
 							if (isset($setting->progressed)) {
@@ -2185,9 +2186,9 @@ class ImporterTest extends TestCase
 						}
 
 						if (isset($setting->offset)
-						&& $progression->getStart() === $setting->offset
-						&& $progression->getLen() === null
-						&& count($progression->getFilters()) === 0) {
+							&& $progression->getStart() === $setting->offset
+							&& $progression->getLen() === null
+							&& count($progression->getFilters()) === 0) {
 							$found = true;
 							if (isset($setting->progressed)) {
 								self::assertSame($setting->progressed, $progression->isProgressed());
@@ -2196,9 +2197,9 @@ class ImporterTest extends TestCase
 						}
 
 						if (isset($setting->length)
-						&& $progression->getStart() === 0
-						&& $progression->getLen() === $setting->length
-						&& count($progression->getFilters()) === 0) {
+							&& $progression->getStart() === 0
+							&& $progression->getLen() === $setting->length
+							&& count($progression->getFilters()) === 0) {
 							$found = true;
 							if (isset($setting->progressed)) {
 								self::assertSame($setting->progressed, $progression->isProgressed());
@@ -2239,37 +2240,37 @@ class ImporterTest extends TestCase
 			foreach ($filters as $filter) {
 
 				if (isset($filterSetting->what, $filterSetting->how, $filterSetting->val, $filterSetting->groups)
-				&& $filterSetting->what === $filter->getWhat()
-				&& $filterSetting->how === $filter->getHow()
-				&& $filterSetting->val === $filter->getVal()
-				&& $filterSetting->groups === $filter->getGroups()) {
+					&& $filterSetting->what === $filter->getWhat()
+					&& $filterSetting->how === $filter->getHow()
+					&& $filterSetting->val === $filter->getVal()
+					&& $filterSetting->groups === $filter->getGroups()) {
 					$found = true;
 					break;
 				}
 
 				if (isset($filterSetting->how, $filterSetting->val, $filterSetting->groups)
-				&& 'points' === $filter->getWhat()
-				&& $filterSetting->how === $filter->getHow()
-				&& $filterSetting->val === $filter->getVal()
-				&& $filterSetting->groups === $filter->getGroups()) {
+					&& 'points' === $filter->getWhat()
+					&& $filterSetting->how === $filter->getHow()
+					&& $filterSetting->val === $filter->getVal()
+					&& $filterSetting->groups === $filter->getGroups()) {
 					$found = true;
 					break;
 				}
 
 				if (isset($filterSetting->what, $filterSetting->val, $filterSetting->groups)
-				&& $filterSetting->what === $filter->getWhat()
-				&& '>' === $filter->getHow()
-				&& $filterSetting->val === $filter->getVal()
-				&& $filterSetting->groups === $filter->getGroups()) {
+					&& $filterSetting->what === $filter->getWhat()
+					&& '>' === $filter->getHow()
+					&& $filterSetting->val === $filter->getVal()
+					&& $filterSetting->groups === $filter->getGroups()) {
 					$found = true;
 					break;
 				}
 
 				if (isset($filterSetting->what, $filterSetting->how, $filterSetting->groups)
-				&& $filterSetting->what === $filter->getWhat()
-				&& $filterSetting->how === $filter->getHow()
-				&& 0 === $filter->getVal()
-				&& $filterSetting->groups === $filter->getGroups()) {
+					&& $filterSetting->what === $filter->getWhat()
+					&& $filterSetting->how === $filter->getHow()
+					&& 0 === $filter->getVal()
+					&& $filterSetting->groups === $filter->getGroups()) {
 					$found = true;
 					break;
 				}
