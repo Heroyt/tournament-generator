@@ -424,6 +424,7 @@ class ImportValidator
 				}
 				self::validateParams($value, [$key], self::STRUCTURE[$key]);
 			}
+			self::validateGroupParents($data);
 		} catch (InvalidImportDataException $e) {
 			if ($throwOnError) {
 				throw $e;
@@ -584,6 +585,35 @@ class ImportValidator
 				return;
 			}
 			throw new InvalidImportDataException('Invalid reference of '.$key.' on id: '.$id);
+		}
+	}
+
+	/**
+	 * Validate that the import does not contain groups without a parent round
+	 *
+	 * @param array $data
+	 *
+	 * @return void
+	 * @throws InvalidImportDataException
+	 */
+	public static function validateGroupParents(array $data) : void {
+		if (empty($data['groups'])) {
+			return;
+		}
+		$groups = [];
+		foreach ($data['groups'] as $group) {
+			$groups[] = is_array($group) ? $group['id'] : $group->id;
+		}
+
+		$rounds = $data['rounds'] ?? [];
+		foreach ($rounds as $round) {
+			foreach (is_array($round) ? $round['groups'] : $round->groups as $groupId) {
+				unset($groups[array_search($groupId, $groups, true)]);
+			}
+		}
+
+		if (!empty($groups)) {
+			throw new InvalidImportDataException('Some groups are missing a parent round: '.implode(', ', $groups));
 		}
 	}
 
