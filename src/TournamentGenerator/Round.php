@@ -11,6 +11,7 @@ use TournamentGenerator\Interfaces\WithGames;
 use TournamentGenerator\Interfaces\WithGroups;
 use TournamentGenerator\Interfaces\WithSkipSetters;
 use TournamentGenerator\Interfaces\WithTeams;
+use TournamentGenerator\Interfaces\WithTeams as WithTeamsInterface;
 use TournamentGenerator\Traits\WithGames as WithGamesTrait;
 use TournamentGenerator\Traits\WithGroups as WithGroupsTrait;
 use TournamentGenerator\Traits\WithSkipSetters as WithSkipSettersTrait;
@@ -159,6 +160,38 @@ class Round extends HierarchyBase implements WithSkipSetters, WithTeams, WithGro
 		foreach ($groups as $where) {
 			if (count($teams) > 0) {
 				$where->addTeam(...array_splice($teams, 0, $split));
+			}
+		}
+		return $this;
+	}
+
+	/**
+	 * Split teams into its Groups
+	 *
+	 * @param Group ...$wheres
+	 *
+	 * @return \TournamentGenerator\Traits\WithTeams
+	 * @throws Exception
+	 * @noinspection CallableParameterUseCaseInTypeContextInspection
+	 */
+	public function splitTeamsEvenly(Group ...$wheres) : WithTeamsInterface {
+		if (count($wheres) === 0) {
+			$wheres = $this->getGroups();
+		}
+
+		$teams = $this->getTeams(true, Constants::SEED);
+		if ($this::isSeeded($teams)) {
+			Functions::sortAlternate($teams);
+		}
+		else {
+			shuffle($teams);
+		}
+
+		while (count($teams) > 0) {
+			foreach ($wheres as $where) {
+				if (count($teams) > 0) {
+					$where->addTeam(array_pop($teams));
+				}
 			}
 		}
 		return $this;

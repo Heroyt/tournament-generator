@@ -11,11 +11,29 @@ use TournamentGenerator\Preset\SingleElimination;
 class SingleEliminationTest extends TestCase
 {
 
-	/** @test */
-	public function single_elimination() : void {
+	public function teamCounts() : array {
+		return [
+			[3, 2],
+			[4, 3],
+			[5, 4],
+			[6, 5],
+			[7, 6],
+			[8, 7],
+			[9, 8],
+			[16, 15],
+			[25, 24],
+			[32, 31],
+		];
+	}
+
+	/**
+	 * @test
+	 * @dataProvider teamCounts
+	 */
+	public function single_elimination(int $teams, int $games) : void {
 		$tournament = new SingleElimination('Tournament name');
 
-		for ($i = 1; $i <= 8; $i++) {
+		for ($i = 1; $i <= $teams; $i++) {
 			$tournament->team('Team '.$i);
 		}
 
@@ -23,44 +41,7 @@ class SingleEliminationTest extends TestCase
 
 		$tournament->genGamesSimulate();
 
-		self::assertCount(7, $tournament->getGames());
+		self::assertCount($games, $tournament->getGames());
 	}
 
-	/** @test */
-	public function single_elimination2() : void {
-		$tournament = new SingleElimination('Tournament name');
-
-		$tournament
-			->setPlay(7)     // SET GAME TIME TO 7 MINUTES
-			->setGameWait(2) // SET TIME BETWEEN GAMES TO 2 MINUTES
-			->setRoundWait(0); // SET TIME BETWEEN ROUNDS TO 0 MINUTES
-
-		for ($i = 1; $i <= 6; $i++) {
-			$tournament->team('Team '.$i);
-		}
-
-		$tournament->generate();
-
-		$tournament->genGamesSimulate();
-		$tournament->genGamesSimulateReal();
-
-		$tournament->getTeams(true);
-
-		self::assertCount(7, $tournament->getGames());
-	}
-
-	/** @test */
-	public function single_elimination_non_power_of_2() : void {
-		$tournament = new SingleElimination('Tournament name');
-
-		for ($i = 1; $i <= 7; $i++) {
-			$tournament->team('Team '.$i);
-		}
-
-		$tournament->generate();
-
-		$tournament->genGamesSimulate();
-
-		self::assertCount(6, $tournament->getGames());
-	}
 }

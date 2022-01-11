@@ -79,6 +79,41 @@ trait WithTeams
 	}
 
 	/**
+	 * Split teams into its Groups
+	 *
+	 * @param Round ...$wheres
+	 *
+	 * @return $this
+	 * @throws Exception
+	 * @noinspection CallableParameterUseCaseInTypeContextInspection
+	 */
+	public function splitTeamsEvenly(Round ...$wheres) : WithTeamsInterface {
+		if (count($wheres) === 0) {
+			$wheres = $this->getRounds();
+		}
+
+		$teams = $this->getTeams(true, Constants::SEED);
+		if ($this::isSeeded($teams)) {
+			Functions::sortAlternate($teams);
+		}
+		else {
+			shuffle($teams);
+		}
+
+		while (count($teams) > 0) {
+			foreach ($wheres as $where) {
+				if (count($teams) > 0) {
+					$where->addTeam(array_pop($teams));
+				}
+			}
+		}
+		foreach ($wheres as $where) {
+			$where->splitTeamsEvenly();
+		}
+		return $this;
+	}
+
+	/**
 	 * Get all teams in the object
 	 *
 	 * @param bool                        $ordered  If true - order the teams by their score/points
