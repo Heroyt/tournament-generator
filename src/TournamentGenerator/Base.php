@@ -3,6 +3,7 @@
 namespace TournamentGenerator;
 
 use InvalidArgumentException;
+use JsonSerializable;
 
 /**
  * Abstract class with basic setters and getters
@@ -12,7 +13,7 @@ use InvalidArgumentException;
  *
  * @since   0.3
  */
-abstract class Base implements Interfaces\WithId
+abstract class Base implements Interfaces\WithId, JsonSerializable
 {
 
 	/** @var string $name The name of the object */

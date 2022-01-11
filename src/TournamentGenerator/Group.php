@@ -584,4 +584,18 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 		return $this->progressions;
 	}
 
+	/**
+	 * @inheritDoc
+	 * @return array
+	 * @throws Exception
+	 */
+	public function jsonSerialize() : array {
+		return [
+			'id'    => $this->getId(),
+			'name'  => $this->getName(),
+			'games' => $this->getGames(),
+			'teams' => $this->teams->ids(),
+		];
+	}
+
 }

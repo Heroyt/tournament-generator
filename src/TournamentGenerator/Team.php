@@ -221,4 +221,12 @@ class Team extends Base implements Exportable
 	public function getSeed() : int {
 		return $this->seed;
 	}
+
+	/**
+	 * @inheritDoc
+	 * @return array
+	 */
+	public function jsonSerialize() : array {
+		return $this->export()->get();
+	}
 }

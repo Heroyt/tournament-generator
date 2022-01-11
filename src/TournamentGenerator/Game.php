@@ -3,6 +3,7 @@
 namespace TournamentGenerator;
 
 use Exception;
+use JsonSerializable;
 use TournamentGenerator\Export\ExporterInterface;
 use TournamentGenerator\Export\Single\GameExporter;
 use TournamentGenerator\Interfaces\Exportable;
@@ -16,7 +17,7 @@ use TypeError;
  * @author  Tomáš Vojík <vojik@wboy.cz>
  * @since   0.1
  */
-class Game implements WithId, Exportable
+class Game implements WithId, Exportable, JsonSerializable
 {
 
 	/** @var int Autoincrement game id */
@@ -201,7 +202,7 @@ class Game implements WithId, Exportable
 	public function getTeam($id) : ?Team {
 		$key = array_search($id, array_map(static function($a) {
 			return $a->getId();
-		}, $this->teams), true);
+		}, $this->teams),   true);
 		return ($key !== false ? $this->teams[$key] : null);
 	}
 
@@ -403,6 +404,14 @@ class Game implements WithId, Exportable
 		}
 		$this->id = $id;
 		return $this;
+	}
+
+	/**
+	 * @inheritDoc
+	 * @return array
+	 */
+	public function jsonSerialize() : array {
+		return $this->export()->get();
 	}
 
 	/**

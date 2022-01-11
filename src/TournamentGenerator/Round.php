@@ -205,4 +205,19 @@ class Round extends HierarchyBase implements WithSkipSetters, WithTeams, WithGro
 		}
 		return $this;
 	}
+
+	/**
+	 * @inheritDoc
+	 * @return array
+	 * @throws Exception
+	 */
+	public function jsonSerialize() : array {
+		return [
+			'id'     => $this->getId(),
+			'name'   => $this->getName(),
+			'games'  => $this->getGames(),
+			'teams'  => $this->teams->ids(),
+			'groups' => $this->queryGroups()->ids(),
+		];
+	}
 }

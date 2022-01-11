@@ -5,6 +5,7 @@ namespace TournamentGenerator;
 
 
 use Exception;
+use JsonSerializable;
 use TournamentGenerator\Containers\HierarchyContainer;
 use TournamentGenerator\Export\ExporterInterface;
 use TournamentGenerator\Interfaces\Exportable;
@@ -19,7 +20,7 @@ use TournamentGenerator\Interfaces\WithTeams as WithTeamsInterface;
  * @package TournamentGenerator
  * @author  Tomáš Vojík <vojik@wboy.cz>
  */
-abstract class HierarchyBase extends Base implements Exportable
+abstract class HierarchyBase extends Base implements Exportable, JsonSerializable
 {
 
 	protected HierarchyContainer $container;

@@ -181,4 +181,13 @@ class Tournament extends HierarchyBase implements WithSkipSetters, WithTeams, Wi
 		return $games;
 	}
 
+	/**
+	 * @inheritDoc
+	 * @return array
+	 * @throws Exception
+	 */
+	public function jsonSerialize() : array {
+		return $this->export()->get();
+	}
+
 }

@@ -84,4 +84,20 @@ class Category extends HierarchyBase implements WithSkipSetters, WithRounds, Wit
 		return Helpers\Simulator::simulateCategoryReal($this);
 	}
 
+	/**
+	 * @inheritDoc
+	 * @return array
+	 * @throws Exception
+	 */
+	public function jsonSerialize() : array {
+		return [
+			'id'     => $this->getId(),
+			'name'   => $this->getName(),
+			'games'  => $this->getGames(),
+			'teams'  => $this->teams->ids(),
+			'rounds' => $this->queryRounds()->ids(),
+			'groups' => $this->queryGroups()->ids(),
+		];
+	}
+
 }
