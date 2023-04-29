@@ -32,7 +32,11 @@
 			"php": "8.0.0"
 		},
 		"optimize-autoloader": true,
-		"sort-packages": true
+		"sort-packages": true,
+		"allow-plugins": {
+			"infection/extension-installer": true,
+			"ocramius/package-versions": true
+		}
 	},
 	"scripts": {
 		"docs": "php phpDocumentor.phar -s src/ -t docs/api/",
@@ -49,7 +53,7 @@
 		}
 	},
 	"require-dev": {
-		"infection/infection": "^0.21.5",
-		"phpunit/phpunit": "^9.5"
+		"infection/infection": "^0.26",
+		"phpunit/phpunit": "^9.6"
 	}
 }
