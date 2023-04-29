@@ -64,17 +64,17 @@ class TeamFilter
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct(string $what = 'points', string $how = '>', $val = 0, array $groups = []) {
-		if (!in_array(strtolower($what), ['points', 'score', 'wins', 'draws', 'losses', 'second', 'third', 'team', 'not-progressed', 'progressed'])) {
-			throw new InvalidArgumentException('Trying to filter nonexistent type ('.$what.')');
-		}
-		$this->what = strtolower($what);
-		if (!in_array($how, ['>', '<', '>=', '<=', '=', '!='])) {
-			throw new InvalidArgumentException('Trying to filter with nonexistent operator ('.$how.')');
-		}
-		$this->how = $how;
-		if (!(is_int($val) && strtolower($what) !== 'team') && !($val instanceof Team && strtolower($what) === 'team')) {
-			throw new InvalidArgumentException('Unsupported filter value type ('.gettype($val).')');
+	public function __construct(string $what = 'points', string $how = '>', Team|int $val = 0, array $groups = []) {
+        if (!in_array(strtolower($what), ['points', 'score', 'wins', 'draws', 'losses', 'second', 'third', 'team', 'not-progressed', 'progressed'])) {
+            throw new InvalidArgumentException('Trying to filter nonexistent type (' . $what . ')');
+        }
+        $this->what = strtolower($what);
+        if (!in_array($how, ['>', '<', '>=', '<=', '=', '!='])) {
+            throw new InvalidArgumentException('Trying to filter with nonexistent operator (' . $how . ')');
+        }
+        $this->how = $how;
+        if (!(is_int($val) && strtolower($what) !== 'team') && !($val instanceof Team && strtolower($what) === 'team')) {
+            throw new InvalidArgumentException('Unsupported filter value type (' . gettype($val) . ')');
 		}
 		$this->val = $val;
 		$this->groups = array_map(static function($a) {
@@ -189,9 +189,9 @@ class TeamFilter
 	/**
 	 * @return int|Team
 	 */
-	public function getVal() {
-		return $this->val;
-	}
+    public function getVal(): Team|int {
+        return $this->val;
+    }
 
 	/**
 	 * @return array|int[]|string[]

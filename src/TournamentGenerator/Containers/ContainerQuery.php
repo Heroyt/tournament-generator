@@ -47,13 +47,13 @@ class ContainerQuery
 	 *
 	 * @return mixed|null
 	 */
-	public function getFirst() {
-		$data = $this->get();
-		if (count($data) === 0) {
-			return null;
-		}
-		return reset($data);
-	}
+	public function getFirst(): mixed {
+        $data = $this->get();
+        if (count($data) === 0) {
+            return null;
+        }
+        return reset($data);
+    }
 
 	/**
 	 * Get the result
@@ -187,19 +187,19 @@ class ContainerQuery
 		return $this;
 	}
 
-	/**
-	 * Filter results to only contain those with a specific ID
-	 *
-	 * @param string|int $id
-	 *
-	 * @return ContainerQuery
-	 */
-	public function whereId($id) : ContainerQuery {
-		$this->filters[] = static function($object) use ($id) {
-			return $object instanceof WithId && $object->getId() === $id;
-		};
-		return $this;
-	}
+    /**
+     * Filter results to only contain those with a specific ID
+     *
+     * @param int|string $id
+     *
+     * @return ContainerQuery
+     */
+    public function whereId(int|string $id): ContainerQuery {
+        $this->filters[] = static function ($object) use ($id) {
+            return $object instanceof WithId && $object->getId() === $id;
+        };
+        return $this;
+    }
 
 	/**
 	 * Sort in descending order
@@ -294,25 +294,24 @@ class ContainerQuery
 		return $this;
 	}
 
-	/**
-	 * Sort function for sorting by a defined property
-	 *
-	 * @param array|object $value1
-	 * @param array|object $value2
-	 *
-	 * @return int
-	 */
-	protected function sortByPropertyCallback($value1, $value2) : int {
-		// Get values
-		$property = $this->sortProperty ?? '';
-		$property1 = null;
-		$property2 = null;
-		if (is_object($value1) && isset($value1->$property)) {
-			$property1 = $value1->$property;
-		}
-		elseif (is_array($value1) && isset($value1[$property])) {
-			$property1 = $value1[$property];
-		}
+    /**
+     * Sort function for sorting by a defined property
+     *
+     * @param object|array $value1
+     * @param object|array $value2
+     *
+     * @return int
+     */
+    protected function sortByPropertyCallback(object|array $value1, object|array $value2): int {
+        // Get values
+        $property = $this->sortProperty ?? '';
+        $property1 = null;
+        $property2 = null;
+        if (is_object($value1) && isset($value1->$property)) {
+            $property1 = $value1->$property;
+        } elseif (is_array($value1) && isset($value1[$property])) {
+            $property1 = $value1[$property];
+        }
 		if (is_object($value2) && isset($value2->$property)) {
 			$property2 = $value2->$property;
 		}

@@ -19,7 +19,7 @@ abstract class Base implements Interfaces\WithId, JsonSerializable
 	/** @var string $name The name of the object */
 	protected string $name = '';
 	/** @var string|int $id The unique identifier of the object */
-	protected $id;
+	protected string|int $id;
 
 	/**
 	 * @return string Name of the object
@@ -54,9 +54,9 @@ abstract class Base implements Interfaces\WithId, JsonSerializable
 	 *
 	 * @return string|int  Unique identifier of the object
 	 */
-	public function getId() {
-		return $this->id;
-	}
+    public function getId(): int|string {
+        return $this->id;
+    }
 
 	/**
 	 * Sets the unique identifier of the object
@@ -68,15 +68,15 @@ abstract class Base implements Interfaces\WithId, JsonSerializable
 	 *
 	 */
 	public function setId($id) : Base {
-		if (!is_string($id) && !is_int($id)) {
-			/** @infection-ignore-all */
-			$this->id = uniqid('', false);
-			throw new InvalidArgumentException('Unsupported id type ('.gettype($id).') - expected type of string or int');
-		}
-		else {
-			$this->id = $id;
-		}
-		return $this;
-	}
+        if (!is_string($id) && !is_int($id)) {
+            /** @infection-ignore-all */
+            $this->id = uniqid('', false);
+            throw new InvalidArgumentException('Unsupported id type (' . gettype($id) . ') - expected type of string or int');
+        }
+
+
+        $this->id = $id;
+        return $this;
+    }
 
 }

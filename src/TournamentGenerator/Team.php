@@ -36,56 +36,56 @@ class Team extends Base implements Exportable
 	protected int $seed = 0;
 
 	/**
-	 * Initiates a team class
-	 *
-	 * @param string     $name Name of the team
-	 * @param string|int $id   Unique identifier of the team
-	 *
-	 * @throws InvalidArgumentException if the provided argument id is not of type 'null' or 'string' or 'int'
-	 */
-	public function __construct(string $name = 'team', $id = null) {
-		$this->setName($name);
-		$this->setId($id ?? uniqid('', false));
-	}
+     * Initiates a team class
+     *
+     * @param string $name Name of the team
+     * @param int|string|null $id Unique identifier of the team
+     *
+     * @throws InvalidArgumentException if the provided argument id is not of type 'null' or 'string' or 'int'
+     */
+    public function __construct(string $name = 'team', int|string|null $id = null) {
+        $this->setName($name);
+        $this->setId($id ?? uniqid('', false));
+    }
 
 	public function seed(int $score) : Team {
 		$this->seed = $score;
 		return $this;
 	}
 
-	/**
-	 * Gets team statistics from the given group without the group object
-	 *
-	 * @param string|int $groupId Unique identifier of the group to get its results
-	 *
-	 * @return array  All the statistics including points, score, wins, draws, losses, times being second, times being third
-	 * @throws Exception if the group with given groupId doesn't exist
-	 *
-	 */
-	public function getGamesInfo($groupId) : array {
-		return array_filter($this->getGroupResults($groupId), static function($k) {
-			return $k !== 'group';
-		}, ARRAY_FILTER_USE_KEY);
-	}
+    /**
+     * Gets team statistics from the given group without the group object
+     *
+     * @param int|string $groupId Unique identifier of the group to get its results
+     *
+     * @return array  All the statistics including points, score, wins, draws, losses, times being second, times being third
+     * @throws Exception if the group with given groupId doesn't exist
+     *
+     */
+    public function getGamesInfo(int|string $groupId): array {
+        return array_filter($this->getGroupResults($groupId), static function ($k) {
+            return $k !== 'group';
+        }, ARRAY_FILTER_USE_KEY);
+    }
 
-	/**
-	 * Gets team statistics from the given group
-	 *
-	 * @param string|int|null $groupId Unique identifier of the group to get its results
-	 *
-	 * @return array  All the statistics including points, score, wins, draws, losses, times being second, times being third if the group id is set or all the statistics
-	 * @throws Exception if the group with given groupId doesn't exist
-	 *
-	 */
-	public function getGroupResults($groupId = null) : array {
-		if (isset($groupId)) {
-			if (!isset($this->groupResults[$groupId])) {
-				throw new Exception('Trying to get nonexistent group results ('.$groupId.')');
-			}
-			return $this->groupResults[$groupId];
-		}
-		return $this->groupResults;
-	}
+    /**
+     * Gets team statistics from the given group
+     *
+     * @param int|string|null $groupId Unique identifier of the group to get its results
+     *
+     * @return array  All the statistics including points, score, wins, draws, losses, times being second, times being third if the group id is set or all the statistics
+     * @throws Exception if the group with given groupId doesn't exist
+     *
+     */
+    public function getGroupResults(int|string|null $groupId = null): array {
+        if (isset($groupId)) {
+            if (!isset($this->groupResults[$groupId])) {
+                throw new Exception('Trying to get nonexistent group results (' . $groupId . ')');
+            }
+            return $this->groupResults[$groupId];
+        }
+        return $this->groupResults;
+    }
 
 	/**
 	 * Creates a new data-array to store statistics for a new group
@@ -134,17 +134,17 @@ class Team extends Base implements Exportable
 	 *
 	 * @return array|int The number of games played with a team in a group if both arguments are given, array of all games with all teams from a group if only group is given, array of games with team from all groups if only a team argument is given or all games with all teams from all groups if no argument is given
 	 */
-	public function getGameWith(Team $team = null, Group $group = null) {
-		if (isset($group)) {
-			if (isset($team)) {
-				return $this->gamesWith[$group->getId()][$team->getId()];
-			}
-			return $this->gamesWith[$group->getId()];
-		}
-		if (isset($team)) {
-			$return = [];
-			foreach ($this->gamesWith as $id => $games) {
-				$filter = array_filter($games, static function($key) use ($team) {
+    public function getGameWith(Team $team = null, Group $group = null): array|int {
+        if (isset($group)) {
+            if (isset($team)) {
+                return $this->gamesWith[$group->getId()][$team->getId()];
+            }
+            return $this->gamesWith[$group->getId()];
+        }
+        if (isset($team)) {
+            $return = [];
+            foreach ($this->gamesWith as $id => $games) {
+                $filter = array_filter($games, static function ($key) use ($team) {
 					return $key === $team->getId();
 				}, ARRAY_FILTER_USE_KEY);
 				if (count($filter) > 0) {
@@ -186,23 +186,23 @@ class Team extends Base implements Exportable
 		return $this;
 	}
 
-	/**
-	 * Gets all game from given group
-	 *
-	 * @param Group|null      $group   A group to get its game from
-	 * @param string|int|null $groupId An id of group to get its game from
-	 *
-	 * @return array Games from a group or all games if both arguments are null
-	 */
-	public function getGames(?Group $group = null, $groupId = null) {
-		if (!is_null($group) && isset($this->games[$group->getId()])) {
-			return $this->games[$group->getId()];
-		}
-		if (isset($groupId, $this->games[$groupId])) {
-			return $this->games[$groupId];
-		}
-		return $this->games;
-	}
+    /**
+     * Gets all game from given group
+     *
+     * @param Group|null $group A group to get its game from
+     * @param int|string|null $groupId An id of group to get its game from
+     *
+     * @return Game[] Games from a group or all games if both arguments are null
+     */
+    public function getGames(?Group $group = null, int|string|null $groupId = null): array {
+        if (!is_null($group) && isset($this->games[$group->getId()])) {
+            return $this->games[$group->getId()];
+        }
+        if (isset($groupId, $this->games[$groupId])) {
+            return $this->games[$groupId];
+        }
+        return $this->games;
+    }
 
 	/**
 	 * Prepares an export query for the object

@@ -29,13 +29,13 @@ class Game implements WithId, Exportable, JsonSerializable
 	/** @var Group Group that the game belongs to */
 	protected Group $group;
 	/** @var int|string Id of the winning team */
-	protected $winId;
+	protected string|int $winId;
 	/** @var int|string Id of the losing team */
-	protected $lossId;
+    protected string|int $lossId;
 	/** @var int|string Id of the second team */
-	private $secondId;
+    private string|int $secondId;
 	/** @var int|string Id of the third team */
-	private $thirdId;
+    private string|int $thirdId;
 	/** @var int[]|string[] Ids of the teams that have drawn */
 	private array $drawIds = [];
 
@@ -160,26 +160,26 @@ class Game implements WithId, Exportable, JsonSerializable
 		return $this;
 	}
 
-	/**
-	 * Resets a score for a team
-	 *
-	 * @param string|int $teamId
-	 * @param array      $score
-	 *
-	 * @throws Exception
-	 * @noinspection NullPointerExceptionInspection
-	 */
-	protected function resetTeamScore($teamId, array $score) : void {
-		$team = $this->getTeam($teamId);
-		$team->groupResults[$this->group->getId()]['score'] -= $score['score'];
-		$team->removeScore($score['score']);
-		switch ($score['type']) {
-			case 'win':
-				$team->removeWin($this->group->getId());
-				break;
-			case 'draw':
-				$team->removeDraw($this->group->getId());
-				break;
+    /**
+     * Resets a score for a team
+     *
+     * @param int|string $teamId
+     * @param array $score
+     *
+     * @throws Exception
+     * @noinspection NullPointerExceptionInspection
+     */
+    protected function resetTeamScore(int|string $teamId, array $score): void {
+        $team = $this->getTeam($teamId);
+        $team->groupResults[$this->group->getId()]['score'] -= $score['score'];
+        $team->removeScore($score['score']);
+        switch ($score['type']) {
+            case 'win':
+                $team->removeWin($this->group->getId());
+                break;
+            case 'draw':
+                $team->removeDraw($this->group->getId());
+                break;
 			case 'loss':
 				$team->removeLoss($this->group->getId());
 				break;
@@ -192,19 +192,19 @@ class Game implements WithId, Exportable, JsonSerializable
 		}
 	}
 
-	/**
-	 * Get team by ID
-	 *
-	 * @param string|int $id Team ID
-	 *
-	 * @return Team|null
-	 */
-	public function getTeam($id) : ?Team {
-		$key = array_search($id, array_map(static function($a) {
-			return $a->getId();
-		}, $this->teams),   true);
-		return ($key !== false ? $this->teams[$key] : null);
-	}
+    /**
+     * Get team by ID
+     *
+     * @param int|string $id Team ID
+     *
+     * @return Team|null
+     */
+    public function getTeam(int|string $id): ?Team {
+        $key = array_search($id, array_map(static function ($a) {
+            return $a->getId();
+        }, $this->teams), true);
+        return ($key !== false ? $this->teams[$key] : null);
+    }
 
 	/**
 	 * Set a score for a team
@@ -335,36 +335,36 @@ class Game implements WithId, Exportable, JsonSerializable
 	 *
 	 * @return int|string
 	 */
-	public function getWin() {
-		return $this->winId;
-	}
+    public function getWin(): int|string {
+        return $this->winId;
+    }
 
 	/**
 	 * Get the losing team's id
 	 *
 	 * @return int|string
 	 */
-	public function getLoss() {
-		return $this->lossId;
-	}
+    public function getLoss(): int|string {
+        return $this->lossId;
+    }
 
 	/**
 	 * Get the second team's id
 	 *
 	 * @return int|string
 	 */
-	public function getSecond() {
-		return $this->secondId;
-	}
+    public function getSecond(): int|string {
+        return $this->secondId;
+    }
 
 	/**
 	 * Get the third team's id
 	 *
 	 * @return int|string
 	 */
-	public function getThird() {
-		return $this->thirdId;
-	}
+    public function getThird(): int|string {
+        return $this->thirdId;
+    }
 
 	/**
 	 * Get the draws teams' id

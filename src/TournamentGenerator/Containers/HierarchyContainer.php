@@ -48,8 +48,7 @@ class HierarchyContainer extends BaseContainer
 	 */
 	public function getHierarchyLevelQuery($class) : ContainerQuery {
 		$objects = $this->getHierarchyLevel($class);
-		$container = BaseContainer::fromArray($objects);
-		return $container->getQuery();
+        return BaseContainer::fromArray($objects)->getQuery();
 	}
 
 	/**

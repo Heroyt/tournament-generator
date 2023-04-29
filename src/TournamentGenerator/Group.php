@@ -55,20 +55,20 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	protected int $order = 0;
 
 	/**
-	 * Group constructor.
-	 *
-	 * @param string          $name Group name
-	 * @param string|int|null $id   Group id - if omitted -> it is generated automatically as unique string
-	 */
-	public function __construct(string $name, $id = null) {
-		$this->setName($name);
-		$this->generator = new Helpers\Generator($this);
-		/** @infection-ignore-all */
-		$this->setId($id ?? uniqid('', false));
-		$this->games = new GameContainer($this->id);
-		$this->teams = new TeamContainer($this->id);
-		$this->container = new HierarchyContainer($this->id);
-	}
+     * Group constructor.
+     *
+     * @param string $name Group name
+     * @param int|string|null $id Group id - if omitted -> it is generated automatically as unique string
+     */
+    public function __construct(string $name, int|string|null $id = null) {
+        $this->setName($name);
+        $this->generator = new Helpers\Generator($this);
+        /** @infection-ignore-all */
+        $this->setId($id ?? uniqid('', false));
+        $this->games = new GameContainer($this->id);
+        $this->teams = new TeamContainer($this->id);
+        $this->container = new HierarchyContainer($this->id);
+    }
 
 	/**
 	 * Add one or more teams into the object.

@@ -400,9 +400,7 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 	 * @throws Exception
 	 */
 	public function orderGames() : array {
-		$sorter = new Sorter\GameSorter($this->group);
-
-		return $sorter->sort($this->group->getGames());
+        return (new Sorter\GameSorter($this->group))->sort($this->group->getGames());
 	}
 
 }

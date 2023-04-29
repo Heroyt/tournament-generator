@@ -35,19 +35,19 @@ class Round extends HierarchyBase implements WithSkipSetters, WithTeams, WithGro
 	use WithGamesTrait;
 
 	/**
-	 * Round constructor.
-	 *
-	 * @param string          $name Round name
-	 * @param string|int|null $id   Round id - if omitted -> it is generated automatically as unique string
-	 */
-	public function __construct(string $name = '', $id = null) {
-		$this->setName($name);
-		/** @infection-ignore-all */
-		$this->setId($id ?? uniqid('', false));
-		$this->games = new GameContainer($this->id);
-		$this->teams = new TeamContainer($this->id);
-		$this->container = new HierarchyContainer($this->id);
-	}
+     * Round constructor.
+     *
+     * @param string $name Round name
+     * @param int|string|null $id Round id - if omitted -> it is generated automatically as unique string
+     */
+    public function __construct(string $name = '', int|string $id = null) {
+        $this->setName($name);
+        /** @infection-ignore-all */
+        $this->setId($id ?? uniqid('', false));
+        $this->games = new GameContainer($this->id);
+        $this->teams = new TeamContainer($this->id);
+        $this->container = new HierarchyContainer($this->id);
+    }
 
 	/**
 	 * Adds one or more group to round
@@ -64,20 +64,20 @@ class Round extends HierarchyBase implements WithSkipSetters, WithTeams, WithGro
 		return $this;
 	}
 
-	/**
-	 * Creates a new group and adds it to round
-	 *
-	 * @param string          $name Group name
-	 * @param string|int|null $id   Group id - if omitted -> it is generated automatically as unique string
-	 *
-	 * @return Group New group
-	 * @throws Exception
-	 */
-	public function group(string $name, $id = null) : Group {
-		$g = new Group($name, $id);
-		$this->insertIntoContainer($g->setSkip($this->allowSkip));
-		return $g;
-	}
+    /**
+     * Creates a new group and adds it to round
+     *
+     * @param string $name Group name
+     * @param int|string|null $id Group id - if omitted -> it is generated automatically as unique string
+     *
+     * @return Group New group
+     * @throws Exception
+     */
+    public function group(string $name, int|string $id = null): Group {
+        $g = new Group($name, $id);
+        $this->insertIntoContainer($g->setSkip($this->allowSkip));
+        return $g;
+    }
 
 	/**
 	 * Get all group ids
@@ -156,34 +156,33 @@ class Round extends HierarchyBase implements WithSkipSetters, WithTeams, WithGro
 			shuffle($teams);
 		}
 
-		$split = ceil(count($teams) / count($groups));
-		foreach ($groups as $where) {
-			if (count($teams) > 0) {
-				$where->addTeam(...array_splice($teams, 0, $split));
-			}
-		}
-		return $this;
-	}
+        $split = ceil(count($teams) / count($groups));
+        foreach ($groups as $where) {
+            if (count($teams) > 0) {
+                $where->addTeam(...array_splice($teams, 0, $split));
+            }
+        }
+        return $this;
+    }
 
-	/**
-	 * Split teams into its Groups
-	 *
-	 * @param Group ...$wheres
-	 *
-	 * @return \TournamentGenerator\Traits\WithTeams
-	 * @throws Exception
-	 * @noinspection CallableParameterUseCaseInTypeContextInspection
-	 */
-	public function splitTeamsEvenly(Group ...$wheres) : WithTeamsInterface {
-		if (count($wheres) === 0) {
-			$wheres = $this->getGroups();
-		}
+    /**
+     * Split teams into its Groups
+     *
+     * @param Group ...$wheres
+     *
+     * @return WithTeamsInterface
+     * @throws Exception
+     * @noinspection CallableParameterUseCaseInTypeContextInspection
+     */
+    public function splitTeamsEvenly(Group ...$wheres): WithTeamsInterface {
+        if (count($wheres) === 0) {
+            $wheres = $this->getGroups();
+        }
 
-		$teams = $this->getTeams(true, Constants::SEED);
-		if ($this::isSeeded($teams)) {
-			Functions::sortAlternate($teams);
-		}
-		else {
+        $teams = $this->getTeams(true, Constants::SEED);
+        if ($this::isSeeded($teams)) {
+            Functions::sortAlternate($teams);
+        } else {
 			shuffle($teams);
 		}
 

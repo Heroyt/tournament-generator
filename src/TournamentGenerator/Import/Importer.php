@@ -30,51 +30,49 @@ class Importer
 	protected static array $categories = [];
 	/** @var array List of $roundId => $parent */
 	protected static array $rounds = [];
-	/** @var array List of $groupId => $parent */
-	protected static array $groups = [];
-	/** @var array List of $teamId => $parent */
-	protected static array $teams = [];
-	/** @var array List of $gameId => $parent */
-	protected static array $games = [];
+    /** @var array List of $groupId => $parent */
+    protected static array $groups = [];
+    /** @var array List of $teamId => $parent */
+    protected static array $teams = [];
+    /** @var array List of $gameId => $parent */
+    protected static array $games = [];
 
-	/** @var Base|null $root Root object - returned from import */
-	protected static ?Base $root = null;
+    /** @var Base|null $root Root object - returned from import */
+    protected static ?Base $root = null;
 
-	/**
-	 * Processes a JSON input and creates necessary objects from it
-	 *
-	 * @param string $data
-	 *
-	 * @return Base
-	 * @throws JsonException
-	 * @throws InvalidImportDataException
-	 * @see Importer::import()
-	 *
-	 */
-	public static function importJson(string $data) : ?Base {
-		return self::import(json_decode($data, true, 512, JSON_THROW_ON_ERROR));
-	}
+    /**
+     * Processes a JSON input and creates necessary objects from it
+     *
+     * @param string $data
+     *
+     * @return Base|null
+     * @throws InvalidImportDataException
+     * @throws JsonException
+     * @see Importer::import()
+     */
+    public static function importJson(string $data): ?Base {
+        return self::import(json_decode($data, true, 512, JSON_THROW_ON_ERROR));
+    }
 
-	/**
-	 * Processes an input array of data and creates necessary objects from it
-	 *
-	 * @param array $data
-	 *
-	 * @return Base Imported root object or null if nothing was created
-	 *
-	 * @throws InvalidImportDataException
-	 * @throws Exception
-	 */
-	public static function import(array $data) : ?Base {
-		// Validate data
-		ImportValidator::validate($data);
+    /**
+     * Processes an input array of data and creates necessary objects from it
+     *
+     * @param array $data
+     *
+     * @return Base|null Imported root object or null if nothing was created
+     *
+     * @throws InvalidImportDataException
+     */
+    public static function import(array $data): ?Base {
+        // Validate data
+        ImportValidator::validate($data);
 
-		// Groups for parent logging
-		// This allows setting a parent to other objects. The latest parent in hierarchy.
-		self::$categories = [];
-		self::$rounds = [];
-		self::$groups = [];
-		self::$teams = [];
+        // Groups for parent logging
+        // This allows setting a parent to other objects. The latest parent in hierarchy.
+        self::$categories = [];
+        self::$rounds = [];
+        self::$groups = [];
+        self::$teams = [];
 		self::$games = [];
 
 		// Reset root

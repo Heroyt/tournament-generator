@@ -145,14 +145,14 @@ class Tournament extends HierarchyBase implements WithSkipSetters, WithTeams, Wi
 	 * @return Game[]|int Generated games, or expected play time
 	 * @throws Exception
 	 */
-	public function genGamesSimulate(bool $returnTime = false) {
-		$games = Helpers\Simulator::simulateTournament($this);
+	public function genGamesSimulate(bool $returnTime = false): int|array {
+        $games = Helpers\Simulator::simulateTournament($this);
 
-		if ($returnTime) {
-			return $this->getTournamentTime();
-		}
-		return $games;
-	}
+        if ($returnTime) {
+            return $this->getTournamentTime();
+        }
+        return $games;
+    }
 
 	/**
 	 * Get the whole tournament time
@@ -172,14 +172,14 @@ class Tournament extends HierarchyBase implements WithSkipSetters, WithTeams, Wi
 	 * @return int|Game[] Generated games, or expected play time
 	 * @throws Exception
 	 */
-	public function genGamesSimulateReal(bool $returnTime = false) {
-		$games = Helpers\Simulator::simulateTournamentReal($this);
+    public function genGamesSimulateReal(bool $returnTime = false): int|array {
+        $games = Helpers\Simulator::simulateTournamentReal($this);
 
-		if ($returnTime) {
-			return $this->getTournamentTime();
-		}
-		return $games;
-	}
+        if ($returnTime) {
+            return $this->getTournamentTime();
+        }
+        return $games;
+    }
 
 	/**
 	 * @inheritDoc

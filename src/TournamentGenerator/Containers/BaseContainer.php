@@ -22,7 +22,7 @@ class BaseContainer implements Countable, Iterator
 {
 
 	/** @var string|int Identifier */
-	public $id;
+	public string|int $id;
 	/** @var BaseContainer[] Direct child containers */
 	protected array $children = [];
 	/** @var BaseContainer|null Parent container reference */
@@ -33,15 +33,15 @@ class BaseContainer implements Countable, Iterator
 	/** @var int Current iterator index */
 	protected int $currentIndex = 0;
 
-	/**
-	 * BaseContainer constructor.
-	 *
-	 * @param string|int $id
-	 */
-	public function __construct($id, BaseContainer $parent = null) {
-		$this->id = $id;
-		$this->parent = $parent;
-	}
+    /**
+     * BaseContainer constructor.
+     *
+     * @param int|string $id
+     */
+    public function __construct(int|string $id, BaseContainer $parent = null) {
+        $this->id = $id;
+        $this->parent = $parent;
+    }
 
 	/**
 	 * Create a new container from array
@@ -119,9 +119,9 @@ class BaseContainer implements Countable, Iterator
 	 *
 	 * @return mixed
 	 */
-	public function current() {
-		return $this->get()[$this->currentIndex];
-	}
+    public function current(): mixed {
+        return $this->get()[$this->currentIndex];
+    }
 
 	/**
 	 * Move pointer to next
@@ -227,18 +227,18 @@ class BaseContainer implements Countable, Iterator
 		return $query;
 	}
 
-	/**
-	 * Filter results to only contain those with a specific ID
-	 *
-	 * @param string|int $id
-	 *
-	 * @return ContainerQuery
-	 */
-	public function whereId($id) : ContainerQuery {
-		$query = new ContainerQuery($this);
-		$query->whereId($id);
-		return $query;
-	}
+    /**
+     * Filter results to only contain those with a specific ID
+     *
+     * @param int|string $id
+     *
+     * @return ContainerQuery
+     */
+    public function whereId(int|string $id): ContainerQuery {
+        $query = new ContainerQuery($this);
+        $query->whereId($id);
+        return $query;
+    }
 
 	/**
 	 * Sort a result using a callback - maintaining the index association

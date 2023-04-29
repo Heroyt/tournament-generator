@@ -40,19 +40,19 @@ class Category extends HierarchyBase implements WithSkipSetters, WithRounds, Wit
 
 
 	/**
-	 * Category constructor.
-	 *
-	 * @param string          $name Category name
-	 * @param string|int|null $id   Category id - if omitted -> it is generated automatically as unique string
-	 */
-	public function __construct(string $name = '', $id = null) {
-		$this->setName($name);
-		/** @infection-ignore-all */
-		$this->setId($id ?? uniqid('', false));
-		$this->games = new GameContainer($this->id);
-		$this->teams = new TeamContainer($this->id);
-		$this->container = new HierarchyContainer($this->id);
-	}
+     * Category constructor.
+     *
+     * @param string $name Category name
+     * @param int|string|null $id Category id - if omitted -> it is generated automatically as unique string
+     */
+    public function __construct(string $name = '', int|string|null $id = null) {
+        $this->setName($name);
+        /** @infection-ignore-all */
+        $this->setId($id ?? uniqid('', false));
+        $this->games = new GameContainer($this->id);
+        $this->teams = new TeamContainer($this->id);
+        $this->container = new HierarchyContainer($this->id);
+    }
 
 	/**
 	 * Allows skipping of games with less than the minimum amounts of games
