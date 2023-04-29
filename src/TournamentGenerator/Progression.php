@@ -19,26 +19,32 @@ class Progression
 
 	/** @var Group What group to progress from */
 	protected Group $from;
-	/** @var Group What group to progress to */
-	protected Group $to;
-	/** @var int Offset to start picking teams */
-	protected int $start;
-	/** @var int|null Maximum number of teams to progress */
-	protected ?int $len;
-	/** @var TeamFilter[] Filters to use */
-	protected array $filters = [];
-	/** @var bool If the progression was already called */
-	protected bool $progressed = false;
+    /** @var Group What group to progress to */
+    protected Group $to;
+    /** @var int Offset to start picking teams */
+    protected int $start;
+    /** @var int|null Maximum number of teams to progress */
+    protected ?int $len;
+    /** @var TeamFilter[] Filters to use */
+    protected array $filters = [];
+    /** @var bool If the progression was already called */
+    protected bool $progressed = false;
 
-	/**
-	 * Progression constructor.
-	 *
-	 * @param Group    $from  What group to progress from
-	 * @param Group    $to    What group to progress to
-	 * @param int      $start Offset to start picking teams
-	 * @param int|null $len   Maximum number of teams to progress
-	 */
-	public function __construct(Group $from, Group $to, int $start = 0, ?int $len = null) {
+    /**
+     * @var int|null Custom points for progression
+     * @package TournamentGenerator
+     */
+    protected ?int $points = null;
+
+    /**
+     * Progression constructor.
+     *
+     * @param Group $from What group to progress from
+     * @param Group $to What group to progress to
+     * @param int $start Offset to start picking teams
+     * @param int|null $len Maximum number of teams to progress
+     */
+    public function __construct(Group $from, Group $to, int $start = 0, ?int $len = null) {
 		$this->from = $from;
 		$this->to = $to;
 		$this->start = $start;
@@ -102,7 +108,7 @@ class Progression
 				$this->to->addTeam(new BlankTeam($this.' - '.$i++, $team, $this->from, $this));
 			}
 			else {
-				$team->addPoints($this->from->getProgressPoints());
+                $team->addPoints($this->points ?? $this->from->getProgressPoints());
 			}
 		}
 
@@ -176,15 +182,31 @@ class Progression
 	/**
 	 * @return bool
 	 */
-	public function isProgressed() : bool {
-		return $this->progressed;
-	}
+    public function isProgressed(): bool {
+        return $this->progressed;
+    }
 
-	/**
-	 * @param bool $progressed
-	 */
-	public function setProgressed(bool $progressed) : void {
-		$this->progressed = $progressed;
-	}
+    /**
+     * @param bool $progressed
+     */
+    public function setProgressed(bool $progressed): void {
+        $this->progressed = $progressed;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getPoints(): ?int {
+        return $this->points;
+    }
+
+    /**
+     * @param int|null $points
+     * @return Progression
+     */
+    public function setPoints(?int $points): Progression {
+        $this->points = $points;
+        return $this;
+    }
 
 }

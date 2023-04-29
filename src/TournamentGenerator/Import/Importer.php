@@ -389,17 +389,21 @@ class Importer
 					$filterSetting = (array) $filterSetting;
 
 					self::$groups = array_map(static function($groupId) use ($allGroups) {
-						return $allGroups[$groupId] ?? null;
-					}, $filterSetting['groups'] ?? []);
+                        return $allGroups[$groupId] ?? null;
+                    }, $filterSetting['groups'] ?? []);
 
-					$filter = new TeamFilter($filterSetting['what'] ?? 'points', $filterSetting['how'] ?? '>', $filterSetting['val'] ?? 0, self::$groups);
-					$progression->addFilter($filter);
-				}
+                    $filter = new TeamFilter($filterSetting['what'] ?? 'points', $filterSetting['how'] ?? '>', $filterSetting['val'] ?? 0, self::$groups);
+                    $progression->addFilter($filter);
+                }
 
-				if (isset($setting['progressed'])) {
-					$progression->setProgressed($setting['progressed']);
-				}
-			}
+                if (isset($setting['progressed'])) {
+                    $progression->setProgressed($setting['progressed']);
+                }
+
+                if (isset($settings['points'])) {
+                    $progression->setPoints($settings['points']);
+                }
+            }
 		}
 	}
 

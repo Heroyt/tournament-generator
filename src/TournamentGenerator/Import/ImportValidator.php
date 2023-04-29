@@ -297,17 +297,21 @@ class ImportValidator
 							'default' => 0,
 						],
 						'groups' => [
-							'type'      => 'array',
-							'subtype'   => 'id',
-							'reference' => 'groups',
-						],
-					],
-				],
-				'progressed' => [
-					'type'    => 'bool',
-					'default' => false,
-				],
-			],
+                            'type' => 'array',
+                            'subtype' => 'id',
+                            'reference' => 'groups',
+                        ],
+                    ],
+                ],
+                'progressed' => [
+                    'type' => 'bool',
+                    'default' => false,
+                ],
+                'points' => [
+                    'type' => ['int', 'null'],
+                    'default' => null,
+                ],
+            ],
 		],
 		'teams'        => [
 			'type'       => 'array',
@@ -542,17 +546,22 @@ class ImportValidator
 						return;
 					}
 					break;
-				case 'id':
-					if (is_int($var) || is_string($var)) {
-						return;
-					}
-					break;
-				case 'bool':
-					if (is_bool($var)) {
-						return;
-					}
-					break;
-			}
+                case 'id':
+                    if (is_int($var) || is_string($var)) {
+                        return;
+                    }
+                    break;
+                case 'bool':
+                    if (is_bool($var)) {
+                        return;
+                    }
+                    break;
+                case 'null':
+                    if (is_null($var)) {
+                        return;
+                    }
+                    break;
+            }
 		}
 		throw new InvalidImportDataException('Invalid data type for: '.implode('->', $keys).'. Expected '.implode('|', $types).'.');
 	}
