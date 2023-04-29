@@ -314,4 +314,34 @@ class ProgressionTest extends TestCase
             self::assertEquals($points, $team->getSumPoints());
         }
     }
+
+    public function testGetProgressedTeams(): void {
+        $tournament = new Tournament('Name of tournament 1');
+
+        // Create a round and a final round
+        $round = $tournament->round("First's round's name");
+        $final = $tournament->round("Final's round's name");
+
+        // Create 1 group for the first round
+        $group_1 = $round->group('Round 1')->setInGame(2);
+
+        for ($i = 1; $i <= 3; $i++) {
+            $group_1->team('Team ' . $i, $i);
+        }
+
+        // Create a final group
+        $final_group = $final->group('Teams 1-2')->setInGame(2);
+
+        $tournament->splitTeams($round);
+
+        $progression = $group_1->progression($final_group, 0, 2);  // PROGRESS 2 BEST WINNING TEAMS
+
+        $round->simulate();
+
+        $round->progress();
+
+        self::assertCount(2, $final_group->getTeams());
+        self::assertCount(2, $progression->getProgressedTeams());
+        self::assertEquals($final_group->getTeams(), $progression->getProgressedTeams());
+    }
 }

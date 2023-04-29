@@ -36,6 +36,9 @@ class Progression
      */
     protected ?int $points = null;
 
+    /** @var Team[] */
+    protected array $progressedTeams = [];
+
     /**
      * Progression constructor.
      *
@@ -108,6 +111,7 @@ class Progression
 				$this->to->addTeam(new BlankTeam($this.' - '.$i++, $team, $this->from, $this));
 			}
 			else {
+                $this->progressedTeams[] = $team;
                 $team->addPoints($this->points ?? $this->from->getProgressPoints());
 			}
 		}
@@ -207,6 +211,13 @@ class Progression
     public function setPoints(?int $points): Progression {
         $this->points = $points;
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getProgressedTeams(): array {
+        return $this->progressedTeams;
     }
 
 }
