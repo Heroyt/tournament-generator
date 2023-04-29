@@ -11,8 +11,8 @@
 		"json": "build/infection/infection-log.json",
 		"perMutator": "build/infection/per-mutator.md",
 		"github": true,
-		"badge": {
-			"branch": "master"
+		"stryker": {
+			"badge": "master"
 		}
 	},
 	"mutators": {
