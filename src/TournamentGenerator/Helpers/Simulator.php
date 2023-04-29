@@ -28,24 +28,29 @@ use TournamentGenerator\Tournament;
 class Simulator
 {
 
-	/**
-	 * Simulates games in a given group.
-	 *
-	 * @param Group                       $group   Group to simulate
-	 * @param TeamFilter[]|TeamFilter[][] $filters Filters applied to returned teams (ex. if you only want to return the winning team)
-	 * @param bool                        $reset   If the group should reset its scores after simulation
-	 *
-	 * @return Team[] Teams sorted and filtered after simulation
-	 * @throws Exception
+    public static function simulateGame(Game $game): Game {
+        $teams = $game->getTeams();
+        $results = [];
+        foreach ($teams as $team) {
+            $results[$team->getId()] = floor(random_int(0, 500));
+        }
+        $game->setResults($results);
+        return $game;
+    }
+
+    /**
+     * Simulates games in a given group.
+     *
+     * @param Group $group Group to simulate
+     * @param TeamFilter[]|TeamFilter[][] $filters Filters applied to returned teams (ex. if you only want to return the winning team)
+     * @param bool $reset If the group should reset its scores after simulation
+     *
+     * @return Team[] Teams sorted and filtered after simulation
+     * @throws Exception
 	 */
 	public static function simulateGroup(Group $group, array $filters = [], bool $reset = true) : array {
 		foreach ($group->getGames() as $game) {
-			$teams = $game->getTeams();
-			$results = [];
-			foreach ($teams as $team) {
-				$results[$team->getId()] = floor(random_int(0, 500));
-			}
-			$game->setResults($results);
+            self::simulateGame($game);
 		}
 		$returnTeams = $group->sortTeams(null, $filters);
 		if (!$reset) {

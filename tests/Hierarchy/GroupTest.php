@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use TournamentGenerator\Constants;
 use TournamentGenerator\Game;
 use TournamentGenerator\Group;
+use TournamentGenerator\Helpers\Simulator;
 use TournamentGenerator\Progression;
 use TournamentGenerator\Team;
 use TournamentGenerator\TeamFilter;
@@ -641,13 +642,32 @@ class GroupTest extends TestCase
 			$group->team('Team '.$i);
 		}
 
-		$games = $group->genGames();
-		self::assertCount(6, $games);
+        $games = $group->genGames();
+        self::assertCount(6, $games);
 
-		$teams = $group->simulate([], true);
-		self::assertCount(4, $teams);
+        $teams = $group->simulate([], true);
+        self::assertCount(4, $teams);
 
-		self::assertFalse($group->isPlayed());
+        self::assertFalse($group->isPlayed());
 
-	}
+    }
+
+    public function testIsPlayed(): void {
+        $group = new Group('Group name');
+
+        for ($i = 1; $i <= 4; $i++) {
+            $group->team('Team ' . $i);
+        }
+
+        $games = $group->genGames();
+        self::assertCount(6, $games);
+
+        foreach ($games as $game) {
+            self::assertFalse($group->isPlayed());
+            Simulator::simulateGame($game);
+            self::assertTrue($game->isPlayed());
+        }
+
+        self::assertTrue($group->isPlayed());
+    }
 }

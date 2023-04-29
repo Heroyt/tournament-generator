@@ -570,9 +570,9 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 		if (count($this->games) === 0) {
 			return false;
 		}
-		return count(array_filter($this->getGames(), static function($a) {
-				return $a->isPlayed();
-			})) !== 0;
+		return count(array_filter($this->getGames(), static function ($a) {
+                return $a->isPlayed();
+            })) === count($this->games);
 	}
 
 	/**
