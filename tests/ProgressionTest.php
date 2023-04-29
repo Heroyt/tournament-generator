@@ -258,14 +258,60 @@ class ProgressionTest extends TestCase
 
 		$round->genGames();
 
-		$round->simulate();
+        $round->simulate();
 
-		$round->progress(true);
+        $round->progress(true);
 
-		self::assertCount(count($round->getTeams(false, null, [$filter1])), $final_group->getTeams());
-		self::assertCount(count($round->getTeams(false, null, [$filter2])), $second_group->getTeams());
+        self::assertCount(count($round->getTeams(false, null, [$filter1])), $final_group->getTeams());
+        self::assertCount(count($round->getTeams(false, null, [$filter2])), $second_group->getTeams());
 
-		self::assertInstanceOf(BlankTeam::class, $final_group->getTeams()[0]);
-		self::assertInstanceOf(BlankTeam::class, $second_group->getTeams()[0]);
-	}
+        self::assertInstanceOf(BlankTeam::class, $final_group->getTeams()[0]);
+        self::assertInstanceOf(BlankTeam::class, $second_group->getTeams()[0]);
+    }
+
+    public function testProgressionPoints(): void {
+        $tournament = new Tournament('Name of tournament 1');
+
+        for ($i = 1; $i <= 8; $i++) {
+            $tournament->team('Team ' . $i);
+        }
+        // Create a round and a final round
+        $round = $tournament->round("First's round's name");
+        $final = $tournament->round("Final's round's name");
+
+        // Create 2 groups for the first round
+        $group_1 = $round->group('Round 1')->setInGame(2);
+        $group_2 = $round->group('Round 2')->setInGame(2);
+
+        // Create a final group
+        $final_group = $final->group('Teams 1-4')->setInGame(2);
+        $second_group = $final->group('Teams 5-8')->setInGame(2);
+
+        $tournament->splitTeams($round);
+
+        $group_1->progression($final_group, 0, 2)->setPoints(69);  // PROGRESS 2 BEST WINNING TEAMS
+        $group_2->progression($final_group, 0, 2)->setPoints(69);  // PROGRESS 2 BEST WINNING TEAMS
+        $group_1->progression($second_group, 2, 2)->setPoints(0); // PROGRESS 2 BEST WINNING TEAMS
+        $group_2->progression($second_group, 2, 2)->setPoints(0); // PROGRESS 2 BEST WINNING TEAMS
+
+        $round->simulate();
+
+        $round->progress();
+
+        foreach ($final_group->getTeams() as $team) {
+            $points = 0;
+            foreach ($team->getGroupResults() as $results) {
+                $points += $results['points'];
+            }
+            self::assertEquals(69 + $points, $team->getSumPoints());
+        }
+
+        foreach ($second_group->getTeams() as $team) {
+            $points = 0;
+            foreach ($team->getGroupResults() as $results) {
+                $points += $results['points'];
+            }
+            self::assertEquals($points, $team->getSumPoints());
+        }
+    }
 }
