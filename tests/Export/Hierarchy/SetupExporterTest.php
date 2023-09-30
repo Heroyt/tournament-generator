@@ -95,6 +95,7 @@ class SetupExporterTest extends TestCase
 				'type'       => 'general',
 				'name'       => 'Tournament name',
 				'skip'       => false,
+				'iterations' => 1,
 				'timing'     => (object) [
 					'play'         => 5,
 					'gameWait'     => 0,
@@ -133,6 +134,7 @@ class SetupExporterTest extends TestCase
 					'id'     => 1,
 					'name'   => 'Round 1',
 					'skip'   => false,
+					'iterations' => 1,
 					'played' => false,
 					'groups' => [1, 2],
 					'teams'  => [],
@@ -142,6 +144,7 @@ class SetupExporterTest extends TestCase
 					'id'     => 2,
 					'name'   => 'Round 2',
 					'skip'   => false,
+					'iterations' => 1,
 					'played' => false,
 					'groups' => [3],
 					'teams'  => [],
@@ -151,6 +154,7 @@ class SetupExporterTest extends TestCase
 					'id'     => 3,
 					'name'   => 'Round 3',
 					'skip'   => false,
+					'iterations' => 1,
 					'played' => false,
 					'groups' => [4, 5],
 					'teams'  => [],
@@ -160,6 +164,7 @@ class SetupExporterTest extends TestCase
 					'id'     => 4,
 					'name'   => 'Round 4',
 					'skip'   => false,
+					'iterations' => 1,
 					'played' => false,
 					'groups' => [6],
 					'teams'  => [],
@@ -172,6 +177,7 @@ class SetupExporterTest extends TestCase
 					'name'    => 'Group 1',
 					'type'    => Constants::ROUND_ROBIN,
 					'skip'    => true,
+					'iterations' => 1,
 					'points'  => (object) [
 						'win'         => 10,
 						'loss'        => -3,
@@ -191,6 +197,7 @@ class SetupExporterTest extends TestCase
 					'name'    => 'Group 2',
 					'type'    => Constants::ROUND_TWO,
 					'skip'    => false,
+					'iterations' => 1,
 					'points'  => (object) [
 						'win'         => 11,
 						'loss'        => -3,
@@ -210,6 +217,7 @@ class SetupExporterTest extends TestCase
 					'name'    => 'Group 3',
 					'type'    => Constants::ROUND_SPLIT,
 					'skip'    => true,
+					'iterations' => 1,
 					'points'  => (object) [
 						'win'         => 10,
 						'loss'        => -3,
@@ -229,6 +237,7 @@ class SetupExporterTest extends TestCase
 					'name'    => 'Group 4',
 					'type'    => Constants::ROUND_ROBIN,
 					'skip'    => false,
+					'iterations' => 1,
 					'points'  => (object) [
 						'win'         => 20,
 						'loss'        => -9,
@@ -248,6 +257,7 @@ class SetupExporterTest extends TestCase
 					'name'    => 'Group 5',
 					'type'    => Constants::ROUND_ROBIN,
 					'skip'    => true,
+					'iterations' => 1,
 					'points'  => (object) [
 						'win'         => 10,
 						'loss'        => -3,
@@ -267,6 +277,7 @@ class SetupExporterTest extends TestCase
 					'name'    => 'Group 6',
 					'type'    => Constants::ROUND_TWO,
 					'skip'    => true,
+					'iterations' => 1,
 					'points'  => (object) [
 						'win'         => 10,
 						'loss'        => -3,
@@ -434,6 +445,7 @@ class SetupExporterTest extends TestCase
 														 'id'     => 1,
 														 'name'   => 'Round1',
 														 'skip'   => false,
+														 'iterations' => 1,
 														 'played' => false,
 														 'groups' => [1, 2],
 														 'teams'  => [],
@@ -446,6 +458,7 @@ class SetupExporterTest extends TestCase
 														 'name'    => 'Group1',
 														 'type'    => Constants::ROUND_ROBIN,
 														 'skip'    => false,
+														 'iterations' => 1,
 														 'points'  => (object) [
 															 'win'         => 3,
 															 'loss'        => 0,
@@ -465,6 +478,7 @@ class SetupExporterTest extends TestCase
 														 'name'    => 'Group2',
 														 'type'    => Constants::ROUND_ROBIN,
 														 'skip'    => false,
+														 'iterations' => 1,
 														 'points'  => (object) [
 															 'win'         => 3,
 															 'loss'        => 0,
@@ -556,6 +570,7 @@ class SetupExporterTest extends TestCase
 														 'name'    => 'Group1',
 														 'type'    => Constants::ROUND_ROBIN,
 														 'skip'    => false,
+														 'iterations' => 1,
 														 'points'  => (object) [
 															 'win'         => 3,
 															 'loss'        => 0,

@@ -9,12 +9,14 @@ use TournamentGenerator\Containers\TeamContainer;
 use TournamentGenerator\Interfaces\WithCategories;
 use TournamentGenerator\Interfaces\WithGames;
 use TournamentGenerator\Interfaces\WithGroups;
+use TournamentGenerator\Interfaces\WithIterationSetters;
 use TournamentGenerator\Interfaces\WithRounds;
 use TournamentGenerator\Interfaces\WithSkipSetters;
 use TournamentGenerator\Interfaces\WithTeams;
 use TournamentGenerator\Traits\WithCategories as WithCategoriesTrait;
 use TournamentGenerator\Traits\WithGames as WithGamesTrait;
 use TournamentGenerator\Traits\WithGroups as WithGroupsTrait;
+use TournamentGenerator\Traits\WithIterations;
 use TournamentGenerator\Traits\WithRounds as WithRoundsTrait;
 use TournamentGenerator\Traits\WithSkipSetters as WithSkipSettersTrait;
 use TournamentGenerator\Traits\WithTeams as WithTeamsTrait;
@@ -28,7 +30,7 @@ use TournamentGenerator\Traits\WithTeams as WithTeamsTrait;
  * @author  Tomáš Vojík <vojik@wboy.cz>
  * @since   0.1
  */
-class Tournament extends HierarchyBase implements WithSkipSetters, WithTeams, WithRounds, WithCategories, WithGroups, WithGames
+class Tournament extends HierarchyBase implements WithSkipSetters, WithTeams, WithRounds, WithCategories, WithGroups, WithGames, WithIterationSetters
 {
 	use WithTeamsTrait;
 	use WithCategoriesTrait;
@@ -36,6 +38,7 @@ class Tournament extends HierarchyBase implements WithSkipSetters, WithTeams, Wi
 	use WithGroupsTrait;
 	use WithSkipSettersTrait;
 	use WithGamesTrait;
+	use WithIterations;
 
 	/** @var int Wait time between categories */
 	protected int $expectedCategoryWait = 0;
@@ -188,6 +191,16 @@ class Tournament extends HierarchyBase implements WithSkipSetters, WithTeams, Wi
 	 */
 	public function jsonSerialize() : array {
 		return $this->export()->get();
+	}
+
+	public function setIterationCount(int $iterations): static {
+		$this->iterations = $iterations;
+
+		foreach ($this->getRounds() as $round) {
+			$round->setIterationCount($iterations);
+		}
+
+		return $this;
 	}
 
 }

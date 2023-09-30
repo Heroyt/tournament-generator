@@ -40,6 +40,10 @@ class ImportValidator
 					'default' => false,
 					'type'    => 'bool',
 				],
+				'iterations' => [
+					'default' => 1,
+					'type'    => 'int',
+				],
 				'timing'     => [
 					'default'    => null,
 					'type'       => 'object',
@@ -156,6 +160,10 @@ class ImportValidator
 					'default' => false,
 					'type'    => 'bool',
 				],
+				'iterations' => [
+					'default' => 1,
+					'type'    => 'int',
+				],
 				'played' => [
 					'default' => false,
 					'type'    => 'bool',
@@ -200,6 +208,10 @@ class ImportValidator
 				'skip'    => [
 					'default' => false,
 					'type'    => 'bool',
+				],
+				'iterations' => [
+					'default' => 1,
+					'type'    => 'int',
 				],
 				'points'  => [
 					'default'    => null,

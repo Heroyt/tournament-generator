@@ -11,7 +11,7 @@ use TournamentGenerator\Constants;
  * @package TournamentGenerator\Interfaces
  * @since   0.4
  */
-interface WithGeneratorSetters
+interface WithGeneratorSetters extends WithIterationSetters
 {
 	/**
 	 * Sets a generator type

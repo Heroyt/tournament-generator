@@ -5,6 +5,7 @@ namespace TournamentGenerator\Traits;
 
 
 use TournamentGenerator\Containers\ContainerQuery;
+use TournamentGenerator\Interfaces\WithIterationSetters;
 use TournamentGenerator\Interfaces\WithRounds as WithRoundsInterface;
 use TournamentGenerator\Interfaces\WithSkipSetters as WithSkipSettersInterface;
 use TournamentGenerator\Round;
@@ -45,6 +46,9 @@ trait WithRounds
 		$r = new Round($name, $id);
 		if ($this instanceof WithSkipSettersInterface) {
 			$r->setSkip($this->getSkip());
+		}
+		if ($this instanceof WithIterationSetters) {
+			$r->setIterationCount($this->getIterationCount());
 		}
 		$this->insertIntoContainer($r);
 		return $r;

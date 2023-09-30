@@ -11,6 +11,7 @@ use TournamentGenerator\Interfaces\WithGeneratorSetters;
 use TournamentGenerator\Interfaces\WithSkipSetters;
 use TournamentGenerator\Interfaces\WithTeams;
 use TournamentGenerator\Traits\WithGames as WithGamesTrait;
+use TournamentGenerator\Traits\WithIterations;
 use TournamentGenerator\Traits\WithTeams as WithTeamsTrait;
 
 /**
@@ -27,6 +28,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 {
 	use WithTeamsTrait;
 	use WithGamesTrait;
+	use WithIterations;
 
 	/** @var Helpers\Generator Generator class to generate games of this group */
 	protected Helpers\Generator $generator;
@@ -53,6 +55,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	protected int $progressPoints = 50;
 	/** @var int Group order in a round */
 	protected int $order = 0;
+
 
 	/**
      * Group constructor.
@@ -598,4 +601,9 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 		];
 	}
 
+	public function setIterationCount(int $iterations): static {
+		$this->generator->setIterationCount($iterations);
+		$this->iterations = $iterations;
+		return $this;
+	}
 }

@@ -9,11 +9,13 @@ use TournamentGenerator\Containers\TeamContainer;
 use TournamentGenerator\Helpers\Functions;
 use TournamentGenerator\Interfaces\WithGames;
 use TournamentGenerator\Interfaces\WithGroups;
+use TournamentGenerator\Interfaces\WithIterationSetters;
 use TournamentGenerator\Interfaces\WithSkipSetters;
 use TournamentGenerator\Interfaces\WithTeams;
 use TournamentGenerator\Interfaces\WithTeams as WithTeamsInterface;
 use TournamentGenerator\Traits\WithGames as WithGamesTrait;
 use TournamentGenerator\Traits\WithGroups as WithGroupsTrait;
+use TournamentGenerator\Traits\WithIterations;
 use TournamentGenerator\Traits\WithSkipSetters as WithSkipSettersTrait;
 use TournamentGenerator\Traits\WithTeams as WithTeamsTrait;
 
@@ -27,27 +29,28 @@ use TournamentGenerator\Traits\WithTeams as WithTeamsTrait;
  * @author  Tomáš Vojík <vojik@wboy.cz>
  * @since   0.1
  */
-class Round extends HierarchyBase implements WithSkipSetters, WithTeams, WithGroups, WithGames
+class Round extends HierarchyBase implements WithSkipSetters, WithTeams, WithGroups, WithGames, WithIterationSetters
 {
 	use WithTeamsTrait;
 	use WithGroupsTrait;
 	use WithSkipSettersTrait;
 	use WithGamesTrait;
+	use WithIterations;
 
 	/**
-     * Round constructor.
-     *
-     * @param string $name Round name
-     * @param int|string|null $id Round id - if omitted -> it is generated automatically as unique string
-     */
-    public function __construct(string $name = '', int|string $id = null) {
-        $this->setName($name);
-        /** @infection-ignore-all */
-        $this->setId($id ?? uniqid('', false));
-        $this->games = new GameContainer($this->id);
-        $this->teams = new TeamContainer($this->id);
-        $this->container = new HierarchyContainer($this->id);
-    }
+	 * Round constructor.
+	 *
+	 * @param string          $name Round name
+	 * @param int|string|null $id   Round id - if omitted -> it is generated automatically as unique string
+	 */
+	public function __construct(string $name = '', int|string $id = null) {
+		$this->setName($name);
+		/** @infection-ignore-all */
+		$this->setId($id ?? uniqid('', false));
+		$this->games = new GameContainer($this->id);
+		$this->teams = new TeamContainer($this->id);
+		$this->container = new HierarchyContainer($this->id);
+	}
 
 	/**
 	 * Adds one or more group to round
@@ -57,36 +60,39 @@ class Round extends HierarchyBase implements WithSkipSetters, WithTeams, WithGro
 	 * @return $this
 	 * @throws Exception
 	 */
-	public function addGroup(Group ...$groups) : Round {
+	public function addGroup(Group ...$groups): Round {
 		foreach ($groups as $group) {
 			$this->insertIntoContainer($group);
 		}
 		return $this;
 	}
 
-    /**
-     * Creates a new group and adds it to round
-     *
-     * @param string $name Group name
-     * @param int|string|null $id Group id - if omitted -> it is generated automatically as unique string
-     *
-     * @return Group New group
-     * @throws Exception
-     */
-    public function group(string $name, int|string $id = null): Group {
-        $g = new Group($name, $id);
-        $this->insertIntoContainer($g->setSkip($this->allowSkip));
-        return $g;
-    }
+	/**
+	 * Creates a new group and adds it to round
+	 *
+	 * @param string          $name Group name
+	 * @param int|string|null $id   Group id - if omitted -> it is generated automatically as unique string
+	 *
+	 * @return Group New group
+	 * @throws Exception
+	 */
+	public function group(string $name, int|string $id = null): Group {
+		$g = new Group($name, $id);
+		$this->insertIntoContainer(
+			$g->setSkip($this->allowSkip)
+			  ->setIterationCount($this->getIterationCount())
+		);
+		return $g;
+	}
 
 	/**
 	 * Get all group ids
 	 *
 	 * @return string[]|int[] Array of ids
 	 */
-	public function getGroupsIds() : array {
+	public function getGroupsIds(): array {
 		$groups = $this->orderGroups();
-		return array_map(static function($a) {
+		return array_map(static function ($a) {
 			return $a->getId();
 		}, $groups);
 	}
@@ -96,9 +102,9 @@ class Round extends HierarchyBase implements WithSkipSetters, WithTeams, WithGro
 	 *
 	 * @return Group[] Sorted groups
 	 */
-	public function orderGroups() : array {
+	public function orderGroups(): array {
 		$groups = $this->getGroups();
-		usort($groups, static function($a, $b) {
+		usort($groups, static function ($a, $b) {
 			return $a->getOrder() - $b->getOrder();
 		});
 		return $groups;
@@ -110,7 +116,7 @@ class Round extends HierarchyBase implements WithSkipSetters, WithTeams, WithGro
 	 * @return array
 	 * @throws Exception
 	 */
-	public function genGames() : array {
+	public function genGames(): array {
 		foreach ($this->getGroups() as $group) {
 			$group->genGames();
 		}
@@ -122,7 +128,7 @@ class Round extends HierarchyBase implements WithSkipSetters, WithTeams, WithGro
 	 *
 	 * @return bool
 	 */
-	public function isPlayed() : bool {
+	public function isPlayed(): bool {
 		if (count($this->games) === 0) {
 			return false;
 		}
@@ -143,7 +149,7 @@ class Round extends HierarchyBase implements WithSkipSetters, WithTeams, WithGro
 	 * @throws Exception
 	 * @noinspection CallableParameterUseCaseInTypeContextInspection
 	 */
-	public function splitTeams(Group ...$groups) : Round {
+	public function splitTeams(Group ...$groups): Round {
 		if (count($groups) === 0) {
 			$groups = $this->getGroups();
 		}
@@ -156,33 +162,34 @@ class Round extends HierarchyBase implements WithSkipSetters, WithTeams, WithGro
 			shuffle($teams);
 		}
 
-        $split = ceil(count($teams) / count($groups));
-        foreach ($groups as $where) {
-            if (count($teams) > 0) {
-                $where->addTeam(...array_splice($teams, 0, $split));
-            }
-        }
-        return $this;
-    }
+		$split = ceil(count($teams) / count($groups));
+		foreach ($groups as $where) {
+			if (count($teams) > 0) {
+				$where->addTeam(...array_splice($teams, 0, $split));
+			}
+		}
+		return $this;
+	}
 
-    /**
-     * Split teams into its Groups
-     *
-     * @param Group ...$wheres
-     *
-     * @return WithTeamsInterface
-     * @throws Exception
-     * @noinspection CallableParameterUseCaseInTypeContextInspection
-     */
-    public function splitTeamsEvenly(Group ...$wheres): WithTeamsInterface {
-        if (count($wheres) === 0) {
-            $wheres = $this->getGroups();
-        }
+	/**
+	 * Split teams into its Groups
+	 *
+	 * @param Group ...$wheres
+	 *
+	 * @return WithTeamsInterface
+	 * @throws Exception
+	 * @noinspection CallableParameterUseCaseInTypeContextInspection
+	 */
+	public function splitTeamsEvenly(Group ...$wheres): WithTeamsInterface {
+		if (count($wheres) === 0) {
+			$wheres = $this->getGroups();
+		}
 
-        $teams = $this->getTeams(true, Constants::SEED);
-        if ($this::isSeeded($teams)) {
-            Functions::sortAlternate($teams);
-        } else {
+		$teams = $this->getTeams(true, Constants::SEED);
+		if ($this::isSeeded($teams)) {
+			Functions::sortAlternate($teams);
+		}
+		else {
 			shuffle($teams);
 		}
 
@@ -204,7 +211,7 @@ class Round extends HierarchyBase implements WithSkipSetters, WithTeams, WithGro
 	 * @return $this
 	 * @throws Exception
 	 */
-	public function progress(bool $blank = false) : Round {
+	public function progress(bool $blank = false): Round {
 		foreach ($this->getGroups() as $group) {
 			$group->progress($blank);
 		}
@@ -217,7 +224,7 @@ class Round extends HierarchyBase implements WithSkipSetters, WithTeams, WithGro
 	 * @return $this
 	 * @throws Exception
 	 */
-	public function simulate() : Round {
+	public function simulate(): Round {
 		Helpers\Simulator::simulateRound($this);
 		return $this;
 	}
@@ -231,7 +238,7 @@ class Round extends HierarchyBase implements WithSkipSetters, WithTeams, WithGro
 	 * @return $this
 	 * @throws Exception
 	 */
-	public function resetGames() : Round {
+	public function resetGames(): Round {
 		foreach ($this->getGroups() as $group) {
 			$group->resetGames();
 		}
@@ -243,7 +250,7 @@ class Round extends HierarchyBase implements WithSkipSetters, WithTeams, WithGro
 	 * @return array
 	 * @throws Exception
 	 */
-	public function jsonSerialize() : array {
+	public function jsonSerialize(): array {
 		return [
 			'id'     => $this->getId(),
 			'name'   => $this->getName(),
@@ -251,5 +258,15 @@ class Round extends HierarchyBase implements WithSkipSetters, WithTeams, WithGro
 			'teams'  => $this->teams->ids(),
 			'groups' => $this->queryGroups()->ids(),
 		];
+	}
+
+	public function setIterationCount(int $iterations): static {
+		$this->iterations = $iterations;
+
+		foreach ($this->getGroups() as $group) {
+			$group->setIterationCount($iterations);
+		}
+
+		return $this;
 	}
 }

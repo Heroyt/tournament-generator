@@ -5,6 +5,7 @@ namespace Helpers;
 use PHPUnit\Framework\TestCase;
 use TournamentGenerator\Constants;
 use TournamentGenerator\Group;
+use TournamentGenerator\Tournament;
 
 /**
  *
@@ -157,5 +158,145 @@ class GeneratorTest extends TestCase
 		$games = $group->genGames();
 
 		self::assertCount(6, $games);
+	}
+
+	public function getGroupGenerationIterationsParams(): array {
+		return [
+			[
+				1,
+				Constants::ROUND_ROBIN,
+				5,
+				10,
+			],
+			[
+				2,
+				Constants::ROUND_ROBIN,
+				5,
+				20,
+			],
+			[
+				1,
+				Constants::ROUND_TWO,
+				4,
+				2,
+			],
+			[
+				2,
+				Constants::ROUND_TWO,
+				4,
+				4,
+			],
+			[
+				1,
+				Constants::ROUND_ROBIN,
+				8,
+				28,
+			],
+			[
+				2,
+				Constants::ROUND_ROBIN,
+				8,
+				56,
+			],
+			[
+				3,
+				Constants::ROUND_ROBIN,
+				8,
+				84,
+			],
+			[
+				1,
+				Constants::ROUND_TWO,
+				8,
+				4,
+			],
+			[
+				2,
+				Constants::ROUND_TWO,
+				8,
+				8,
+			],
+			[
+				3,
+				Constants::ROUND_TWO,
+				8,
+				12,
+			],
+			[
+				1,
+				Constants::ROUND_SPLIT,
+				8,
+				12,
+			],
+			[
+				2,
+				Constants::ROUND_SPLIT,
+				8,
+				24,
+			],
+			[
+				3,
+				Constants::ROUND_SPLIT,
+				8,
+				36,
+			],
+		];
+	}
+
+	/**
+	 * @dataProvider getGroupGenerationIterationsParams
+	 *
+	 * @param int    $iterations
+	 * @param string $type
+	 * @param int    $teams
+	 * @param int    $expectedGames
+	 *
+	 * @return void
+	 */
+	public function testGroupGenerationWithIterations(int $iterations, string $type, int $teams, int $expectedGames): void {
+		$group = new Group('Group');
+		$group->setInGame(2)->setType($type)->setIterationCount($iterations);
+
+		for ($i = 1; $i <= $teams; $i++) {
+			$group->team('Team ' . $i);
+		}
+
+		$games = $group->genGames();
+		self::assertCount($expectedGames, $games);
+	}
+
+	public function testIterationGeneration(): void {
+		$tournament = new Tournament('Tournament');
+		$round = $tournament->round('Round');
+		$group = $round->group('Group');
+
+		for ($i = 1; $i <= 5; $i++) {
+			$group->team('Team ' . $i);
+		}
+
+		$tournament->setIterationCount(3);
+
+		$games = $tournament->genGamesSimulate();
+
+		self::assertCount(30, $games);
+
+		$iteration1Games = array_splice($games, 10, 10);
+		$iteration2Games = array_splice($games, 10, 10);
+
+		self::assertCount(10, $games);
+		self::assertCount(10, $iteration1Games);
+		self::assertCount(10, $iteration2Games);
+
+		foreach ($games as $key => $game) {
+			$iteration1Game = $iteration1Games[$key];
+			$iteration2Game = $iteration2Games[$key];
+
+			$teams = $game->getTeamsIds();
+			$iteration1Teams = $iteration1Game->getTeamsIds();
+			$iteration2Teams = $iteration2Game->getTeamsIds();
+
+			self::assertEquals($teams, $iteration2Teams);
+			self::assertEquals(array_reverse($teams), $iteration1Teams);
+		}
 	}
 }

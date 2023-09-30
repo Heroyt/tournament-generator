@@ -9,6 +9,7 @@ use TournamentGenerator\Group;
 use TournamentGenerator\Interfaces\WithGeneratorSetters;
 use TournamentGenerator\Interfaces\WithSkipSetters;
 use TournamentGenerator\Team;
+use TournamentGenerator\Traits\WithIterations;
 use TournamentGenerator\Traits\WithSkipSetters as WithSkipSettersTrait;
 
 /**
@@ -23,6 +24,7 @@ use TournamentGenerator\Traits\WithSkipSetters as WithSkipSettersTrait;
 class Generator implements WithGeneratorSetters, WithSkipSetters
 {
 	use WithSkipSettersTrait;
+	use WithIterations;
 
 	/** @var Group Group object */
 	private Group $group;
@@ -32,6 +34,7 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 	private int $inGame = 2;
 	/** @var int Maximum size of group before split */
 	private int $maxSize = 4;
+
 
 	/**
 	 * Generator constructor.
@@ -47,7 +50,7 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 	 *
 	 * @return string
 	 */
-	public function getType() : string {
+	public function getType(): string {
 		return $this->type;
 	}
 
@@ -59,12 +62,12 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 	 * @return $this
 	 * @throws Exception
 	 */
-	public function setType(string $type = Constants::ROUND_ROBIN) : Generator {
+	public function setType(string $type = Constants::ROUND_ROBIN): Generator {
 		if (in_array($type, Constants::GroupTypes, true)) {
 			$this->type = $type;
 		}
 		else {
-			throw new Exception('Unknown group type: '.$type);
+			throw new Exception('Unknown group type: ' . $type);
 		}
 		return $this;
 	}
@@ -74,7 +77,7 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 	 *
 	 * @return int
 	 */
-	public function getInGame() : int {
+	public function getInGame(): int {
 		return $this->inGame;
 	}
 
@@ -86,9 +89,9 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 	 * @return $this
 	 * @throws Exception
 	 */
-	public function setInGame(int $inGame) : Generator {
+	public function setInGame(int $inGame): Generator {
 		if ($inGame < 2 || $inGame > 4) {
-			throw new Exception('Expected 2,3 or 4 as inGame '.$inGame.' given');
+			throw new Exception('Expected 2,3 or 4 as inGame ' . $inGame . ' given');
 		}
 		$this->inGame = $inGame;
 		return $this;
@@ -99,7 +102,7 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 	 *
 	 * @return int
 	 */
-	public function getMaxSize() : int {
+	public function getMaxSize(): int {
 		return $this->maxSize;
 	}
 
@@ -111,9 +114,9 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 	 * @return $this
 	 * @throws Exception
 	 */
-	public function setMaxSize(int $size) : Generator {
+	public function setMaxSize(int $size): Generator {
 		if ($size < 2) {
-			throw new Exception('Max group size has to be at least 2, '.$size.' given');
+			throw new Exception('Max group size has to be at least 2, ' . $size . ' given');
 		}
 		$this->maxSize = $size;
 		return $this;
@@ -125,7 +128,7 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 	 * @return Game[] List of generated games
 	 * @throws Exception
 	 */
-	public function genGames() : array {
+	public function genGames(): array {
 		switch ($this->type) {
 			case Constants::ROUND_ROBIN:
 				$this->group->addGame(...$this->r_rGames());
@@ -148,7 +151,7 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 	 * @return Game[]
 	 * @throws Exception
 	 */
-	protected function r_rGames(array $teams = []) : array {
+	protected function r_rGames(array $teams = []): array {
 		$games = [];
 		if (count($teams) === 0) {
 			$teams = $this->group->getTeams();
@@ -164,11 +167,14 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 				$games = $this->r_r4Games($teams, $games);
 				break;
 		}
+
+		$this->copyGameIterations($games);
+
 		return $games;
 	}
 
 	/**
-	 * Generate games for round robin and 2 teams in one game
+	 * Generate games for round-robin and 2 teams in one game
 	 *
 	 * @param array $teams
 	 * @param Group $group
@@ -176,7 +182,7 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 	 * @return Game[]
 	 * @throws Exception
 	 */
-	public static function circle_genGames2(Group $group, array $teams = []) : array {
+	public static function circle_genGames2(Group $group, array $teams = []): array {
 
 		if (count($teams) % 2 !== 0) {
 			$teams[] = Constants::DUMMY_TEAM;
@@ -203,7 +209,7 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 	 * @return Game[]
 	 * @throws Exception
 	 */
-	public static function circle_saveBracket(array $teams, Group $group) : array {
+	public static function circle_saveBracket(array $teams, Group $group): array {
 
 		$bracket = [];
 
@@ -232,7 +238,7 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 	 *
 	 * @return array
 	 */
-	public static function circle_rotateBracket(array $teams) : array {
+	public static function circle_rotateBracket(array $teams): array {
 
 		$first = array_shift($teams); // THE FIRST TEAM REMAINS FIRST
 		$last = array_shift($teams);  // THE SECOND TEAM MOVES TO LAST PLACE
@@ -251,7 +257,7 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 	 * @return array
 	 * @throws Exception
 	 */
-	protected function r_r3Games(array $teams, array &$games, Team $lockedTeam1 = null) : array {
+	protected function r_r3Games(array $teams, array &$games, Team $lockedTeam1 = null): array {
 		$teamsB = $teams;
 		$generatedGames = [];
 		while (count($teamsB) >= 3) {
@@ -278,7 +284,7 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 	 * @return array
 	 * @throws Exception
 	 */
-	protected function r_r4Games(array $teams, array &$games) : array {
+	protected function r_r4Games(array $teams, array &$games): array {
 		$teamsB = $teams;
 		$lockedTeam1 = array_shift($teamsB);
 		while (count($teamsB) >= 4) {
@@ -290,6 +296,35 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 	}
 
 	/**
+	 * Copy games for each set iteration
+	 *
+	 * @param Game[] $games
+	 *
+	 * @return Game[]
+	 * @throws Exception
+	 */
+	private function copyGameIterations(array &$games): array {
+		if (($iterations = $this->getIterationCount()) < 2) {
+			return [];
+		}
+		$originalGames = $games;
+		$newGames = [];
+		// Start from 1st iteration - 0th iteration is already generated
+		for ($i = 1; $i < $iterations; $i++) {
+			// Copy all games and flip the teams for every second iteration (starting from 0)
+			foreach ($originalGames as $game) {
+				$games[] = $newGame = new Game(
+				// Flip teams every 2nd iteration
+					$i % 2 === 0 ? $game->getTeams() : array_reverse($game->getTeams()),
+					$this->group
+				);
+				$newGames[] = $newGame;
+			}
+		}
+		return $newGames;
+	}
+
+	/**
 	 * Generates games for teams, where a team plays only against one other team
 	 *
 	 * @param array $teams
@@ -297,7 +332,7 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 	 * @return Generator
 	 * @throws Exception
 	 */
-	protected function two_twoGames(array $teams = []) : Generator {
+	protected function two_twoGames(array $teams = []): Generator {
 		if (count($teams) === 0) {
 			$teams = $this->group->getTeams();
 		}
@@ -309,7 +344,14 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 		$teams = $this->saveTwoTwoGames($teams);
 
 		if (!$this->allowSkip && count($discard) > 0) {
-			throw new Exception('Couldn\'t make games with all teams. Expected k*'.$this->inGame.' teams '.$count.' teams given - discarting '.count($discard).' teams ('.implode(', ', $discard).') in group '.$this->group.' - allow skip '.($this->allowSkip ? 'True' : 'False'));
+			throw new Exception(
+				'Couldn\'t make games with all teams. Expected k*' . $this->inGame . ' teams ' . $count . ' teams given - discarting ' . count(
+					$discard
+				) . ' teams (' . implode(
+					', ',
+					$discard
+				) . ') in group ' . $this->group . ' - allow skip ' . ($this->allowSkip ? 'True' : 'False')
+			);
 		}
 		return $this;
 	}
@@ -324,14 +366,17 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 	 * @return array
 	 * @throws Exception
 	 */
-	protected function saveTwoTwoGames(array $teams) : array {
+	protected function saveTwoTwoGames(array $teams): array {
+		$games = [];
 		while (count($teams) > 0) {
 			$tInGame = [];
 			for ($i = 0; $i < $this->inGame; $i++) {
 				$tInGame[] = array_shift($teams);
 			}
-			$this->group->game($tInGame);
+			$games[] = $this->group->game($tInGame);
 		}
+		$newGames = $this->copyGameIterations($games);
+		$this->group->addGame(...$newGames);
 		return $teams;
 	}
 
@@ -343,7 +388,7 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 	 * @return Generator
 	 * @throws Exception
 	 */
-	protected function cond_splitGames(array $teams = []) : Generator {
+	protected function cond_splitGames(array $teams = []): Generator {
 		if (count($teams) === 0) {
 			$teams = $this->group->getTeams();
 		}
@@ -353,7 +398,7 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 			$games = [];
 
 			// Split teams into chunks of maximum size
-			$groups = array_chunk($teams, (int) ceil($count / ceil($count / $this->maxSize)));
+			$groups = array_chunk($teams, (int)ceil($count / ceil($count / $this->maxSize)));
 			// Generate games for each chunk
 			foreach ($groups as $group) {
 				$games[] = $this->r_rGames($group);
@@ -377,7 +422,7 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 	 *
 	 * @throws Exception
 	 */
-	protected function fillGamesFromChunks(array $games) : void {
+	protected function fillGamesFromChunks(array $games): void {
 		$gameCount = Functions::nestedCount($games);
 		while ($gameCount > 0) {
 			foreach ($games as $key => $group) {
@@ -399,8 +444,8 @@ class Generator implements WithGeneratorSetters, WithSkipSetters
 	 * @return array
 	 * @throws Exception
 	 */
-	public function orderGames() : array {
-        return (new Sorter\GameSorter($this->group))->sort($this->group->getGames());
+	public function orderGames(): array {
+		return (new Sorter\GameSorter($this->group))->sort($this->group->getGames());
 	}
 
 }

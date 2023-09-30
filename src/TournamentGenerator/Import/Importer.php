@@ -9,6 +9,7 @@ use TournamentGenerator\Base;
 use TournamentGenerator\Category;
 use TournamentGenerator\Group;
 use TournamentGenerator\Interfaces\WithGames;
+use TournamentGenerator\Interfaces\WithIterationSetters;
 use TournamentGenerator\Interfaces\WithSkipSetters;
 use TournamentGenerator\Round;
 use TournamentGenerator\Team;
@@ -142,6 +143,9 @@ class Importer
 				case 'skip':
 					$tournament->setSkip($value);
 					break;
+				case 'iteration':
+					$tournament->setIterationCount($value);
+					break;
 				case 'timing':
 					self::setTiming($tournament, (array) $value);
 					break;
@@ -257,6 +261,18 @@ class Importer
 	}
 
 	/**
+	 * Set skip setting to an object
+	 *
+	 * @param WithIterationSetters $object
+	 * @param array                $setting
+	 */
+	protected static function setIterations(WithIterationSetters $object, array $setting): void {
+		if (isset($setting['iterations'])) {
+			$object->setIterationCount($setting['iterations']);
+		}
+	}
+
+	/**
 	 * Create round objects
 	 *
 	 * @param array $rounds
@@ -272,6 +288,7 @@ class Importer
 			}
 
 			self::setSkip($round, $setting);
+			self::setIterations($round, $setting);
 
 			// Set parent if exists
 			if (isset(self::$rounds[$setting['id'] ?? $round->getId()])) {
@@ -302,6 +319,7 @@ class Importer
 
 			self::setSkip($group, $setting);
 			self::setGroup($group, $setting);
+			self::setIterations($group, $setting);
 
 			// Set parent if exists
 			if (isset(self::$groups[$setting['id'] ?? $group->getId()])) {

@@ -78,6 +78,7 @@ class SetupExporter extends ExporterBase
             'type' => $this->object instanceof Preset ? get_class($this->object) : 'general',
             'name' => $this->object->getName(),
             'skip' => $this->object->getSkip(),
+            'iterations' => $this->object->getIterationCount(),
             'timing' => (object)[
                 'play' => $this->object->getPlay(),
                 'gameWait' => $this->object->getGameWait(),
@@ -170,6 +171,7 @@ class SetupExporter extends ExporterBase
             'groups' => $round instanceof WithGroups ? $round->queryGroups()->ids()->get() : [],
             'teams' => $round instanceof WithTeams ? $round->getTeamContainer()->ids()->unique()->get() : [],
             'games' => $round instanceof WithGames ? $round->getGameContainer()->ids()->get() : [],
+            'iterations' => $round->getIterationCount(),
         ];
     }
 
@@ -212,6 +214,7 @@ class SetupExporter extends ExporterBase
             'name' => $group->getName(),
             'type' => $group->getType(),
             'skip' => $group->getSkip(),
+            'iterations' => $group->getIterationCount(),
             'points' => (object)[
                 'win' => $group->getWinPoints(),
                 'loss' => $group->getLostPoints(),

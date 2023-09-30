@@ -131,6 +131,7 @@ class ExportImportTest extends TestCase
 				'type'       => 'general',
 				'name'       => 'Tournament',
 				'skip'       => false,
+				'iterations' => 1,
 				'timing'     => (object) [
 					'play'         => 0,
 					'gameWait'     => 0,
@@ -150,6 +151,7 @@ class ExportImportTest extends TestCase
 					'id'     => 1,
 					'name'   => 'Round 1',
 					'skip'   => false,
+					'iterations' => 1,
 					'played' => true,
 					'groups' => [1, 2],
 					'teams'  => [0, 1, 2, 3, 4, 5, 6, 7],
@@ -159,6 +161,7 @@ class ExportImportTest extends TestCase
 					'id'     => 2,
 					'name'   => 'Round 2',
 					'skip'   => false,
+					'iterations' => 1,
 					'played' => false,
 					'groups' => [3, 4],
 					'teams'  => [],
@@ -171,6 +174,7 @@ class ExportImportTest extends TestCase
 					'name'    => 'Group 1',
 					'type'    => Constants::ROUND_ROBIN,
 					'skip'    => false,
+					'iterations' => 1,
 					'points'  => (object) [
 						'win'         => 3,
 						'loss'        => 0,
@@ -190,6 +194,7 @@ class ExportImportTest extends TestCase
 					'name'    => 'Group 2',
 					'type'    => Constants::ROUND_ROBIN,
 					'skip'    => false,
+					'iterations' => 1,
 					'points'  => (object) [
 						'win'         => 3,
 						'loss'        => 0,
@@ -209,6 +214,7 @@ class ExportImportTest extends TestCase
 					'name'    => 'Group 3',
 					'type'    => Constants::ROUND_ROBIN,
 					'skip'    => false,
+					'iterations' => 1,
 					'points'  => (object) [
 						'win'         => 3,
 						'loss'        => 0,
@@ -228,6 +234,7 @@ class ExportImportTest extends TestCase
 					'name'    => 'Group 4',
 					'type'    => Constants::ROUND_ROBIN,
 					'skip'    => false,
+					'iterations' => 1,
 					'points'  => (object) [
 						'win'         => 3,
 						'loss'        => 0,

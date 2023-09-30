@@ -16,13 +16,13 @@ use TournamentGenerator\Tournament;
 class ExporterTest extends TestCase
 {
 
-	public function testInvalidModifier() : void {
+	public function testInvalidModifier(): void {
 		$this->expectException(Error::class);
-		$this->expectExceptionMessage('Call to undefined method '.Exporter::class.'::invalidModifier()');
+		$this->expectExceptionMessage('Call to undefined method ' . Exporter::class . '::invalidModifier()');
 		Exporter::start(new Tournament('Tournament'))->invalidModifier();
 	}
 
-	public function getBasicTournamentData() : array {
+	public function getBasicTournamentData(): array {
 		return [
 			$this->tournamentSetup(),
 			$this->tournamentSetup(true),
@@ -38,7 +38,7 @@ class ExporterTest extends TestCase
 	 * @return array
 	 * @throws Exception
 	 */
-	private function tournamentSetup(bool $withSecondRound = false, bool $withScores = false) : array {
+	private function tournamentSetup(bool $withSecondRound = false, bool $withScores = false): array {
 		$tournament = new Tournament('Tournament');
 		$round1 = $tournament->round('Round 1', 1);
 		$group1 = $round1->group('Group 1', 1);
@@ -57,71 +57,71 @@ class ExporterTest extends TestCase
 
 		$teams = [];
 		for ($i = 0; $i < 4; $i++) {
-			$teams[] = $group1->team('Team '.$i, $i);
-			$expectedTeams[$i] = (object) ['name' => 'Team '.$i, 'id' => $i];
+			$teams[] = $group1->team('Team ' . $i, $i);
+			$expectedTeams[$i] = (object)['name' => 'Team ' . $i, 'id' => $i];
 		}
 		for ($i = 4; $i < 8; $i++) {
-			$teams[] = $group2->team('Team '.$i, $i);
-			$expectedTeams[$i] = (object) ['name' => 'Team '.$i, 'id' => $i];
+			$teams[] = $group2->team('Team ' . $i, $i);
+			$expectedTeams[$i] = (object)['name' => 'Team ' . $i, 'id' => $i];
 		}
 
 		$expectedGames = [
-			(object) [
+			(object)[
 				'id'     => 1,
 				'teams'  => [0, 1],
 				'scores' => [],
 			],
-			(object) [
+			(object)[
 				'id'     => 2,
 				'teams'  => [2, 3],
 				'scores' => [],
 			],
-			(object) [
+			(object)[
 				'id'     => 3,
 				'teams'  => [0, 2],
 				'scores' => [],
 			],
-			(object) [
+			(object)[
 				'id'     => 4,
 				'teams'  => [1, 3],
 				'scores' => [],
 			],
-			(object) [
+			(object)[
 				'id'     => 5,
 				'teams'  => [0, 3],
 				'scores' => [],
 			],
-			(object) [
+			(object)[
 				'id'     => 6,
 				'teams'  => [1, 2],
 				'scores' => [],
 			],
-			(object) [
+			(object)[
 				'id'     => 7,
 				'teams'  => [4, 5],
 				'scores' => [],
 			],
-			(object) [
+			(object)[
 				'id'     => 8,
 				'teams'  => [6, 7],
 				'scores' => [],
 			],
-			(object) [
+			(object)[
 				'id'     => 9,
 				'teams'  => [4, 6],
 				'scores' => [],
 			],
-			(object) [
+			(object)[
 				'id'     => 10,
 				'teams'  => [5, 7],
 				'scores' => [],
 			],
-			(object) [
+			(object)[
 				'id'     => 11,
 				'teams'  => [4, 7],
 				'scores' => [],
 			],
-			(object) [
+			(object)[
 				'id'     => 12,
 				'teams'  => [5, 6],
 				'scores' => [],
@@ -129,11 +129,12 @@ class ExporterTest extends TestCase
 		];
 
 		$expectedSetup = [
-			'tournament'   => (object) [
+			'tournament'   => (object)[
 				'type'       => 'general',
 				'name'       => 'Tournament',
 				'skip'       => false,
-				'timing'     => (object) [
+				'iterations' => 1,
+				'timing'     => (object)[
 					'play'         => 0,
 					'gameWait'     => 0,
 					'categoryWait' => 0,
@@ -148,19 +149,21 @@ class ExporterTest extends TestCase
 			],
 			'categories'   => [],
 			'rounds'       => [
-				1 => (object) [
+				1 => (object)[
 					'id'     => 1,
 					'name'   => 'Round 1',
 					'skip'   => false,
+					'iterations' => 1,
 					'played' => true,
 					'groups' => [1, 2],
 					'teams'  => [0, 1, 2, 3, 4, 5, 6, 7],
 					'games'  => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
 				],
-				2 => (object) [
+				2 => (object)[
 					'id'     => 2,
 					'name'   => 'Round 2',
 					'skip'   => false,
+					'iterations' => 1,
 					'played' => false,
 					'groups' => [3, 4],
 					'teams'  => [],
@@ -168,12 +171,13 @@ class ExporterTest extends TestCase
 				],
 			],
 			'groups'       => [
-				1 => (object) [
+				1 => (object)[
 					'id'      => 1,
 					'name'    => 'Group 1',
 					'type'    => Constants::ROUND_ROBIN,
 					'skip'    => false,
-					'points'  => (object) [
+					'iterations' => 1,
+					'points'     => (object)[
 						'win'         => 3,
 						'loss'        => 0,
 						'draw'        => 1,
@@ -187,12 +191,13 @@ class ExporterTest extends TestCase
 					'teams'   => [0, 1, 2, 3],
 					'games'   => [1, 2, 3, 4, 5, 6],
 				],
-				2 => (object) [
+				2 => (object)[
 					'id'      => 2,
 					'name'    => 'Group 2',
 					'type'    => Constants::ROUND_ROBIN,
 					'skip'    => false,
-					'points'  => (object) [
+					'iterations' => 1,
+					'points'     => (object)[
 						'win'         => 3,
 						'loss'        => 0,
 						'draw'        => 1,
@@ -206,12 +211,13 @@ class ExporterTest extends TestCase
 					'teams'   => [4, 5, 6, 7],
 					'games'   => [7, 8, 9, 10, 11, 12],
 				],
-				3 => (object) [
+				3 => (object)[
 					'id'      => 3,
 					'name'    => 'Group 3',
 					'type'    => Constants::ROUND_ROBIN,
 					'skip'    => false,
-					'points'  => (object) [
+					'iterations' => 1,
+					'points'     => (object)[
 						'win'         => 3,
 						'loss'        => 0,
 						'draw'        => 1,
@@ -225,12 +231,13 @@ class ExporterTest extends TestCase
 					'teams'   => [],
 					'games'   => [],
 				],
-				4 => (object) [
+				4 => (object)[
 					'id'      => 4,
 					'name'    => 'Group 4',
 					'type'    => Constants::ROUND_ROBIN,
 					'skip'    => false,
-					'points'  => (object) [
+					'iterations' => 1,
+					'points'     => (object)[
 						'win'         => 3,
 						'loss'        => 0,
 						'draw'        => 1,
@@ -246,63 +253,77 @@ class ExporterTest extends TestCase
 				],
 			],
 			'progressions' => [
-				(object) [
-                    'from' => 1,
-                    'to' => 3,
-                    'offset' => 0,
-                    'length' => 2,
-                    'progressed' => false,
-                    'filters' => [],
-                    'points' => null,
-                ],
 				(object)[
-                    'from' => 1,
-                    'to' => 4,
-                    'offset' => -2,
-                    'length' => null,
-                    'progressed' => false,
-                    'filters' => [],
-                    'points' => null,
-                ],
+					'from'       => 1,
+					'to'         => 3,
+					'offset'     => 0,
+					'length'     => 2,
+					'progressed' => false,
+					'filters'    => [],
+					'points'     => null,
+				],
 				(object)[
-                    'from' => 2,
-                    'to' => 3,
-                    'offset' => 0,
-                    'length' => 2,
-                    'progressed' => false,
-                    'filters' => [],
-                    'points' => null,
-                ],
+					'from'       => 1,
+					'to'         => 4,
+					'offset'     => -2,
+					'length'     => null,
+					'progressed' => false,
+					'filters'    => [],
+					'points'     => null,
+				],
 				(object)[
-                    'from' => 2,
-                    'to' => 4,
-                    'offset' => -2,
-                    'length' => null,
-                    'progressed' => false,
-                    'filters' => [],
-                    'points' => null,
-                ],
+					'from'       => 2,
+					'to'         => 3,
+					'offset'     => 0,
+					'length'     => 2,
+					'progressed' => false,
+					'filters'    => [],
+					'points'     => null,
+				],
+				(object)[
+					'from'       => 2,
+					'to'         => 4,
+					'offset'     => -2,
+					'length'     => null,
+					'progressed' => false,
+					'filters'    => [],
+					'points'     => null,
+				],
 			],
 		];
 
-		$expectedGames[0]->scores = $group1->game([$teams[0], $teams[1]])->setResults([0 => 100, 1 => 200])->getResults();
-		$expectedGames[1]->scores = $group1->game([$teams[2], $teams[3]])->setResults([2 => 000, 3 => 500])->getResults();
-		$expectedGames[2]->scores = $group1->game([$teams[0], $teams[2]])->setResults([0 => 300, 2 => 200])->getResults();
-		$expectedGames[3]->scores = $group1->game([$teams[1], $teams[3]])->setResults([1 => 200, 3 => 200])->getResults();
-		$expectedGames[4]->scores = $group1->game([$teams[0], $teams[3]])->setResults([0 => 800, 3 => 200])->getResults();
-		$expectedGames[5]->scores = $group1->game([$teams[1], $teams[2]])->setResults([1 => 000, 2 => 100])->getResults();
+		$expectedGames[0]->scores = $group1->game([$teams[0], $teams[1]])->setResults([0 => 100, 1 => 200])->getResults(
+		);
+		$expectedGames[1]->scores = $group1->game([$teams[2], $teams[3]])->setResults([2 => 000, 3 => 500])->getResults(
+		);
+		$expectedGames[2]->scores = $group1->game([$teams[0], $teams[2]])->setResults([0 => 300, 2 => 200])->getResults(
+		);
+		$expectedGames[3]->scores = $group1->game([$teams[1], $teams[3]])->setResults([1 => 200, 3 => 200])->getResults(
+		);
+		$expectedGames[4]->scores = $group1->game([$teams[0], $teams[3]])->setResults([0 => 800, 3 => 200])->getResults(
+		);
+		$expectedGames[5]->scores = $group1->game([$teams[1], $teams[2]])->setResults([1 => 000, 2 => 100])->getResults(
+		);
 
 		// #1 - Team 0 - 1200 Score, 6 points, 2 wins, 1 loss  , 0 draws
 		// #3 - Team 1 -  400 Score, 4 points, 1 wins, 1 loss  , 1 draw
 		// #4 - Team 2 -  300 Score, 3 points, 1 win , 2 losses, 0 draws
 		// #2 - Team 3 -  900 Score, 4 points, 1 win , 1 loss  , 1 draw
 
-		$expectedGames[6]->scores = $group2->game([$teams[4], $teams[5]])->setResults([4 => 100, 5 => 100])->getResults();
-		$expectedGames[7]->scores = $group2->game([$teams[6], $teams[7]])->setResults([6 => 000, 7 => 500])->getResults();
-		$expectedGames[8]->scores = $group2->game([$teams[4], $teams[6]])->setResults([4 => 100, 6 => 100])->getResults();
-		$expectedGames[9]->scores = $group2->game([$teams[5], $teams[7]])->setResults([5 => 800, 7 => 000])->getResults();
-		$expectedGames[10]->scores = $group2->game([$teams[4], $teams[7]])->setResults([4 => 600, 7 => 200])->getResults();
-		$expectedGames[11]->scores = $group2->game([$teams[5], $teams[6]])->setResults([5 => 300, 6 => 200])->getResults();
+		$expectedGames[6]->scores = $group2->game([$teams[4], $teams[5]])->setResults([4 => 100, 5 => 100])->getResults(
+		);
+		$expectedGames[7]->scores = $group2->game([$teams[6], $teams[7]])->setResults([6 => 000, 7 => 500])->getResults(
+		);
+		$expectedGames[8]->scores = $group2->game([$teams[4], $teams[6]])->setResults([4 => 100, 6 => 100])->getResults(
+		);
+		$expectedGames[9]->scores = $group2->game([$teams[5], $teams[7]])->setResults([5 => 800, 7 => 000])->getResults(
+		);
+		$expectedGames[10]->scores = $group2->game([$teams[4], $teams[7]])
+		                                    ->setResults([4 => 600, 7 => 200])
+		                                    ->getResults();
+		$expectedGames[11]->scores = $group2->game([$teams[5], $teams[6]])
+		                                    ->setResults([5 => 300, 6 => 200])
+		                                    ->getResults();
 
 		// #2 - Team 4 -  800 Score, 5 points, 1 win , 0 losses, 2 draws
 		// #1 - Team 5 - 1200 Score, 7 points, 2 wins, 0 losses, 1 draw
@@ -477,62 +498,62 @@ class ExporterTest extends TestCase
 			];
 
 			$expectedGames = array_merge($expectedGames, [
-				(object) [
+				(object)[
 					'id'     => 13,
 					'teams'  => [0, 4],
 					'scores' => [],
 				],
-				(object) [
+				(object)[
 					'id'     => 14,
 					'teams'  => [5, 3],
 					'scores' => [],
 				],
-				(object) [
+				(object)[
 					'id'     => 15,
 					'teams'  => [0, 5],
 					'scores' => [],
 				],
-				(object) [
+				(object)[
 					'id'     => 16,
 					'teams'  => [4, 3],
 					'scores' => [],
 				],
-				(object) [
+				(object)[
 					'id'     => 17,
 					'teams'  => [0, 3],
 					'scores' => [],
 				],
-				(object) [
+				(object)[
 					'id'     => 18,
 					'teams'  => [4, 5],
 					'scores' => [],
 				],
-				(object) [
+				(object)[
 					'id'     => 19,
 					'teams'  => [1, 2],
 					'scores' => [],
 				],
-				(object) [
+				(object)[
 					'id'     => 20,
 					'teams'  => [6, 7],
 					'scores' => [],
 				],
-				(object) [
+				(object)[
 					'id'     => 21,
 					'teams'  => [1, 6],
 					'scores' => [],
 				],
-				(object) [
+				(object)[
 					'id'     => 22,
 					'teams'  => [2, 7],
 					'scores' => [],
 				],
-				(object) [
+				(object)[
 					'id'     => 23,
 					'teams'  => [1, 7],
 					'scores' => [],
 				],
-				(object) [
+				(object)[
 					'id'     => 24,
 					'teams'  => [2, 6],
 					'scores' => [],
@@ -540,12 +561,24 @@ class ExporterTest extends TestCase
 			]);
 
 			// Group 3 teams: 0, 3, 4, 5
-			$expectedGames[12]->scores = $group3->game([$teams[0], $teams[4]])->setResults([0 => 100, 4 => 200])->getResults();
-			$expectedGames[13]->scores = $group3->game([$teams[5], $teams[3]])->setResults([5 => 000, 3 => 500])->getResults();
-			$expectedGames[14]->scores = $group3->game([$teams[0], $teams[5]])->setResults([0 => 300, 5 => 200])->getResults();
-			$expectedGames[15]->scores = $group3->game([$teams[4], $teams[3]])->setResults([4 => 200, 3 => 200])->getResults();
-			$expectedGames[16]->scores = $group3->game([$teams[0], $teams[3]])->setResults([0 => 800, 3 => 200])->getResults();
-			$expectedGames[17]->scores = $group3->game([$teams[4], $teams[5]])->setResults([4 => 000, 5 => 100])->getResults();
+			$expectedGames[12]->scores = $group3->game([$teams[0], $teams[4]])
+			                                    ->setResults([0 => 100, 4 => 200])
+			                                    ->getResults();
+			$expectedGames[13]->scores = $group3->game([$teams[5], $teams[3]])
+			                                    ->setResults([5 => 000, 3 => 500])
+			                                    ->getResults();
+			$expectedGames[14]->scores = $group3->game([$teams[0], $teams[5]])
+			                                    ->setResults([0 => 300, 5 => 200])
+			                                    ->getResults();
+			$expectedGames[15]->scores = $group3->game([$teams[4], $teams[3]])
+			                                    ->setResults([4 => 200, 3 => 200])
+			                                    ->getResults();
+			$expectedGames[16]->scores = $group3->game([$teams[0], $teams[3]])
+			                                    ->setResults([0 => 800, 3 => 200])
+			                                    ->getResults();
+			$expectedGames[17]->scores = $group3->game([$teams[4], $teams[5]])
+			                                    ->setResults([4 => 000, 5 => 100])
+			                                    ->getResults();
 
 			// #1 - Team 0 - 1200 Score, 6 points, 2 wins, 1 loss  , 0 draws
 			// #3 - Team 4 -  400 Score, 4 points, 1 win , 1 loss  , 1 draw
@@ -553,12 +586,24 @@ class ExporterTest extends TestCase
 			// #2 - Team 3 -  900 Score, 4 points, 1 win , 1 loss  , 1 draw
 
 			// Group 4 teams: 1, 2, 6, 7
-			$expectedGames[18]->scores = $group4->game([$teams[1], $teams[2]])->setResults([1 => 100, 2 => 100])->getResults();
-			$expectedGames[19]->scores = $group4->game([$teams[6], $teams[7]])->setResults([6 => 000, 7 => 500])->getResults();
-			$expectedGames[20]->scores = $group4->game([$teams[1], $teams[6]])->setResults([1 => 100, 6 => 100])->getResults();
-			$expectedGames[21]->scores = $group4->game([$teams[2], $teams[7]])->setResults([2 => 800, 7 => 000])->getResults();
-			$expectedGames[22]->scores = $group4->game([$teams[1], $teams[7]])->setResults([1 => 600, 7 => 200])->getResults();
-			$expectedGames[23]->scores = $group4->game([$teams[2], $teams[6]])->setResults([2 => 300, 6 => 200])->getResults();
+			$expectedGames[18]->scores = $group4->game([$teams[1], $teams[2]])
+			                                    ->setResults([1 => 100, 2 => 100])
+			                                    ->getResults();
+			$expectedGames[19]->scores = $group4->game([$teams[6], $teams[7]])
+			                                    ->setResults([6 => 000, 7 => 500])
+			                                    ->getResults();
+			$expectedGames[20]->scores = $group4->game([$teams[1], $teams[6]])
+			                                    ->setResults([1 => 100, 6 => 100])
+			                                    ->getResults();
+			$expectedGames[21]->scores = $group4->game([$teams[2], $teams[7]])
+			                                    ->setResults([2 => 800, 7 => 000])
+			                                    ->getResults();
+			$expectedGames[22]->scores = $group4->game([$teams[1], $teams[7]])
+			                                    ->setResults([1 => 600, 7 => 200])
+			                                    ->getResults();
+			$expectedGames[23]->scores = $group4->game([$teams[2], $teams[6]])
+			                                    ->setResults([2 => 300, 6 => 200])
+			                                    ->getResults();
 
 			// #2 - Team 1 -  800 Score, 5 points, 1 win , 0 losses, 2 draws
 			// #1 - Team 2 - 1200 Score, 7 points, 2 wins, 0 losses, 1 draw
@@ -656,7 +701,7 @@ class ExporterTest extends TestCase
 		return [$tournament, $expectedTeams, $expectedGames, $expectedSetup];
 	}
 
-	public function getModifiedTournamentData() : array {
+	public function getModifiedTournamentData(): array {
 		return [
 			$this->tournamentSetup(false, true),
 			$this->tournamentSetup(true, true),
@@ -666,7 +711,7 @@ class ExporterTest extends TestCase
 	/**
 	 * @dataProvider getBasicTournamentData
 	 */
-	public function testBasicExport(Tournament $tournament, array $expectedTeams, array $expectedGames) : void {
+	public function testBasicExport(Tournament $tournament, array $expectedTeams, array $expectedGames): void {
 
 		$export1 = Exporter::export($tournament);
 		$export2 = Exporter::start($tournament)->get();
@@ -683,7 +728,7 @@ class ExporterTest extends TestCase
 	/**
 	 * @dataProvider getBasicTournamentData
 	 */
-	public function testBasicExportWithSetup(Tournament $tournament, array $expectedTeams, array $expectedGames, array $expectedSetup) : void {
+	public function testBasicExportWithSetup(Tournament $tournament, array $expectedTeams, array $expectedGames, array $expectedSetup): void {
 
 		$export = Exporter::start($tournament)->withSetup()->get();
 		//print_r($export);
@@ -702,14 +747,14 @@ class ExporterTest extends TestCase
 	/**
 	 * @dataProvider getModifiedTournamentData
 	 */
-	public function testModifiedExport(Tournament $tournament, array $expectedTeams, array $expectedGames) : void {
+	public function testModifiedExport(Tournament $tournament, array $expectedTeams, array $expectedGames): void {
 
 		$export = Exporter::start($tournament)
-											->withScores()
-											->get();
+		                  ->withScores()
+		                  ->get();
 		$export2 = $tournament->export()
-											->withScores()
-											->get();
+		                      ->withScores()
+		                      ->get();
 
 		self::assertEquals($expectedTeams, $export['teams']);
 		self::assertEquals($expectedGames, $export['games']);
@@ -717,7 +762,7 @@ class ExporterTest extends TestCase
 		self::assertEquals($expectedGames, $export2['games']);
 	}
 
-	public function testCategoryRoundsGroupsExport() : void {
+	public function testCategoryRoundsGroupsExport(): void {
 		$category = new Category('Category', 0);
 		$round1 = $category->round('Round 1', 1);
 		$round2 = $category->round('Round 2', 2);
@@ -725,28 +770,28 @@ class ExporterTest extends TestCase
 		$group2 = $round2->group('Group 2', 2);
 		$teams = [];
 		for ($i = 0; $i < 4; $i++) {
-			$group1->team('Team '.$i, $i);
-			$teams[] = (object) [
+			$group1->team('Team ' . $i, $i);
+			$teams[] = (object)[
 				'id'   => $i,
-				'name' => 'Team '.$i,
+				'name' => 'Team ' . $i,
 			];
 		}
 		for ($i = 4; $i < 8; $i++) {
-			$group2->team('Team '.$i, $i);
-			$teams[] = (object) [
+			$group2->team('Team ' . $i, $i);
+			$teams[] = (object)[
 				'id'   => $i,
-				'name' => 'Team '.$i,
+				'name' => 'Team ' . $i,
 			];
 		}
-		$games1 = array_map(static function(Game $game) {
-			return (object) [
+		$games1 = array_map(static function (Game $game) {
+			return (object)[
 				'id'     => $game->getId(),
 				'teams'  => $game->getTeamsIds(),
 				'scores' => [],
 			];
 		}, $group1->genGames());
-		$games2 = array_map(static function(Game $game) {
-			return (object) [
+		$games2 = array_map(static function (Game $game) {
+			return (object)[
 				'id'     => $game->getId(),
 				'teams'  => $game->getTeamsIds(),
 				'scores' => [],
@@ -755,52 +800,52 @@ class ExporterTest extends TestCase
 		$export = Exporter::export($category);
 		$export2 = $category->export()->get();
 		self::assertEquals([
-												 'teams' => $teams,
-												 'games' => array_merge($games1, $games2),
-											 ], $export);
+			                   'teams' => $teams,
+			                   'games' => array_merge($games1, $games2),
+		                   ], $export);
 		self::assertEquals([
-												 'teams' => $teams,
-												 'games' => array_merge($games1, $games2),
-											 ], $export2);
+			                   'teams' => $teams,
+			                   'games' => array_merge($games1, $games2),
+		                   ], $export2);
 		$export = Exporter::export($round1);
 		$export2 = $round1->export()->get();
 		self::assertEquals([
-												 'teams' => array_slice($teams, 0, 4),
-												 'games' => $games1,
-											 ], $export);
+			                   'teams' => array_slice($teams, 0, 4),
+			                   'games' => $games1,
+		                   ], $export);
 		self::assertEquals([
-												 'teams' => array_slice($teams, 0, 4),
-												 'games' => $games1,
-											 ], $export2);
+			                   'teams' => array_slice($teams, 0, 4),
+			                   'games' => $games1,
+		                   ], $export2);
 		$export = Exporter::export($round2);
 		$export2 = $round2->export()->get();
 		self::assertEquals([
-												 'teams' => array_slice($teams, -4),
-												 'games' => $games2,
-											 ], $export);
+			                   'teams' => array_slice($teams, -4),
+			                   'games' => $games2,
+		                   ], $export);
 		self::assertEquals([
-												 'teams' => array_slice($teams, -4),
-												 'games' => $games2,
-											 ], $export2);
+			                   'teams' => array_slice($teams, -4),
+			                   'games' => $games2,
+		                   ], $export2);
 		$export = Exporter::export($group1);
 		$export2 = $group1->export()->get();
 		self::assertEquals([
-												 'teams' => array_slice($teams, 0, 4),
-												 'games' => $games1,
-											 ], $export);
+			                   'teams' => array_slice($teams, 0, 4),
+			                   'games' => $games1,
+		                   ], $export);
 		self::assertEquals([
-												 'teams' => array_slice($teams, 0, 4),
-												 'games' => $games1,
-											 ], $export2);
+			                   'teams' => array_slice($teams, 0, 4),
+			                   'games' => $games1,
+		                   ], $export2);
 		$export = Exporter::export($group2);
 		$export2 = $group2->export()->get();
 		self::assertEquals([
-												 'teams' => array_slice($teams, -4),
-												 'games' => $games2,
-											 ], $export);
+			                   'teams' => array_slice($teams, -4),
+			                   'games' => $games2,
+		                   ], $export);
 		self::assertEquals([
-												 'teams' => array_slice($teams, -4),
-												 'games' => $games2,
-											 ], $export2);
+			                   'teams' => array_slice($teams, -4),
+			                   'games' => $games2,
+		                   ], $export2);
 	}
 }
