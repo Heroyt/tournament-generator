@@ -6,6 +6,7 @@ use Exception;
 use TournamentGenerator\Containers\GameContainer;
 use TournamentGenerator\Containers\HierarchyContainer;
 use TournamentGenerator\Containers\TeamContainer;
+use TournamentGenerator\Interfaces\ProgressionInterface;
 use TournamentGenerator\Interfaces\WithGames;
 use TournamentGenerator\Interfaces\WithGeneratorSetters;
 use TournamentGenerator\Interfaces\WithSkipSetters;
@@ -36,7 +37,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	protected array $progressed = [];
 	/** @var string Ordering parameter */
 	protected string $ordering = Constants::POINTS;
-	/** @var Progression[] List of progressions from this group */
+	/** @var ProgressionInterface[] List of progressions from this group */
 	protected array $progressions = [];
 	/** @var int Points acquired for winning */
 	protected int $winPoints = 3;
@@ -58,20 +59,20 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 
 
 	/**
-     * Group constructor.
-     *
-     * @param string $name Group name
-     * @param int|string|null $id Group id - if omitted -> it is generated automatically as unique string
-     */
-    public function __construct(string $name, int|string|null $id = null) {
-        $this->setName($name);
-        $this->generator = new Helpers\Generator($this);
-        /** @infection-ignore-all */
-        $this->setId($id ?? uniqid('', false));
-        $this->games = new GameContainer($this->id);
-        $this->teams = new TeamContainer($this->id);
-        $this->container = new HierarchyContainer($this->id);
-    }
+	 * Group constructor.
+	 *
+	 * @param string          $name Group name
+	 * @param int|string|null $id   Group id - if omitted -> it is generated automatically as unique string
+	 */
+	public function __construct(string $name, int|string|null $id = null) {
+		$this->setName($name);
+		$this->generator = new Helpers\Generator($this);
+		/** @infection-ignore-all */
+		$this->setId($id ?? uniqid('', false));
+		$this->games = new GameContainer($this->id);
+		$this->teams = new TeamContainer($this->id);
+		$this->container = new HierarchyContainer($this->id);
+	}
 
 	/**
 	 * Add one or more teams into the object.
@@ -81,7 +82,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 * @return $this
 	 * @throws Exception
 	 */
-	public function addTeam(Team ...$teams) : Group {
+	public function addTeam(Team ...$teams): Group {
 		foreach ($teams as $team) {
 			$this->teams->insert($team);
 			$team->addGroupResults($this);
@@ -98,7 +99,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 * @return Team Newly created team
 	 * @throws Exception
 	 */
-	public function team(string $name = '', $id = null) : Team {
+	public function team(string $name = '', $id = null): Team {
 		$t = new Team($name, $id);
 		$this->teams->insert($t);
 		$t->addGroupResults($this);
@@ -110,7 +111,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 *
 	 * @return $this
 	 */
-	public function allowSkip() : Group {
+	public function allowSkip(): Group {
 		$this->generator->allowSkip();
 		return $this;
 	}
@@ -120,7 +121,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 *
 	 * @return $this
 	 */
-	public function disallowSkip() : Group {
+	public function disallowSkip(): Group {
 		$this->generator->disallowSkip();
 		return $this;
 	}
@@ -132,7 +133,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 *
 	 * @return $this
 	 */
-	public function setSkip(bool $skip) : Group {
+	public function setSkip(bool $skip): Group {
 		$this->generator->setSkip($skip);
 		return $this;
 	}
@@ -142,7 +143,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 *
 	 * @return bool
 	 */
-	public function getSkip() : bool {
+	public function getSkip(): bool {
 		return $this->generator->getSkip();
 	}
 
@@ -151,7 +152,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 *
 	 * @return int
 	 */
-	public function getWinPoints() : int {
+	public function getWinPoints(): int {
 		return $this->winPoints;
 	}
 
@@ -162,7 +163,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 *
 	 * @return $this
 	 */
-	public function setWinPoints(int $points) : Group {
+	public function setWinPoints(int $points): Group {
 		$this->winPoints = $points;
 		return $this;
 	}
@@ -172,7 +173,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 *
 	 * @return int
 	 */
-	public function getDrawPoints() : int {
+	public function getDrawPoints(): int {
 		return $this->drawPoints;
 	}
 
@@ -183,7 +184,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 *
 	 * @return $this
 	 */
-	public function setDrawPoints(int $points) : Group {
+	public function setDrawPoints(int $points): Group {
 		$this->drawPoints = $points;
 		return $this;
 	}
@@ -193,7 +194,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 *
 	 * @return int
 	 */
-	public function getLostPoints() : int {
+	public function getLostPoints(): int {
 		return $this->lostPoints;
 	}
 
@@ -204,7 +205,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 *
 	 * @return $this
 	 */
-	public function setLostPoints(int $points) : Group {
+	public function setLostPoints(int $points): Group {
 		$this->lostPoints = $points;
 		return $this;
 	}
@@ -214,7 +215,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 *
 	 * @return int
 	 */
-	public function getSecondPoints() : int {
+	public function getSecondPoints(): int {
 		return $this->secondPoints;
 	}
 
@@ -225,7 +226,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 *
 	 * @return $this
 	 */
-	public function setSecondPoints(int $points) : Group {
+	public function setSecondPoints(int $points): Group {
 		$this->secondPoints = $points;
 		return $this;
 	}
@@ -235,7 +236,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 *
 	 * @return int
 	 */
-	public function getThirdPoints() : int {
+	public function getThirdPoints(): int {
 		return $this->thirdPoints;
 	}
 
@@ -246,7 +247,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 *
 	 * @return $this
 	 */
-	public function setThirdPoints(int $points) : Group {
+	public function setThirdPoints(int $points): Group {
 		$this->thirdPoints = $points;
 		return $this;
 	}
@@ -256,7 +257,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 *
 	 * @return int
 	 */
-	public function getProgressPoints() : int {
+	public function getProgressPoints(): int {
 		return $this->progressPoints;
 	}
 
@@ -267,7 +268,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 *
 	 * @return Group
 	 */
-	public function setProgressPoints(int $points) : Group {
+	public function setProgressPoints(int $points): Group {
 		$this->progressPoints = $points;
 		return $this;
 	}
@@ -283,7 +284,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 * @return $this
 	 * @throws Exception
 	 */
-	public function setMaxSize(int $size) : Group {
+	public function setMaxSize(int $size): Group {
 		$this->generator->setMaxSize($size);
 		return $this;
 	}
@@ -296,7 +297,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 *
 	 * @return int
 	 */
-	public function getMaxSize() : int {
+	public function getMaxSize(): int {
 		return $this->generator->getMaxSize();
 	}
 
@@ -310,7 +311,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 * @see Constants::GroupTypes
 	 *
 	 */
-	public function setType(string $type = Constants::ROUND_ROBIN) : Group {
+	public function setType(string $type = Constants::ROUND_ROBIN): Group {
 		$this->generator->setType($type);
 		return $this;
 	}
@@ -322,7 +323,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 * @see Constants::GroupTypes
 	 *
 	 */
-	public function getType() : string {
+	public function getType(): string {
 		return $this->generator->getType();
 	}
 
@@ -331,7 +332,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 *
 	 * @return int
 	 */
-	public function getOrder() : int {
+	public function getOrder(): int {
 		return $this->order;
 	}
 
@@ -342,7 +343,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 *
 	 * @return $this
 	 */
-	public function setOrder(int $order) : Group {
+	public function setOrder(int $order): Group {
 		$this->order = $order;
 		return $this;
 	}
@@ -352,7 +353,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 *
 	 * @return string
 	 */
-	public function getOrdering() : string {
+	public function getOrdering(): string {
 		return $this->ordering;
 	}
 
@@ -366,9 +367,9 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 * @see Constants::OrderingTypes
 	 *
 	 */
-	public function setOrdering(string $ordering = Constants::POINTS) : Group {
+	public function setOrdering(string $ordering = Constants::POINTS): Group {
 		if (!in_array($ordering, Constants::OrderingTypes, true)) {
-			throw new Exception('Unknown group ordering: '.$ordering);
+			throw new Exception('Unknown group ordering: ' . $ordering);
 		}
 		$this->ordering = $ordering;
 		return $this;
@@ -382,7 +383,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 * @return $this
 	 * @throws Exception
 	 */
-	public function setInGame(int $inGame) : Group {
+	public function setInGame(int $inGame): Group {
 		$this->generator->setInGame($inGame);
 		return $this;
 	}
@@ -392,18 +393,18 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 *
 	 * @return int
 	 */
-	public function getInGame() : int {
+	public function getInGame(): int {
 		return $this->generator->getInGame();
 	}
 
 	/**
 	 * Add a progression to this group
 	 *
-	 * @param Progression $progression
+	 * @param ProgressionInterface $progression
 	 *
 	 * @return $this
 	 */
-	public function addProgression(Progression $progression) : Group {
+	public function addProgression(ProgressionInterface $progression): Group {
 		$this->progressions[] = $progression;
 		return $this;
 	}
@@ -421,9 +422,34 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 *
 	 * @see https://www.php.net/manual/en/function.array-slice.php
 	 */
-	public function progression(Group $to, int $offset = 0, int $len = null) : Progression {
+	public function progression(Group $to, int $offset = 0, int $len = null): Progression {
 		$p = new Progression($this, $to, $offset, $len);
 		$this->progressions[] = $p;
+		return $p;
+	}
+
+	/**
+	 * Creates a new multi-progression INTO this group
+	 *
+	 * Progression uses a similar syntax to php's array_slice() function.
+	 *
+	 * @warning The logic is reversed from the Group::progression() method. This will create a progression INTO this group.
+	 *
+	 * @param Group[]  $from
+	 * @param int      $offset First index
+	 * @param int|null $len    Maximum number of teams to progress
+	 * @param int|null $totalCount
+	 * @param int      $totalStart
+	 *
+	 * @return MultiProgression
+	 *
+	 * @see     https://www.php.net/manual/en/function.array-slice.php
+	 */
+	public function multiProgression(array $from, int $offset = 0, int $len = null, ?int $totalCount = null, int $totalStart = 0): MultiProgression {
+		$p = new MultiProgression($from, $this, $offset, $len, $totalCount, $totalStart);
+		foreach ($from as $group) {
+			$group->addProgression($p);
+		}
 		return $p;
 	}
 
@@ -438,7 +464,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 * @return $this
 	 * @throws Exception
 	 */
-	public function progress(bool $blank = false) : Group {
+	public function progress(bool $blank = false): Group {
 		foreach ($this->progressions as $progression) {
 			$progression->progress($blank);
 		}
@@ -452,8 +478,8 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 *
 	 * @return $this
 	 */
-	public function addProgressed(Team ...$teams) : Group {
-		$this->progressed = array_merge($this->progressed, array_map(static function($a) {
+	public function addProgressed(Team ...$teams): Group {
+		$this->progressed = array_merge($this->progressed, array_map(static function ($a) {
 			return $a->getId();
 		}, $teams));
 		return $this;
@@ -466,7 +492,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 *
 	 * @return bool
 	 */
-	public function isProgressed(Team $team) : bool {
+	public function isProgressed(Team $team): bool {
 		return in_array($team->getId(), $this->progressed, true);
 	}
 
@@ -476,7 +502,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 * @return array
 	 * @throws Exception
 	 */
-	public function genGames() : array {
+	public function genGames(): array {
 		return $this->generator->genGames();
 	}
 
@@ -490,7 +516,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 * @return Game
 	 * @throws Exception
 	 */
-	public function game(array $teams = []) : Game {
+	public function game(array $teams = []): Game {
 		$g = new Game($teams, $this);
 		$g->setId($this->games->getAutoIncrement());
 		$this->games->incrementId();
@@ -508,7 +534,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 * @return $this
 	 * @throws Exception
 	 */
-	public function addGame(Game ...$games) : Group {
+	public function addGame(Game ...$games): Group {
 		$this->games->insert(...$games);
 		// Set the game id's
 		foreach ($games as $game) {
@@ -527,7 +553,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 * @return Game[]
 	 * @throws Exception
 	 */
-	public function orderGames() : array {
+	public function orderGames(): array {
 		if (count($this->games) < 5) {
 			return $this->games->get();
 		}
@@ -544,7 +570,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 * @return Team[]
 	 * @throws Exception
 	 */
-	public function simulate(array $filters = [], bool $reset = true) : array {
+	public function simulate(array $filters = [], bool $reset = true): array {
 		return Helpers\Simulator::simulateGroup($this, $filters, $reset);
 	}
 
@@ -557,7 +583,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 * @return $this
 	 * @throws Exception
 	 */
-	public function resetGames() : Group {
+	public function resetGames(): Group {
 		foreach ($this->getGames() as $game) {
 			$game->resetResults();
 		}
@@ -569,21 +595,21 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 *
 	 * @return bool
 	 */
-	public function isPlayed() : bool {
+	public function isPlayed(): bool {
 		if (count($this->games) === 0) {
 			return false;
 		}
 		return count(array_filter($this->getGames(), static function ($a) {
-                return $a->isPlayed();
-            })) === count($this->games);
+				return $a->isPlayed();
+			})) === count($this->games);
 	}
 
 	/**
 	 * Get all progressions
 	 *
-	 * @return Progression[]
+	 * @return ProgressionInterface[]
 	 */
-	public function getProgressions() : array {
+	public function getProgressions(): array {
 		return $this->progressions;
 	}
 
@@ -592,7 +618,7 @@ class Group extends HierarchyBase implements WithGeneratorSetters, WithSkipSette
 	 * @return array
 	 * @throws Exception
 	 */
-	public function jsonSerialize() : array {
+	public function jsonSerialize(): array {
 		return [
 			'id'    => $this->getId(),
 			'name'  => $this->getName(),

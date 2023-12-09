@@ -2,6 +2,8 @@
 
 namespace TournamentGenerator;
 
+use TournamentGenerator\Interfaces\ProgressionInterface;
+
 /**
  * Blank / dummy team used for simulating the games
  *
@@ -19,7 +21,7 @@ class BlankTeam extends Team
 	/** @var Group A group that it was generated from during progression */
 	protected Group $from;
 	/** @var Progression  A progression object that generated this dummy team */
-	protected Progression $progression;
+	protected ProgressionInterface $progression;
 
 	/**
 	 * BlankTeam constructor.
@@ -29,7 +31,7 @@ class BlankTeam extends Team
 	 * @param Group       $from        A group that the original team was playing in
 	 * @param Progression $progression A progression object that created this team
 	 */
-	public function __construct(string $name, Team $original, Group $from, Progression $progression) {
+	public function __construct(string $name, Team $original, Group $from, ProgressionInterface $progression) {
 		$this->groupResults = $original->groupResults;
 		$this->from = $from;
 		$this->progression = $progression;

@@ -49,6 +49,7 @@ class ProgressionTest extends TestCase
 		$group_1->progression($second_group, 2, 2); // PROGRESS 2 BEST WINNING TEAMS
 		$group_2->progression($second_group, 2, 2); // PROGRESS 2 BEST WINNING TEAMS
 
+		$round->genGames();
 		$round->simulate();
 
 		$round->progress();
@@ -336,8 +337,8 @@ class ProgressionTest extends TestCase
 
         $progression = $group_1->progression($final_group, 0, 2);  // PROGRESS 2 BEST WINNING TEAMS
 
+	    $round->genGames();
         $round->simulate();
-
         $round->progress();
 
         self::assertCount(2, $final_group->getTeams());
