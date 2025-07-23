@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TournamentGenerator\Helpers;
 
 use Exception;
@@ -13,7 +15,7 @@ use TournamentGenerator\TeamFilter;
 use TournamentGenerator\Tournament;
 
 /**
- * Class responsible for simulating a tournament
+ * Class responsible for simulating a tournament.
  *
  * Simulating a tournament can be useful if you want to generate all the games beforehand.
  * It generates random scores and progresses teams into next groups / rounds to generate them too.
@@ -21,184 +23,198 @@ use TournamentGenerator\Tournament;
  *
  * @author  Tomáš Vojík <vojik@wboy.cz>
  *
- * @package TournamentGenerator\Helpers
- *
  * @since   0.3
  */
 class Simulator
 {
-
-    public static function simulateGame(Game $game): Game {
+    public static function simulateGame(Game $game) : Game {
         $teams = $game->getTeams();
         $results = [];
         foreach ($teams as $team) {
-            $results[$team->getId()] = floor(random_int(0, 500));
+            $results[$team->getId()] = random_int(0, 500);
         }
         $game->setResults($results);
+
         return $game;
     }
 
     /**
      * Simulates games in a given group.
      *
-     * @param Group $group Group to simulate
+     * @param Group                       $group   Group to simulate
      * @param TeamFilter[]|TeamFilter[][] $filters Filters applied to returned teams (ex. if you only want to return the winning team)
-     * @param bool $reset If the group should reset its scores after simulation
+     * @param bool                        $reset   If the group should reset its scores after simulation
      *
      * @return Team[] Teams sorted and filtered after simulation
+     *
      * @throws Exception
-	 */
-	public static function simulateGroup(Group $group, array $filters = [], bool $reset = true) : array {
-		foreach ($group->getGames() as $game) {
+     */
+    public static function simulateGroup(Group $group, array $filters = [], bool $reset = true) : array {
+        foreach ($group->getGames() as $game) {
             self::simulateGame($game);
-		}
-		$returnTeams = $group->sortTeams(null, $filters);
-		if (!$reset) {
-			return $returnTeams;
-		}
-		foreach ($group->getGames() as $game) {
-			$game->resetResults();
-		}
-		return $returnTeams;
-	}
+        }
+        $returnTeams = $group->sortTeams(null, $filters);
+        if (!$reset) {
+            return $returnTeams;
+        }
+        foreach ($group->getGames() as $game) {
+            $game->resetResults();
+        }
 
-	/**
-	 * Simulates games in a round
-	 *
-	 * @param Round $round Round to simulate
-	 *
-	 * @throws Exception
-	 */
-	public static function simulateRound(Round $round) : void {
-		foreach ($round->getGroups() as $group) {
-			if ($group->isPlayed()) {
-				continue;
-			}
-			$group->simulate([], false);
-		}
-	}
+        return $returnTeams;
+    }
 
-	/**
-	 * Simulate the whole tournament as it was played for real
-	 *
-	 * Generates the games for each round, simulates it, progresses the teams and resets the scores. Uses dummy team objects to progress.
-	 *
-	 * @param Tournament $tournament Tournament to simulate
-	 *
-	 * @post The games' scores will be reset
-	 *
-	 * @return Game[] All played games
-	 * @throws Exception
-	 * @see  Simulator::simulateRounds()
-	 *
-	 */
-	public static function simulateTournament(Tournament $tournament) : array {
-		return self::simulateRounds($tournament);
-	}
+    /**
+     * Simulates games in a round.
+     *
+     * @param Round $round Round to simulate
+     *
+     * @throws Exception
+     */
+    public static function simulateRound(Round $round) : void {
+        foreach ($round->getGroups() as $group) {
+            if ($group->isPlayed()) {
+                continue;
+            }
+            $group->simulate([], false);
+        }
+    }
 
-	/**
-	 * Simulate the whole tournament as it was played for real
-	 *
-	 * Generates the games for each round, simulates it, progresses the teams and resets the scores. Uses dummy team objects to progress.
-	 *
-	 * @param WithRounds $object Tournament or Category to generate games from.
-	 *
-	 * @return Game[] All played games
-	 * @throws Exception
-	 * @post The games' scores will be reset
-	 *
-	 */
-	public static function simulateRounds(WithRounds $object) : array {
-		if (count($object->getRounds()) === 0) {
-			throw new Exception('There are no rounds to simulate games from.');
-		}
+    /**
+     * Simulate the whole tournament as it was played for real.
+     *
+     * Generates the games for each round, simulates it, progresses the teams and resets the scores. Uses dummy team
+     * objects to progress.
+     *
+     * @param Tournament $tournament Tournament to simulate
+     *
+     * @post The games' scores will be reset
+     *
+     * @return Game[] All played games
+     *
+     * @throws Exception
+     *
+     * @see  Simulator::simulateRounds()
+     */
+    public static function simulateTournament(Tournament $tournament) : array {
+        return self::simulateRounds($tournament);
+    }
 
-		/** @var Game[][] $games Array of games for each round */
-		$games = [];
+    /**
+     * Simulate the whole tournament as it was played for real.
+     *
+     * Generates the games for each round, simulates it, progresses the teams and resets the scores. Uses dummy team
+     * objects to progress.
+     *
+     * @param WithRounds $withRounds tournament or Category to generate games from
+     *
+     * @return Game[] All played games
+     *
+     * @throws Exception
+     *
+     * @post The games' scores will be reset
+     */
+    public static function simulateRounds(WithRounds $withRounds) : array {
+        if (0 === count($withRounds->getRounds())) {
+            throw new Exception('There are no rounds to simulate games from.');
+        }
 
-		foreach ($object->getRounds() as $round) {
-			$games[] = $round->genGames();
-			$round
-				->simulate()
-				->progress(true);
-		}
-		foreach ($object->getRounds() as $round) {
-			$round->resetGames();
-		}
+        /** @var Game[][] $games Array of games for each round */
+        $games = [];
 
-		return array_merge(...$games);
-	}
+        foreach ($withRounds->getRounds() as $round) {
+            $games[] = $round->genGames();
+            $round
+                ->simulate()
+                ->progress(true)
+            ;
+        }
+        foreach ($withRounds->getRounds() as $round) {
+            $round->resetGames();
+        }
 
-	/**
-	 * Generates and simulates the tournament as if it was played for real.
-	 *
-	 * Progresses the real teams, does not create dummy teams.
-	 *
-	 * @param Tournament $tournament Tournament to simulate
-	 *
-	 * @return Game[]
-	 * @throws Exception
-	 * @see Simulator::simulateRoundsReal()
-	 */
-	public static function simulateTournamentReal(Tournament $tournament) : array {
-		return self::simulateRoundsReal($tournament);
-	}
+        return array_merge(...$games);
+    }
 
-	/**
-	 * Generates and simulates rounds as if it was played for real.
-	 *
-	 * Progresses the real teams, does not create dummy teams.
-	 *
-	 * @param WithRounds $object Tournament or Category to generate games from.
-	 *
-	 * @return Game[]
-	 * @throws Exception
-	 */
-	public static function simulateRoundsReal(WithRounds $object) : array {
-		if (count($object->getRounds()) === 0) {
-			throw new Exception('There are no rounds to simulate games from.');
-		}
+    /**
+     * Generates and simulates the tournament as if it was played for real.
+     *
+     * Progresses the real teams, does not create dummy teams.
+     *
+     * @param Tournament $tournament Tournament to simulate
+     *
+     * @return Game[]
+     *
+     * @throws Exception
+     *
+     * @see Simulator::simulateRoundsReal()
+     */
+    public static function simulateTournamentReal(Tournament $tournament) : array {
+        return self::simulateRoundsReal($tournament);
+    }
 
-		/** @var Game[][] $games Array of games for each round */
-		$games = [];
+    /**
+     * Generates and simulates rounds as if it was played for real.
+     *
+     * Progresses the real teams, does not create dummy teams.
+     *
+     * @param WithRounds $withRounds tournament or Category to generate games from
+     *
+     * @return Game[]
+     *
+     * @throws Exception
+     */
+    public static function simulateRoundsReal(WithRounds $withRounds) : array {
+        if (0 === count($withRounds->getRounds())) {
+            throw new Exception('There are no rounds to simulate games from.');
+        }
 
-		foreach ($object->getRounds() as $round) {
-			$games[] = $round->genGames();
-			$round
-				->simulate()
-				->progress();
-		}
-		return array_merge(...$games);
-	}
+        /** @var Game[][] $games Array of games for each round */
+        $games = [];
 
-	/**
-	 * Generates and simulates a tournament category.
-	 *
-	 * Generates the games for each round, simulates it, progresses the teams and resets the scores. Uses dummy team objects to progress.
-	 *
-	 * @param Category $category Category to simulate
-	 *
-	 * @return Game[]
-	 * @throws Exception
-	 * @see Simulator::simulateRounds()
-	 */
-	public static function simulateCategory(Category $category) : array {
-		return self::simulateRounds($category);
-	}
+        foreach ($withRounds->getRounds() as $round) {
+            $games[] = $round->genGames();
+            $round
+                ->simulate()
+                ->progress()
+            ;
+        }
 
-	/**
-	 * Generates and simulates a category as if it was played for real.
-	 *
-	 * Progresses the real teams, does not create dummy teams.
-	 *
-	 * @param Category $category Category to simulate
-	 *
-	 * @return Game[]
-	 * @throws Exception
-	 * @see Simulator::simulateRoundsReal()
-	 */
-	public static function simulateCategoryReal(Category $category) : array {
-		return self::simulateRoundsReal($category);
-	}
+        return array_merge(...$games);
+    }
 
+    /**
+     * Generates and simulates a tournament category.
+     *
+     * Generates the games for each round, simulates it, progresses the teams and resets the scores. Uses dummy team
+     * objects to progress.
+     *
+     * @param Category $category Category to simulate
+     *
+     * @return Game[]
+     *
+     * @throws Exception
+     *
+     * @see Simulator::simulateRounds()
+     */
+    public static function simulateCategory(Category $category) : array {
+        return self::simulateRounds($category);
+    }
+
+    /**
+     * Generates and simulates a category as if it was played for real.
+     *
+     * Progresses the real teams, does not create dummy teams.
+     *
+     * @param Category $category Category to simulate
+     *
+     * @return Game[]
+     *
+     * @throws Exception
+     *
+     * @see Simulator::simulateRoundsReal()
+     */
+    public static function simulateCategoryReal(Category $category) : array {
+        return self::simulateRoundsReal($category);
+    }
 }

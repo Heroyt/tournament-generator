@@ -7,6 +7,7 @@ $finder = (new PhpCsFixer\Finder())
             'build',
             'docs',
             'wiki',
+            'temp',
         ]
     );
 

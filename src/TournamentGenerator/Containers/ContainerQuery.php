@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace TournamentGenerator\Containers;
 
@@ -9,321 +10,260 @@ use TournamentGenerator\Helpers\Sorter\BaseSorter;
 use TournamentGenerator\Interfaces\WithId;
 
 /**
- * Class ContainerQuery
+ * Class ContainerQuery.
  *
  * Container query is a helper class to filter, sort, etc. the values of the container hierarchy.
  *
- * @package TournamentGenerator\Containers
  * @author  Tomáš Vojík <vojik@wboy.cz>
+ *
  * @since   0.4
  */
 class ContainerQuery
 {
+    /** @var Closure[] Filter closures */
+    protected array $filters = [];
+    protected Closure $sortClosure;
+    protected string $sortProperty;
+    protected bool $desc = false;
+    protected BaseSorter $sorter;
+    protected bool $uniqueOnly = false;
+    protected ?string $pluck = null;
 
-	/** @var BaseContainer Queried container */
-	protected BaseContainer $container;
-	/** @var Closure[] Filter closures */
-	protected array      $filters      = [];
-	protected Closure    $sortClosure;
-	protected string     $sortProperty;
-	protected bool       $desc         = false;
-	protected BaseSorter $sorter;
-	protected bool       $topLevelOnly = false;
-	protected bool       $uniqueOnly   = false;
-	protected ?string    $pluck        = null;
+    /**
+     * ContainerQuery constructor.
+     *
+     * @param BaseContainer $container Queried container
+     */
+    public function __construct(protected BaseContainer $container, protected bool $topLevelOnly = false) {}
 
-	/**
-	 * ContainerQuery constructor.
-	 *
-	 * @param BaseContainer $container Queried container
-	 */
-	public function __construct(BaseContainer $container, bool $topLevelOnly = false) {
-		$this->container = $container;
-		$this->topLevelOnly = $topLevelOnly;
-	}
-
-	/**
-	 * Gets the first result of container query
-	 *
-	 * @return mixed|null
-	 */
-	public function getFirst(): mixed {
+    /**
+     * Gets the first result of container query.
+     *
+     * @return null|mixed
+     */
+    public function getFirst() : mixed {
         $data = $this->get();
-        if (count($data) === 0) {
+        if (0 === count($data)) {
             return null;
         }
+
         return reset($data);
     }
 
-	/**
-	 * Get the result
-	 *
-	 * @return array
-	 */
-	public function get() : array {
-		// Get initial data
-		if ($this->topLevelOnly) {
-			$data = $this->container->getTopLevel();
-		}
-		else {
-			$data = $this->container->get();
-		}
+    /**
+     * Get the result.
+     */
+    public function get() : array {
+        // Get initial data
+        $data = $this->topLevelOnly ? $this->container->getTopLevel() : $this->container->get();
 
-		// Unique
-		$this->filterUnique($data);
+        // Unique
+        $this->filterUnique($data);
 
-		// Filters
-		$this->applyFilters($data);
+        // Filters
+        $this->applyFilters($data);
 
-		// Sorting
-		$this->sortData($data);
+        // Sorting
+        $this->sortData($data);
 
-		// Order reverse
-		if ($this->desc) {
-			$data = array_reverse($data, true);
-		}
+        // Order reverse
+        if ($this->desc) {
+            $data = array_reverse($data, true);
+        }
 
-		// "Pluck" a specific value from an object
-		$this->pluckData($data);
+        // "Pluck" a specific value from an object
+        $this->pluckData($data);
 
-		return $data;
-	}
-
-	/**
-	 *  Filter data to contain only unique values
-	 *
-	 * @param array $data
-	 */
-	protected function filterUnique(array &$data) : void {
-		if ($this->uniqueOnly) {
-			if (reset($data) instanceof WithId) {
-				$ids = [];
-				foreach ($data as $key => $obj) {
-					if (in_array($obj->getId(), $ids, true)) {
-						unset($data[$key]);
-						continue;
-					}
-					$ids[] = $obj->getId();
-				}
-			}
-			else {
-				$data = array_unique($data);
-			}
-		}
-	}
-
-	/**
-	 * Apply predefined filters on data
-	 *
-	 * @param $data
-	 */
-	protected function applyFilters(&$data) : void {
-		foreach ($this->filters as $filter) {
-			$data = array_filter($data, $filter);
-		}
-		$data = array_values($data); // Reset array keys
-	}
-
-	/**
-	 * Sort data using a predefined filters
-	 *
-	 * @param array $data
-	 */
-	protected function sortData(array &$data) : void {
-		if (isset($this->sorter)) {
-			$data = $this->sorter->sort($data);
-		}
-		elseif (isset($this->sortClosure)) {
-			uasort($data, $this->sortClosure);
-		}
-		elseif (isset($this->sortProperty)) {
-			uasort($data, [$this, 'sortByPropertyCallback']);
-		}
-	}
-
-	/**
-	 * Pluck a predefined value from data values
-	 *
-	 * @param $data
-	 */
-	protected function pluckData(&$data) : void {
-		if (!empty($this->pluck)) {
-			$data = array_map(function($item) {
-				if (is_array($item) && isset($item[$this->pluck])) {
-					return $item[$this->pluck];
-				}
-				if (is_object($item)) {
-					if (property_exists($item, $this->pluck)) {
-						return $item->{$this->pluck};
-					}
-					if (method_exists($item, $this->pluck)) {
-						return $item->{$this->pluck}();
-					}
-				}
-				return $item;
-			}, $data);
-		}
-	}
-
-	/**
-	 * Get query results as an container
-	 *
-	 * @return BaseContainer
-	 * @throws Exception
-	 */
-	public function getContainer() : BaseContainer {
-		return BaseContainer::fromArray($this->get());
-	}
-
-	/**
-	 * Add a filter callback
-	 *
-	 * @param Closure $callback
-	 *
-	 * @return $this
-	 */
-	public function filter(Closure $callback) : ContainerQuery {
-		$this->filters[] = $callback;
-		return $this;
-	}
+        return $data;
+    }
 
     /**
-     * Filter results to only contain those with a specific ID
-     *
-     * @param int|string $id
-     *
-     * @return ContainerQuery
+     *  Filter data to contain only unique values.
      */
-    public function whereId(int|string $id): ContainerQuery {
-        $this->filters[] = static function ($object) use ($id) {
-            return $object instanceof WithId && $object->getId() === $id;
-        };
+    protected function filterUnique(array &$data) : void {
+        if ($this->uniqueOnly) {
+            if (reset($data) instanceof WithId) {
+                $ids = [];
+                foreach ($data as $key => $obj) {
+                    if (in_array($obj->getId(), $ids, true)) {
+                        unset($data[$key]);
+
+                        continue;
+                    }
+                    $ids[] = $obj->getId();
+                }
+            } else {
+                $data = array_unique($data);
+            }
+        }
+    }
+
+    /**
+     * Apply predefined filters on data.
+     */
+    protected function applyFilters(mixed &$data) : void {
+        foreach ($this->filters as $filter) {
+            $data = array_filter($data, $filter);
+        }
+        $data = array_values($data); // Reset array keys
+    }
+
+    /**
+     * Sort data using a predefined filters.
+     */
+    protected function sortData(array &$data) : void {
+        if (isset($this->sorter)) {
+            $data = $this->sorter->sort($data);
+        } elseif (isset($this->sortClosure)) {
+            uasort($data, $this->sortClosure);
+        } elseif (isset($this->sortProperty)) {
+            uasort($data, [$this, 'sortByPropertyCallback']);
+        }
+    }
+
+    /**
+     * Pluck a predefined value from data values.
+     */
+    protected function pluckData(mixed &$data) : void {
+        if (null !== $this->pluck && '' !== $this->pluck && '0' !== $this->pluck) {
+            $data = array_map(
+                function ($item) {
+                    if (is_array($item) && isset($item[$this->pluck])) {
+                        return $item[$this->pluck];
+                    }
+                    if (is_object($item)) {
+                        if (property_exists($item, $this->pluck)) {
+                            return $item->{$this->pluck};
+                        }
+                        if (method_exists($item, $this->pluck)) {
+                            return $item->{$this->pluck}();
+                        }
+                    }
+
+                    return $item;
+                },
+                $data
+            );
+        }
+    }
+
+    /**
+     * Get query results as an container.
+     *
+     * @throws Exception
+     */
+    public function getContainer() : BaseContainer {
+        return BaseContainer::fromArray($this->get());
+    }
+
+    /**
+     * Add a filter callback.
+     */
+    public function filter(Closure $callback) : ContainerQuery {
+        $this->filters[] = $callback;
+
         return $this;
     }
 
-	/**
-	 * Sort in descending order
-	 *
-	 * @return $this
-	 */
-	public function desc() : ContainerQuery {
-		$this->desc = true;
-		return $this;
-	}
+    /**
+     * Filter results to only contain those with a specific ID.
+     */
+    public function whereId(int|string $id) : ContainerQuery {
+        $this->filters[] = (static fn ($object) : bool => $object instanceof WithId && $object->getId() === $id);
 
-	/**
-	 * Sort a result using a callback - maintaining the index association
-	 *
-	 * @param Closure|null $callback
-	 *
-	 * @return $this
-	 */
-	public function sort(?Closure $callback = null) : ContainerQuery {
-		if (is_null($callback)) {
-			$this->sortClosure = static function($a, $b) {
-				if ($a === $b) {
-					return 0;
-				}
-				return $a < $b ? -1 : 1;
-			};
-		}
-		else {
-			$this->sortClosure = $callback;
-		}
-		return $this;
-	}
-
-	/**
-	 * Sort a result set by a given property
-	 *
-	 * @warning Sort callback has a priority.
-	 *
-	 * @param string $property
-	 *
-	 * @return $this
-	 */
-	public function sortBy(string $property) : ContainerQuery {
-		$this->sortProperty = $property;
-		return $this;
-	}
-
-	/**
-	 * @param BaseSorter $sorter
-	 *
-	 * @return $this
-	 */
-	public function addSorter(BaseSorter $sorter) : ContainerQuery {
-		$this->sorter = $sorter;
-		return $this;
-	}
-
-	/**
-	 * Get only unique values
-	 *
-	 * @return $this
-	 */
-	public function unique() : ContainerQuery {
-		$this->uniqueOnly = true;
-		return $this;
-	}
-
-	/**
-	 * Get only the object's ids
-	 *
-	 * @return $this
-	 * @throws Exception
-	 */
-	public function ids() : ContainerQuery {
-		$this->only('getId');
-		return $this;
-	}
-
-	/**
-	 * Pluck a specific key from all values
-	 *
-	 * @param string $property Property, array key or method to extract from values
-	 *
-	 * @return ContainerQuery
-	 * @throws Exception
-	 */
-	public function only(string $property) : ContainerQuery {
-		if (!empty($this->pluck)) {
-			throw new Exception('only() can be only called once.');
-		}
-		$this->pluck = $property;
-		return $this;
-	}
+        return $this;
+    }
 
     /**
-     * Sort function for sorting by a defined property
-     *
-     * @param object|array $value1
-     * @param object|array $value2
-     *
-     * @return int
+     * Sort in descending order.
      */
-    protected function sortByPropertyCallback(object|array $value1, object|array $value2): int {
+    public function desc() : ContainerQuery {
+        $this->desc = true;
+
+        return $this;
+    }
+
+    /**
+     * Sort a result using a callback - maintaining the index association.
+     */
+    public function sort(?Closure $callback = null) : ContainerQuery {
+        $this->sortClosure = is_null($callback) ? static fn ($a, $b) : int => $a <=> $b : $callback;
+
+        return $this;
+    }
+
+    /**
+     * Sort a result set by a given property.
+     *
+     * @warning Sort callback has a priority.
+     */
+    public function sortBy(string $property) : ContainerQuery {
+        $this->sortProperty = $property;
+
+        return $this;
+    }
+
+    public function addSorter(BaseSorter $baseSorter) : ContainerQuery {
+        $this->sorter = $baseSorter;
+
+        return $this;
+    }
+
+    /**
+     * Get only unique values.
+     */
+    public function unique() : ContainerQuery {
+        $this->uniqueOnly = true;
+
+        return $this;
+    }
+
+    /**
+     * Get only the object's ids.
+     *
+     * @throws Exception
+     */
+    public function ids() : ContainerQuery {
+        $this->only('getId');
+
+        return $this;
+    }
+
+    /**
+     * Pluck a specific key from all values.
+     *
+     * @param string $property Property, array key or method to extract from values
+     *
+     * @throws Exception
+     */
+    public function only(string $property) : ContainerQuery {
+        if (null !== $this->pluck && '' !== $this->pluck && '0' !== $this->pluck) {
+            throw new Exception('only() can be only called once.');
+        }
+        $this->pluck = $property;
+
+        return $this;
+    }
+
+    /**
+     * Sort function for sorting by a defined property.
+     */
+    protected function sortByPropertyCallback(array|object $value1, array|object $value2) : int {
         // Get values
         $property = $this->sortProperty ?? '';
         $property1 = null;
         $property2 = null;
-        if (is_object($value1) && isset($value1->$property)) {
-            $property1 = $value1->$property;
+        if (is_object($value1) && isset($value1->{$property})) {
+            $property1 = $value1->{$property};
         } elseif (is_array($value1) && isset($value1[$property])) {
             $property1 = $value1[$property];
         }
-		if (is_object($value2) && isset($value2->$property)) {
-			$property2 = $value2->$property;
-		}
-		elseif (is_array($value2) && isset($value2[$property])) {
-			$property2 = $value2[$property];
-		}
+        if (is_object($value2) && isset($value2->{$property})) {
+            $property2 = $value2->{$property};
+        } elseif (is_array($value2) && isset($value2[$property])) {
+            $property2 = $value2[$property];
+        }
 
-		// Compare values
-		if ($property1 === $property2) {
-			return 0;
-		}
-		return $property1 < $property2 ? -1 : 1;
-	}
-
+        return $property1 <=> $property2;
+    }
 }

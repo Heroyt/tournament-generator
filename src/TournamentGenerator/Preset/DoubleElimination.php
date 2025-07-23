@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TournamentGenerator\Preset;
 
 use Exception;
@@ -12,325 +14,384 @@ use TournamentGenerator\TeamFilter;
 use TournamentGenerator\Tournament;
 
 /**
- * Double elimination generator
+ * Double elimination generator.
  *
  * @author  Tomáš Vojík <vojik@wboy.cz>
- * @package TournamentGenerator\Preset
+ *
  * @since   0.1
  */
 class DoubleElimination extends Tournament implements Preset
 {
+    /**
+     * Generate all the games.
+     *
+     * @throws Exception
+     */
+    public function generate() : DoubleElimination {
+        $this->allowSkip();
 
-	/**
-	 * Generate all the games
-	 *
-	 * @return $this
-	 * @throws Exception
-	 */
-	public function generate() : DoubleElimination {
-		$this->allowSkip();
+        $countTeams = count($this->getTeams());
+        if ($countTeams < 3) {
+            throw new Exception('Double elimination is possible for minimum of 3 teams - ' . $countTeams . ' teams given.');
+        }
 
-		$countTeams = count($this->getTeams());
-		if ($countTeams < 3) {
-			throw new Exception('Double elimination is possible for minimum of 3 teams - '.$countTeams.' teams given.');
-		}
+        // CALCULATE BYES
+        $nextPow = 0;
+        $byes = $this->calcByes($countTeams, $nextPow);
 
-		// CALCULATE BYES
-		$nextPow = 0;
-		$byes = $this->calcByes($countTeams, $nextPow);
-		/** If an extra winning round is generated first */
-		$extraStart = $byes > 0;
+        /** If an extra winning round is generated first */
+        $extraStart = $byes > 0;
 
-		$startRound = $this->round('Start round');
+        $startRound = $this->round('Start round');
 
-		/** Total round count (minus final rounds) */
-		$roundsNum = log($nextPow, 2) * 2;
+        /** Total round count (minus final rounds) */
+        $roundsNum = log($nextPow, 2) * 2;
 
-		/** How many groups are in the first round */
-		$startGroups = ($countTeams + $byes) / 2;
+        /** How many groups are in the first round */
+        $startGroups = ($countTeams + $byes) / 2;
 
-		/** How many losing teams there are after the first winning rounds */
-		$losingTeams = (($countTeams - $byes) / 2) + ($extraStart ? $startGroups / 2 : 0);
-		/** If an extra losing round is generated first */
-		$extraLosingStart = !Functions::isPowerOf2($losingTeams);
+        /** How many losing teams there are after the first winning rounds */
+        $losingTeams = (($countTeams - $byes) / 2) + ($extraStart ? $startGroups / 2 : 0);
 
-		if ($extraLosingStart) {
-			$roundsNum++;
-		}
+        /** If an extra losing round is generated first */
+        $extraLosingStart = !Functions::isPowerOf2($losingTeams);
 
-		$previousLosingGroups = [];
-		$previousWinningGroups = [];
-		$allGroups = [];
+        if ($extraLosingStart) {
+            ++$roundsNum;
+        }
 
-		// First round's groups
-		for ($i = 1; $i <= $startGroups; $i++) {
-			$g = $startRound->group('Start group ('.$i.')')->setInGame(2)->setType(Constants::ROUND_TWO);
-			$allGroups[] = $g;
-		}
-		$previousGroups = $allGroups;
+        $previousLosingGroups = [];
+        $previousWinningGroups = [];
+        $allGroups = [];
 
-		// Split teams
-		$this->splitTeamsEvenly();
+        // First round's groups
+        for ($i = 1; $i <= $startGroups; ++$i) {
+            $g = $startRound->group('Start group (' . $i . ')')->setInGame(2)->setType(Constants::ROUND_TWO);
+            $allGroups[] = $g;
+        }
+        $previousGroups = $allGroups;
 
-		/** Counter for winning rounds only */
-		$winR = 2;
+        // Split teams
+        $this->splitTeamsEvenly();
 
-		// Create an extra starting winning round.
-		// This needs to be created because the first round will skip a lot of games if there are any byes.
-		if ($extraStart) {
-			$startRound = $this->round('Start round (2)');
-			$groups = [];
-			$winningGroups = [];
-			$this->generateWinSide(2, $winR++, $byes, $countTeams, $startRound, $allGroups, $groups, $winningGroups, $previousGroups);
-			$previousWinningGroups = $winningGroups;
-		}
+        /** Counter for winning rounds only */
+        $winR = 2;
 
-		$previousGroups = $allGroups;
+        // Create an extra starting winning round.
+        // This needs to be created because the first round will skip a lot of games if there are any byes.
+        if ($extraStart) {
+            $startRound = $this->round('Start round (2)');
+            $groups = [];
+            $winningGroups = [];
+            $this->generateWinSide(
+                2,
+                $winR++,
+                $byes,
+                $countTeams,
+                $startRound,
+                $allGroups,
+                $groups,
+                $winningGroups,
+                $previousGroups
+            );
+            $previousWinningGroups = $winningGroups;
+        }
 
-		/** @var Group|null $lastLosingGroup The last group from the loser's side, to progress to the final round */
-		$lastLosingGroup = null;
-		/** @var Group $lastLosingGroup The last group from the winner's side, to progress to the final round */
-		$lastWinningGroup = end($allGroups);
+        $previousGroups = $allGroups;
 
-		// Create all rounds
-		for ($r = $winR; $r <= $roundsNum - 1; $r++) {
-			$groups = [];
-			$losingGroups = [];
-			$winningGroups = [];
-			$round = $this->round('Round '.$r);
+        /** @var null|Group $lastLosingGroup The last group from the loser's side, to progress to the final round */
+        $lastLosingGroup = null;
 
-			// Always generate a losing side
-			$this->generateLosingSide($r, $extraStart, $round, $allGroups, $previousLosingGroups, $previousGroups, $losingGroups);
+        /** @var Group $lastLosingGroup The last group from the winner's side, to progress to the final round */
+        $lastWinningGroup = end($allGroups);
 
-			// Skip some winning rounds - losing side will have more rounds
-			$rr = $r - ($extraStart ? 1 : 0) + ($extraLosingStart ? 1 : 0);
-			if (($rr < 3 || $rr % 2 === 0) && (!$extraStart || count($previousWinningGroups) > 1)) {
-				// First round after the starting rounds
-				if ($extraStart && $r === 3) {
-					$previousGroups = $previousWinningGroups;
-				}
-				/** @noinspection SlowArrayOperationsInLoopInspection */
-				$previousGroups = array_merge($previousGroups, $previousWinningGroups);
-				$this->generateWinSide($r, $winR++, $byes, $countTeams, $round, $allGroups, $groups, $winningGroups, $previousGroups);
-				$previousWinningGroups = $winningGroups;
-			}
+        // Create all rounds
+        for ($r = $winR; $r <= $roundsNum - 1; ++$r) {
+            $groups = [];
+            $losingGroups = [];
+            $winningGroups = [];
+            $round = $this->round('Round ' . $r);
 
-			// Save last generated groups for next round's
-			if (count($winningGroups) > 0) {
-				$lastWinningGroup = end($winningGroups);
-			}
-			if (count($losingGroups) > 0) {
-				$lastLosingGroup = end($losingGroups);
-			}
+            // Always generate a losing side
+            $this->generateLosingSide(
+                $r,
+                $extraStart,
+                $round,
+                $allGroups,
+                $previousLosingGroups,
+                $previousGroups,
+                $losingGroups
+            );
 
-			$previousGroups = $groups;
-			$previousLosingGroups = $losingGroups;
-		}
+            // Skip some winning rounds - losing side will have more rounds
+            $rr = $r - ($extraStart ? 1 : 0) + ($extraLosingStart ? 1 : 0);
+            if (($rr < 3 || 0 === $rr % 2) && (!$extraStart || count($previousWinningGroups) > 1)) {
+                // First round after the starting rounds
+                if ($extraStart && 3 === $r) {
+                    $previousGroups = $previousWinningGroups;
+                }
 
-		// Final round
-		$round = $this->round('Round '.$roundsNum.' - Finale');
-		$groupFinal = $round->group('Round '.$r.' - finale')->setInGame(2)->setType(Constants::ROUND_TWO)->setOrder(1);
-		$allGroups[] = $groupFinal;
-		if (isset($lastLosingGroup)) {
-			$lastLosingGroup->progression($groupFinal, 0, 1);
-		}
-		if (isset($lastWinningGroup)) {
-			$lastWinningGroup->progression($groupFinal, 0, 1);
-		}
+                /** @noinspection SlowArrayOperationsInLoopInspection */
+                $previousGroups = array_merge($previousGroups, $previousWinningGroups);
+                $this->generateWinSide(
+                    $r,
+                    $winR++,
+                    $byes,
+                    $countTeams,
+                    $round,
+                    $allGroups,
+                    $groups,
+                    $winningGroups,
+                    $previousGroups
+                );
+                $previousWinningGroups = $winningGroups;
+            }
 
-		// Repeat the game if the winning team loses
-		$group = $round->group('Round '.$r.' - finale (2)')->setInGame(2)->setType(Constants::ROUND_TWO)->setOrder(1);
-		$twoLoss = new TeamFilter('losses', '=', 1, $allGroups);
-		$groupFinal->progression($group, 0, 2)->addFilter($twoLoss);
+            // Save last generated groups for next round's
+            if (count($winningGroups) > 0) {
+                $lastWinningGroup = end($winningGroups);
+            }
+            if (count($losingGroups) > 0) {
+                $lastLosingGroup = end($losingGroups);
+            }
 
-		return $this;
-	}
+            $previousGroups = $groups;
+            $previousLosingGroups = $losingGroups;
+        }
 
-	/**
-	 * Calculate how many teams should skip the first round
-	 *
-	 * @param int $countTeams Total teams
-	 * @param int $nextPow    Next power of 2
-	 *
-	 * @return float|int
-	 */
-	private function calcByes(int $countTeams, int &$nextPow) {
-		$byes = 0;
-		$nextPow = $countTeams;
-		if (!Functions::isPowerOf2($countTeams)) {
-			$nextPow = Functions::nextPowerOf2($countTeams);
-			$byes = $nextPow - $countTeams;
-		}
-		return $byes;
-	}
+        // Final round
+        $round = $this->round('Round ' . $roundsNum . ' - Finale');
+        $groupFinal = $round->group('Round ' . $r . ' - finale')->setInGame(2)->setType(Constants::ROUND_TWO)->setOrder(1);
+        $allGroups[] = $groupFinal;
+        if (isset($lastLosingGroup)) {
+            $lastLosingGroup->progression($groupFinal, 0, 1);
+        }
+        if (isset($lastWinningGroup)) {
+            $lastWinningGroup->progression($groupFinal, 0, 1);
+        }
 
-	/**
-	 * Generate the winning side (Single elimination with progressions into the losing side)
-	 *
-	 * @param int     $roundNum              Round number
-	 * @param int     $winRoundNum           Real winning side round counter
-	 * @param int     $byes                  Initial byes
-	 * @param int     $countTeams            Total teams
-	 * @param Round   $round                 Round object
-	 * @param Group[] $allGroups             All groups
-	 * @param Group[] $groups                Output groups
-	 * @param Group[] $previousWinningGroups Winning side groups
-	 * @param Group[] $previousGroups        Losing side groups
-	 *
-	 * @return void
-	 * @throws Exception
-	 */
-	private function generateWinSide(int $roundNum, int $winRoundNum, int $byes, int $countTeams, Round $round, array &$allGroups, array &$groups, array &$previousWinningGroups = [], array $previousGroups = []) : void {
-		$order = 1;
-		// All groups
-		for ($g = 1; $g <= (($countTeams + $byes) / (2 ** $winRoundNum)); $g++) {
-			$group = $round
-				->group('Round '.$roundNum.' (win '.$g.')')
-				->setInGame(2)
-				->setType(Constants::ROUND_TWO)
-				->setOrder($order);
-			$allGroups[] = $group;
-			$order += 2;
-			$groups[] = $group;
+        // Repeat the game if the winning team loses
+        $group = $round->group('Round ' . $r . ' - finale (2)')->setInGame(2)->setType(Constants::ROUND_TWO)->setOrder(1);
+        $teamFilter = new TeamFilter('losses', '=', 1, $allGroups);
+        $groupFinal->progression($group, 0, 2)->addFilter($teamFilter);
 
-			// Save the last winning groups for the final round
-			$previousWinningGroups[] = $group;
+        return $this;
+    }
 
-			// Progress from winning groups before
-			$previousGroups[2 * ($g - 1)]->progression($group, 0, 1);
-			$previousGroups[(2 * ($g - 1)) + 1]->progression($group, 0, 1);
-		}
-	}
+    /**
+     * Calculate how many teams should skip the first round.
+     *
+     * @param int $countTeams Total teams
+     * @param int $nextPow    Next power of 2
+     */
+    private function calcByes(int $countTeams, int &$nextPow) : int {
+        $byes = 0;
+        $nextPow = $countTeams;
+        if (!Functions::isPowerOf2($countTeams)) {
+            $nextPow = Functions::nextPowerOf2($countTeams);
+            $byes = $nextPow - $countTeams;
+        }
 
-	/**
-	 * Generate the "losing side" - same as Single elimination
-	 *
-	 * @param int     $roundNum              Round number
-	 * @param bool    $extraStart            If there was an extra starting round (because of byes)
-	 * @param Round   $round                 Round object
-	 * @param Group[] $allGroups             Array of all groups
-	 * @param Group[] $previousLosingGroups  Last losing round's groups
-	 * @param Group[] $previousWinningGroups Last winning round's groups
-	 * @param Group[] $losingGroups          Array to save generated groups for later reference
-	 *
-	 * @return void
-	 * @throws Exception
-	 */
-	private function generateLosingSide(int $roundNum, bool $extraStart, Round $round, array &$allGroups, array $previousLosingGroups = [], array $previousWinningGroups = [], array &$losingGroups = []) : void {
-		// Filter winning groups - remove the ones without a game
-		foreach ($previousWinningGroups as $key => $group) {
-			if (count($group->getTeams()) === 1) {
-				unset($previousWinningGroups[$key]);
-			}
-		}
-		// Reset keys
-		$previousWinningGroups = array_values($previousWinningGroups);
+        return $byes;
+    }
 
-		// Save counts
-		$losingCount = count($previousLosingGroups);
-		$winningCount = count($previousWinningGroups);
-		$teamsTotal = $losingCount + $winningCount;
+    /**
+     * Generate the winning side (Single elimination with progressions into the losing side).
+     *
+     * @param int     $roundNum              Round number
+     * @param int     $winRoundNum           Real winning side round counter
+     * @param int     $byes                  Initial byes
+     * @param int     $countTeams            Total teams
+     * @param Round   $round                 Round object
+     * @param Group[] $allGroups             All groups
+     * @param Group[] $groups                Output groups
+     * @param Group[] $previousWinningGroups Winning side groups
+     * @param Group[] $previousGroups        Losing side groups
+     *
+     * @throws Exception
+     */
+    private function generateWinSide(
+        int $roundNum,
+        int $winRoundNum,
+        int $byes,
+        int $countTeams,
+        Round $round,
+        array &$allGroups,
+        array &$groups,
+        array &$previousWinningGroups = [],
+        array $previousGroups = []
+    ) : void {
+        $order = 1;
+        // All groups
+        for ($g = 1; $g <= (($countTeams + $byes) / (2 ** $winRoundNum)); ++$g) {
+            $group = $round
+                ->group('Round ' . $roundNum . ' (win ' . $g . ')')
+                ->setInGame(2)
+                ->setType(Constants::ROUND_TWO)
+                ->setOrder($order)
+            ;
+            $allGroups[] = $group;
+            $order += 2;
+            $groups[] = $group;
 
-		// Merge all groups in an alternating order for progressions
-		/** @var array[] $progressGroups 0: Group, 1: int - progression offset */
-		$progressGroups = [];
-		$losingKey = 0;
-		$winningKey = 0;
-		while (count($progressGroups) < $teamsTotal && ($losingCount > $losingKey || $winningCount > $winningKey)) {
-			if ($losingCount > $losingKey) {
-				$progressGroups[] = [$previousLosingGroups[$losingKey++], 0];
-			}
-			if ($winningCount > $winningKey) {
-				$progressGroups[] = [$previousWinningGroups[$winningKey++], 1];
-			}
-		}
+            // Save the last winning groups for the final round
+            $previousWinningGroups[] = $group;
 
-		$order = 2;
-		// Check byes
-		if (Functions::isPowerOf2($teamsTotal)) {
-			for ($g = 1; $g <= $teamsTotal / 2; $g++) {
-				$group = $round
-					->group('Round '.$roundNum.' (loss '.$g.')')
-					->setInGame(2)
-					->setType(Constants::ROUND_TWO)
-					->setOrder($order);
-				$allGroups[] = $group;
-				$order += 2;
-				$losingGroups[] = $group;
+            // Progress from winning groups before
+            $previousGroups[2 * ($g - 1)]->progression($group, 0, 1);
+            $previousGroups[(2 * ($g - 1)) + 1]->progression($group, 0, 1);
+        }
+    }
 
-				// First losing round
-				// Progress from winning teams only
-				if (($roundNum === 2 && !$extraStart) || ($roundNum === 3 && $extraStart)) {
-					$previousWinningGroups[2 * ($g - 1)]->progression($group, 1, 1);
-					$previousWinningGroups[(2 * ($g - 1)) + 1]->progression($group, 1, 1);
-				}
-				elseif ($teamsTotal >= 2) {
-					$key = 2 * ($g - 1);
-					$progressGroups[$key][0]->progression($group, $progressGroups[$key][1], 1);
-					$key++;
-					$progressGroups[$key][0]->progression($group, $progressGroups[$key][1], 1);
-				}
-			}
-		}
-		else {
-			// Calculate byes
-			$nextPowerOf2 = Functions::nextPowerOf2($teamsTotal);
-			$losingByes = $nextPowerOf2 - $teamsTotal;
+    /**
+     * Generate the "losing side" - same as Single elimination.
+     *
+     * @param int     $roundNum              Round number
+     * @param bool    $extraStart            If there was an extra starting round (because of byes)
+     * @param Round   $round                 Round object
+     * @param Group[] $allGroups             Array of all groups
+     * @param Group[] $previousLosingGroups  Last losing round's groups
+     * @param Group[] $previousWinningGroups Last winning round's groups
+     * @param Group[] $losingGroups          Array to save generated groups for later reference
+     *
+     * @throws Exception
+     */
+    private function generateLosingSide(
+        int $roundNum,
+        bool $extraStart,
+        Round $round,
+        array &$allGroups,
+        array $previousLosingGroups = [],
+        array $previousWinningGroups = [],
+        array &$losingGroups = []
+    ) : void {
+        // Filter winning groups - remove the ones without a game
+        foreach ($previousWinningGroups as $key => $group) {
+            if (1 === count($group->getTeams())) {
+                unset($previousWinningGroups[$key]);
+            }
+        }
+        // Reset keys
+        $previousWinningGroups = array_values($previousWinningGroups);
 
-			// Counters
-			$byesProgressed = 0;
-			$teamCounter = 0;
+        // Save counts
+        $losingCount = count($previousLosingGroups);
+        $winningCount = count($previousWinningGroups);
+        $teamsTotal = $losingCount + $winningCount;
 
-			// Generate groups
-			$groupCount = $nextPowerOf2 / 2;
-			for ($g = 1; $g <= $groupCount; $g++) {
-				$group = $round
-					->group('Round '.$roundNum.' (loss '.$g.')')
-					->setInGame(2)
-					->setType(Constants::ROUND_TWO)
-					->setOrder($order);
-				$allGroups[] = $group;
-				$order += 2;
-				$losingGroups[] = $group;
+        // Merge all groups in an alternating order for progressions
+        /** @var array[] $progressGroups 0: Group, 1: int - progression offset */
+        $progressGroups = [];
+        $losingKey = 0;
+        $winningKey = 0;
+        while (count($progressGroups) < $teamsTotal && ($losingCount > $losingKey || $winningCount > $winningKey)) {
+            if ($losingCount > $losingKey) {
+                $progressGroups[] = [$previousLosingGroups[$losingKey++], 0];
+            }
+            if ($winningCount > $winningKey) {
+                $progressGroups[] = [$previousWinningGroups[$winningKey++], 1];
+            }
+        }
 
-				// Create progressions from groups before
-				$teamCounter++;
-				$progressGroups[$byesProgressed][0]->progression($group, $progressGroups[$byesProgressed++][1], 1);
-				if (isset($progressGroups[$byesProgressed]) && $teamCounter < $teamsTotal - $losingByes) {
-					$teamCounter++;
-					$progressGroups[$byesProgressed][0]->progression($group, $progressGroups[$byesProgressed++][1], 1);
-				}
-			}
-		}
-	}
+        $order = 2;
+        // Check byes
+        if (Functions::isPowerOf2($teamsTotal)) {
+            for ($g = 1; $g <= $teamsTotal / 2; ++$g) {
+                $group = $round
+                    ->group('Round ' . $roundNum . ' (loss ' . $g . ')')
+                    ->setInGame(2)
+                    ->setType(Constants::ROUND_TWO)
+                    ->setOrder($order)
+                ;
+                $allGroups[] = $group;
+                $order += 2;
+                $losingGroups[] = $group;
 
-	/**
-	 * @return string
-	 * @throws Exception
-	 */
-	public function printBracket() : string {
-		$str = '';
-		foreach ($this->getRounds() as $round) {
-			$name = $round->getName();
-			$len = strlen($name);
-			$str .= "\n| ---------------------------------------- |\n| ".str_repeat('-', floor((40 - $len) / 2) - 1).' '.$name.' '.str_repeat('-', ceil((40 - $len) / 2) - 1)." |\n| ---------------------------------------- |\n\n";
-			foreach ($round->getGroups() as $group) {
-				$str .= '-- '.$group->getName().PHP_EOL;
-				if (count($group->getGames()) === 0) {
-					$str .= '| '.implode(' | ', array_map(static function(Team $team) {
-							return $team->getName();
-						}, $group->getTeams())).' |'.PHP_EOL;
-				}
-				else {
-					foreach ($group->getGames() as $game) {
-						$str .= '| '.implode(' | ', array_map(static function(Team $team) use ($game) {
-								return ($team->getId() === $game->getWin() ? "\e[1m\e[4m" : '').$team->getName()."\e[0m";
-							}, $game->getTeams())).' |'.(count($game->getDraw()) > 0 ? ' - draw' : '').PHP_EOL;
-					}
-				}
-			}
-		}
-		return $str;
-	}
+                // First losing round
+                // Progress from winning teams only
+                if ((2 === $roundNum && !$extraStart) || (3 === $roundNum && $extraStart)) {
+                    $previousWinningGroups[2 * ($g - 1)]->progression($group, 1, 1);
+                    $previousWinningGroups[(2 * ($g - 1)) + 1]->progression($group, 1, 1);
+                } elseif ($teamsTotal >= 2) {
+                    $key = 2 * ($g - 1);
+                    $progressGroups[$key][0]->progression($group, $progressGroups[$key][1], 1);
+                    ++$key;
+                    $progressGroups[$key][0]->progression($group, $progressGroups[$key][1], 1);
+                }
+            }
+        } else {
+            // Calculate byes
+            $nextPowerOf2 = Functions::nextPowerOf2($teamsTotal);
+            $losingByes = $nextPowerOf2 - $teamsTotal;
 
+            // Counters
+            $byesProgressed = 0;
+            $teamCounter = 0;
+
+            // Generate groups
+            $groupCount = $nextPowerOf2 / 2;
+            for ($g = 1; $g <= $groupCount; ++$g) {
+                $group = $round
+                    ->group('Round ' . $roundNum . ' (loss ' . $g . ')')
+                    ->setInGame(2)
+                    ->setType(Constants::ROUND_TWO)
+                    ->setOrder($order)
+                ;
+                $allGroups[] = $group;
+                $order += 2;
+                $losingGroups[] = $group;
+
+                // Create progressions from groups before
+                ++$teamCounter;
+                $progressGroups[$byesProgressed][0]->progression($group, $progressGroups[$byesProgressed++][1], 1);
+                if (isset($progressGroups[$byesProgressed]) && $teamCounter < $teamsTotal - $losingByes) {
+                    ++$teamCounter;
+                    $progressGroups[$byesProgressed][0]->progression($group, $progressGroups[$byesProgressed++][1], 1);
+                }
+            }
+        }
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function printBracket() : string {
+        $str = '';
+        foreach ($this->getRounds() as $round) {
+            $name = $round->getName();
+            $len = strlen($name);
+            $str .= "\n| ---------------------------------------- |\n| " . str_repeat(
+                '-',
+                (int) floor((40 - $len) / 2) - 1
+            ) . ' ' . $name . ' ' . str_repeat(
+                '-',
+                (int) ceil((40 - $len) / 2) - 1
+            ) . " |\n| ---------------------------------------- |\n\n";
+            foreach ($round->getGroups() as $group) {
+                $str .= '-- ' . $group->getName() . PHP_EOL;
+                if (0 === count($group->getGames())) {
+                    $str .= '| ' . implode(
+                        ' | ',
+                        array_map(
+                            static fn (Team $team) : string => $team->getName(),
+                            $group->getTeams()
+                        )
+                    ) . ' |' . PHP_EOL;
+                } else {
+                    foreach ($group->getGames() as $game) {
+                        $str .= '| ' . implode(
+                            ' | ',
+                            array_map(
+                                static fn (Team $team) : string => ($team->getId() === $game->getWin()
+                                            ? "\e[1m\e[4m" : '') . $team->getName() . "\e[0m",
+                                $game->getTeams()
+                            )
+                        ) . ' |' . (count($game->getDraw()) > 0 ? ' - draw' : '') . PHP_EOL;
+                    }
+                }
+            }
+        }
+
+        return $str;
+    }
 }

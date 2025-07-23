@@ -1,68 +1,72 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Presets;
 
 use Exception;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use TournamentGenerator\Preset\DoubleElimination;
 
 /**
- * Test the double elimination generator
+ * Test the double elimination generator.
+ *
+ * @internal
+ *
+ * @coversNothing
  */
 class DoubleEliminationTest extends TestCase
 {
+    #[Test]
+    public function doubleEliminationLessTeams() : void {
+        $doubleElimination = new DoubleElimination('Tournament name');
 
-	/** @test */
-	public function double_elimination_less_teams() : void {
-		$tournament = new DoubleElimination('Tournament name');
+        for ($i = 1; $i < 3; ++$i) {
+            $doubleElimination->team('Team ' . $i);
+        }
 
-		for ($i = 1; $i < 3; $i++) {
-			$tournament->team('Team '.$i);
-		}
+        $this->expectException(Exception::class);
+        $doubleElimination->generate();
+    }
 
-		$this->expectException(Exception::class);
-		$tournament->generate();
-	}
+    #[DataProvider('teamCounts')]
+    #[Test]
+    public function doubleElimination(int $teams, int $games) : void {
+        $doubleElimination = new DoubleElimination('Tournament name');
 
-	public function teamCounts() : array {
-		return [
-			[3, 5],
-			[4, 7],
-			[5, 9],
-			[6, 11],
-			[7, 13],
-			[8, 15],
-			[9, 17],
-			[10, 19],
-			[11, 21],
-			[12, 23],
-			[13, 25],
-			[14, 27],
-			[15, 29],
-			[16, 31],
-		];
-	}
+        for ($i = 1; $i <= $teams; ++$i) {
+            $doubleElimination->team('Team ' . $i);
+        }
 
-	/**
-	 * @test
-	 * @dataProvider teamCounts
-	 */
-	public function double_elimination(int $teams, int $games) : void {
-		$tournament = new DoubleElimination('Tournament name');
+        $doubleElimination->generate();
 
-		for ($i = 1; $i <= $teams; $i++) {
-			$tournament->team('Team '.$i);
-		}
+        $doubleElimination->genGamesSimulateReal();
 
-		$tournament->generate();
+        $count = count($doubleElimination->getGames());
+        // The last game can be repeated - therefore <games-1, games> count must be checked
+        self::assertTrue($count === $games || $count === $games - 1, 'Expected: ' . $games . ', Actual: ' . $count . PHP_EOL . $doubleElimination->printBracket());
+    }
 
-		$tournament->genGamesSimulateReal();
+    public static function teamCounts() : array {
+        return [
+            [3, 5],
+            [4, 7],
+            [5, 9],
+            [6, 11],
+            [7, 13],
+            [8, 15],
+            [9, 17],
+            [10, 19],
+            [11, 21],
+            [12, 23],
+            [13, 25],
+            [14, 27],
+            [15, 29],
+            [16, 31],
+        ];
+    }
 
-		$count = count($tournament->getGames());
-		// The last game can be repeated - therefore <games-1, games> count must be checked
-		self::assertTrue($count === $games || $count === $games - 1, 'Expected: '.$games.', Actual: '.$count.PHP_EOL.$tournament->printBracket());
-	}
-
-	// TODO: Maybe test specific double elimination bracket, if correct games are generated
-
+    // TODO: Maybe test specific double elimination bracket, if correct games are generated
 }

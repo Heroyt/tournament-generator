@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
 
 namespace TournamentGenerator\Export\Hierarchy;
 
-
 use Exception;
+use Override;
 use TournamentGenerator\Category;
 use TournamentGenerator\Export\ExporterBase;
 use TournamentGenerator\Export\ExporterInterface;
@@ -22,64 +23,61 @@ use TournamentGenerator\TeamFilter;
 use TournamentGenerator\Tournament;
 
 /**
- * Class SetupExporter
+ * Class SetupExporter.
  *
- * @package TournamentGenerator\Export
  * @author  Tomáš Vojík <vojik@wboy.cz>
+ *
  * @since   0.5
  */
 class SetupExporter extends ExporterBase
 {
-
-    /**
-     * @inheritDoc
-     */
-    public static function export(WithId $object): array {
-        return self::start($object)->get();
+    public static function export(WithId $withId) : array {
+        return self::start($withId)->get();
     }
 
     /**
-     * Finish the export query -> get the result
+     * Finish the export query -> get the result.
      *
      * @return array The query result
+     *
      * @throws Exception
      */
-    public function get(): array {
+    #[Override]
+    public function get() : array {
         $data = $this->getBasic();
         $this->applyModifiers($data);
+
         return $data;
     }
 
     /**
-     * @inheritDoc
      * @throws Exception
      */
-    public function getBasic(): array {
+    public function getBasic() : array {
         $data = [];
         $this->getTournamentData($data);
         $this->getCategoriesData($data);
         $this->getRoundsData($data);
         $this->getGroupsData($data);
+
         return $data;
     }
 
     /**
-     * Get all setup information from a Tournament class
-     *
-     * @param array $data
+     * Get all setup information from a Tournament class.
      *
      * @throws Exception
      */
-    protected function getTournamentData(array &$data): void {
+    protected function getTournamentData(array &$data) : void {
         if (!$this->object instanceof Tournament) {
             return;
         }
-        $data['tournament'] = (object)[
-            'type' => $this->object instanceof Preset ? get_class($this->object) : 'general',
+        $data['tournament'] = (object) [
+            'type'   => $this->object instanceof Preset ? $this->object::class : 'general',
             'name' => $this->object->getName(),
             'skip' => $this->object->getSkip(),
             'iterations' => $this->object->getIterationCount(),
-            'timing' => (object)[
+            'timing' => (object) [
                 'play' => $this->object->getPlay(),
                 'gameWait' => $this->object->getGameWait(),
                 'categoryWait' => $this->object->getCategoryWait(),
@@ -95,13 +93,11 @@ class SetupExporter extends ExporterBase
     }
 
     /**
-     * Get all setup information for categories
-     *
-     * @param array $data
+     * Get all setup information for categories.
      *
      * @throws Exception
      */
-    protected function getCategoriesData(array &$data): void {
+    protected function getCategoriesData(array &$data) : void {
         if ($this->object instanceof Category) {
             $data['categories'] = [
                 $this->object->getId() => $this->getCategoryData($this->object),
@@ -115,15 +111,14 @@ class SetupExporter extends ExporterBase
     }
 
     /**
-     * Get all setup information from a Category class
+     * Get all setup information from a Category class.
      *
      * @param Category $category Category class to export
      *
-     * @return object
      * @throws Exception
      */
-    protected function getCategoryData(Category $category): object {
-        return (object)[
+    protected function getCategoryData(Category $category) : object {
+        return (object) [
             'id' => $category->getId(),
             'name' => $category->getName(),
             'skip' => $category->getSkip(),
@@ -135,13 +130,11 @@ class SetupExporter extends ExporterBase
     }
 
     /**
-     * Get all setup information for rounds
-     *
-     * @param array $data
+     * Get all setup information for rounds.
      *
      * @throws Exception
      */
-    protected function getRoundsData(array &$data): void {
+    protected function getRoundsData(array &$data) : void {
         if ($this->object instanceof Round) {
             $data['rounds'] = [
                 $this->object->getId() => $this->getRoundData($this->object),
@@ -155,15 +148,14 @@ class SetupExporter extends ExporterBase
     }
 
     /**
-     * Get all setup information from a Round class
+     * Get all setup information from a Round class.
      *
      * @param Round $round Round class to export
      *
-     * @return object
      * @throws Exception
      */
-    protected function getRoundData(Round $round): object {
-        return (object)[
+    protected function getRoundData(Round $round) : object {
+        return (object) [
             'id' => $round->getId(),
             'name' => $round->getName(),
             'skip' => $round->getSkip(),
@@ -176,13 +168,11 @@ class SetupExporter extends ExporterBase
     }
 
     /**
-     * Get all setup information for groups and progressions
-     *
-     * @param array $data
+     * Get all setup information for groups and progressions.
      *
      * @throws Exception
      */
-    protected function getGroupsData(array &$data): void {
+    protected function getGroupsData(array &$data) : void {
         $data['groups'] = [];
         $data['progressions'] = [];
         if ($this->object instanceof Group) {
@@ -201,21 +191,20 @@ class SetupExporter extends ExporterBase
     }
 
     /**
-     * Get all setup information from a Group class
+     * Get all setup information from a Group class.
      *
      * @param Group $group Group class to export
      *
-     * @return object
      * @throws Exception
      */
-    protected function getGroupData(Group $group): object {
-        return (object)[
+    protected function getGroupData(Group $group) : object {
+        return (object) [
             'id' => $group->getId(),
             'name' => $group->getName(),
             'type' => $group->getType(),
             'skip' => $group->getSkip(),
             'iterations' => $group->getIterationCount(),
-            'points' => (object)[
+            'points' => (object) [
                 'win' => $group->getWinPoints(),
                 'loss' => $group->getLostPoints(),
                 'draw' => $group->getDrawPoints(),
@@ -232,14 +221,12 @@ class SetupExporter extends ExporterBase
     }
 
     /**
-     * Get all setup information from a Progression class
+     * Get all setup information from a Progression class.
      *
      * @param Progression $progression Progression class to export
-     *
-     * @return object
      */
-    protected function getProgressionData(Progression $progression): object {
-        return (object)[
+    protected function getProgressionData(Progression $progression) : object {
+        return (object) [
             'from' => $progression->getFrom()->getId(),
             'to' => $progression->getTo()->getId(),
             'offset' => $progression->getStart(),
@@ -250,26 +237,21 @@ class SetupExporter extends ExporterBase
         ];
     }
 
-    /**
-     * @inheritDoc
-     */
-    public static function start(WithId $object): ExporterInterface {
-        return new self($object);
+    public static function start(WithId $withId) : ExporterInterface {
+        return new self($withId);
     }
 
     /**
-     * Get all setup information from a TeamFilter class
+     * Get all setup information from a TeamFilter class.
      *
-     * @param TeamFilter $filter TeamFilter class to export
-     *
-     * @return object
+     * @param TeamFilter $teamFilter TeamFilter class to export
      */
-    protected function getTeamFilterData(TeamFilter $filter): object {
-        return (object)[
-            'what' => $filter->getWhat(),
-            'how' => $filter->getHow(),
-            'val' => $filter->getVal(),
-            'groups' => $filter->getGroups(),
+    protected function getTeamFilterData(TeamFilter $teamFilter) : object {
+        return (object) [
+            'what'   => $teamFilter->getWhat(),
+            'how'    => $teamFilter->getHow(),
+            'val'    => $teamFilter->getVal(),
+            'groups' => $teamFilter->getGroups(),
         ];
     }
 }

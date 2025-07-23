@@ -1,47 +1,51 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Presets;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use TournamentGenerator\Preset\SingleElimination;
 
 /**
- * Test the Single elimination generator
+ * Test the Single elimination generator.
+ *
+ * @internal
+ *
+ * @coversNothing
  */
 class SingleEliminationTest extends TestCase
 {
+    #[DataProvider('teamCounts')]
+    #[Test]
+    public function singleElimination(int $teams, int $games) : void {
+        $singleElimination = new SingleElimination('Tournament name');
 
-	public function teamCounts() : array {
-		return [
-			[3, 2],
-			[4, 3],
-			[5, 4],
-			[6, 5],
-			[7, 6],
-			[8, 7],
-			[9, 8],
-			[16, 15],
-			[25, 24],
-			[32, 31],
-		];
-	}
+        for ($i = 1; $i <= $teams; ++$i) {
+            $singleElimination->team('Team ' . $i);
+        }
 
-	/**
-	 * @test
-	 * @dataProvider teamCounts
-	 */
-	public function single_elimination(int $teams, int $games) : void {
-		$tournament = new SingleElimination('Tournament name');
+        $singleElimination->generate();
 
-		for ($i = 1; $i <= $teams; $i++) {
-			$tournament->team('Team '.$i);
-		}
+        $singleElimination->genGamesSimulate();
 
-		$tournament->generate();
+        self::assertCount($games, $singleElimination->getGames());
+    }
 
-		$tournament->genGamesSimulate();
-
-		self::assertCount($games, $tournament->getGames());
-	}
-
+    public static function teamCounts() : array {
+        return [
+            [3, 2],
+            [4, 3],
+            [5, 4],
+            [6, 5],
+            [7, 6],
+            [8, 7],
+            [9, 8],
+            [16, 15],
+            [25, 24],
+            [32, 31],
+        ];
+    }
 }
