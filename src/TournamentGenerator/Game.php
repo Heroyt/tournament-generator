@@ -30,17 +30,17 @@ class Game implements WithId, Exportable, JsonSerializable
     /** @var array[] List of scores - [teamId => [score => value, type => win|loss|draw|second|third]] pairs */
     protected array $results = [];
 
-    /** @var int|string Id of the winning team */
-    protected int|string $winId;
+    /** @var null|int|string Id of the winning team */
+    protected null|int|string $winId = null;
 
-    /** @var int|string Id of the losing team */
-    protected int|string $lossId;
+    /** @var null|int|string Id of the losing team */
+    protected null|int|string $lossId = null;
 
-    /** @var int|string Id of the second team */
-    private int|string $secondId;
+    /** @var null|int|string Id of the second team */
+    protected null|int|string $secondId = null;
 
-    /** @var int|string Id of the third team */
-    private int|string $thirdId;
+    /** @var null|int|string Id of the third team */
+    protected null|int|string $thirdId = null;
 
     /** @var int[]|string[] Ids of the teams that have drawn */
     private array $drawIds = [];
@@ -356,28 +356,28 @@ class Game implements WithId, Exportable, JsonSerializable
     /**
      * Get the winning team's id.
      */
-    public function getWin() : int|string {
+    public function getWin() : null|int|string {
         return $this->winId;
     }
 
     /**
      * Get the losing team's id.
      */
-    public function getLoss() : int|string {
+    public function getLoss() : null|int|string {
         return $this->lossId;
     }
 
     /**
      * Get the second team's id.
      */
-    public function getSecond() : int|string {
+    public function getSecond() : null|int|string {
         return $this->secondId;
     }
 
     /**
      * Get the third team's id.
      */
-    public function getThird() : int|string {
+    public function getThird() : null|int|string {
         return $this->thirdId;
     }
 

@@ -97,13 +97,16 @@ class MultiProgressionTest extends TestCase
         $group2 = $round->group('Round 2')->setInGame(2);
 
         for ($i = 1; $i <= 6; ++$i) {
-            $group1->team('Team ' . $i, $i);
+            $round->team('Team ' . $i, $i);
         }
 
         // Create a final group
         $group = $final->group('Teams 1-2')->setInGame(2);
 
         $tournament->splitTeams($round);
+
+        $this->assertCount(3, $group1->getTeams());
+        $this->assertCount(3, $group2->getTeams());
 
         $multiProgression = $group->multiProgression([$group1, $group2], 0, 2, 3);
 

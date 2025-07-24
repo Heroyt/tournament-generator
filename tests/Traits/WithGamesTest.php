@@ -13,6 +13,7 @@ use TournamentGenerator\Interfaces\WithGames;
 use TournamentGenerator\Interfaces\WithGroups;
 use TournamentGenerator\Interfaces\WithRounds;
 use TournamentGenerator\Round;
+use TournamentGenerator\Team;
 use TournamentGenerator\Tournament;
 
 /**
@@ -50,10 +51,10 @@ class WithGamesTest extends TestCase
 
         // Create random rounds, groups and games
         if ($withGames instanceof WithRounds) {
-            $rounds = random_int(1, 10);
+            $rounds = random_int(2, 5);
             for ($i = 0; $i < $rounds; ++$i) {
                 $round = $withGames->round('Round ' . $i, $i);
-                $groups = random_int(1, 4);
+                $groups = random_int(2, 4);
                 for ($ii = 0; $ii < $groups; ++$ii) {
                     $id = 4 * $i + $ii;
                     $group = $round->group('Group ' . $id, $id);
@@ -137,21 +138,23 @@ class WithGamesTest extends TestCase
     #[DataProvider('getClasses')]
     public function testSettingResult(WithGames $withGames) : void {
         $this->setupGames($withGames);
-        $teams = [];
+
+        /** @var array<int|string, array<int|string, Team>> $teamGroups */
+        $teamGroups = [];
         $games = [];
         if ($withGames instanceof WithGroups) {
             $groups = $withGames->getGroups();
             foreach ($groups as $group) {
-                $teams[$group->getId()] = [];
+                $teamGroups[$group->getId()] = [];
                 foreach ($group->getTeams() as $team) {
-                    $teams[$group->getId()][$team->getId()] = $team;
+                    $teamGroups[$group->getId()][$team->getId()] = $team;
                 }
                 $games[$group->getId()] = $group->getGames();
             }
         } elseif ($withGames instanceof Group) {
-            $teams[$withGames->getId()] = [];
+            $teamGroups[$withGames->getId()] = [];
             foreach ($withGames->getTeams() as $team) {
-                $teams[$withGames->getId()][$team->getId()] = $team;
+                $teamGroups[$withGames->getId()][$team->getId()] = $team;
             }
             $games[$withGames->getId()] = $withGames->getGames();
         }
@@ -172,11 +175,12 @@ class WithGamesTest extends TestCase
 
         // Test setting results for invalid games
         if ($withGames instanceof WithGroups) {
+            $this->assertGreaterThanOrEqual(2, count($teamGroups), 'Not enough groups created for testing results setting.');
             for ($i = 0; $i < 10; ++$i) {
-                $groups = array_rand($teams, 2);
+                $groups = array_rand($teamGroups, 2);
                 $results = [];
                 foreach ($groups as $group) {
-                    $results[array_rand($teams[$group])] = random_int(0, 10000);
+                    $results[array_rand($teamGroups[$group])] = random_int(0, 10000);
                 }
                 $game = $withGames->setResults($results);
                 self::assertNull($game);
@@ -184,12 +188,16 @@ class WithGamesTest extends TestCase
         }
     }
 
-    public static function getClasses() : array {
-        return [
-            [new Tournament('Tournament')],
-            [new Category('Category')],
-            [new Round('Round')],
-            [new Group('Group')],
-        ];
+    /**
+     * @return iterable<string, array{0:WithGames}>
+     */
+    public static function getClasses() : iterable {
+        yield 'Tournament' => [new Tournament('Tournament')];
+
+        yield 'Category' => [new Category('Category')];
+
+        yield 'Round' => [new Round('Round')];
+
+        yield 'Group' => [new Group('Group')];
     }
 }
