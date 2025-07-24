@@ -1,10 +1,16 @@
 name: PHP Composer
 
 on:
+  workflow_dispatch:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+
+env:
+  extensions:  json, zlib, fileinfo, mbstring, intl
+  defaultPHPVersion: '8.4'
+
 
 jobs:
   build:
@@ -14,40 +20,111 @@ jobs:
     strategy:
       matrix:
         operating-system: [ubuntu-latest]
-        php-version: [ '8.0', '8.1' ]
+        php-version: [ '8.4' ]
         dependencies: ['']
-        coverage-driver: [pcov, xdebug]
-        include:
-          - { operating-system: 'ubuntu-latest', php-version: '8.0', dependencies: '--prefer-lowest', coverage-driver: 'pcov' }
-          - { operating-system: 'ubuntu-latest', php-version: '8.1', dependencies: '--ignore-platform-req=php', coverage-driver: 'pcov' }
+        coverage-driver: [xdebug]
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-    - name: Validate composer.json and composer.lock
-      run: composer validate --strict
+      - name: Setup PHP
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: ${{ env.defaultPHPVersion }}
+          extensions: ${{ env.extensions }}
+          ini-values: memory_limit=2G, display_errors=On, error_reporting=-1
+          tools: composer-require-checker:2.1.0
 
-    - name: Cache Composer packages
-      id: composer-cache
-      uses: actions/cache@v2
-      with:
-        path: vendor
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
 
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
 
-    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-    # Docs: https://getcomposer.org/doc/articles/scripts.md
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
 
-    - name: Run test suite
-      env: 
-        XDEBUG_MODE: coverage 
-      run: composer run-script test
+  cs:
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      matrix:
+        operating-system: [ubuntu-latest]
+        php-version: [ '8.4' ]
+        dependencies: ['']
+        coverage-driver: [xdebug]
+    name: Check code style
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
 
-    - name: Run mutation test suite
-      env: 
-        XDEBUG_MODE: coverage 
-      run: composer run-script testMutation
+      - name: Setup PHP
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: ${{ env.defaultPHPVersion }}
+          extensions: ${{ env.extensions }}
+          ini-values: memory_limit=2G, display_errors=On, error_reporting=-1
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install Composer dependencies
+        run: |
+          composer install --no-progress --prefer-dist --optimize-autoloader
+
+      - name: Run code style checks
+        run: composer run-script cs
+
+  test:
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      matrix:
+        operating-system: [ubuntu-latest]
+        php-version: [ '8.4' ]
+        dependencies: ['']
+        coverage-driver: [xdebug]
+    name: Run tests
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: ${{ env.defaultPHPVersion }}
+          extensions: ${{ env.extensions }}
+          ini-values: memory_limit=2G, display_errors=On, error_reporting=-1
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install Composer dependencies
+        run: |
+          composer install --no-progress --prefer-dist --optimize-autoloader
+
+      - name: Run test suite
+        env:
+          XDEBUG_MODE: coverage
+        run: composer run-script test
+
+      - name: Run mutation test suite
+        env:
+          XDEBUG_MODE: coverage
+        run: composer run-script testMutation

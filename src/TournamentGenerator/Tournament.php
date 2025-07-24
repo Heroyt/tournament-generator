@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TournamentGenerator;
 
 use Exception;
@@ -22,185 +24,168 @@ use TournamentGenerator\Traits\WithSkipSetters as WithSkipSettersTrait;
 use TournamentGenerator\Traits\WithTeams as WithTeamsTrait;
 
 /**
- * Tournament class
+ * Tournament class.
  *
  * Tournament is a main class. It is a container for every other object related to one tournament (categories -> rounds -> groups -> games -> teams).
  *
- * @package TournamentGenerator
  * @author  Tomáš Vojík <vojik@wboy.cz>
+ *
  * @since   0.1
  */
 class Tournament extends HierarchyBase implements WithSkipSetters, WithTeams, WithRounds, WithCategories, WithGroups, WithGames, WithIterationSetters
 {
-	use WithTeamsTrait;
-	use WithCategoriesTrait;
-	use WithRoundsTrait;
-	use WithGroupsTrait;
-	use WithSkipSettersTrait;
-	use WithGamesTrait;
-	use WithIterations;
+    use WithTeamsTrait;
+    use WithCategoriesTrait;
+    use WithRoundsTrait;
+    use WithGroupsTrait;
+    use WithSkipSettersTrait;
+    use WithGamesTrait;
+    use WithIterations;
 
-	/** @var int Wait time between categories */
-	protected int $expectedCategoryWait = 0;
-	/** @var int Play time for one game */
-	private int $expectedPlay = 0;
-	/** @var int Wait time between games */
-	private int $expectedGameWait = 0;
-	/** @var int Wait time between rounds */
-	private int $expectedRoundWait = 0;
+    /** @var int Wait time between categories */
+    protected int $expectedCategoryWait = 0;
 
-	public function __construct(string $name = '') {
-		$this->name = $name;
-		$this->games = new GameContainer(0);
-		$this->teams = new TeamContainer(0);
-		$this->container = new HierarchyContainer(0);
-	}
+    /** @var int Play time for one game */
+    private int $expectedPlay = 0;
 
-	/**
-	 * Set play time for one game
-	 *
-	 * @param int $play
-	 *
-	 * @return $this
-	 */
-	public function setPlay(int $play) : Tournament {
-		$this->expectedPlay = $play;
-		return $this;
-	}
+    /** @var int Wait time between games */
+    private int $expectedGameWait = 0;
 
-	/**
-	 * Get play time for one game
-	 *
-	 * @return int
-	 */
-	public function getPlay() : int {
-		return $this->expectedPlay;
-	}
+    /** @var int Wait time between rounds */
+    private int $expectedRoundWait = 0;
 
-	/**
-	 * Set wait time between games
-	 *
-	 * @param int $wait
-	 *
-	 * @return $this
-	 */
-	public function setGameWait(int $wait) : Tournament {
-		$this->expectedGameWait = $wait;
-		return $this;
-	}
+    public function __construct(string $name = '') {
+        $this->name = $name;
+        $this->games = new GameContainer(0);
+        $this->teams = new TeamContainer(0);
+        $this->container = new HierarchyContainer(0);
+    }
 
-	/**
-	 * Get wait time between games
-	 *
-	 * @return int
-	 */
-	public function getGameWait() : int {
-		return $this->expectedGameWait;
-	}
+    /**
+     * Set play time for one game.
+     */
+    public function setPlay(int $play) : Tournament {
+        $this->expectedPlay = $play;
 
-	/**
-	 * Set wait time between rounds
-	 *
-	 * @param int $wait
-	 *
-	 * @return $this
-	 */
-	public function setRoundWait(int $wait) : Tournament {
-		$this->expectedRoundWait = $wait;
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Get wait time between rounds
-	 *
-	 * @return int
-	 */
-	public function getRoundWait() : int {
-		return $this->expectedRoundWait;
-	}
+    /**
+     * Get play time for one game.
+     */
+    public function getPlay() : int {
+        return $this->expectedPlay;
+    }
 
-	/**
-	 * Set the wait time between categories
-	 *
-	 * @param int $wait
-	 *
-	 * @return $this
-	 */
-	public function setCategoryWait(int $wait) : Tournament {
-		$this->expectedCategoryWait = $wait;
-		return $this;
-	}
+    /**
+     * Set wait time between games.
+     */
+    public function setGameWait(int $wait) : Tournament {
+        $this->expectedGameWait = $wait;
 
-	/**
-	 * Get the wait time between categories
-	 *
-	 * @return int
-	 */
-	public function getCategoryWait() : int {
-		return $this->expectedCategoryWait;
-	}
+        return $this;
+    }
 
-	/**
-	 * Simulate all games as they would be played in reality - with dummy teams
-	 *
-	 * @param bool $returnTime If true - return the expected play time
-	 *
-	 * @return Game[]|int Generated games, or expected play time
-	 * @throws Exception
-	 */
-	public function genGamesSimulate(bool $returnTime = false): int|array {
+    /**
+     * Get wait time between games.
+     */
+    public function getGameWait() : int {
+        return $this->expectedGameWait;
+    }
+
+    /**
+     * Set wait time between rounds.
+     */
+    public function setRoundWait(int $wait) : Tournament {
+        $this->expectedRoundWait = $wait;
+
+        return $this;
+    }
+
+    /**
+     * Get wait time between rounds.
+     */
+    public function getRoundWait() : int {
+        return $this->expectedRoundWait;
+    }
+
+    /**
+     * Set the wait time between categories.
+     */
+    public function setCategoryWait(int $wait) : Tournament {
+        $this->expectedCategoryWait = $wait;
+
+        return $this;
+    }
+
+    /**
+     * Get the wait time between categories.
+     */
+    public function getCategoryWait() : int {
+        return $this->expectedCategoryWait;
+    }
+
+    /**
+     * Simulate all games as they would be played in reality - with dummy teams.
+     *
+     * @param bool $returnTime If true - return the expected play time
+     *
+     * @return Game[]|int Generated games, or expected play time
+     *
+     * @throws Exception
+     */
+    public function genGamesSimulate(bool $returnTime = false) : array|int {
         $games = Helpers\Simulator::simulateTournament($this);
 
         if ($returnTime) {
             return $this->getTournamentTime();
         }
+
         return $games;
     }
 
-	/**
-	 * Get the whole tournament time
-	 *
-	 * @return int
-	 */
-	public function getTournamentTime() : int {
-		$games = count($this->getGames());
-		return $games * $this->expectedPlay + ($games - 1) * $this->expectedGameWait + (count($this->getRounds()) - 1) * $this->expectedRoundWait + (count($this->getCategories()) - 1) * $this->expectedCategoryWait;
-	}
+    /**
+     * Get the whole tournament time.
+     */
+    public function getTournamentTime() : int {
+        $games = count($this->getGames());
 
-	/**
-	 * Simulate all games as they would be played in reality - with real teams
-	 *
-	 * @param bool $returnTime If true - return the expected play time
-	 *
-	 * @return int|Game[] Generated games, or expected play time
-	 * @throws Exception
-	 */
-    public function genGamesSimulateReal(bool $returnTime = false): int|array {
+        return $games * $this->expectedPlay + ($games - 1) * $this->expectedGameWait + (count($this->getRounds()) - 1) * $this->expectedRoundWait + (count($this->getCategories()) - 1) * $this->expectedCategoryWait;
+    }
+
+    /**
+     * Simulate all games as they would be played in reality - with real teams.
+     *
+     * @param bool $returnTime If true - return the expected play time
+     *
+     * @return Game[]|int Generated games, or expected play time
+     *
+     * @throws Exception
+     */
+    public function genGamesSimulateReal(bool $returnTime = false) : array|int {
         $games = Helpers\Simulator::simulateTournamentReal($this);
 
         if ($returnTime) {
             return $this->getTournamentTime();
         }
+
         return $games;
     }
 
-	/**
-	 * @inheritDoc
-	 * @return array
-	 * @throws Exception
-	 */
-	public function jsonSerialize() : array {
-		return $this->export()->get();
-	}
+    /**
+     * @throws Exception
+     */
+    public function jsonSerialize() : array {
+        return $this->export()->get();
+    }
 
-	public function setIterationCount(int $iterations): static {
-		$this->iterations = $iterations;
+    public function setIterationCount(int $iterations) : static {
+        $this->iterations = $iterations;
 
-		foreach ($this->getRounds() as $round) {
-			$round->setIterationCount($iterations);
-		}
+        foreach ($this->getRounds() as $round) {
+            $round->setIterationCount($iterations);
+        }
 
-		return $this;
-	}
-
+        return $this;
+    }
 }

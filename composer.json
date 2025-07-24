@@ -29,7 +29,7 @@
 	"prefer-stable": true,
 	"config": {
 		"platform": {
-			"php": "8.0.0"
+			"php": "8.4.0"
 		},
 		"optimize-autoloader": true,
 		"sort-packages": true,
@@ -42,10 +42,14 @@
 		"docs": "php phpDocumentor.phar -s src/ -t docs/api/",
 		"doxygen": "doxygen",
 		"test": "./vendor/bin/phpunit",
-		"testMutation": "./vendor/bin/infection --threads=4"
+		"testMutation": "./vendor/bin/infection --threads=4",
+		"phpstan": "./vendor/bin/phpstan analyse -c phpstan.neon",
+		"cs": "./vendor/bin/php-cs-fixer --allow-risky=yes check",
+		"cbf": "./vendor/bin/php-cs-fixer --allow-risky=yes fix",
+		"rector": "./vendor/bin/rector"
 	},
 	"require": {
-		"php": ">=8.0"
+		"php": ">=8.4"
 	},
 	"autoload": {
 		"psr-4": {
@@ -53,7 +57,10 @@
 		}
 	},
 	"require-dev": {
-		"infection/infection": "^0.26",
-		"phpunit/phpunit": "^9.6"
+		"friendsofphp/php-cs-fixer": "^3.84",
+		"infection/infection": "^0.30",
+		"phpstan/phpstan": "^2.1",
+		"phpunit/phpunit": "^12.2",
+		"rector/rector": "^2.1"
 	}
 }

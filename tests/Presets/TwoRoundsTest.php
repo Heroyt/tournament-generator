@@ -1,67 +1,71 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Presets;
 
 use Exception;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use TournamentGenerator\Preset\R2G;
 
 /**
+ * @internal
  *
+ * @coversNothing
  */
 class TwoRoundsTest extends TestCase
 {
+    #[Test]
+    public function r2GEliminationEvenTeams() : void {
+        $r2g = new R2G('Tournament name');
 
-	/** @test */
-	public function R2G_elimination_even_teams() : void {
-		$tournament = new R2G('Tournament name');
+        for ($i = 1; $i <= 8; ++$i) {
+            $r2g->team('Team ' . $i);
+        }
 
-		for ($i = 1; $i <= 8; $i++) {
-			$tournament->team('Team '.$i);
-		}
+        $r2g->generate();
 
-		$tournament->generate();
+        $r2g->genGamesSimulate();
 
-		$tournament->genGamesSimulate();
+        self::assertCount(12, $r2g->getGames());
+    }
 
-		self::assertCount(12, $tournament->getGames());
-	}
+    #[Test]
+    public function r2GEliminationNondivisibleBy4() : void {
+        $r2g = new R2G('Tournament name');
 
-	/** @test */
-	public function R2G_elimination_nondivisible_by_4() : void {
-		$tournament = new R2G('Tournament name');
+        for ($i = 1; $i <= 6; ++$i) {
+            $r2g->team('Team ' . $i);
+        }
 
-		for ($i = 1; $i <= 6; $i++) {
-			$tournament->team('Team '.$i);
-		}
+        $r2g->generate();
 
-		$tournament->generate();
+        $r2g->genGamesSimulate();
 
-		$tournament->genGamesSimulate();
+        self::assertGreaterThanOrEqual(7, count($r2g->getGames()));
+        self::assertLessThanOrEqual(9, count($r2g->getGames()));
+    }
 
-		self::assertGreaterThanOrEqual(7, count($tournament->getGames()));
-		self::assertLessThanOrEqual(9, count($tournament->getGames()));
-	}
+    #[Test]
+    public function r2GEliminationOddTeams() : void {
+        $r2g = new R2G('Tournament name');
 
-	/** @test */
-	public function R2G_elimination_odd_teams() : void {
-		$tournament = new R2G('Tournament name');
+        for ($i = 1; $i <= 7; ++$i) {
+            $r2g->team('Team ' . $i);
+        }
 
-		for ($i = 1; $i <= 7; $i++) {
-			$tournament->team('Team '.$i);
-		}
+        $r2g->generate();
 
-		$tournament->generate();
+        $this->expectException(Exception::class);
+        $r2g->genGamesSimulate();
+    }
 
-		$this->expectException(Exception::class);
-		$tournament->genGamesSimulate();
-	}
+    #[Test]
+    public function r2GEliminationNoTeams() : void {
+        $r2g = new R2G('Tournament name');
 
-	/** @test */
-	public function R2G_elimination_no_teams() : void {
-		$tournament = new R2G('Tournament name');
-
-		$this->expectException(Exception::class);
-		$tournament->generate();
-	}
+        $this->expectException(Exception::class);
+        $r2g->generate();
+    }
 }

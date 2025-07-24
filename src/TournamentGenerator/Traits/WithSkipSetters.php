@@ -1,63 +1,60 @@
 <?php
 
+declare(strict_types=1);
 
 namespace TournamentGenerator\Traits;
-
 
 use TournamentGenerator\Interfaces\WithSkipSetters as WithSkipSettersInterface;
 
 /**
- * Trait WithSkipSetters
+ * Trait WithSkipSetters.
  *
- * @package TournamentGenerator\Traits
  * @author  Tomáš Vojík <vojik@wboy.cz>
+ *
  * @since   0.4
  */
 trait WithSkipSetters
 {
+    /** @var bool If the number of teams is less than $this->inGame, then skip playing this round */
+    private bool $allowSkip = false;
 
-	/** @var bool If the number of teams is less than $this->inGame, then skip playing this round */
-	private bool $allowSkip = false;
+    /**
+     * Allows round skipping.
+     *
+     * @return $this
+     */
+    public function allowSkip() : WithSkipSettersInterface {
+        $this->allowSkip = true;
 
+        return $this;
+    }
 
-	/**
-	 * Allows round skipping
-	 *
-	 * @return $this
-	 */
-	public function allowSkip() : WithSkipSettersInterface {
-		$this->allowSkip = true;
-		return $this;
-	}
+    /**
+     * Disallow round skipping.
+     *
+     * @return $this
+     */
+    public function disallowSkip() : WithSkipSettersInterface {
+        $this->allowSkip = false;
 
-	/**
-	 * Disallow round skipping
-	 *
-	 * @return $this
-	 */
-	public function disallowSkip() : WithSkipSettersInterface {
-		$this->allowSkip = false;
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Set round skipping
-	 *
-	 * @param bool $skip
-	 *
-	 * @return $this
-	 */
-	public function setSkip(bool $skip) : WithSkipSettersInterface {
-		$this->allowSkip = $skip;
-		return $this;
-	}
+    /**
+     * Set round skipping.
+     *
+     * @return $this
+     */
+    public function setSkip(bool $skip) : WithSkipSettersInterface {
+        $this->allowSkip = $skip;
 
-	/**
-	 * Getter for round skipping
-	 *
-	 * @return bool
-	 */
-	public function getSkip() : bool {
-		return $this->allowSkip;
-	}
+        return $this;
+    }
+
+    /**
+     * Getter for round skipping.
+     */
+    public function getSkip() : bool {
+        return $this->allowSkip;
+    }
 }

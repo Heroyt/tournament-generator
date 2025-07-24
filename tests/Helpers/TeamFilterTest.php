@@ -1,9 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Helpers;
 
 use Exception;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use TournamentGenerator\Group;
 use TournamentGenerator\Team;
@@ -11,21 +15,31 @@ use TournamentGenerator\TeamFilter;
 use TypeError;
 
 /**
+ * @internal
  *
+ * @coversNothing
  */
 class TeamFilterTest extends TestCase
 {
-
-    public function testConstructDefault(): void {
+    public function testConstructDefault() : void {
         // Default values
-        $filter = new TeamFilter();
-        self::assertEquals('points', $filter->getWhat());
-        self::assertEquals('>', $filter->getHow());
-        self::assertEquals(0, $filter->getVal());
-        self::assertEquals([], $filter->getGroups());
+        $teamFilter = new TeamFilter();
+        self::assertEquals('points', $teamFilter->getWhat());
+        self::assertEquals('>', $teamFilter->getHow());
+        self::assertEquals(0, $teamFilter->getVal());
+        self::assertEquals([], $teamFilter->getGroups());
     }
 
-    public function filterConstruct(): array {
+    #[DataProvider('filterConstruct')]
+    public function testConstructCustom(string $what, string $how, int|Team $value, array $groups) : void {
+        $teamFilter = new TeamFilter($what, $how, $value, $groups);
+        self::assertEquals($what, $teamFilter->getWhat());
+        self::assertEquals($how, $teamFilter->getHow());
+        self::assertEquals($value, $teamFilter->getVal());
+        self::assertEquals(array_map(static fn (Group $group) : int|string => $group->getId(), $groups), $teamFilter->getGroups());
+    }
+
+    public static function filterConstruct() : array {
         return [
             ['points', '=', 10, [new Group('Group'), new Group('Group', 123)]],
             ['score', '<', 9999, []],
@@ -41,80 +55,62 @@ class TeamFilterTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider filterConstruct
-     *
-     * @param string $what
-     * @param string $how
-     * @param        $value
-     * @param array $groups
-     */
-    public function testConstructCustom(string $what, string $how, $value, array $groups): void {
-        $filter = new TeamFilter($what, $how, $value, $groups);
-        self::assertEquals($what, $filter->getWhat());
-        self::assertEquals($how, $filter->getHow());
-        self::assertEquals($value, $filter->getVal());
-        self::assertEquals(array_map(static function (Group $group) {
-            return $group->getId();
-        }, $groups), $filter->getGroups());
-    }
-
-    public function testConstructorInvalidType(): void {
+    public function testConstructorInvalidType() : void {
         $this->expectException(InvalidArgumentException::class);
         new TeamFilter('nonexistent type');
     }
 
-    public function testConstructorInvalidHow(): void {
+    public function testConstructorInvalidHow() : void {
         $this->expectException(InvalidArgumentException::class);
         new TeamFilter('points', 'nonexistent how');
     }
 
-    public function testConstructorInvalidVal(): void {
+    public function testConstructorInvalidVal() : void {
         $this->expectException(TypeError::class);
         new TeamFilter('team', '=', 'not a team');
     }
 
-    public function testConstructorInvalidProgressedValidation(): void {
-        $filter = new TeamFilter('progressed');
+    public function testConstructorInvalidProgressedValidation() : void {
+        $teamFilter = new TeamFilter('progressed');
         $this->expectException(InvalidArgumentException::class);
-        $filter->validate(new Team('Team'), []);
+        $teamFilter->validate(new Team('Team'), []);
     }
 
-    public function testConstructorInvalidCalcValidation(): void {
-        $filter = new TeamFilter('points', '=', 1000);
+    public function testConstructorInvalidCalcValidation() : void {
+        $teamFilter = new TeamFilter('points', '=', 1000);
         $this->expectException(InvalidArgumentException::class);
-        $filter->validate(new Team('Team'), [1, 2, 3, 4], 'not a valid operation');
+        $teamFilter->validate(new Team('Team'), [1, 2, 3, 4], 'not a valid operation');
     }
 
-    /** @test */
-    public function check_filter_setup_teamFilter(): void {
+    #[Test]
+    public function checkFilterSetupTeamFilter() : void {
         $group1 = new Group('Group 1');
         $group2 = new Group('Group 2');
 
-        $filter = new TeamFilter('points', '>', 2, [$group1, $group2]);
+        $teamFilter = new TeamFilter('points', '>', 2, [$group1, $group2]);
 
-        self::assertEquals('Filter: points > 2', (string)$filter);
+        self::assertEquals('Filter: points > 2', (string) $teamFilter);
 
     }
 
-    /** @test */
-    public function check_filter_setup_incorrect_teamFilter(): void {
+    #[Test]
+    public function checkFilterSetupIncorrectTeamFilter() : void {
         $group1 = new Group('Group 1');
         $group2 = new Group('Group 2');
 
         $this->expectException(Exception::class);
-        $filter = new TeamFilter('not a correct type', '>', 2, [$group1, $group2]);
+        new TeamFilter('not a correct type', '>', 2, [$group1, $group2]);
 
         $this->expectException(Exception::class);
-        $filter = new TeamFilter('score', 'not a correct operator', 2, [$group1, $group2]);
+        new TeamFilter('score', 'not a correct operator', 2, [$group1, $group2]);
 
         $this->expectException(Exception::class);
-        $filter = new TeamFilter('score', '>', 'not a correct value', [$group1, $group2]);
+        new TeamFilter('score', '>', 'not a correct value', [$group1, $group2]);
 
     }
 
-    /** @test */
-    public function check_filter_validate_points_teamFilter(): void {
+    #[Test]
+    public function checkFilterValidatePointsTeamFilter() : void {
         $group = new Group('Group 1', 'g1');
 
         $team1 = $group->team('Team 1', 't1');
@@ -141,8 +137,8 @@ class TeamFilterTest extends TestCase
 
     }
 
-    /** @test */
-    public function check_filter_validate_score_teamFilter(): void {
+    #[Test]
+    public function checkFilterValidateScoreTeamFilter() : void {
         $group = new Group('Group 1', 'g1');
 
         $team1 = $group->team('Team 1', 't1'); // Score: 200
@@ -173,8 +169,8 @@ class TeamFilterTest extends TestCase
 
     }
 
-    /** @test */
-    public function check_filter_validate_wins_teamFilter(): void {
+    #[Test]
+    public function checkFilterValidateWinsTeamFilter() : void {
         $group = new Group('Group 1', 'g1');
 
         $team1 = $group->team('Team 1', 't1'); // Wins: 1
@@ -205,8 +201,8 @@ class TeamFilterTest extends TestCase
 
     }
 
-    /** @test */
-    public function check_filter_validate_losses_teamFilter(): void {
+    #[Test]
+    public function checkFilterValidateLossesTeamFilter() : void {
         $group = new Group('Group 1', 'g1');
 
         $team1 = $group->team('Team 1', 't1'); // Losses: 2
@@ -237,8 +233,8 @@ class TeamFilterTest extends TestCase
 
     }
 
-    /** @test */
-    public function check_filter_validate_draws_teamFilter(): void {
+    #[Test]
+    public function checkFilterValidateDrawsTeamFilter() : void {
         $group = new Group('Group 1', 'g1');
 
         $team1 = $group->team('Team 1', 't1'); // Draws: 0
@@ -246,7 +242,7 @@ class TeamFilterTest extends TestCase
         $team3 = $group->team('Team 3', 't3'); // Draws: 1
         $team4 = $group->team('Team 4', 't4'); // Draws: 1
 
-        $g1 = $group->game([$team1, $team2])->setResults(['t1' => 100, 't2' => 200]);
+        $group->game([$team1, $team2])->setResults(['t1' => 100, 't2' => 200]);
         $group->game([$team2, $team3])->setResults(['t3' => 150, 't2' => 150]);
         $group->game([$team1, $team3])->setResults(['t1' => 90, 't3' => 100]);
         $group->game([$team4, $team1])->setResults(['t4' => 30, 't1' => 10]);
@@ -269,8 +265,8 @@ class TeamFilterTest extends TestCase
 
     }
 
-    /** @test */
-    public function check_filter_validate_second_teamFilter(): void {
+    #[Test]
+    public function checkFilterValidateSecondTeamFilter() : void {
         $group = new Group('Group 1', 'g1');
         $group->setInGame(4);
 
@@ -302,8 +298,8 @@ class TeamFilterTest extends TestCase
 
     }
 
-    /** @test */
-    public function check_filter_validate_third_teamFilter(): void {
+    #[Test]
+    public function checkFilterValidateThirdTeamFilter() : void {
         $group = new Group('Group 1', 'g1');
         $group->setInGame(4);
 
@@ -335,16 +331,16 @@ class TeamFilterTest extends TestCase
 
     }
 
-    /** @test */
-    public function check_filter_validate_team_teamFilter(): void {
+    #[Test]
+    public function checkFilterValidateTeamTeamFilter() : void {
         $group = new Group('Group 1', 'g1');
         $group->setInGame(4);
 
         $team1 = $group->team('Team 1', 't1'); // Second: 0
-        $team2 = $group->team('Team 2', 't2'); // Second: 1
-        $team3 = $group->team('Team 3', 't3'); // Second: 3
-        $team4 = $group->team('Team 4', 't4'); // Second: 0
-        $team5 = $group->team('Team 5', 't5'); // Second: 1
+        $group->team('Team 2', 't2'); // Second: 1
+        $group->team('Team 3', 't3'); // Second: 3
+        $group->team('Team 4', 't4'); // Second: 0
+        $group->team('Team 5', 't5'); // Second: 1
 
         $filter_greater = new TeamFilter('team', '>', $team1, [$group]);
         $filter_less = new TeamFilter('team', '<', $team1, [$group]);
@@ -362,8 +358,8 @@ class TeamFilterTest extends TestCase
 
     }
 
-    /** @test */
-    public function check_filter_validate_progressed_teamFilter(): void {
+    #[Test]
+    public function checkFilterValidateProgressedTeamFilter() : void {
         $group = new Group('Group 1', 'g1');
         $group->setInGame(4);
         $group2 = new Group('Group 2', 'g2');
@@ -401,8 +397,8 @@ class TeamFilterTest extends TestCase
 
     }
 
-    /** @test */
-    public function check_filter_validate_notprogressed_teamFilter(): void {
+    #[Test]
+    public function checkFilterValidateNotprogressedTeamFilter() : void {
         $group = new Group('Group 1', 'g1');
         $group->setInGame(4);
         $group2 = new Group('Group 2', 'g2');
@@ -440,8 +436,8 @@ class TeamFilterTest extends TestCase
 
     }
 
-    /** @test */
-    public function check_filter_validate_avg_teamFilter(): void {
+    #[Test]
+    public function checkFilterValidateAvgTeamFilter() : void {
         $group = new Group('Group 1', 'g1');
         $group->setInGame(4);
 
@@ -484,8 +480,8 @@ class TeamFilterTest extends TestCase
 
     }
 
-    /** @test */
-    public function check_filter_validate_max_teamFilter(): void {
+    #[Test]
+    public function checkFilterValidateMaxTeamFilter() : void {
         $group = new Group('Group 1', 'g1');
         $group->setInGame(4);
 
@@ -528,8 +524,8 @@ class TeamFilterTest extends TestCase
 
     }
 
-    /** @test */
-    public function check_filter_validate_max_more_groups_teamFilter(): void {
+    #[Test]
+    public function checkFilterValidateMaxMoreGroupsTeamFilter() : void {
         $group = new Group('Group 1', 'g1');
         $group->setInGame(2);
         $group2 = new Group('Group 2', 'g2');
@@ -578,8 +574,8 @@ class TeamFilterTest extends TestCase
 
     }
 
-    /** @test */
-    public function check_filter_validate_min_teamFilter(): void {
+    #[Test]
+    public function checkFilterValidateMinTeamFilter() : void {
         $group = new Group('Group 1', 'g1');
         $group->setInGame(4);
 
@@ -622,8 +618,8 @@ class TeamFilterTest extends TestCase
 
     }
 
-    /** @test */
-    public function check_filter_validate_min_more_groups_teamFilter(): void {
+    #[Test]
+    public function checkFilterValidateMinMoreGroupsTeamFilter() : void {
         $group = new Group('Group 1', 'g1');
         $group->setInGame(2);
         $group2 = new Group('Group 2', 'g2');
@@ -671,5 +667,4 @@ class TeamFilterTest extends TestCase
         self::assertFalse($filter_isnt->validate($team3, ['g1', 'g2'], 'min'));
 
     }
-
 }

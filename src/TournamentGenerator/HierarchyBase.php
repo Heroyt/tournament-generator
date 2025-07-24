@@ -1,8 +1,8 @@
 <?php
 
+declare(strict_types=1);
 
 namespace TournamentGenerator;
-
 
 use Exception;
 use TournamentGenerator\Containers\HierarchyContainer;
@@ -12,57 +12,50 @@ use TournamentGenerator\Interfaces\WithGames as WithGamesInterface;
 use TournamentGenerator\Interfaces\WithTeams as WithTeamsInterface;
 
 /**
- * Class HierarchyBase
+ * Class HierarchyBase.
  *
  * Extended base for hierarchy objects (Tournament, Category, Round, Group).
  *
- * @package TournamentGenerator
  * @author  Tomáš Vojík <vojik@wboy.cz>
  */
 abstract class HierarchyBase extends Base implements Exportable
 {
-
     protected HierarchyContainer $container;
 
     /**
-     * Get the hierarchy container
-     *
-     * @return HierarchyContainer
+     * Get the hierarchy container.
      */
-    public function getContainer(): HierarchyContainer {
+    public function getContainer() : HierarchyContainer {
         return $this->container;
     }
 
     /**
-     * Insert into hierarchical container
-     *
-     * @param Base $object
+     * Insert into hierarchical container.
      *
      * @post Object is added to hierarchy
      * @post If the object has teams -> add other team container to hierarchy
      * @post If the object has games -> add other game container to hierarchy
      *
      * @return $this
+     *
      * @throws Exception
      */
-    public function insertIntoContainer(Base $object): Base {
-        $this->container->insert($object);
-        if ($this instanceof WithGamesInterface && $object instanceof WithGamesInterface) {
-            $this->addGameContainer($object->getGameContainer());
+    public function insertIntoContainer(Base $base) : Base {
+        $this->container->insert($base);
+        if ($this instanceof WithGamesInterface && $base instanceof WithGamesInterface) {
+            $this->addGameContainer($base->getGameContainer());
         }
-        if ($this instanceof WithTeamsInterface && $object instanceof WithTeamsInterface) {
-            $this->addTeamContainer($object->getTeamContainer());
+        if ($this instanceof WithTeamsInterface && $base instanceof WithTeamsInterface) {
+            $this->addTeamContainer($base->getTeamContainer());
         }
+
         return $this;
     }
 
     /**
-     * Prepares a general hierarchy exporter for this hierarchy class
-     *
-     * @return ExporterInterface
+     * Prepares a general hierarchy exporter for this hierarchy class.
      */
-    public function export(): ExporterInterface {
+    public function export() : ExporterInterface {
         return Export\Hierarchy\Exporter::start($this);
     }
-
 }

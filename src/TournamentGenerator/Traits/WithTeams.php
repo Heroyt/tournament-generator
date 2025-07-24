@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace TournamentGenerator\Traits;
 
@@ -17,225 +18,223 @@ use TournamentGenerator\Team;
 use TournamentGenerator\TeamFilter;
 
 /**
- * Trait WithTeams
+ * Trait WithTeams.
  *
- * @package TournamentGenerator\Traits
  * @author  Tomáš Vojík <vojik@wboy.cz>
+ *
  * @since   0.4
  */
 trait WithTeams
 {
+    /** @var TeamContainer Teams in a object */
+    protected TeamContainer $teams;
 
-	/** @var TeamContainer Teams in a object */
-	protected TeamContainer $teams;
+    /**
+     * Create a new team and add it into the object.
+     *
+     * @param string          $name Name of the new team
+     * @param null|int|string $id   Id of the new team - if omitted -> it is generated automatically as unique string
+     *
+     * @return Team Newly created team
+     *
+     * @throws Exception
+     */
+    public function team(string $name = '', null|int|string $id = null) : Team {
+        $team = new Team($name, $id);
+        $this->teams->insert($team);
 
-	/**
-	 * Create a new team and add it into the object
-	 *
-	 * @param string          $name Name of the new team
-	 * @param string|int|null $id   Id of the new team - if omitted -> it is generated automatically as unique string
-	 *
-	 * @return Team Newly created team
-	 * @throws Exception
-	 */
-	public function team(string $name = '', $id = null) : Team {
-		$t = new Team($name, $id);
-		$this->teams->insert($t);
-		return $t;
-	}
+        return $team;
+    }
 
-	/**
-	 * Split teams into its Groups
-	 *
-	 * @param Round ...$wheres
-	 *
-	 * @return $this
-	 * @throws Exception
-	 * @noinspection CallableParameterUseCaseInTypeContextInspection
-	 */
-	public function splitTeams(Round ...$wheres) : WithTeamsInterface {
-		if (count($wheres) === 0) {
-			$wheres = $this->getRounds();
-		}
+    /**
+     * Split teams into its Groups.
+     *
+     * @return $this
+     *
+     * @throws Exception
+     *
+     * @noinspection CallableParameterUseCaseInTypeContextInspection
+     */
+    public function splitTeams(Round ...$wheres) : WithTeamsInterface {
+        if (0 === count($wheres)) {
+            $wheres = $this->getRounds();
+        }
 
-		$teams = $this->getTeams(true, Constants::SEED);
-		if ($this::isSeeded($teams)) {
-			Functions::sortAlternate($teams);
-		}
-		else {
-			shuffle($teams);
-		}
+        $teams = $this->getTeams(true, Constants::SEED);
+        if ($this::isSeeded($teams)) {
+            Functions::sortAlternate($teams);
+        } else {
+            shuffle($teams);
+        }
 
-		$split = ceil(count($teams) / count($wheres));
-		foreach ($wheres as $where) {
-			if (count($teams) > 0) {
-				$where->addTeam(...array_splice($teams, 0, $split));
-			}
-		}
-		foreach ($wheres as $where) {
-			$where->splitTeams();
-		}
-		return $this;
-	}
+        $split = (int) ceil(count($teams) / count($wheres));
+        foreach ($wheres as $where) {
+            if (count($teams) > 0) {
+                $where->addTeam(...array_splice($teams, 0, $split));
+            }
+        }
+        foreach ($wheres as $where) {
+            $where->splitTeams();
+        }
 
-	/**
-	 * Split teams into its Groups
-	 *
-	 * @param Round ...$wheres
-	 *
-	 * @return $this
-	 * @throws Exception
-	 * @noinspection CallableParameterUseCaseInTypeContextInspection
-	 */
-	public function splitTeamsEvenly(Round ...$wheres) : WithTeamsInterface {
-		if (count($wheres) === 0) {
-			$wheres = $this->getRounds();
-		}
+        return $this;
+    }
 
-		$teams = $this->getTeams(true, Constants::SEED);
-		if ($this::isSeeded($teams)) {
-			Functions::sortAlternate($teams);
-		}
-		else {
-			shuffle($teams);
-		}
+    /**
+     * Split teams into its Groups.
+     *
+     * @return $this
+     *
+     * @throws Exception
+     *
+     * @noinspection CallableParameterUseCaseInTypeContextInspection
+     */
+    public function splitTeamsEvenly(Round ...$wheres) : WithTeamsInterface {
+        if (0 === count($wheres)) {
+            $wheres = $this->getRounds();
+        }
 
-		while (count($teams) > 0) {
-			foreach ($wheres as $where) {
-				if (count($teams) > 0) {
-					$where->addTeam(array_pop($teams));
-				}
-			}
-		}
-		foreach ($wheres as $where) {
-			$where->splitTeamsEvenly();
-		}
-		return $this;
-	}
+        $teams = $this->getTeams(true, Constants::SEED);
+        if ($this::isSeeded($teams)) {
+            Functions::sortAlternate($teams);
+        } else {
+            shuffle($teams);
+        }
 
-	/**
-	 * Get all teams in the object
-	 *
-	 * @param bool                        $ordered  If true - order the teams by their score/points
-	 * @param string|null                 $ordering What to order the teams by - Constants::POINTS, Constants::SCORE
-	 * @param TeamFilter[]|TeamFilter[][] $filters  Filters to filter the returned teams (ex. if you only want to get the first 3 teams)
-	 *
-	 * @return Team[]
-	 * @throws Exception
-	 */
-	public function getTeams(bool $ordered = false, ?string $ordering = Constants::POINTS, array $filters = []) : array {
-		if (is_null($ordering)) {
-			$ordering = Constants::POINTS;
-		}
-		if ($ordered) {
-			$returnTeams = $this->sortTeams($ordering);
-		}
-		else {
-			$returnTeams = $this->teams->unique()->get();
-		}
+        while (count($teams) > 0) {
+            foreach ($wheres as $where) {
+                if (count($teams) > 0) {
+                    $where->addTeam(array_pop($teams));
+                }
+            }
+        }
+        foreach ($wheres as $where) {
+            $where->splitTeamsEvenly();
+        }
 
-		// APPLY FILTERS
-		if (count($filters) > 0) {
-			$this->filterTeams($returnTeams, $filters);
-		}
+        return $this;
+    }
 
-		return $returnTeams;
-	}
+    /**
+     * Get all teams in the object.
+     *
+     * @param bool                        $ordered  If true - order the teams by their score/points
+     * @param null|string                 $ordering What to order the teams by - Constants::POINTS, Constants::SCORE
+     * @param TeamFilter[]|TeamFilter[][] $filters  Filters to filter the returned teams (ex. if you only want to get
+     *                                              the first 3 teams)
+     *
+     * @return Team[]
+     *
+     * @throws Exception
+     */
+    public function getTeams(
+        bool $ordered = false,
+        ?string $ordering = Constants::POINTS,
+        array $filters = []
+    ) : array {
+        if (is_null($ordering)) {
+            $ordering = Constants::POINTS;
+        }
+        $returnTeams = $ordered ? $this->sortTeams($ordering) : $this->teams->unique()->get();
 
-	/**
-	 * Sort the teams by their score/points
-	 *
-	 * @param string|null                 $ordering What to order the teams by - Constants::POINTS, Constants::SCORE
-	 * @param TeamFilter[]|TeamFilter[][] $filters  Filters to filter the returned teams (ex. if you only want to get the first 3 teams)
-	 *
-	 * @return Team[]
-	 * @throws Exception
-	 */
-	public function sortTeams(?string $ordering = Constants::POINTS, array $filters = []) : array {
-		if (is_null($ordering)) {
-			$ordering = Constants::POINTS;
-		}
-		$sorter = new TeamSorter($this->getContainer(), $ordering);
-		$teams = $this->teams->addSorter($sorter)->unique()->get();
+        // APPLY FILTERS
+        if (count($filters) > 0) {
+            $this->filterTeams($returnTeams, $filters);
+        }
 
-		// APPLY FILTERS
-		if (count($filters) > 0) {
-			$this->filterTeams($teams, $filters);
-		}
+        return $returnTeams;
+    }
 
-		return $teams;
-	}
+    /**
+     * Sort the teams by their score/points.
+     *
+     * @param null|string                 $ordering What to order the teams by - Constants::POINTS, Constants::SCORE
+     * @param TeamFilter[]|TeamFilter[][] $filters  Filters to filter the returned teams (ex. if you only want to get
+     *                                              the first 3 teams)
+     *
+     * @return Team[]
+     *
+     * @throws Exception
+     */
+    public function sortTeams(?string $ordering = Constants::POINTS, array $filters = []) : array {
+        if (is_null($ordering)) {
+            $ordering = Constants::POINTS;
+        }
+        $teamSorter = new TeamSorter($this->getContainer(), $ordering);
+        $teams = $this->teams->addSorter($teamSorter)->unique()->get();
 
-	/**
-	 * Filter teams using the specified filters
-	 *
-	 * @param array                       $teams   Teams to filter through
-	 * @param TeamFilter[]|TeamFilter[][] $filters Filters to use
-	 *
-	 * @return array
-	 * @throws Exception
-	 */
-	public function filterTeams(array &$teams, array $filters) : array {
-		// APPLY FILTERS
-		if ($this instanceof WithGroupsInterface) {
-			$filter = new Filter($filters, $this->getGroups());
-			$filter->filter($teams);
-		}
-		else if ($this instanceof Group) {
-			$filter = new Filter($filters, [$this]);
-			$filter->filter($teams);
-		}
-		return $teams;
-	}
+        // APPLY FILTERS
+        if (count($filters) > 0) {
+            $this->filterTeams($teams, $filters);
+        }
 
-	/**
-	 * @param Team[] $teams
-	 *
-	 * @return bool
-	 */
-	public static function isSeeded(array $teams) : bool {
-		foreach ($teams as $team) {
-			if ($team->getSeed() > 0) {
-				return true;
-			}
-		}
-		return false;
-	}
+        return $teams;
+    }
 
-	/**
-	 * Add one or more teams into the object.
-	 *
-	 * @param Team ...$teams Team objects
-	 *
-	 * @return WithTeamsInterface
-	 * @throws Exception
-	 */
-	public function addTeam(Team ...$teams) : WithTeamsInterface {
-		foreach ($teams as $team) {
-			$this->teams->insert($team);
-		}
-		return $this;
-	}
+    /**
+     * Filter teams using the specified filters.
+     *
+     * @param array                       $teams   Teams to filter through
+     * @param TeamFilter[]|TeamFilter[][] $filters Filters to use
+     *
+     * @throws Exception
+     */
+    public function filterTeams(array &$teams, array $filters) : array {
+        // APPLY FILTERS
+        if ($this instanceof WithGroupsInterface) {
+            $filter = new Filter($filters, $this->getGroups());
+            $filter->filter($teams);
+        } elseif ($this instanceof Group) {
+            $filter = new Filter($filters, [$this]);
+            $filter->filter($teams);
+        }
 
-	/**
-	 * Get the container for games
-	 *
-	 * @return TeamContainer
-	 */
-	public function getTeamContainer() : TeamContainer {
-		return $this->teams;
-	}
+        return $teams;
+    }
 
-	/**
-	 * Add a child container for games
-	 *
-	 * @param TeamContainer $container
-	 *
-	 * @return WithTeamsInterface
-	 * @throws Exception
-	 */
-	public function addTeamContainer(TeamContainer $container) : WithTeamsInterface {
-		$this->teams->addChild($container);
-		return $this;
-	}
+    /**
+     * @param Team[] $teams
+     */
+    public static function isSeeded(array $teams) : bool {
+        foreach ($teams as $team) {
+            if ($team->getSeed() > 0) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Add one or more teams into the object.
+     *
+     * @param Team ...$teams Team objects
+     *
+     * @throws Exception
+     */
+    public function addTeam(Team ...$teams) : WithTeamsInterface {
+        foreach ($teams as $team) {
+            $this->teams->insert($team);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get the container for games.
+     */
+    public function getTeamContainer() : TeamContainer {
+        return $this->teams;
+    }
+
+    /**
+     * Add a child container for games.
+     *
+     * @throws Exception
+     */
+    public function addTeamContainer(TeamContainer $teamContainer) : WithTeamsInterface {
+        $this->teams->addChild($teamContainer);
+
+        return $this;
+    }
 }
