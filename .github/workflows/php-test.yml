@@ -11,6 +11,7 @@ env:
   extensions:  json, zlib, fileinfo, mbstring, intl
   defaultPHPVersion: '8.4'
 
+
 jobs:
   build:
 
@@ -51,6 +52,12 @@ jobs:
 
   test:
     runs-on: ${{ matrix.operating-system }}
+    strategy:
+      matrix:
+        operating-system: [ubuntu-latest]
+        php-version: [ '8.4' ]
+        dependencies: ['']
+        coverage-driver: [xdebug]
     name: Run tests
     needs: build
     steps:
