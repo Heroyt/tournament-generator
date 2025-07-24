@@ -50,6 +50,42 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress
 
+  cs:
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      matrix:
+        operating-system: [ubuntu-latest]
+        php-version: [ '8.4' ]
+        dependencies: ['']
+        coverage-driver: [xdebug]
+    name: Check code style
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: ${{ env.defaultPHPVersion }}
+          extensions: ${{ env.extensions }}
+          ini-values: memory_limit=2G, display_errors=On, error_reporting=-1
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install Composer dependencies
+        run: |
+          composer install --no-progress --prefer-dist --optimize-autoloader
+
+      - name: Run code style checks
+        run: composer run-script cs
+
   test:
     runs-on: ${{ matrix.operating-system }}
     strategy:
